@@ -2,6 +2,7 @@ Mindshare Theme API
 =============
 
 - Author: Mindshare Studios, Inc.
+- License: GPL v3
 - Copyright: 2006-2014
 - Link: http://mindsharelabs.com/downloads/mindshare-theme-api/
 
