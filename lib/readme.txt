@@ -1,0 +1,1 @@
+This folder contains 3rd party code and external libraries used by the Mindshare Theme API.
