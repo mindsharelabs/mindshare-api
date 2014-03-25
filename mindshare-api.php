@@ -29,15 +29,16 @@ if(!defined('MAPI_UPDATE_URL')) {
 }
 
 if(!defined('MAPI_PLUGIN_SLUG')) {
-	define('MAPI_PLUGIN_SLUG', dirname(plugin_basename(__FILE__)).'-master'); // mindshare-api-master
+	define('MAPI_PLUGIN_SLUG', dirname(plugin_basename(__FILE__))); // mindshare-api-master
 }
 
+
 if(!defined('MAPI_DIR_PATH')) {
-	define('MAPI_DIR_PATH', plugin_dir_path(__FILE__).'-master'); // /.../wp-content/plugins/mindshare-api-master/
+	define('MAPI_DIR_PATH', plugin_dir_path(__FILE__)); // /.../wp-content/plugins/mindshare-api-master/
 }
 
 if(!defined('MAPI_DIR_URL')) {
-	define('MAPI_DIR_URL', trailingslashit(plugins_url(NULL, __FILE__)).'-master');
+	define('MAPI_DIR_URL', trailingslashit(plugins_url(NULL, __FILE__)));
 }
 
 if(!defined('MAPI_OPTIONS')) {

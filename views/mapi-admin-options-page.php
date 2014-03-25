@@ -584,17 +584,6 @@ $mapi_options->addCheckbox(
 	)
 );
 
-$mapi_options->addSubtitle('CSS pre-processors');
-
-$mapi_options->addCheckbox(
-	'load_less',
-	array(
-		 'name' => 'Load LESS <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/lesscss/less.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">less.js</a></code>',
-		 'std'  => FALSE,
-		 'desc' => 'Enqueues the LESS CSS library. View <a href="http://lesscss.org/" target="_blank">documentation &rsaquo;</a>'
-	)
-);
-
 $mapi_options->addSubtitle('Utilities');
 
 $mapi_options->addCheckbox(
