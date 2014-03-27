@@ -12,7 +12,7 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 ## 0.7
 
-Updated external libraries, add WP 3.8 auto-update, removed unloading of jQuery, migrated to GitHub, removed LESS
+Updated external libraries, add WP 3.8 auto-update, removed unloading of jQuery, migrated to GitHub, removed LESS, fixed mySQLi function call
 
 ## 0.6.9
 

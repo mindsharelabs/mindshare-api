@@ -24,8 +24,10 @@ function mapi_credits() {
 	jQuery, http://jquery.com
 	Twitter Bootstrap, http://twbs.github.io/bootstrap/
 	Mindshare Studios, Inc., http://mind.sh/are/
+	ANAGR.AM, http://anagr.am/
 	Damian Taggart, http://damiantaggart.com/
 	Bryce Corkins, http://brycecorkins.com/
+	Geet Jacobs, http://www.geetdesign.com/
 	Abid Omar, http://goo.gl/tUpSc
 	Ohad Raz, http://goo.gl/A0jcdk
 	Steven Vachon, http://goo.gl/ib95K9

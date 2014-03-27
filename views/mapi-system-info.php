@@ -19,10 +19,11 @@ function mapi_system_info() {
 	$browser = mapi_browser_from_ua();
 	$plugins = get_plugins();
 	$active_plugins = get_option('active_plugins', array());
+	$mysqli_link = new mysqli(DB_HOST, DB_USER, DB_PASSWORD);
 
 	$sysinfo = "WordPress Version:      ".get_bloginfo('version')."\n";
 	$sysinfo .= "PHP Version:            ".PHP_VERSION."\n";
-	$sysinfo .= "MySQL Version:          ".mysql_get_server_info()."\n";
+	$sysinfo .= "MySQL Version:          ".mysqli_get_server_info($mysqli_link)."\n";
 	$sysinfo .= "Web Server:             ".$_SERVER['SERVER_SOFTWARE']."\n";
 
 	$sysinfo .= "WordPress URL:          ".get_bloginfo('wpurl')."\n";
