@@ -263,7 +263,9 @@ function mapi_add_body_classes($classes = array()) {
  *
  * Provides an additional mechanism for outputting errors to the browser or the JavaScript console.
  *
- * @param $args array
+ * @param $args array [string]msg    An error message to output to the user.
+ * @param $args array [bool]echo     TRUE outputs the error to the screen, FALSE to the JS console. Default FALSE.
+ * @param $args array [bool]die      TRUE stops script execution, FALSE allows execution to continue. Default FALSE.
  *
  * @return string
  *
@@ -743,7 +745,6 @@ function mapi_load_leaflet() {
 	}
 }
 
-
 /**
  *
  * Loads Retina
@@ -1016,7 +1017,6 @@ function mapi_set_contstants_js() {
 		var MAPI_PLUGIN_SLUG = '<?php echo MAPI_PLUGIN_SLUG; ?>';
 		var MAPI_PLUGIN_NAME = '<?php echo MAPI_PLUGIN_NAME; ?>';</script><?php
 }
-
 
 /**
  *

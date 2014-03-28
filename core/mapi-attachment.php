@@ -254,9 +254,18 @@ function mapi_thumb($src, $w = NULL, $h = NULL, $q = 90, $a = 'c', $zc = 1, $f =
 
 /**
  *
- * Upgraded version of mapi_thumb. Do not call this function directly, use mapi_thumb instead.
+ * Upgraded version of mapi_thumb. Do not call this function directly, use mapi_thumb with an array instead.
  *
- * @param $args
+ * @param $args array [string]src   apply_filters('mapi_thumb_src', $args['src'])
+ * @param $args array [int]w        apply_filters('mapi_thumb_w', get_option('thumbnail_size_w'))
+ * @param $args array [int]h        apply_filters('mapi_thumb_h', NULL) // get_option('thumbnail_size_h')
+ * @param $args array [int]q        apply_filters('mapi_thumb_q', 90) // quality 0-100
+ * @param $args array [string]a     apply_filters('mapi_thumb_a', 'c') // crop alignment c, t, l, r, b, tl, tr, bl, br    (c = center, t = top, b = bottom, r = right, l = left)
+ * @param $args array [int]zc       apply_filters('mapi_thumb_zc', 1) // zoom/crop
+ * @param $args array [string]f     apply_filters('mapi_thumb_f', NULL) // filters (can be combined) f=FILTER_ID,FILTER_PARAM,FILTER_PARAM|FILTER_ID,FILTER_PARAM
+ * @param $args array [int]s        apply_filters('mapi_thumb_s', 0) // sharpen 1 or 0
+ * @param $args array [string]cc    apply_filters('mapi_thumb_cc', NULL) // canvas color ffffff
+ * @param $args array [string]ct    apply_filters('mapi_thumb_ct', 1) // canvas transparency (overrides cc) 1 or 0
  *
  * @return string
  */

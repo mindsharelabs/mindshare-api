@@ -9,8 +9,6 @@
  * @filename   mapi-social.php
  * @since      File available since Rev 72
  *
- * @todo       Add Twitter API and Tweet button
- * @todo       Add Pinterest API
  *
  */
 
@@ -240,7 +238,6 @@ function mapi_facebook_like($args) {
 <?php
 }
 
-
 /**
  * Adds Facebook Open Graph API stuff to head
  *
@@ -392,4 +389,179 @@ function mapi_rich_snippets() {
 			</span>
 		</div>
 	<?php endif;
+}
+
+/**
+ * Outputs Font Awesome social icon links wrapped in a DIV.
+ *
+ * @param array  $networks        An array of the social networks to include. Currently supported options are: facebook, twitter, linkedin, google-plus, pinterest, tumblr, youtube, rss
+ * @param bool   $echo            Output or return the HTML. Default is TRUE.
+ * @param string $share_or_follow Whether to return "sharing" links or "follow" links. Valid options are: 'share' or 'follow'. Default is 'share'.
+ *
+ * @internal param array $sites
+ */
+function mapi_social_links($networks = array('facebook', 'twitter', 'linkedin', 'google-plus', 'pinterest', 'tumblr', 'youtube', 'rss'), $echo = TRUE, $share_or_follow = 'share') {
+	if($share_or_follow != 'share') {
+		$share = FALSE;
+	} else {
+		$share = TRUE;
+	}
+	if($echo === TRUE) {
+		echo apply_filters('mapi_social_links_before', '<div class="mapi-social-links">');
+		foreach($networks as $network) {
+			mapi_social_link(array('network' => $network, 'share' => $share));
+		}
+		echo apply_filters('mapi_social_links_after', '</div>');
+	} else {
+		foreach($networks as $network) {
+			mapi_social_link(array('network' => $network, 'share' => $share, 'echo' => FALSE));
+		}
+	}
+}
+
+/**
+ * Returns or outputs a social link for a post.
+ *
+ * @param $args array [string]class    CSS class for the A tag.
+ * @param $args array [bool]echo    Echo or return link.
+ * @param $args array [string]id    Post ID for share/like button.
+ * @param $args array [string]network Social network name. Must match Font Awesome naming conventions.
+ * @param $args array [bool]nofollow        Output nofollow attribute.
+ * @param $args array [string]share         Output a share or follow us link href.
+ * @param $args array [string]target     Link target attribute.
+ * @param $args array [string]title         Link title attribute.
+ *
+ * @return string
+ */
+function mapi_social_link($args) {
+	if(!is_array($args)) {
+		return mapi_error(array('msg' => 'Fatal error: '.__FUNCTION__.' must be passed an array.'));
+	}
+	$defaults = array(
+		'class'    => 'mapi-social-link',
+		'echo'     => TRUE,
+		'id'       => get_the_ID(),
+		'network'  => NULL,
+		'nofollow' => TRUE,
+		'share'    => TRUE,
+		'target'   => '_blank',
+		'title'    => NULL,
+	);
+	$args = wp_parse_args($args, $defaults);
+	extract($args, EXTR_SKIP);
+
+	if(empty($network)) {
+		return mapi_error(array('msg' => 'No social network was specified.'));
+	} else {
+		$network = trim(strtolower($network));
+	}
+
+	if(empty($title)) {
+		$title = 'Share this '.get_post_type($id).' on '.ucwords($network);
+	}
+
+	$link = '<a class="';
+
+	$link .= $class.'" ';
+
+	if($nofollow) {
+		$link .= 'rel="nofollow" ';
+	}
+
+	$link .= 'target="'.$target.'" ';
+	$link .= 'title="'.$title.'" ';
+	$link .= 'href="';
+
+	if($share) {
+		$link .= _mapi_social_share_href($network, $id);
+	} else {
+		$link .= _mapi_social_follow_href($network, $id);
+	}
+
+	$link .= '"><i class="fa fa-'.$network.'">&nbsp;</i></a>';
+
+	if($echo) {
+		echo $link;
+	} else {
+		return $link;
+	}
+}
+
+/**
+ * Builds required HREF for sharing on various social networks.
+ *
+ * @param $network
+ * @param $id
+ *
+ * @return string
+ */
+function _mapi_social_share_href($network, $id) {
+	switch($network) {
+		case 'twitter' :
+			$href = 'http://twitter.com/home?status='.get_permalink($id);
+			break;
+		case 'facebook' :
+			$href = 'http://www.facebook.com/sharer.php?u='.get_permalink($id).'&amp;t='.urlencode(get_the_title_rss($id));
+			break;
+		case 'google-plus' :
+			$href = 'https://plus.google.com/share?url='.get_permalink($id);
+			break;
+		case 'pinterest' :
+			$href = 'http://www.pinterest.com/pin/create/link/?url='.get_permalink($id).'&amp;media='.urlencode(mapi_get_attachment_image_src(mapi_get_attachment_id($id))).'&amp;description='.urlencode(get_the_title_rss($id));
+			break;
+		case 'linkedin' :
+			$href = 'http://www.linkedin.com/shareArticle?mini=true&amp;url='.get_permalink($id).'&amp;title='.urlencode(get_the_title_rss($id));
+			//&amp;summary={articleSummary}&amp;source={articleSource};
+			break;
+		case 'tumblr' :
+			$href = 'http://www.tumblr.com/share/link?url='.urlencode(get_permalink($id)).'&amp;name='.urlencode(get_the_title_rss($id)); // &amp;description=
+			break;
+		case 'youtube' :
+			// youtube doesn't have a "share" feature so we'll use the "follow" format instead
+			$href = _mapi_social_follow_href('youtube', $id);
+			break;
+		case 'rss' :
+			// rss doesn't have a "share" feature so we'll use the "follow" format instead
+			$href = _mapi_social_follow_href('rss', $id);
+			break;
+	}
+	return $href;
+}
+
+/**
+ * Builds required HREF for following on various social networks.
+ *
+ * @param $network
+ * @param $id
+ *
+ * @return string
+ */
+function _mapi_social_follow_href($network, $id) {
+	switch($network) {
+		case 'twitter' :
+			$href = mapi_get_option('twitter_uri');
+			break;
+		case 'facebook' :
+			$href = mapi_get_option('facebook_uri');
+			break;
+		case 'google-plus' :
+			$href = mapi_get_option('google_plus_uri');
+			break;
+		case 'pinterest' :
+			$href = mapi_get_option('pinterest_uri');
+			break;
+		case 'linkedin' :
+			$href = mapi_get_option('linkedin_uri');
+			break;
+		case 'tumblr' :
+			$href = mapi_get_option('tumblr_uri');
+			break;
+		case 'youtube' :
+			$href = mapi_get_option('videostream_uri');
+			break;
+		case 'rss' :
+			$href = get_feed_link(); //rss2
+			break;
+	}
+	return $href;
 }

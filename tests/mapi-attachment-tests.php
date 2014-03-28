@@ -3,7 +3,7 @@
  * Template Name: Mindshare Theme API Tests
  *
  * This file contains tests and is not used in production.
- * @link /wp-content/plugins/mindshare-api/tests/mapi-attachment-tests.php
+ * @link /wp-content/plugins/mindshare-api-master/tests/mapi-attachment-tests.php
  */
 include_once('../../../../wp-blog-header.php');
 $q = new WP_Query(apply_filters('mapi_test_query', 'page_id=2'));
