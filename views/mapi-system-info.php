@@ -4,7 +4,7 @@
  *
  * Forked from: SysInfo by Dave Donaldson http://wordpress.org/extend/plugins/sysinfo/
  *
- * @created 4/11/13 5:58 PM
+ * @created   4/11/13 5:58 PM
  * @author    Mindshare Studios, Inc.
  * @copyright Copyright (c) 2014
  * @link      http://mindsharelabs.com/downloads/mindshare-theme-api/
@@ -19,11 +19,17 @@ function mapi_system_info() {
 	$browser = mapi_browser_from_ua();
 	$plugins = get_plugins();
 	$active_plugins = get_option('active_plugins', array());
-	$mysqli_link = new mysqli(DB_HOST, DB_USER, DB_PASSWORD);
 
 	$sysinfo = "WordPress Version:      ".get_bloginfo('version')."\n";
 	$sysinfo .= "PHP Version:            ".PHP_VERSION."\n";
-	$sysinfo .= "MySQL Version:          ".mysqli_get_server_info($mysqli_link)."\n";
+
+	if(class_exists('mysqli')) {
+		$mysqli_link = new mysqli(DB_HOST, DB_USER, DB_PASSWORD);
+		$sysinfo .= "MySQL Version:          ".mysqli_get_server_info($mysqli_link)."\n";
+	} else {
+		$sysinfo .= "MySQL Version:          ".mysql_get_server_info()."\n";
+	}
+
 	$sysinfo .= "Web Server:             ".$_SERVER['SERVER_SOFTWARE']."\n";
 
 	$sysinfo .= "WordPress URL:          ".get_bloginfo('wpurl')."\n";
@@ -70,7 +76,6 @@ function mapi_system_info() {
 	$sysinfo .= "Active Theme:\n\n- ".$theme->get('Name')." ".$theme->get('Version')."\n  ".$theme->get('ThemeURI')."\n\n";
 
 	$sysinfo .= "Active Plugins:\n\n";
-
 
 	foreach($plugins as $plugin_path => $plugin) {
 		// Only show active plugins
