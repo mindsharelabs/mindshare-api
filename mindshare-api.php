@@ -32,7 +32,6 @@ if(!defined('MAPI_PLUGIN_SLUG')) {
 	define('MAPI_PLUGIN_SLUG', dirname(plugin_basename(__FILE__))); // mindshare-api-master
 }
 
-
 if(!defined('MAPI_DIR_PATH')) {
 	define('MAPI_DIR_PATH', plugin_dir_path(__FILE__)); // /.../wp-content/plugins/mindshare-api-master/
 }
@@ -229,6 +228,9 @@ if(!class_exists("Mindshare_API")) :
 
 		public function check_update() {
 
+			// delete old version
+			delete_plugins(array('mcms-api/mcms-api.php'));
+
 			$edd_active = get_option('mapi_license_status');
 
 			// EDD updates are already activated for this site, so exit
@@ -405,4 +407,19 @@ if(!class_exists("Mindshare_API")) :
 	}
 endif;
 
-$mapi = new Mindshare_API();
+// check to make sure old version is not going to cause conflicts
+if(!is_plugin_active('mcms-api/mcms-api.php')) {
+	$mapi = new Mindshare_API();
+} else {
+	deactivate_plugins(array('mcms-api/mcms-api.php'));
+	function upgrade_admin_notice() {
+		?>
+		<div class="updated">
+			<p><?php _e('An old version of the '.MAPI_PLUGIN_NAME.' was found please <a href="plugins.php?mapi=delete">click here to delete it</a>!', 'mapi'); ?></p>
+		</div>
+	<?php
+	}
+
+	add_action('admin_notices', 'upgrade_admin_notice');
+}
+
