@@ -44,6 +44,11 @@ if(!defined('MAPI_OPTIONS')) {
 	define('MAPI_OPTIONS', 'mapi_options');
 }
 
+// pre-0.7 version folder/file naming convention
+if(!defined('MAPI_LEGACY_NAME')) {
+	define('MAPI_LEGACY_NAME', 'mcms-api/mcms-api.php');
+}
+
 // check WordPress version
 global $wp_version;
 if(version_compare($wp_version, MAPI_MIN_WP_VERSION, "<")) {
@@ -228,8 +233,10 @@ if(!class_exists("Mindshare_API")) :
 
 		public function check_update() {
 
-			// delete old version
-			delete_plugins(array('mcms-api/mcms-api.php'));
+			// delete old version, if it still exists
+			if(is_plugin_inactive(MAPI_LEGACY_NAME)) {
+				delete_plugins(array(MAPI_LEGACY_NAME));
+			}
 
 			$edd_active = get_option('mapi_license_status');
 
@@ -408,18 +415,17 @@ if(!class_exists("Mindshare_API")) :
 endif;
 
 // check to make sure old version is not going to cause conflicts
-if(!is_plugin_active('mcms-api/mcms-api.php')) {
+if(!is_plugin_active(MAPI_LEGACY_NAME)) {
 	$mapi = new Mindshare_API();
 } else {
-	deactivate_plugins(array('mcms-api/mcms-api.php'));
+	deactivate_plugins(array(MAPI_LEGACY_NAME));
 	function upgrade_admin_notice() {
 		?>
 		<div class="updated">
-			<p><?php _e('An old version of the '.MAPI_PLUGIN_NAME.' was found please <a href="plugins.php?mapi=delete">click here to delete it</a>!', 'mapi'); ?></p>
+			<p><?php _e('Upgrading the '.MAPI_PLUGIN_NAME.' is complete. <a href="plugins.php">Please refresh</a>.', 'mapi'); ?></p>
 		</div>
 	<?php
 	}
-
 	add_action('admin_notices', 'upgrade_admin_notice');
 }
 
