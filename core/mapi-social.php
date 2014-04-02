@@ -400,13 +400,13 @@ function mapi_rich_snippets() {
  *
  * @internal param array $sites
  */
-function mapi_social_links($networks = array('facebook', 'twitter', 'linkedin', 'google-plus', 'pinterest', 'tumblr', 'youtube', 'rss'), $echo = TRUE, $share_or_follow = 'share') {
-	if($share_or_follow != 'share') {
-		$share = FALSE;
-	} else {
+function mapi_social_links($networks = array('facebook', 'twitter', 'linkedin', 'google-plus', 'pinterest', 'tumblr', 'youtube', 'rss'), $share_or_follow = 'share', $echo = TRUE) {
+	if($share_or_follow == 'share') {
 		$share = TRUE;
+	} else {
+		$share = FALSE;
 	}
-	if($echo === TRUE) {
+	if($echo == TRUE) {
 		echo apply_filters('mapi_social_links_before', '<div class="mapi-social-links">');
 		foreach($networks as $network) {
 			mapi_social_link(array('network' => $network, 'share' => $share));
@@ -457,7 +457,11 @@ function mapi_social_link($args) {
 	}
 
 	if(empty($title)) {
-		$title = 'Share this '.get_post_type($id).' on '.ucwords($network);
+		if($share) {
+			$title = 'Share this '.get_post_type($id).' on '.ucwords($network);
+		} else {
+			$title = 'Follow '.get_bloginfo_rss('name').' on '.ucwords($network);
+		}
 	}
 
 	$link = '<a class="';
