@@ -462,6 +462,9 @@ function mapi_social_link($args) {
 		} else {
 			$title = 'Follow '.get_bloginfo_rss('name').' on '.ucwords($network);
 		}
+		if($network =='rss') {
+			$title = get_bloginfo_rss('name').' RSS feed';
+		}
 	}
 
 	$link = '<a class="';
