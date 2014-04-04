@@ -462,7 +462,7 @@ function mapi_social_link($args) {
 		} else {
 			$title = 'Follow '.get_bloginfo_rss('name').' on '.ucwords($network);
 		}
-		if($network =='rss') {
+		if($network == 'rss') {
 			$title = get_bloginfo_rss('name').' RSS feed';
 		}
 	}
@@ -564,7 +564,7 @@ function _mapi_social_follow_href($network, $id) {
 			$href = mapi_get_option('tumblr_uri');
 			break;
 		case 'youtube' :
-			$href = mapi_get_option('videostream_uri');
+			$href = mapi_get_option('youtube_uri');
 			break;
 		case 'rss' :
 			$href = get_feed_link(); //rss2

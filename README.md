@@ -10,6 +10,10 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.7.1
+
+Bugfixes for aut-deleting images, misc function additions
+
 ## 0.7
 
 Updated external libraries, add WP 3.8 auto-update, removed unloading of jQuery, migrated to GitHub, removed LESS, fixed mySQLi function call, added social links functions

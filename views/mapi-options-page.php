@@ -367,6 +367,7 @@ $mapi_options->addParagraph(
 	'The following social media settings will be used by compatible themes. You can also implement them in your own custom themes using the template tags listed below each item. If you don\'t want to echo the value you can use the function <code>mapi_get_option()</code> in place of <code>mapi_option()</code>'
 );
 
+// tumblr,
 $mapi_options->addSubtitle('Social Networks');
 
 $mapi_options->addText(
@@ -412,6 +413,16 @@ $mapi_options->addText(
 		 'desc' => '<strong>Template tag:</strong> <code>&lt;?php mapi_option("twitter_uri"); ?&gt;</code>'
 	)
 );
+
+$mapi_options->addText(
+	'tumblr_uri',
+	array(
+		'name' => 'Tumblr URL',
+		'std'  => NULL,
+		'desc' => '<strong>Template tag:</strong> <code>&lt;?php mapi_option("tumblr_uri"); ?&gt;</code>'
+	)
+);
+
 $mapi_options->addText(
 	'twitter_username_slug',
 	array(

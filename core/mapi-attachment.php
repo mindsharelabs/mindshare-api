@@ -160,6 +160,42 @@ function mapi_get_attachment_id($id = NULL) {
 }
 
 /**
+ * Check $post_id for the first image in the_content and returns its URL.
+ * If no image is found it can return a fallback image specified by $fallback image.
+ *
+ * @param null|int    $post_id      A post ID.
+ * @param null|string $fallback_img A URL for a fallback image if no image is found.
+ *
+ * @return bool|null
+ */
+function mapi_get_first_post_image_src($post_id = NULL, $fallback_img = NULL) {
+	if($post_id == NULL) {
+		$post_id = get_the_ID();
+	}
+	$img_post = get_post($post_id);
+	if($img_post) {
+		ob_start();
+		ob_end_clean();
+		preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $img_post->post_content, $matches);
+
+		$first_img = @$matches[1][0];
+
+		if(empty($first_img)) {
+			// if no image was found use fallback image if one is available
+			if(!empty($fallback_img)) {
+				return $fallback_img;
+			} else {
+				return FALSE; // no luck return nothing
+			}
+		} else {
+			return $first_img; // return the first image in the post
+		}
+	} else {
+		return FALSE; // no post was found for $post_id
+	}
+}
+
+/**
  *
  * Retrieve the Link URL field for an image in the media library
  *
@@ -415,6 +451,8 @@ function mapi_random_img($args) {
  *
  * Deletes full size images when uploaded via WordPress, replaces the Large size image as the full size.
  *
+ * @uses apply_filters() Calls 'wp_generate_attachment_metadata' on file path.
+ *
  * @param $image_data
  *
  * @return mixed
@@ -424,11 +462,24 @@ function mapi_remove_large_image($image_data) {
 	if(!isset($image_data['sizes']['large'])) {
 		return $image_data;
 	}
-
-	// paths to the uploaded image and the large image
 	$upload_dir = wp_upload_dir();
-	$uploaded_image_location = $upload_dir['basedir'].'/'.$image_data['file'];
-	$large_image_location = $upload_dir['path'].'/'.$image_data['sizes']['large']['file'];
+
+	// if using year/month folders
+	if(get_option('uploads_use_yearmonth_folders')) {
+		// paths to the uploaded image and the large image
+
+		$sub_dir_array = explode('/', $image_data['file']);
+		$sub_dir = $sub_dir_array[0].'/'.$sub_dir_array[1]; // eg. 2014/03
+
+		$uploaded_image_location = $upload_dir['basedir'].'/'.$image_data['file'];
+		$large_image_location = $upload_dir['basedir'].'/'.$sub_dir.'/'.$image_data['sizes']['large']['file'];
+
+	// no year/month folders
+	} else {
+		// paths to the uploaded image and the large image
+		$uploaded_image_location = $upload_dir['basedir'].'/'.$image_data['file'];
+		$large_image_location = $upload_dir['path'].'/'.$image_data['sizes']['large']['file'];
+	}
 
 	// delete the uploaded image
 	unlink($uploaded_image_location); // @todo - this need to be tested again
