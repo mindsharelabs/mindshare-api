@@ -98,6 +98,8 @@ function mapi_is_child_of($parent_id, $check_id = NULL) {
  *
  * Tests if the current post (or the post specified by $id) is a child.
  *
+ * @param null|int $id
+ *
  * @return bool
  */
 function mapi_is_child($id = NULL) {
@@ -114,6 +116,42 @@ function mapi_is_child($id = NULL) {
 	} else {
 		return FALSE;
 	}
+}
+
+/**
+ * Returns the ID of the topmost parent (ancestor) of a given post $id.
+ *
+ * @param $id
+ *
+ * @internal param $post
+ *
+ * @return int The post ID, if no parents are found returns the ID of the given post.
+ */
+function mapi_get_top_parent_id($id) {
+	if(mapi_is_child($id)) {
+		$test_post = get_post($id);
+		$ancestors = get_post_ancestors($test_post);
+		$root = count($ancestors) - 1;
+		return $ancestors[$root];
+	} else {
+		return $id;
+	}
+}
+
+
+/**
+ * Removes "Protected:" or "Private:" from post title using filters.
+ *
+ * @usage:
+ *       add_filter('private_title_format', 'mapi_remove_title_prefix');
+ *       add_filter('protected_title_format', 'mapi_remove_title_prefix');
+ *
+ * @param $content
+ *
+ * @return string
+ */
+function mapi_remove_title_prefix($content) {
+	return '%s';
 }
 
 /**

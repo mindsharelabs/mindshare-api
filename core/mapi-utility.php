@@ -190,7 +190,9 @@ function mapi_browser_from_ua() {
 /**
  *
  * Generates a CSS class name based on detected browser, depends on PHP Browser Detection plugin. Gracefully degrades
- * if the plugin isn't available.
+ * if the plugin isn't available. Also adds a class for post-type and slug (since 0.7.1).
+ *
+ * @since 0.7.1
  *
  * @param bool $show_major_version
  * @param bool $show_minor_version
@@ -225,7 +227,7 @@ function mapi_broswer_class($show_major_version = FALSE, $show_minor_version = F
  * @return array
  */
 function mapi_add_body_classes($classes = array()) {
-	global $is_lynx, $is_gecko, $is_winIE, $is_macIE, $is_opera, $is_NS4, $is_safari, $is_chrome, $is_iphone;
+	global $is_lynx, $is_gecko, $is_winIE, $is_macIE, $is_opera, $is_NS4, $is_safari, $is_chrome, $is_iphone, $post;
 	if($is_lynx) {
 		$classes[] = 'lynx';
 	}
@@ -255,9 +257,13 @@ function mapi_add_body_classes($classes = array()) {
 	}
 	if($is_iphone) {
 		$classes[] = 'iphone';
+	} // add post "type-slug"
+	if(isset($post)) {
+		$classes[] = $post->post_type.'-'.$post->post_name;
 	}
 	return $classes;
 }
+
 
 /**
  *
