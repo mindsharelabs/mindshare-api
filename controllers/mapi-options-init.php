@@ -107,8 +107,8 @@ if(!class_exists('mapi_options')) :
 			if(@$this->options['load_underscore_js']) {
 				add_action('wp_enqueue_scripts', 'mapi_load_underscore', 100);
 			}
-			if(@$this->options['load_leaflet_js']) {
-				add_action('wp_enqueue_scripts', 'mapi_load_leaflet', 100);
+			if(@$this->options['load_leaflet_js'] || @$this->options['load_mapbox_js']) {
+				add_action('wp_enqueue_scripts', 'mapi_load_mapbox', 100); // leaflet replaced by mapbox
 			}
 			if(@$this->options['load_retina_js']) {
 				add_action('wp_enqueue_scripts', 'mapi_load_retina', 100);
@@ -375,14 +375,14 @@ if(!class_exists('mapi_options')) :
 						'mapi_login_image_args',
 						array(
 							'src' => $img_url['path'],
-							'w'   => 80,
-							'h'   => 80,
-							'zc'  => 1,
+							'w'   => 300,
+							'h'   => 72,
+							'zc'  => 3,
 							'ct'  => 0
 						)
 					)
 				);
-				echo "<style type='text/css'>.login h1 a { background: url('".html_entity_decode($image)."') no-repeat top center !important; }</style>";
+				echo "<style type='text/css'>.login h1 a { height: 72px; width: 300px; background: url('".html_entity_decode($image)."') no-repeat top center !important; }</style>";
 			}
 		}
 

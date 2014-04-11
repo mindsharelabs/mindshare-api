@@ -54,7 +54,7 @@ $mapi_options->addText(
 
 
 $mapi_options->addParagraph('&nbsp;');
-$mapi_options->addSubtitle('Primary Contact Info (physical address)');
+$mapi_options->addSubtitle('Primary Contact Info (e.g. physical address)');
 
 $mapi_options->addText(
 	'business_txt',
@@ -154,7 +154,7 @@ $mapi_options->addText(
 );
 
 $mapi_options->addParagraph('&nbsp;');
-$mapi_options->addSubtitle('Secondary Contact Info (postal address)');
+$mapi_options->addSubtitle('Secondary Contact Info (e.g. postal address)');
 $mapi_options->addParagraph('The Secondary Contact Info section is useful for organizations with separate postal and physical addresses, or business with multiple locations.');
 
 $mapi_options->addText(

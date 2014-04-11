@@ -306,7 +306,7 @@ $custom_branding[] = $mapi_options->addImage(
 	'wp_login_img',
 	array(
 		 'std'  => '',
-		 'desc' => 'Upload a custom logo image for the login screen. <strong>Standard dimensions:</strong> 80px x 80px',
+		 'desc' => 'Upload a custom logo image for the login screen. <strong>Standard dimensions:</strong> 300px x 72px',
 		 'name' => 'WordPress Login Image'
 	),
 	TRUE
@@ -449,18 +449,18 @@ $mapi_options->addCheckbox(
 );
 
 $mapi_options->addCheckbox(
-	'load_leaflet_js',
+	'load_mapbox_js',
 	array(
-		'name' => 'Load Leaflet <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/leaflet/leaflet.js').'" target="_blank">leaflet.js</a></code>',
+		'name' => 'Load Mapbox <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/mapbox/mapbox.min.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">mapbox.min.js</a></code> and <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/mapbox/mapbox.min.css', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">mapbox.min.css</a></code>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the Leaflet mapping library. View <a href="http://leafletjs.com/" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'Enqueues the Mapbox mapping library. View <a href="https://www.mapbox.com/" target="_blank">documentation &rsaquo;</a>'
 	)
 );
 
 $mapi_options->addCheckbox(
 	'load_retina_js',
 	array(
-		'name' => 'Load Retina <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/retina/js/retina-1.1.0.min.js').'" target="_blank">retina.js</a></code>',
+		'name' => 'Load Retina <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/retina/js/retina-1.1.0.min.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">retina.js</a></code>',
 		'std'  => FALSE,
 		'desc' => 'Enqueues the Retina library. View <a href="http://retinajs.com/" target="_blank">documentation &rsaquo;</a>'
 	)

@@ -1835,7 +1835,7 @@ if(!class_exists('mindshare_options_framework')) :
 		public function show_field_image($field, $meta) {
 			$this->show_field_begin($field, $meta);
 			$html = wp_nonce_field("at-delete-mupload_{$field['id']}", "nonce-delete-mupload_".$field['id'], FALSE, FALSE);
-			$height = (isset($field['preview_height'])) ? $field['preview_height'] : '150px';
+			$height = (isset($field['preview_height'])) ? $field['preview_height'] : 'auto';
 			$width = (isset($field['preview_width'])) ? $field['preview_width'] : '150px';
 			if(is_array($meta)) {
 				if(isset($meta[0]) && is_array($meta[0])) {

@@ -264,7 +264,6 @@ function mapi_add_body_classes($classes = array()) {
 	return $classes;
 }
 
-
 /**
  *
  * Provides an additional mechanism for outputting errors to the browser or the JavaScript console.
@@ -736,18 +735,18 @@ function mapi_load_underscore() {
 
 /**
  *
- * Loads Leaflet
+ * Loads Mapbox
  *
  */
-function mapi_load_leaflet() {
+function mapi_load_mapbox() {
 	if(!is_admin()) {
-		wp_deregister_style('leaflet');
-		wp_register_style('leaflet', plugins_url('lib/leaflet/leaflet.css', dirname(__FILE__)));
-		wp_enqueue_style('leaflet');
+		wp_deregister_style('mapbox-css');
+		wp_register_style('mapbox-css', plugins_url('lib/mapbox/mapbox.min.css', dirname(__FILE__)));
+		wp_enqueue_style('mapbox-css');
 
-		wp_deregister_script('leaflet');
-		wp_register_script('leaflet', plugins_url('lib/leaflet/leaflet.js', dirname(__FILE__)));
-		wp_enqueue_script('leaflet');
+		wp_deregister_script('mapbox-js');
+		wp_register_script('mapbox-js', plugins_url('lib/mapbox/mapbox.min.js', dirname(__FILE__)));
+		wp_enqueue_script('mapbox-js');
 	}
 }
 
@@ -1368,4 +1367,75 @@ function mapi_list_hooked_functions($tag = FALSE) {
 	}
 	echo '</pre>';
 	return;
+}
+
+/**
+ * Converts a HEX value into an array of its RGB equivalents.
+ *
+ * @param $hex_color string Examples: '#FFCC00' or 'FFCC00'
+ *
+ * @return array|bool Array of RGB value with keys 'red', 'green', and 'blue'. FALSE if no valid hexadecimal value was passed.
+ */
+function mapi_hex_to_rgb($hex_color) {
+	if($hex_color[0] == '#') {
+		$hex_color = substr($hex_color, 1);
+	}
+	if(strlen($hex_color) == 6) {
+		list($r, $g, $b) = array($hex_color[0].$hex_color[1], $hex_color[2].$hex_color[3], $hex_color[4].$hex_color[5]);
+	} elseif(strlen($hex_color) == 3) {
+		list($r, $g, $b) = array($hex_color[0].$hex_color[0], $hex_color[1].$hex_color[1], $hex_color[2].$hex_color[2]);
+	} else {
+		return FALSE;
+	}
+	$r = hexdec($r);
+	$g = hexdec($g);
+	$b = hexdec($b);
+	return array('red' => $r, 'green' => $g, 'blue' => $b);
+}
+
+/**
+ * Converts a given file (and MIME type) to data URI.
+ *
+ * @param $file
+ * @param $mime
+ */
+function mapi_data_uri($file, $mime) {
+	$contents = file_get_contents($file);
+	$base64 = base64_encode($contents);
+	echo "data:$mime;base64,$base64";
+}
+
+/**
+ *
+ * Generates a random alphanumeric string of the given length.
+ *
+ * @param int $length int Default is 16.
+ *
+ * @return string
+ */
+function mapi_random_string($length = 16) {
+	$salt = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	$len = strlen($salt);
+	$random_string = '';
+	mt_srand(10000000 * (double) microtime());
+	for($i = 0; $i < $length; $i++) {
+		$random_string .= $salt[mt_rand(0, $len - 1)];
+	}
+	return $random_string;
+}
+
+/**
+ * Returns a user's IP address, even behind a proxy server.
+ *
+ * @return mixed
+ */
+function mapi_get_ip() {
+	if(!empty($_SERVER['HTTP_CLIENT_IP'])) {
+		$ip = $_SERVER['HTTP_CLIENT_IP'];
+	} elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	} else {
+		$ip = $_SERVER['REMOTE_ADDR'];
+	}
+	return $ip;
 }
