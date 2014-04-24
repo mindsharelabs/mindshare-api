@@ -570,5 +570,5 @@ function _mapi_social_follow_href($network, $id) {
 			$href = get_feed_link(); //rss2
 			break;
 	}
-	return $href;
+	return $href; // @todo add filter
 }
