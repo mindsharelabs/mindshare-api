@@ -12,7 +12,7 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 ## 0.7.1
 
-Bugfixes for aut-deleting images, misc function additions
+Bugfixes for auto-deleting images, misc function additions, numerous bugfixes
 
 ## 0.7
 
