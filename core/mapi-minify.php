@@ -126,7 +126,7 @@ if(!class_exists('mapi_minify')) :
 					closedir($dh);
 				}
 				if(isset($_POST['mapi_options_clear_cache_submit'])) {
-					wp_die('Minify cache has been cleared. <a href="options-general.php?page=mindshare-api-admin-settings">Continue &raquo;</a>');
+					wp_die('Minify cache has been cleared. <a href="options-general.php?page='.MAPI_PLUGIN_SLUG.'-admin-settings">Continue &raquo;</a>');
 				} else {
 					$this->notify('Minify cache has been cleared.');
 				}

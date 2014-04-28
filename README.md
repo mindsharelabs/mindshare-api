@@ -10,6 +10,10 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.7.2
+
+Added filters for mapi_social_links functions, fixed link when clearing minify cache, added mapi_featured_img_with_caption fn, added mapi_tinymce_line_breaks fn, added mapi_nice_search_redirect fn, updated Isotope to v2.
+
 ## 0.7.1
 
 Bugfixes for auto-deleting images, misc function additions, numerous bugfixes

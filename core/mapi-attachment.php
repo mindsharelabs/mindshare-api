@@ -63,6 +63,23 @@ function mapi_featured_img($args = array()) {
 	return apply_filters('mapi_featured_image', FALSE); // no post thumbnail was found
 }
 
+
+/**
+ * Resizes and outputs a WordPress featured image with a caption. See mapi_featured_img for parameters.
+ *
+ * @uses mapi_featured_img
+ *
+ * @since 0.7.2
+ *
+ * @param array $args
+ */
+function mapi_featured_img_with_caption($args = array()) {
+	echo mapi_featured_img($args);
+	if(mapi_get_attachment_image_caption()) {
+		echo apply_filters('mapi_featured_img_caption', '<div class="caption">'.mapi_get_attachment_image_caption().'</div>');
+	}
+}
+
 /**
  *
  *
@@ -473,8 +490,7 @@ function mapi_remove_large_image($image_data) {
 
 		$uploaded_image_location = $upload_dir['basedir'].'/'.$image_data['file'];
 		$large_image_location = $upload_dir['basedir'].'/'.$sub_dir.'/'.$image_data['sizes']['large']['file'];
-
-	// no year/month folders
+		// no year/month folders
 	} else {
 		// paths to the uploaded image and the large image
 		$uploaded_image_location = $upload_dir['basedir'].'/'.$image_data['file'];

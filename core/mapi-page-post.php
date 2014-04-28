@@ -10,7 +10,6 @@
  *
  */
 
-
 /**
  *
  * Gets a post's slug by ID.
@@ -138,7 +137,6 @@ function mapi_get_top_parent_id($id) {
 	}
 }
 
-
 /**
  * Removes "Protected:" or "Private:" from post title using filters.
  *
@@ -174,7 +172,6 @@ function mapi_list_children() {
 		mapi_error(array('msg' => 'Found no child pages', 'die' => FALSE, 'echo' => FALSE));
 	}
 }
-
 
 /**
  *
@@ -310,4 +307,3 @@ function mapi_list_posts_array($args) {
 	}
 }
 
-?>

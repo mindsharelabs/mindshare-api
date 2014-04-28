@@ -488,9 +488,9 @@ function mapi_social_link($args) {
 	$link .= '"><i class="fa fa-'.$network.'">&nbsp;</i></a>';
 
 	if($echo) {
-		echo $link;
+		echo apply_filters('mapi_social_link', $link);
 	} else {
-		return $link;
+		return apply_filters('mapi_social_link', $link);
 	}
 }
 
@@ -532,7 +532,7 @@ function _mapi_social_share_href($network, $id) {
 			$href = _mapi_social_follow_href('rss', $id);
 			break;
 	}
-	return $href;
+	return apply_filters('mapi_social_share_href', $href, $network);
 }
 
 /**
@@ -570,5 +570,5 @@ function _mapi_social_follow_href($network, $id) {
 			$href = get_feed_link(); //rss2
 			break;
 	}
-	return $href; // @todo add filter
+	return apply_filters('mapi_social_follow_href', $href, $network);
 }

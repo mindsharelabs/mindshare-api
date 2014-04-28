@@ -59,3 +59,30 @@ function mapi_query() {
 		}
 	}
 }
+
+
+
+/**
+ * Replaces the GET variable 's' with a nice URL, like 'search'.
+ *
+ * @usage:
+ *
+ * add_action('template_redirect', 'mapi_nice_search_redirect');
+ * //add_filter('mapi_search_base', 'my_search_page_slug');
+ *
+ */
+function mapi_nice_search_redirect() {
+	global $wp_rewrite;
+
+	if(!isset($wp_rewrite) || !is_object($wp_rewrite) || !$wp_rewrite->using_permalinks()) {
+		return;
+	}
+	$search_base = apply_filters('mapi_search_base', $wp_rewrite->search_base);
+
+	if(is_search() && !is_admin() && strpos($_SERVER['REQUEST_URI'], "/{$search_base}/") === FALSE) {
+		wp_redirect(home_url("/{$search_base}/".urlencode(get_query_var('s'))));
+		exit();
+	}
+}
+
+
