@@ -1450,3 +1450,33 @@ function mapi_get_ip() {
 	}
 	return $ip;
 }
+
+/**
+ * Looks up a hostname using an IP address.
+ *
+ * @param $ip
+ *
+ * @return string
+ */
+function mapi_get_host_by_ip($ip) {
+	if(function_exists('gethostbyaddr')) {
+		return gethostbyaddr($ip);
+	} else {
+		return mapi_error(array('msg' => 'gethostbyaddr() not available.'));
+	}
+}
+
+/**
+ * Looks up an IP address using a hostname.
+ *
+ * @param $host
+ *
+ * @return string
+ */
+function mapi_get_ip_by_host($host) {
+	if(function_exists('gethostbyname')) {
+		return gethostbyname($host);
+	} else {
+		return mapi_error(array('msg' => 'gethostbyname() not available.'));
+	}
+}
