@@ -376,7 +376,6 @@ function mapi_bryce() {
 
 /**
  *
- *
  * Returns an array of file URLs for a given directory filterable by file extension(s).
  *
  * @todo make recursive (optionally)
@@ -409,6 +408,18 @@ function mapi_file_array_dir($dir = NULL, $exts = 'jpg,jpeg,png,gif') {
 	} else {
 		return FALSE;
 	}
+}
+
+/**
+ *
+ * Outputs a file extension for a given string filename.
+ *
+ * @param $file_name
+ *
+ * @return string
+ */
+function mapi_get_file_extension($file_name) {
+	return substr(strrchr($file_name, '.'), 1);
 }
 
 /**

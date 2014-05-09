@@ -773,10 +773,10 @@ if(!class_exists('mindshare_options_framework')) :
 					<input type="hidden" name="action" value="save" />
 					<?php if($this->show_reset_button == TRUE) : ?>
 						<input class="button-secondary" type="button" value="Restore Defautls" onclick="document.getElementById('mindshare-framework-reset').style.display = 'block';document.getElementById('mindshare-framework-uninst').style.display = 'none';" />
-					<? endif; ?>
+					<?php endif; ?>
 					<?php if($this->show_uninstall_button == TRUE) : ?>
 						<input class="button-secondary" type="button" value="Uninstall" onclick="document.getElementById('mindshare-framework-uninst').style.display = 'block';document.getElementById('mindshare-framework-reset').style.display = 'none';" />
-					<? endif; ?>
+					<?php endif; ?>
 				</p>
 			</div>
 			</div>
