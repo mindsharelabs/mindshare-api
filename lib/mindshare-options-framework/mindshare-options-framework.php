@@ -21,7 +21,7 @@
  *
  * Changelog:
  *
- * 0.3.5 -  merging Bryce's changes, disabled auto validation
+ * 0.3.5 -  merging changes, disabled auto validation
  * 0.3.4 - some refactoring, styling for checkbox lists
  * 0.3.3 - updated codemirror
  * 0.3.2 - fixed issue with code fields. css updates

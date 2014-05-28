@@ -366,13 +366,6 @@ function mapi_poop() {
 	mapi_var_dump('Poop', TRUE);
 }
 
-/**
- * Just checking if @bryce is asleep. Or wrong.
- *
- */
-function mapi_bryce() {
-	mapi_var_dump(base64_decode('QnJ5Y2UgaXMgd3Jvbmch'), TRUE);
-}
 
 /**
  *

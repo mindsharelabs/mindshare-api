@@ -26,7 +26,6 @@ function mapi_credits() {
 	Mindshare Studios, Inc., http://mind.sh/are/
 	ANAGR.AM, http://anagr.am/
 	Damian Taggart, http://damiantaggart.com/
-	Bryce Corkins, http://brycecorkins.com/
 	Geet Jacobs, http://www.geetdesign.com/
 	Abid Omar, http://goo.gl/tUpSc
 	Ohad Raz, http://goo.gl/A0jcdk
