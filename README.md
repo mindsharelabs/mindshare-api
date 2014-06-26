@@ -10,6 +10,9 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.7.4
+Fixed mThumb PHP Notices, added Maintenance Mode bypass for wp-config.php, disabled minify builder, updated domains list for mapi_extract_domain, fix for 3.9 in options framework
+
 ## 0.7.3.1
 
 Bugfix for PHP open tags, add fn mapi_get_file_extension, added mapi_get_host_by_ip and mapi_get_ip_by_host

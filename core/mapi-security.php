@@ -18,13 +18,21 @@
  * To bypass maintenance mode and enable a specific page to be viewed while logged out
  * append any site URL with <code>?maintenance=bypass</code>.
  *
+ * You can also bypass maintenance mode from within wp-config.php like so:
+ * <code>define('MAPI_MAINTENANCE_MODE_BYPASS', TRUE);</code>
+ *
  * @param bool   $enabled
  * @param string $role
  * @param string $reason
+ * @param string $css
+ * @param bool   $use_503
  */
 function mapi_maintenance_mode($enabled = FALSE, $role = 'Subscriber', $reason = '', $css = '', $use_503 = FALSE) {
 	$bypass_key = apply_filters('mapi_maintenance_mode_bypass_key', 'bypass');
 	if((isset($_GET['maintenance']) && $_GET['maintenance'] == $bypass_key)) {
+		$enabled = FALSE;
+	}
+	if(defined('MAPI_MAINTENANCE_MODE_BYPASS') && MAPI_MAINTENANCE_MODE_BYPASS == TRUE) {
 		$enabled = FALSE;
 	}
 	if(empty($css)) {

@@ -1779,7 +1779,7 @@ if(!class_exists('mindshare_options_framework')) :
 				echo "<textarea class='at-wysiwyg theEditor large-text' name='{$field['id']}' id='{$field['id']}' cols='60' rows='10'>{$meta}</textarea>";
 			} else {
 				// Use new wp_editor() since WP 3.3
-				wp_editor(stripslashes(stripslashes(html_entity_decode($meta))), $field['id'], array('editor_class' => 'at-wysiwyg'));
+				@wp_editor(stripslashes(stripslashes(html_entity_decode($meta))), $field['id'], array('editor_class' => 'at-wysiwyg'));
 			}
 			$this->show_field_end($field, $meta);
 		}

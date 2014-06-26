@@ -8,8 +8,15 @@
 //mapi_mthumb_config();
 
 // Max sizes
-define('MAX_WIDTH', 3600);
-define('MAX_HEIGHT', 3600);
+if(!defined('MAX_WIDTH')) {
+	define('MAX_WIDTH', 3600);
+}
+if(!defined('MAX_HEIGHT')) {
+	define('MAX_HEIGHT', 3600);
+}
+if(!defined('MAX_FILE_SIZE')) {
+	define ('MAX_FILE_SIZE', 20971520); // 20MB
+}
 
 // External Sites
 $ALLOWED_SITES = array(

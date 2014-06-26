@@ -15,7 +15,7 @@ $min_errorLogger = TRUE;
 $min_allowDebugFlag = TRUE;
 //###WPM-DEBUG-FLAG-AFTER###
 
-$min_enableBuilder = TRUE;
+$min_enableBuilder = FALSE;
 $min_builderPassword = 'admin';
 $min_documentRoot = '';
 $min_cacheFileLocking = TRUE;

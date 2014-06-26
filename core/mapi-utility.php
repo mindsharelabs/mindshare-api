@@ -366,7 +366,6 @@ function mapi_poop() {
 	mapi_var_dump('Poop', TRUE);
 }
 
-
 /**
  *
  * Returns an array of file URLs for a given directory filterable by file extension(s).
@@ -1003,13 +1002,18 @@ function mapi_edit_link() {
 
 /**
  *
- * Automatically sets external (offsite) links to open in a new window or tab.
+ * Automatically sets external (offsite) links to open in a new window or tab. Updated to allow subdomains from the same TLD.
  *
  */
 function mapi_external_links() {
+	global $MAPI_TLD;
+	if(!isset($MAPI_TLD) || empty($MAPI_TLD)) {
+		$MAPI_TLD = mapi_extract_domain(mapi_get_url());
+	}
+
 	?>
 	<script type="text/javascript">jQuery(document).ready(function() {
-			jQuery("a[href^='http']:not([href*='" + document.domain + "'])").each(function() {
+			jQuery("a[href^='http']:not([href*='<?php echo $MAPI_TLD; ?>'])").each(function() {
 				jQuery(this).attr("target", "_blank");
 			});
 		});</script><?php

@@ -63,11 +63,10 @@ function mapi_featured_img($args = array()) {
 	return apply_filters('mapi_featured_image', FALSE); // no post thumbnail was found
 }
 
-
 /**
  * Resizes and outputs a WordPress featured image with a caption. See mapi_featured_img for parameters.
  *
- * @uses mapi_featured_img
+ * @uses  mapi_featured_img
  *
  * @since 0.7.2
  *
@@ -380,10 +379,13 @@ function mapi_mthumb_config() {
 	} elseif(file_exists(get_template_directory().'/timthumb-config.php')) {
 		include(get_template_directory().'/timthumb-config.php');
 	} else {
-
 		// Max sizes
-		define('MAX_WIDTH', apply_filters('mapi_timthumb_max_width', 3600));
-		define('MAX_HEIGHT', apply_filters('mapi_timthumb_max_height', 3600));
+		if(!defined('MAX_WIDTH')) {
+			define('MAX_WIDTH', apply_filters('mapi_timthumb_max_width', 3600));
+		}
+		if(!defined('MAX_HEIGHT')) {
+			define('MAX_HEIGHT', apply_filters('mapi_timthumb_max_height', 3600));
+		}
 
 		// External Sites
 		$ALLOWED_SITES = apply_filters(
@@ -402,13 +404,21 @@ function mapi_mthumb_config() {
 				'mindsharestudios.com'
 			)
 		);
-		define('ALLOW_EXTERNAL', apply_filters('mapi_timthumb_allow_external', TRUE));
+		if(!defined('ALLOW_EXTERNAL')) {
+			define('ALLOW_EXTERNAL', apply_filters('mapi_timthumb_allow_external', TRUE));
+		}
 
 		// Caching
-		define('FILE_CACHE_DIRECTORY', apply_filters('mapi_timthumb_cache_dir', ABSPATH.'/wp-content/uploads/cache/'));
+		if(!defined('MAX_WIDTH')) {
+			define('FILE_CACHE_DIRECTORY', apply_filters('mapi_timthumb_cache_dir', ABSPATH.'/wp-content/uploads/cache/'));
+		}
 		//define('FILE_CACHE_DIRECTORY',''); // leave blank for system directory
-		define('FILE_CACHE_TIME_BETWEEN_CLEANS', apply_filters('mapi_timthumb_cache_interval', 172800)); // 2 days
-		define('BROWSER_CACHE_MAX_AGE', apply_filters('mapi_timthumb_cache_max_age', 1728000)); // 20 days
+		if(!defined('MAX_WIDTH')) {
+			define('FILE_CACHE_TIME_BETWEEN_CLEANS', apply_filters('mapi_timthumb_cache_interval', 172800)); // 2 days
+		}
+		if(!defined('MAX_WIDTH')) {
+			define('BROWSER_CACHE_MAX_AGE', apply_filters('mapi_timthumb_cache_max_age', 1728000)); // 20 days
+		}
 	}
 }
 
