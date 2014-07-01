@@ -1212,17 +1212,23 @@ function mapi_analytics($ga_id = NULL, $allow_multiple_domains = NULL, $enhanced
 	if(empty($allow_multiple_domains)) {
 		// allow_multiple_domains flag was not passed, so grab the one from the API options page
 		$ga_adv_options = mapi_get_option('enable_adv_ga_options');
-		$allow_multiple_domains = @$ga_adv_options['multiple_domains'];
+		if(array_key_exists('multiple_domains', $ga_adv_options)) {
+			$allow_multiple_domains = @$ga_adv_options['multiple_domains'];
+		}
 	}
 	if(empty($enhanced_link_attribution)) {
 		// enhanced_link_attribution flag was not passed, so grab the one from the API options page
 		$ga_adv_options = mapi_get_option('enable_adv_ga_options');
-		$enhanced_link_attribution = @$ga_adv_options['enhanced_link_attribution'];
+		if(array_key_exists('enhanced_link_attribution', $ga_adv_options)) {
+			$enhanced_link_attribution = @$ga_adv_options['enhanced_link_attribution'];
+		}
 	}
 	if(empty($universal_analytics)) {
 		// allow_multiple_domains flag was not passed, so grab the one from the API options page
 		$ga_adv_options = mapi_get_option('enable_adv_ga_options');
-		$universal_analytics = @$ga_adv_options['universal_analytics'];
+		if(array_key_exists('universal_analytics', $ga_adv_options)) {
+			$universal_analytics = @$ga_adv_options['universal_analytics'];
+		}
 	}
 	// get the base of the site domain (removing any subdomains, etc)
 	$domain = mapi_extract_domain(home_url());
