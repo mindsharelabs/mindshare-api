@@ -460,7 +460,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_retina_js',
 	array(
-		'name' => 'Load Retina <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/retina/js/retina-1.1.0.min.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">retina.js</a></code>',
+		'name' => 'Load Retina <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/retina/js/retina.min.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">retina.js</a></code>',
 		'std'  => FALSE,
 		'desc' => 'Enqueues the Retina library. View <a href="http://retinajs.com/" target="_blank">documentation &rsaquo;</a>'
 	)

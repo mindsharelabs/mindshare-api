@@ -344,7 +344,7 @@ if(!class_exists('mapi_options')) :
 				$role = 'Administrator';
 			}
 
-			if(mapi_is_true(@$this->options['maintenance_mode']['maintenance_mode_503'])) {
+			if(isset($this->options['maintenance_mode']['maintenance_mode_503']) && mapi_is_true(@$this->options['maintenance_mode']['maintenance_mode_503'])) {
 				$use_503 = TRUE;
 			} else {
 				$use_503 = FALSE;

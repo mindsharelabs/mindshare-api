@@ -130,7 +130,7 @@ function mapi_browser_from_ua() {
 		$platform = 'Windows';
 	}
 
-	// Next get the name of the user agent yes seperately and for good reason
+	// Next get the name of the user agent yes separately and for good reason
 	if(preg_match('/MSIE/i', $user_agent) && !preg_match('/Opera/i', $user_agent)) {
 		$browser_name = 'Internet Explorer';
 		$browser_name_short = "MSIE";
@@ -149,10 +149,12 @@ function mapi_browser_from_ua() {
 	} elseif(preg_match('/Netscape/i', $user_agent)) {
 		$browser_name = 'Netscape';
 		$browser_name_short = "Netscape";
+	} else {
+		$browser_name = '';
+		$browser_name_short = "";
 	}
 
 	// get the correct version number
-	/** @noinspection PhpUndefinedVariableInspection */
 	$known = array('Version', $browser_name_short, 'other');
 	$pattern = '#(?<browser>'.join('|', $known).')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
 	if(!preg_match_all($pattern, $user_agent, $matches)) {
@@ -761,7 +763,7 @@ function mapi_load_mapbox() {
 function mapi_load_retina() {
 	if(!is_admin()) {
 		wp_deregister_script('retina');
-		wp_register_script('retina', plugins_url('lib/retina/js/retina-1.1.0.min.js', dirname(__FILE__)));
+		wp_register_script('retina', plugins_url('lib/retina/js/retina.min.js', dirname(__FILE__)));
 		wp_enqueue_script('retina');
 	}
 }
@@ -912,7 +914,7 @@ function mapi_load_easylistsplitter() {
 function mapi_load_tinysort() {
 	if(!is_admin()) {
 		wp_deregister_script('tinysort');
-		wp_register_script('tinysort', plugins_url('lib/tinysort/jquery.tinysort.js', dirname(__FILE__)));
+		wp_register_script('tinysort', plugins_url('lib/tinysort/jquery.tinysort.min.js', dirname(__FILE__)));
 		wp_enqueue_script('tinysort');
 	}
 }
