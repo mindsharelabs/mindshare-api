@@ -47,7 +47,7 @@ add_action('admin_head', 'credits_css');
 function credits_css() {
 	?>
 	<style type="text/css">
-		textarea#credits {
+		textarea#credits-ta {
 			font-family: Consolas, 'Courier New', Courier, monospace;
 			font-size: 14px;
 			width: 600px;

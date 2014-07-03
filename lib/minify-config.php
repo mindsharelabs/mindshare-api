@@ -1,10 +1,10 @@
 <?php
 //###WPM-CACHE-PATH-BEFORE###
-$min_cachePath = "";
+$min_cachePath = "/home/mindsharedev/dev.mindsharelabs.com/wp-content/uploads/minify-cache";
 //###WPM-CACHE-PATH-AFTER###
 
 //###WPM-CACHE-AGE-BEFORE###
-$min_serveOptions['maxAge'] = 1;
+$min_serveOptions['maxAge'] = 432000;
 //###WPM-CACHE-AGE-AFTER###
 
 //###WPM-ERROR-LOGGER-BEFORE###

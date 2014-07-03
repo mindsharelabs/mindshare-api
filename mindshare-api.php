@@ -4,7 +4,7 @@ Plugin Name:Mindshare Theme API
 Plugin URI: http://mindsharelabs.com/downloads/mindshare-theme-api/
 Description: Provides a library of additional template tags, 3rd-party libraries, and functions for WordPress themes and additional features for WordPress CMS websites.
 Author: Mindshare Studios, Inc
-Version: 0.7.5
+Version: 0.7.5.1
 Author URI: http://mind.sh/are/
 Network: false
 */
@@ -101,7 +101,7 @@ if(!class_exists("Mindshare_API")) :
 		 *
 		 * @var string
 		 */
-		private $class_version = '0.7.5';
+		private $class_version = '0.7.5.1';
 
 		/**
 		 * Used for automatic updates
@@ -394,6 +394,7 @@ if(!class_exists("Mindshare_API")) :
 			include_once('core/mapi-shortcodes.php');
 			include_once('core/mapi-social.php');
 			include_once('core/mapi-taxonomy.php');
+			include_once('core/mapi-theme.php');
 			include_once('core/mapi-user.php');
 
 			// deprecated functions

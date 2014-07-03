@@ -325,6 +325,32 @@ function mapi_error($args) {
 }
 
 /**
+ * Stops PHP execution and outputs an error message.
+ *
+ * @param $msg
+ */
+function mapi_die($msg) {
+	mapi_error(array(
+		'msg'  => $msg,
+		'echo' => TRUE,
+		'die'  => TRUE
+	));
+}
+
+/**
+ * Outputs a message to the JavaScript console.
+ *
+ * @param $msg
+ */
+function mapi_console_log($msg) {
+	mapi_error(array(
+		'msg'  => $msg,
+		'echo' => FALSE,
+		'die'  => FALSE
+	));
+}
+
+/**
  *
  * Outputs registered error message to the JavaScript console in wp_footer.
  *
@@ -527,7 +553,7 @@ function mapi_remove_recent_comments_style() {
  * @return string
  */
 function mapi_toggle_html_compression($echo = TRUE) {
-	$comment = '<!--compression-none-->';
+	$comment = PHP_EOL.'<!--compression-none-->'.PHP_EOL;
 	if($echo) {
 		echo $comment;
 	} else {

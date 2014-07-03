@@ -10,8 +10,11 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.7.5.1
+Bugfixes for the options framework
+
 ## 0.7.5
-added fns mapi_console_log and mapi_die, fixed PHP notices, misc bugfixes, updated all external libraries
+added fns mapi_console_log and mapi_die, fixed PHP notices, misc bugfixes, updated all external libraries, added options to set favicon and mapi_get_favicon_url() function
 
 ## 0.7.4
 Fixed mThumb PHP Notices, added Maintenance Mode bypass for wp-config.php, disabled minify builder, updated domains list for mapi_extract_domain, fix for 3.9 in options framework

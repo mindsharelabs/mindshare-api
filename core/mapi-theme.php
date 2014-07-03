@@ -1,14 +1,13 @@
 <?php
 /**
  * mapi-theme.php
- * 
- * @created 3/21/14 2:54 PM
- * @author Mindshare Studios, Inc.
+ *
+ * @created   3/21/14 2:54 PM
+ * @author    Mindshare Studios, Inc.
  * @copyright Copyright (c) 2014
- * @link http://www.mindsharelabs.com/documentation/
- * 
+ * @link      http://www.mindsharelabs.com/documentation/
+ *
  */
-
 
 /**
  * Optionally displays a credit message in compatible themes when enabled in the Mindshare Theme API
@@ -24,9 +23,21 @@ function mapi_copyright() {
 			echo base64_decode($c);
 		} elseif(function_exists('mapi_get_option')) {
 			if(mapi_get_option('show_credit') == TRUE || $_GET['credit'] == 1) {
-				echo base64_decode($c);
+				echo PHP_EOL.base64_decode($c).PHP_EOL;
 			}
 		}
 	}
 	mapi_toggle_html_compression();
+}
+
+/**
+ * Returns the URL to a user specified favicon sized to 96 x 96.
+ *
+ * @return string
+ */
+function mapi_get_favicon_url() {
+	$favicon = mapi_get_option('custom_branding');
+	$favicon = $favicon['mapi_favicon']['src'];
+	$string = mapi_thumb(array('src' => esc_url_raw($favicon), 'w' => 96, 'h' => 96, 'zc' => 0, 'ct' => 1));
+	return $string;
 }

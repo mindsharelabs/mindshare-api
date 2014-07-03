@@ -1,6 +1,8 @@
 /* Common Rules for all fields. */
 /*.form-table td.at-field { border:1px solid #DDD; padding:10px 10px 20px; margin:0px; font-family:"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, sans-serif; }*/
-.sections .form-table { margin-bottom: 10px; }
+.sections .form-table {
+	margin-bottom:10px;
+}
 .at-label {
 	margin:0 !important;
 	padding:10px 0 0;
@@ -362,13 +364,13 @@ div.apc-export, div.apc_import {
 div.desc-field {
 	font-size:0.9em;
 	color:#666;
-	max-width: 550px;
+	max-width:550px;
 }
 textarea#sysinfo {
-	font-family: Consolas, 'Courier New', Courier;
-	font-size: 14px;
-	width: 100%;
-	height: 600px;
-	background-color: #f9f9f9;
-	margin-top: 15px;
+	font-family:Consolas, 'Courier New', Courier;
+	font-size:14px;
+	width:100%;
+	height:600px;
+	background-color:#f9f9f9;
+	margin-top:15px;
 }

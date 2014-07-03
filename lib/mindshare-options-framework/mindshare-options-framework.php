@@ -225,16 +225,16 @@ if(!class_exists('mindshare_options_framework')) :
 		/**
 		 * Builds a new Page
 		 *
-		 * @param $args         (string|mixed array) - Possible keys within $args:
-		 * @param menu          (string) - this the name of the parent Top-Level-Menu or a TopPage object to create this page as a sub menu to.
-		 * @param top           (string) - Slug for the New Top level Menu page to create.
-		 * @param page_title    (string) - The name of this page (good for Top level and sub menu pages)
-		 * @param menu_title    (string) - The test link for this page on the WordPress menu
-		 * @param capability    (string) (optional) - The capability needed to view the page (good for Top level and sub menu pages)
-		 * @param menu_slug     (string) - A unique string identifying your new menu (Top level Only)
-		 * @param icon_url      (string) (optional) - URL to the icon, decorating the Top-Level-Menu (Top level Only)
-		 * @param position      (string) (optional) - The position of the Menu in the ACP (Top level Only)
-		 * @param option_group  (string) (required) - the name of the option to create in the database
+		 * @param $args        (string|mixed array) - Possible keys within $args:
+		 * @param menu         (string) - this the name of the parent Top-Level-Menu or a TopPage object to create this page as a sub menu to.
+		 * @param top          (string) - Slug for the New Top level Menu page to create.
+		 * @param page_title   (string) - The name of this page (good for Top level and sub menu pages)
+		 * @param menu_title   (string) - The test link for this page on the WordPress menu
+		 * @param capability   (string) (optional) - The capability needed to view the page (good for Top level and sub menu pages)
+		 * @param menu_slug    (string) - A unique string identifying your new menu (Top level Only)
+		 * @param icon_url     (string) (optional) - URL to the icon, decorating the Top-Level-Menu (Top level Only)
+		 * @param position     (string) (optional) - The position of the Menu in the ACP (Top level Only)
+		 * @param option_group (string) (required) - the name of the option to create in the database
 		 */
 		public function __construct($args) {
 
@@ -376,9 +376,9 @@ if(!class_exists('mindshare_options_framework')) :
 			);
 			$this->args = array_merge($default, $this->args);
 			$top_id = add_menu_page($this->args['page_title'], $this->args['menu_title'], $this->args['capability'], $this->args['id'], array(
-																																			 $this,
-																																			 'DisplayPage'
-																																		), $this->args['icon_url'], $this->args['position']);
+				$this,
+				'DisplayPage'
+			), $this->args['icon_url'], $this->args['position']);
 			$page = add_submenu_page($top_id, $this->args['page_title'], $this->args['menu_title'], $this->args['capability'], $this->args['id'], array($this, 'DisplayPage'));
 			if($page) {
 				$this->_Slug = $page;
@@ -653,8 +653,8 @@ if(!class_exists('mindshare_options_framework')) :
 						<?php if($this->project_path == 'PLUGIN') : ?>
 							<?php
 							if(!empty($this->project_slug)) {
-							$deactivate_url = 'plugins.php?action=deactivate&amp;plugin='.$this->project_slug.'/'.$this->project_slug.'.php';
-							$deactivate_url = wp_nonce_url($deactivate_url, 'deactivate-plugin_'.$this->project_slug.'/'.$this->project_slug.'.php');
+								$deactivate_url = 'plugins.php?action=deactivate&amp;plugin='.$this->project_slug.'/'.$this->project_slug.'.php';
+								$deactivate_url = wp_nonce_url($deactivate_url, 'deactivate-plugin_'.$this->project_slug.'/'.$this->project_slug.'.php');
 							} else {
 								$deactivate_url = admin_url('plugins.php');
 							}
@@ -780,6 +780,7 @@ if(!class_exists('mindshare_options_framework')) :
 				</p>
 			</div>
 			</div>
+			</div>
 			</form>
 			<div id="mindshare-framework-uninst" style="display:none; clear: both;">
 				<form method="post" action="">
@@ -847,7 +848,7 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @access   public
 		 *
-		 * @param $args     (mixed|array) contains everything needed to build the field
+		 * @param $args (mixed|array) contains everything needed to build the field
 		 *
 		 * @internal param $repeater (boolean)
 		 *
@@ -895,7 +896,7 @@ if(!class_exists('mindshare_options_framework')) :
 		/**
 		 * Does the repetitive tasks of adding a field
 		 *
-		 * @param $args     (mixed|array) contains everything needed to build the field
+		 * @param $args (mixed|array) contains everything needed to build the field
 		 *
 		 * @internal param $repeater (boolean)
 		 *
@@ -1158,9 +1159,9 @@ if(!class_exists('mindshare_options_framework')) :
 			// Get Attachments
 			$attachments = get_posts(
 				array(
-					 'numberposts' => -1,
-					 'post_type'   => 'attachment',
-					 'post_parent' => $post_id
+					'numberposts' => -1,
+					'post_type'   => 'attachment',
+					'post_parent' => $post_id
 				)
 			);
 			// Loop through attachments, if not empty, delete it.
@@ -1196,8 +1197,9 @@ if(!class_exists('mindshare_options_framework')) :
 				}
 				$temp = get_option($this->args['option_group']);
 				$saved = $temp[$f[0]];
-				if(isset($saved[$f[1]][$f[2]])) {
-					unset($saved[$f[1]][$f[2]]);
+				//var_dump($saved[$f[1]]); die;
+				if(isset($saved[$f[1]])) {
+					unset($saved[$f[1]]);
 					$temp[$f[0]] = $saved;
 					update_option($this->args['option_group'], $temp);
 					$ok = wp_delete_attachment($attachment_id);
@@ -1880,7 +1882,7 @@ if(!class_exists('mindshare_options_framework')) :
 			}
 			$html = '<select class="at-typography at-typography-size" name="'.esc_attr($field['id'].'[size]').'" id="'.esc_attr($field['id'].'_size').'">';
 			$op = '';
-			for($i = 16; $i < 200; $i=$i+8) {
+			for($i = 16; $i < 200; $i = $i + 8) {
 				$size = $i.'px';
 				$op .= '<option value="'.esc_attr($size).'">'.esc_html($size).'</option>';
 			}
@@ -2302,11 +2304,11 @@ if(!class_exists('mindshare_options_framework')) :
 				$format = 'date' == $field['type'] ? 'yy-mm-dd' : ('time' == $field['type'] ? 'hh:mm' : '');
 				$field = array_merge(
 					array(
-						 'multiple'            => $multiple,
-						 'std'                 => $std,
-						 'desc'                => '',
-						 'format'              => $format,
-						 'validation_function' => ''
+						'multiple'            => $multiple,
+						'std'                 => $std,
+						'desc'                => '',
+						'format'              => $format,
+						'validation_function' => ''
 					), $field);
 			}
 		}
@@ -2397,9 +2399,9 @@ if(!class_exists('mindshare_options_framework')) :
 		 * @since  0.3
 		 * @access public
 		 *
-		 * @param          $id      string  id of the field
-		 * @param          $args    mixed|array
-		 * @param  boolean $repeater=false
+		 * @param          $id       string  id of the field
+		 * @param          $args     mixed|array
+		 * @param  boolean $repeater =false
 		 */
 		public function addTypo($id, $args, $repeater = FALSE) {
 			$new_field = array(
@@ -2429,11 +2431,11 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string  field id, i.e. the meta key
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'style' =>   // custom style for field, string optional
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, string optional
+		 *                  'style' =>   // custom style for field, string optional
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater/conditional? true|false(default)
 		 *
 		 * @return array
@@ -2464,11 +2466,11 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string  field id, i.e. the meta key
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'style' =>   // custom style for field, string optional
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, string optional
+		 *                  'style' =>   // custom style for field, string optional
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -2502,11 +2504,11 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string  field id, i.e. the meta key
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'style' =>   // custom style for field, string optional
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, string optional
+		 *                  'style' =>   // custom style for field, string optional
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -2530,12 +2532,12 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string  field id, i.e. the meta key
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'style' =>   // custom style for field, string optional
-		 *    'syntax' =>   // syntax language to use in editor (php,javascript,css,html)
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, string optional
+		 *                  'style' =>   // custom style for field, string optional
+		 *                  'syntax' =>   // syntax language to use in editor (php,javascript,css,html)
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -2610,10 +2612,10 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string  field id, i.e. the meta key
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, string optional
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -2644,11 +2646,11 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string  field id, i.e. the key
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'validation_function' => // validate function, string optional
-		 *    'fields' => list of fields to show conditionally.
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, string optional
+		 *                  'validation_function' => // validate function, string optional
+		 *                  'fields' => list of fields to show conditionally.
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -2681,10 +2683,10 @@ if(!class_exists('mindshare_options_framework')) :
 		 * @param $id       string  field id, i.e. the meta key
 		 * @param $options  (array)  array of key => value pairs for select options
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, string optional
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array : remember to call: $checkbox_list = get_post_meta(get_the_ID(), 'meta_name', false);
@@ -2715,11 +2717,11 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string  field id, i.e. the meta key
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'style' =>   // custom style for field, string optional
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, string optional
+		 *                  'style' =>   // custom style for field, string optional
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -2751,11 +2753,11 @@ if(!class_exists('mindshare_options_framework')) :
 		 * @param $id       string field id, i.e. the meta key
 		 * @param $options  (array)  array of key => value pairs for select options
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, (array) optional
-		 *    'multiple' => // select multiple values, optional. Default is false.
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, (array) optional
+		 *                  'multiple' => // select multiple values, optional. Default is false.
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -2788,11 +2790,11 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string field id, i.e. the meta key
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, (array) optional
-		 *    'multiple' => // select multiple values, optional. Default is false.
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, (array) optional
+		 *                  'multiple' => // select multiple values, optional. Default is false.
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -2888,11 +2890,11 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string field id, i.e. the meta key
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, (array) optional
-		 *    'multiple' => // select multiple values, optional. Default is false.
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, (array) optional
+		 *                  'multiple' => // select multiple values, optional. Default is false.
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -3178,10 +3180,10 @@ if(!class_exists('mindshare_options_framework')) :
 		 * @param $id       string field id, i.e. the meta key
 		 * @param $options  (array)  array of key => value pairs for sortable options  as value => label
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, (array) optional
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, (array) optional
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -3215,10 +3217,10 @@ if(!class_exists('mindshare_options_framework')) :
 		 * @param $id       string field id, i.e. the meta key
 		 * @param $options  (array)  array of key => value pairs for radio options
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, string optional
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -3250,11 +3252,11 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string  field id, i.e. the meta key
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'validation_function' => // validate function, string optional
-		 *    'format' => // date format, default yy-mm-dd. Optional. Default "'d MM, yy'"  See more formats here: http://goo.gl/Wcwxn
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, string optional
+		 *                  'validation_function' => // validate function, string optional
+		 *                  'format' => // date format, default yy-mm-dd. Optional. Default "'d MM, yy'"  See more formats here: http://goo.gl/Wcwxn
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -3285,11 +3287,11 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string- field id, i.e. the meta key
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'validation_function' => // validate function, string optional
-		 *    'format' => // time format, default hh:mm. Optional. See more formats here: http://goo.gl/83woX
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, string optional
+		 *                  'validation_function' => // validate function, string optional
+		 *                  'format' => // time format, default hh:mm. Optional. See more formats here: http://goo.gl/83woX
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -3320,10 +3322,10 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string  field id, i.e. the meta key
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, string optional
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -3353,9 +3355,9 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string  field id, i.e. the meta key
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -3379,11 +3381,11 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string  field id, i.e. the meta key
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'style' =>   // custom style for field, string optional Default 'width: 300px; height: 400px'
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, string optional
+		 *                  'style' =>   // custom style for field, string optional Default 'width: 300px; height: 400px'
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -3414,14 +3416,14 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string  field id, i.e. the meta key
 		 * @param $options  mixed|array options of taxonomy field
-		 *    'taxonomy' =>    // taxonomy name can be category,post_tag or any custom taxonomy default is category
-		 *    'type' =>  // how to show taxonomy? 'select' (default) or 'checkbox_list'
-		 *    'args' =>  // arguments to query taxonomy, see http://goo.gl/uAANN default ('hide_empty' => false)
+		 *                  'taxonomy' =>    // taxonomy name can be category,post_tag or any custom taxonomy default is category
+		 *                  'type' =>  // how to show taxonomy? 'select' (default) or 'checkbox_list'
+		 *                  'args' =>  // arguments to query taxonomy, see http://goo.gl/uAANN default ('hide_empty' => false)
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, string optional
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -3456,12 +3458,12 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string  field id, i.e. the meta key
 		 * @param $options  mixed|array options of taxonomy field
-		 *    'type' =>  // how to show taxonomy? 'select' (default) or 'checkbox_list'
+		 *                  'type' =>  // how to show taxonomy? 'select' (default) or 'checkbox_list'
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, string optional
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -3494,14 +3496,14 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id       string  field id, i.e. the meta key
 		 * @param $options  mixed|array options of taxonomy field
-		 *    'post_type' =>    // post type name, 'post' (default) 'page' or any custom post type
+		 *                  'post_type' =>    // post type name, 'post' (default) 'page' or any custom post type
 		 *                  type' =>  // how to show posts? 'select' (default) or 'checkbox_list'
 		 *                  args' =>  // arguments to query posts, see http://goo.gl/is0yK default ('posts_per_page' => -1)
 		 * @param $args     mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'validation_function' => // validate function, string optional
+		 *                  'name' => // field name/label string optional
+		 *                  'desc' => // field description, string optional
+		 *                  'std' => // default value, string optional
+		 *                  'validation_function' => // validate function, string optional
 		 * @param $repeater bool  is this a field inside a repeater? true|false(default)
 		 *
 		 * @return array
@@ -3534,12 +3536,12 @@ if(!class_exists('mindshare_options_framework')) :
 		 *
 		 * @param $id   string  field id, i.e. the meta key
 		 * @param $args mixed|array
-		 *    'name' => // field name/label string optional
-		 *    'desc' => // field description, string optional
-		 *    'std' => // default value, string optional
-		 *    'style' =>   // custom style for field, string optional
-		 *    'validation_function' => // validate function, string optional
-		 *    'fields' => //fields to repeater
+		 *              'name' => // field name/label string optional
+		 *              'desc' => // field description, string optional
+		 *              'std' => // default value, string optional
+		 *              'style' =>   // custom style for field, string optional
+		 *              'validation_function' => // validate function, string optional
+		 *              'fields' => //fields to repeater
 		 *
 		 * @modified 0.4 added sortable option
 		 */
@@ -3790,8 +3792,9 @@ if(!class_exists('mindshare_options_framework')) :
         <div class="export_code">
           <label for="export_code">'.__('Export Code').'</label><br />
           <textarea id="export_code"></textarea>        
-          <input class="button-primary" type="button" value="'.__('Get Export').'" id="apc_export_b" />'./*$this->create_export_download_link().*/'
-          <span class="export_status" style="display: none;"><img style="vertical-align: middle;" src="'.$this->SelfPath.'/img/load16x16.gif" alt="loading..."/></span>
+          <input class="button-primary" type="button" value="'.__('Get Export').'" id="apc_export_b" />'. /*$this->create_export_download_link().*/
+				'
+						  <span class="export_status" style="display: none;"><img style="vertical-align: middle;" src="'.$this->SelfPath.'/img/load16x16.gif" alt="loading..."/></span>
           <div class="export_results alert" style="display: none;"></div>
         </div>
       </div>
@@ -3942,8 +3945,8 @@ if(!class_exists('mindshare_options_framework')) :
 			$status = wp_handle_upload(
 				$_FILES[$imgid.'async-upload'],
 				array(
-					 'test_form' => TRUE,
-					 'action'    => 'plupload_action'
+					'test_form' => TRUE,
+					'action'    => 'plupload_action'
 				)
 			);
 			// send the uploaded file url in response
