@@ -37,7 +37,11 @@ function mapi_copyright() {
  */
 function mapi_get_favicon_url() {
 	$favicon = mapi_get_option('custom_branding');
-	$favicon = $favicon['mapi_favicon']['src'];
-	$string = mapi_thumb(array('src' => esc_url_raw($favicon), 'w' => 96, 'h' => 96, 'zc' => 0, 'ct' => 1));
-	return $string;
+	if($favicon != NULL && array_key_exists('mapi_favicon', $favicon)) {
+		$favicon = $favicon['mapi_favicon']['src'];
+		$string = mapi_thumb(array('src' => esc_url_raw($favicon), 'w' => 96, 'h' => 96, 'zc' => 0, 'ct' => 1));
+		return $string;
+	} else {
+		return FALSE;
+	}
 }

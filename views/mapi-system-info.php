@@ -24,10 +24,16 @@ function mapi_system_info() {
 	$sysinfo .= "PHP Version:            ".PHP_VERSION."\n";
 
 	if(class_exists('mysqli')) {
-		$mysqli_link = new mysqli(DB_HOST, DB_USER, DB_PASSWORD);
-		$sysinfo .= "MySQL Version:          ".mysqli_get_server_info($mysqli_link)."\n";
+		// if the host contains a port we need to split them up
+		if(strpos(DB_HOST, ':') !== FALSE) {
+			$db_host = explode(':', DB_HOST);
+			$mysqli_link = new mysqli($db_host[0], DB_USER, DB_PASSWORD, DB_NAME, $db_host[1]);
+		} else {
+			$mysqli_link = new mysqli(DB_HOST, DB_USER, DB_PASSWORD);
+		}
+		$sysinfo .= "MySQL Version:          ".@mysqli_get_server_info($mysqli_link)."\n";
 	} else {
-		$sysinfo .= "MySQL Version:          ".mysql_get_server_info()."\n";
+		$sysinfo .= "MySQL Version:          ".@mysql_get_server_info()."\n";
 	}
 
 	$sysinfo .= "Web Server:             ".$_SERVER['SERVER_SOFTWARE']."\n";
