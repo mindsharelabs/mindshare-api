@@ -357,13 +357,14 @@ function mapi_console_log($msg) {
  */
 function mapi_error_console() {
 	global $MAPI_ERRORS;
+	/* commenting this out because $error includes full path disclosure
 	if(count($MAPI_ERRORS) != 0) {
 		echo '<script type="text/javascript">';
 		foreach($MAPI_ERRORS as $error) {
 			echo 'console.log("'.$error.'");';
 		}
 		echo '</script>';
-	}
+	}*/
 }
 
 /**
