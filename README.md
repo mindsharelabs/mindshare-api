@@ -10,6 +10,10 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.7.7
+
+Security update
+
 ## 0.7.6
 
 Fixed issue with favicon not being set, fix for DB_HOST having port number, PHP 5.3 fix

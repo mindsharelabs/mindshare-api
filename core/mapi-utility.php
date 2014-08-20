@@ -602,7 +602,9 @@ function mapi_get_option($name = NULL) {
 	if($options && array_key_exists($name, $options)) {
 		return $options[$name];
 	} else {
-		return mapi_error(array('msg' => 'get_option returned FALSE', 'echo' => FALSE, 'die' => FALSE));
+		if(current_user_can('manage_options')) {
+			return mapi_error(array('msg' => 'get_option returned FALSE', 'echo' => FALSE, 'die' => FALSE));
+		}
 	}
 }
 
