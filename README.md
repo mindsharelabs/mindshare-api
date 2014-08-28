@@ -10,6 +10,10 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.7.8
+
+Fix PHP notice on Blankout
+
 ## 0.7.7
 
 Security update
