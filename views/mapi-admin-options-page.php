@@ -22,7 +22,6 @@ $misc_options_label = 'Misc. Settings';
 $wp_options_label = 'WordPress Tweaks';
 $lib_options_label = 'Libraries &amp; Plugins';
 $sysinfo_options_label = 'System Information';
-$credits_options_label = 'Credits';
 $import_options_label = 'Import &amp; Export';
 
 $mapi_options->TabsListing(
@@ -37,7 +36,7 @@ $mapi_options->TabsListing(
 				sanitize_title($lib_options_label)     => __($lib_options_label),
 				sanitize_title($sysinfo_options_label) => __($sysinfo_options_label),
 				sanitize_title($import_options_label)  => __($import_options_label),
-				sanitize_title($credits_options_label) => __($credits_options_label),
+
 			)
 	)
 );
@@ -165,9 +164,9 @@ $mapi_options->addText(
 $adv_ga_options[] = $mapi_options->addCheckbox(
 	'universal_analytics',
 	array(
-		'name'  => 'Use  <a href="https://support.google.com/analytics/answer/2790010?hl=en&ref_topic=2790009" target="_blank" title="View documentation">Universal Analytics (beta)</a> tracking code instead of the standard asynchronous code?',
+		'name'  => 'Use  <a href="https://support.google.com/analytics/answer/2790010?hl=en&ref_topic=2790009" target="_blank" title="View documentation">Universal Analytics</a>. Uncheck for legacy asynchronous code.',
 		'style' => 'simple',
-		'std'   => FALSE
+		'std'   => TRUE
 	),
 	TRUE
 );
@@ -342,7 +341,7 @@ $mapi_options->addText(
 	array(
 		'name' => 'Excerpt "more" text',
 		'desc' => 'Customize the text displayed at the end of <code>the_excerpt</code> and add a link to the full post. Leave blank to disable. WordPress default: <code>[...]</code>',
-		'std'  => '...'
+		'std'  => apply_filters('mapi_excerpt_more_text', 'Read more &rsaquo;')
 	)
 );
 
@@ -630,7 +629,7 @@ $mapi_options->addCheckbox(
 	'fix_console',
 	array(
 		'name' => 'Load <code><a title="View source in new tab" href="view-source:'.plugins_url('js/mapi-fix-console.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">mapi-fix-console.js</a></code>',
-		'std'  => TRUE,
+		'std'  => FALSE,
 		'desc' => 'Adds JavaScript to prevent any errors from calls to <code>console.log</code> in production environments (recommended).'
 	)
 );
@@ -794,21 +793,6 @@ $mapi_options->addTextarea(
 		'name' => $sysinfo_options_label,
 		'desc' => 'This information can be useful when you are debugging problems with you WordPress installation.',
 		'std'  => mapi_system_info()
-	)
-);
-$mapi_options->CloseTab();
-
-/*
- * tab start
- */
-$mapi_options->OpenTab(sanitize_title($credits_options_label));
-$mapi_options->Title($credits_options_label);
-$mapi_options->addTextarea(
-	'credits-ta',
-	array(
-		'name' => $credits_options_label,
-		'desc' => 'The '.MAPI_PLUGIN_NAME.' Team thanks the developers and free software projects listed above.',
-		'std'  => mapi_credits()
 	)
 );
 $mapi_options->CloseTab();

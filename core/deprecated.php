@@ -11,7 +11,62 @@
  *
  */
 
+/**
+ *
+ * Grabs the latest tweets from a user's timeline.
+ *
+ * @deprecated
+ *
+ * @see      : https://dev.twitter.com/docs/api/1/get/statuses/user_timeline
+ *
+ * @param $args array
+ *
+ * @internal param $screen_name (string) A Twitter screen name. Default is NULL.
+ * @internal param int $num_items (integer) Number of Tweets to pull. Default is 4.
+ * @internal param int $echo (boolean) Whether to output HTML or return a SimpleXMLElement for us in PHP. Default is TRUE.
+ * @return SimpleXMLElement|string
+ */
 
+function mapi_tweets($args) {
+	_deprecated_function(__FUNCTION__, '3.8', 'mapi_tweets_oauth');
+	$defaults = array(
+		'screen_name' => NULL,
+		'num_items'   => 4,
+		'echo'        => TRUE
+	);
+	$args = wp_parse_args($args, $defaults);
+	extract($args, EXTR_SKIP);
+
+	if(empty($screen_name)) {
+		return mapi_error(array('msg' => 'A valid Twitter screen name is required'));
+	}
+
+	if(function_exists('simplexml_load_file')) {
+		$url = 'https://api.twitter.com/1/statuses/user_timeline.xml?screen_name='.$screen_name.'&count='.$num_items;
+		$tweets_xml = @ simplexml_load_file($url); // error supression added to prevent issues when Twitter is down
+		if($tweets_xml) {
+			if($echo) {
+				echo '<ul class="mapi-twitter-feed mapi-twitter-rss">';
+				$tweets = $tweets_xml->xpath("/statuses/status");
+				foreach($tweets as $tweet) : ?>
+					<li>
+						<span class="mapi-tweet-link"><?php echo $tweet->text; ?></span><br />
+						<span class="mapi-tweet-meta">Posted to <a class="mapi-tweet-link" href='https://twitter.com/<?php echo $screen_name; ?>/status/<?php echo $tweet->id; ?>' title='<?php echo 'Posted '.$tweet->created_at; ?>'>Twitter</a> on <?php echo $tweet->created_at; ?>
+							by <a href="https://twitter.com/<?php echo $screen_name; ?>" title="Connect with <?php bloginfo('name'); ?> on Twitter" target="_blank"><?php echo $screen_name; ?></a></span>
+					</li>
+				<?php
+				endforeach;
+				echo '</ul>';
+			} else {
+				return $tweets_xml;
+			}
+		} else {
+			mapi_error(array('msg' => 'Could not retrieve Twitter XML: '.$url, 'die' => FALSE, 'echo' => FALSE));
+		}
+	} else {
+		mapi_error(array('msg' => 'The PHP function simplexml_load_file was not found.', 'die' => FALSE, 'echo' => FALSE));
+	}
+}
 
 /**
  *
@@ -145,6 +200,7 @@ function mapi_get_meta($key, $id = NULL, $empty_str = '', $processing_function =
 function mapi_force_send($args) {
 	_deprecated_function(__FUNCTION__, '3.8');
 	$args['send'] = TRUE;
+
 	return $args;
 }
 
@@ -187,6 +243,7 @@ function mapi_replace_attachment_url($form_fields, $post) {
 			$form_fields['url']['html'] = preg_replace("/value='.*?'/", "value='$url'", $form_fields['url']['html']);
 		}
 	}
+
 	return $form_fields;
 }
 
@@ -207,6 +264,7 @@ function mapi_save_attachment_url($post, $attachment) {
 	if(isset($attachment['url'])) {
 		update_post_meta($post['ID'], '_wp_attachment_url', esc_url_raw($attachment['url']));
 	}
+
 	return $post;
 }
 

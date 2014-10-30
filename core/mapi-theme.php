@@ -40,7 +40,8 @@ function mapi_get_favicon_url() {
 	if($favicon != NULL && array_key_exists('mapi_favicon', $favicon)) {
 		$favicon = $favicon['mapi_favicon']['src'];
 		if(!empty($favicon)) {
-			$string = mapi_thumb(array('src' => esc_url_raw($favicon), 'w' => 96, 'h' => 96, 'zc' => 0, 'ct' => 1));
+			$string = mapi_thumb(array('src' => esc_url_raw($favicon), 'w' => 96, 'h' => 96, 'zc' => 1, 'ct' => 1));
+
 			return $string;
 		} else {
 			return FALSE;
@@ -49,3 +50,4 @@ function mapi_get_favicon_url() {
 		return FALSE;
 	}
 }
+

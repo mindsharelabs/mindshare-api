@@ -35,6 +35,7 @@ get_header();
 
 						<?php //mapi_social_link(array('network' => 'facebook')); ?>
 						<?php mapi_social_links(); ?>
+						<?php mapi_tweets_oauth(array('screen_name' => 'mindsharestatus', 'num_tweets' => 6)); ?>
 
 
 

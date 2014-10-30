@@ -10,6 +10,17 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.7.9
+
+Preparation for version 1.0 launch:
+- remove credits tab
+- minify JS files
+- Fix favicon scaling
+- added new Twitter API Tweets function, mapi_tweets_oauth
+- added mapi_excerpt_more_text filter
+- update language on universal analytics
+- add CSS class for OS to body tag
+
 ## 0.7.8
 
 Fix PHP notice on Blankout

@@ -30,6 +30,7 @@ function mapi_is_true($string, $true_synonyms = array('yes', 'y', 'true', '1', '
 	if(is_bool($string)) {
 		return $string;
 	}
+
 	return in_array(strtolower(trim($string)), $true_synonyms);
 }
 
@@ -47,8 +48,9 @@ function mapi_excerpt_more($more = NULL) {
 	}
 	$options = get_option(MAPI_OPTIONS);
 	if(!empty($options['excerpt_more_txt'])) {
-		$more = $options['excerpt_more_txt'];
+		$more = apply_filters('mapi_excerpt_more_text', $options['excerpt_more_txt']);
 	}
+
 	return apply_filters('mapi_excerpt_more', '&nbsp;<a class="mapi excerpt-more" title="'.the_title_attribute('echo=0').'" href="'.get_permalink(get_the_ID()).'">'.$more.'</a>');
 }
 
@@ -76,6 +78,7 @@ function mapi_get_url() {
 	$s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
 	$protocol = substr(strtolower($_SERVER["SERVER_PROTOCOL"]), 0, strpos(strtolower($_SERVER["SERVER_PROTOCOL"]), "/")).$s;
 	$port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":".$_SERVER["SERVER_PORT"]);
+
 	return $protocol."://".$_SERVER['SERVER_NAME'].$port.$_SERVER['REQUEST_URI'];
 }
 
@@ -167,12 +170,12 @@ function mapi_browser_from_ua() {
 		// We will have two since we are not using 'other' argument yet
 		// See if version is before or after the name
 		if(strripos($user_agent, "Version") < strripos($user_agent, $browser_name_short)) {
-			$version = $matches['version'][0];
+			$version = @$matches['version'][0];
 		} else {
-			$version = $matches['version'][1];
+			$version = @$matches['version'][1];
 		}
 	} else {
-		$version = $matches['version'][0];
+		$version = @$matches['version'][0];
 	}
 
 	// check if we have a number
@@ -217,6 +220,7 @@ function mapi_broswer_class($show_major_version = FALSE, $show_minor_version = F
 		// fallback on the builtin WP globals if the plugin is not found
 		$class = implode(' ', mapi_add_body_classes());
 	}
+
 	return $class;
 }
 
@@ -262,6 +266,29 @@ function mapi_add_body_classes($classes = array()) {
 	} // add post "type-slug"
 	if(isset($post)) {
 		$classes[] = $post->post_type.'-'.$post->post_name;
+	}
+
+	return $classes;
+}
+
+/**
+ * Adds a CSS class for a users' Operating System to the BODY tag.
+ *
+ * @param $classes
+ *
+ * @return array
+ */
+function mapi_add_os_body_class($classes) {
+	if(stristr($_SERVER['HTTP_USER_AGENT'], "iphone") || stristr($_SERVER['HTTP_USER_AGENT'], "ipad")) {
+		$classes[] = 'ios';
+	} elseif(stristr($_SERVER['HTTP_USER_AGENT'], "android")) {
+		$classes[] = 'android';
+	} elseif(stristr($_SERVER['HTTP_USER_AGENT'], "mac")) {
+		$classes[] = 'osx';
+	} elseif(stristr($_SERVER['HTTP_USER_AGENT'], "linux")) {
+		$classes[] = 'linux';
+	} elseif(stristr($_SERVER['HTTP_USER_AGENT'], "windows")) {
+		$classes[] = 'windows';
 	}
 	return $classes;
 }
@@ -424,6 +451,7 @@ function mapi_file_array_dir($dir = NULL, $exts = 'jpg,jpeg,png,gif') {
 			}
 		}
 		closedir($handle);
+
 		return $files;
 	} else {
 		return FALSE;
@@ -625,6 +653,7 @@ function mapi_update_option($name, $value) {
 	$options = get_option(MAPI_OPTIONS);
 	if($options) {
 		$options[$name] = $value;
+
 		return update_option(MAPI_OPTIONS, $options);
 	}
 }
@@ -655,6 +684,7 @@ function mapi_delete_option($name) {
 	$options = get_option(MAPI_OPTIONS);
 	if($options) {
 		$options[$name] = '';
+
 		return update_option(MAPI_OPTIONS, $options);
 	}
 }
@@ -1311,6 +1341,7 @@ function mapi_extract_domain($url) {
 	require_once(MAPI_DIR_PATH.'lib/regdom-php/effectiveTLDs.inc.php');
 	$tldTree = require_once(MAPI_DIR_PATH.'lib/regdom-php/regDomain.inc.php');
 	$domain = getRegisteredDomain($domain, $tldTree);
+
 	return $domain;
 }
 
@@ -1324,6 +1355,7 @@ function mapi_extract_domain($url) {
  */
 function mapi_tel_uri($tel, $prefix = "+1") {
 	$tel = mapi_strip_nonnumeric($tel);
+
 	return apply_filters('mapi_tel_uri', $prefix.$tel);
 }
 
@@ -1349,6 +1381,7 @@ function mapi_strip_nonnumeric($str) {
  */
 function mapi_phone_format($tel) {
 	$tel = mapi_strip_nonnumeric($tel);
+
 	return apply_filters('mapi_phone_format', preg_replace('~.*(\d{3})[^\d]*(\d{3})[^\d]*(\d{4}).*~', '($1) $2-$3', $tel));
 }
 
@@ -1361,6 +1394,7 @@ function mapi_phone_format($tel) {
 
 function mapi_money_format($number) {
 	setlocale(LC_MONETARY, 'en_US');
+
 	return money_format('%(#10n', $number);
 }
 
@@ -1376,6 +1410,7 @@ function mapi_money_format($number) {
  */
 function mapi_remove_quick_edit($actions) {
 	unset($actions['inline hide-if-no-js']);
+
 	return $actions;
 }
 
@@ -1392,6 +1427,7 @@ function mapi_list_hooked_functions($tag = FALSE) {
 		$hook[$tag] = $wp_filter[$tag];
 		if(!is_array($hook[$tag])) {
 			mapi_error(array('msg' => "Nothing found for '$tag' hook", 'echo' => TRUE));
+
 			return;
 		}
 	} else {
@@ -1410,6 +1446,7 @@ function mapi_list_hooked_functions($tag = FALSE) {
 		}
 	}
 	echo '</pre>';
+
 	return;
 }
 
@@ -1434,6 +1471,7 @@ function mapi_hex_to_rgb($hex_color) {
 	$r = hexdec($r);
 	$g = hexdec($g);
 	$b = hexdec($b);
+
 	return array('red' => $r, 'green' => $g, 'blue' => $b);
 }
 
@@ -1465,6 +1503,7 @@ function mapi_random_string($length = 16) {
 	for($i = 0; $i < $length; $i++) {
 		$random_string .= $salt[mt_rand(0, $len - 1)];
 	}
+
 	return $random_string;
 }
 
@@ -1481,6 +1520,7 @@ function mapi_get_ip() {
 	} else {
 		$ip = $_SERVER['REMOTE_ADDR'];
 	}
+
 	return $ip;
 }
 

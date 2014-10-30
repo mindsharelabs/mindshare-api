@@ -331,11 +331,15 @@ if(!class_exists('mapi_options')) :
 			remove_action('wp_head', 'wp_generator');
 
 			add_filter('body_class', 'mapi_add_body_classes'); // add classes to body tag
+			add_filter('body_class', 'mapi_add_os_body_class');
 
 			// allow login by email or username
 			remove_filter('authenticate', 'wp_authenticate_username_password', 20, 3);
 			add_filter('authenticate', 'mapi_email_login_authenticate', 20, 3);
 			add_action('login_form', 'mapi_username_or_email_login');
+
+			// delete deprecated credits tab options
+			mapi_delete_option('credits');
 		}
 
 		public function start_maintenance_mode() {
@@ -357,11 +361,13 @@ if(!class_exists('mapi_options')) :
 		// login page changes
 		public function login_headertitle() {
 			$string = @$this->options['custom_branding']['wp_login_title'];
+
 			return $string;
 		}
 
 		public function login_headerurl() {
 			$string = esc_url_raw(@$this->options['custom_branding']['wp_login_url']);
+
 			return $string;
 		}
 

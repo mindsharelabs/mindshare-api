@@ -133,7 +133,7 @@ function mapi_facebook_rss($args = array()) {
 	extract($args, EXTR_SKIP);
 
 	if(empty($rss_uri)) {
-		// nothing was passed in so let's see if wee can build the proper URL based on API settings
+		// nothing was passed in so let's see if we can build the proper URL based on API settings
 		$facebook_id = mapi_get_facebook_id();
 		if($facebook_id) {
 			$rss_uri = 'https://www.facebook.com/feeds/page.php?id='.$facebook_id.'&format=rss20';
@@ -249,7 +249,9 @@ function mapi_facebook_head() {
 		<meta property="og:type" content="article" />
 		<meta property="og:url" content="<?php the_permalink_rss(); ?>" />
 		<meta property="og:site_name" content="<?php bloginfo_rss('name'); ?>" />
-		<?php if(!has_post_thumbnail(get_the_ID())) : // the post does not have featured image, use a default image ?>
+		<?php
+		// the post does not have featured image, use a default image
+		if(!has_post_thumbnail(get_the_ID())) : ?>
 			<meta property="og:image" content="<?php echo get_template_directory_uri().'/img/nothumb.gif'; ?>" />
 		<?php else : ?>
 			<meta property="og:image" content="<?php echo esc_attr(mapi_get_attachment_image_src(NULL, 'medium')); ?>" />
@@ -310,60 +312,6 @@ function mapi_google_plus_one($args) {
 		})();
 	</script>
 <?php
-}
-
-/**
- *
- * Grabs the latest tweets from a user's timeline.
- *
- * @see      : https://dev.twitter.com/docs/api/1/get/statuses/user_timeline
- *
- * @param $args array
- *
- * @internal param $screen_name (string) A Twitter screen name. Default is NULL.
- * @internal param int $num_items (integer) Number of Tweets to pull. Default is 4.
- * @internal param int $echo (boolean) Whether to output HTML or return a SimpleXMLElement for us in PHP. Default is TRUE.
- * @return SimpleXMLElement|string
- */
-
-function mapi_tweets($args) {
-	$defaults = array(
-		'screen_name' => NULL,
-		'num_items'   => 4,
-		'echo'        => TRUE
-	);
-	$args = wp_parse_args($args, $defaults);
-	extract($args, EXTR_SKIP);
-
-	if(empty($screen_name)) {
-		return mapi_error(array('msg' => 'A valid Twitter screen name is required'));
-	}
-
-	if(function_exists('simplexml_load_file')) {
-		$url = 'https://api.twitter.com/1/statuses/user_timeline.xml?screen_name='.$screen_name.'&count='.$num_items;
-		$tweets_xml = @ simplexml_load_file($url); // error supression added to prevent issues when Twitter is down
-		if($tweets_xml) {
-			if($echo) {
-				echo '<ul class="mapi-twitter-feed mapi-twitter-rss">';
-				$tweets = $tweets_xml->xpath("/statuses/status");
-				foreach($tweets as $tweet) : ?>
-					<li>
-						<span class="mapi-tweet-link"><?php echo $tweet->text; ?></span><br />
-						<span class="mapi-tweet-meta">Posted to <a class="mapi-tweet-link" href='https://twitter.com/<?php echo $screen_name; ?>/status/<?php echo $tweet->id; ?>' title='<?php echo 'Posted '.$tweet->created_at; ?>'>Twitter</a> on <?php echo $tweet->created_at; ?>
-							by <a href="https://twitter.com/<?php echo $screen_name; ?>" title="Connect with <?php bloginfo('name'); ?> on Twitter" target="_blank"><?php echo $screen_name; ?></a></span>
-					</li>
-				<?php
-				endforeach;
-				echo '</ul>';
-			} else {
-				return $tweets_xml;
-			}
-		} else {
-			mapi_error(array('msg' => 'Could not retrieve Twitter XML: '.$url, 'die' => FALSE, 'echo' => FALSE));
-		}
-	} else {
-		mapi_error(array('msg' => 'The PHP function simplexml_load_file was not found.', 'die' => FALSE, 'echo' => FALSE));
-	}
 }
 
 /**
@@ -532,6 +480,7 @@ function _mapi_social_share_href($network, $id) {
 			$href = _mapi_social_follow_href('rss', $id);
 			break;
 	}
+
 	return apply_filters('mapi_social_share_href', $href, $network);
 }
 
@@ -570,5 +519,77 @@ function _mapi_social_follow_href($network, $id) {
 			$href = get_feed_link(); //rss2
 			break;
 	}
+
 	return apply_filters('mapi_social_follow_href', $href, $network);
 }
+
+/**
+ * Retrieves public Tweets from a user's timeline using the new Twitter OAuth API. Replaces the deprecated mapi_tweets function.
+ *
+ * @param $args array [string]screen_name A Twitter screen name, default: NULL
+ * @param $args array [int]num_tweets Number of Tweets to retrieve, default: 4
+ * @param $args array [bool]echo Whether to echo or return the result, default: TRUE
+ * @param $args array [array]oauth Filterable array of OAuth settings for Twitter API app. Optional.
+ *
+ *
+ * @todo add caching?
+ */
+function mapi_tweets_oauth($args) {
+
+	if(!class_exists('TwitterAPIExchange')) {
+		require_once(MAPI_DIR_PATH.'/lib/twitter-api-php/TwitterAPIExchange.php');
+	}
+
+	//  Set access tokens here - see: https://dev.twitter.com/apps/
+	$settings = array(
+		'oauth_access_token'        =>
+			apply_filters('mapi_twitter_oauth_access_token', "45686564-2vwoGVrN88RScUl6TOqr5guSYBbzQ3DOWAbWLRq7R"),
+		'oauth_access_token_secret' =>
+			apply_filters('mapi_twitter_oauth_access_token_secret', "g1J8oT2il0ruIJtbr2zyZqM2O59m2PKvN6CdPeYealu1c"),
+		'consumer_key'              =>
+			apply_filters('mapi_twitter_consumer_key', "wOgvxmU8JYXjfXGnolhXsNtPV"),
+		'consumer_secret'           =>
+			apply_filters('mapi_twitter_consumer_secret', "26l1pgAgmblBb8l5Vi6JD2ybmrTVHc5X5arBwiZAhskqzZI5ff")
+	);
+
+	$defaults = array(
+		'screen_name' => NULL,
+		'num_tweets'  => 4,
+		'echo'        => TRUE,
+		'oauth'       => $settings
+	);
+	$args = wp_parse_args($args, $defaults);
+	extract($args, EXTR_SKIP);
+
+	if(empty($screen_name)) {
+		return mapi_error(array('msg' => 'A valid Twitter screen name is required.'));
+	}
+
+	//  Perform a GET request and echo the response, note: Set the GET field BEFORE calling buildOauth();
+	$url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
+	$getfield = '?screen_name='.$screen_name;
+	$requestMethod = 'GET';
+	$twitter = new TwitterAPIExchange($settings);
+	$tweets = json_decode($twitter->setGetfield($getfield)->buildOauth($url, $requestMethod)->performRequest());
+
+	if($tweets) {
+		$tweets = array_slice($tweets, 0, $num_tweets);
+		if($echo) {
+			echo '<ul class="mapi-twitter-feed mapi-twitter-rss">';
+			foreach($tweets as $tweet) : ?>
+				<li>
+					<span class="mapi-tweet-link"><?php echo $tweet->text; ?></span><br />
+						<span class="mapi-tweet-meta">Posted to <a class="mapi-tweet-link" href='https://twitter.com/<?php echo $screen_name; ?>/status/<?php echo $tweet->id; ?>' title='<?php echo 'Posted '.$tweet->created_at; ?>'>Twitter</a> on <?php echo $tweet->created_at; ?>
+							by <a href="https://twitter.com/<?php echo $screen_name; ?>" title="Connect with <?php bloginfo('name'); ?> on Twitter" target="_blank"><?php echo $screen_name; ?></a></span>
+				</li>
+			<?php
+			endforeach;
+			echo '</ul>';
+		} else {
+			return $tweets;
+		}
+	} else {
+		mapi_error(array('msg' => 'Could not retrieve Twitter timeline: '.$url, 'die' => FALSE, 'echo' => FALSE));
+	}
+}
+
