@@ -730,7 +730,7 @@ function mapi_load_jquery() {
 function mapi_load_bootstrap() {
 	if(!is_admin()) {
 		wp_deregister_script('bootstrap');
-		wp_register_script('bootstrap', plugins_url('lib/bootstrap/js/bootstrap.min.js', dirname(__FILE__)));
+		wp_register_script('bootstrap', '//cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js', array('jquery'));
 		wp_enqueue_script('bootstrap');
 	}
 }
@@ -743,7 +743,7 @@ function mapi_load_bootstrap() {
 function mapi_load_bootstrap_css() {
 	if(!is_admin()) {
 		wp_deregister_style('bootstrap');
-		wp_register_style('bootstrap', plugins_url('lib/bootstrap/css/bootstrap.min.css', dirname(__FILE__)));
+		wp_register_style('bootstrap', '//cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css');
 		wp_enqueue_style('bootstrap');
 	}
 }
@@ -756,7 +756,7 @@ function mapi_load_bootstrap_css() {
 function mapi_load_font_awesome() {
 	if(!is_admin()) {
 		wp_deregister_style('font-awesome');
-		wp_register_style('font-awesome', plugins_url('lib/font-awesome/css/font-awesome.min.css', dirname(__FILE__)));
+		wp_register_style('font-awesome', '//cdn.jsdelivr.net/fontawesome/4.2.0/css/font-awesome.min.css');
 		wp_enqueue_style('font-awesome');
 	}
 }

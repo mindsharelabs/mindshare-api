@@ -87,7 +87,7 @@ if(!class_exists('mapi_options')) :
 			}
 
 			if(@$this->options['load_jquery']) {
-				add_action('wp_enqueue_scripts', 'mapi_load_jquery', 100);
+				add_action('wp_enqueue_scripts', 'mapi_load_jquery');
 			}
 			if(@$this->options['load_bootstrap']) {
 				add_action('wp_enqueue_scripts', 'mapi_load_bootstrap', 100);
@@ -99,13 +99,13 @@ if(!class_exists('mapi_options')) :
 				add_action('wp_enqueue_scripts', 'mapi_load_font_awesome', 100);
 			}
 			if(@$this->options['load_modernizr_js']) {
-				add_action('wp_enqueue_scripts', 'mapi_load_modernizr', 100);
+				add_action('wp_enqueue_scripts', 'mapi_load_modernizr', 50);
 			}
 			if(@$this->options['load_backbone_js']) {
-				add_action('wp_enqueue_scripts', 'mapi_load_backbone', 100);
+				add_action('wp_enqueue_scripts', 'mapi_load_backbone', 50);
 			}
 			if(@$this->options['load_underscore_js']) {
-				add_action('wp_enqueue_scripts', 'mapi_load_underscore', 100);
+				add_action('wp_enqueue_scripts', 'mapi_load_underscore', 50);
 			}
 			if(@$this->options['load_leaflet_js'] || @$this->options['load_mapbox_js']) {
 				add_action('wp_enqueue_scripts', 'mapi_load_mapbox', 100); // leaflet replaced by mapbox

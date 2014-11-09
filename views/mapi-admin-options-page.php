@@ -418,7 +418,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_bootstrap',
 	array(
-		'name' => 'Load Bootstrap JS <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/bootstrap/js/bootstrap.min.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">bootstrap.min.js</a></code>',
+		'name' => 'Load Bootstrap JS <code>bootstrap.min.js</code>',
 		'std'  => FALSE,
 		'desc' => 'Enqueues the Twitter Bootstrap library (JS only). View <a href="http://twbs.github.io/bootstrap/" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -427,7 +427,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_bootstrap_css',
 	array(
-		'name' => 'Load Bootstrap CSS <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/bootstrap/css/bootstrap.min.css', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">bootstrap.min.css</a></code>',
+		'name' => 'Load Bootstrap CSS <code>bootstrap.min.css</code>',
 		'std'  => FALSE,
 		'desc' => 'Enqueues the Twitter Bootstrap library (CSS only). View <a href="http://twbs.github.io/bootstrap/" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -601,7 +601,7 @@ $mapi_options->addSubtitle('Utilities');
 $mapi_options->addCheckbox(
 	'load_font_awesome',
 	array(
-		'name' => 'Load Font Awesome <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/font-awesome/css/font-awesome.min.css', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">font-awesome.min.css</a></code>',
+		'name' => 'Load Font Awesome <code>font-awesome.min.css</code>',
 		'std'  => FALSE,
 		'desc' => 'Enqueues the CSS and font files for Font Awesome. View <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">documentation &rsaquo;</a>'
 	)
