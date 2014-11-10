@@ -9,23 +9,11 @@
 
 define('MINIFY_MIN_DIR', dirname(__FILE__));
 
-// set config path defaults
-$min_configPaths = array(
-    'base'   => MINIFY_MIN_DIR . '/config.php',
-    'test'   => MINIFY_MIN_DIR . '/config-test.php',
-    'groups' => MINIFY_MIN_DIR . '/groupsConfig.php'
-);
-
-// check for custom config paths
-if (!empty($min_customConfigPaths) && is_array($min_customConfigPaths)) {
-    $min_configPaths = array_merge($min_configPaths, $min_customConfigPaths);
-}
-
 // load config
-require $min_configPaths['base'];
+require MINIFY_MIN_DIR . '/config.php';
 
 if (isset($_GET['test'])) {
-    include $min_configPaths['test'];
+    include MINIFY_MIN_DIR . '/config-test.php';
 }
 
 require "$min_libPath/Minify/Loader.php";
@@ -60,18 +48,16 @@ if ($min_errorLogger) {
 }
 
 // check for URI versioning
-if (preg_match('/&\\d/', $_SERVER['QUERY_STRING']) || isset($_GET['v'])) {
+if (preg_match('/&\\d/', $_SERVER['QUERY_STRING'])) {
     $min_serveOptions['maxAge'] = 31536000;
 }
-
-// need groups config?
 if (isset($_GET['g'])) {
     // well need groups config
-    $min_serveOptions['minApp']['groups'] = (require $min_configPaths['groups']);
+    $min_serveOptions['minApp']['groups'] = (require MINIFY_MIN_DIR . '/groupsConfig.php');
 }
-
-// serve or redirect
 if (isset($_GET['f']) || isset($_GET['g'])) {
+    // serve!   
+
     if (! isset($min_serveController)) {
         $min_serveController = new Minify_Controller_MinApp();
     }

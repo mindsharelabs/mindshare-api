@@ -14,68 +14,13 @@
  * @todo can use a stream wrapper to unit test this?
  */
 class Minify_JS_ClosureCompiler {
+    const URL = 'http://closure-compiler.appspot.com/compile';
 
     /**
-     * @var string The option key for the maximum POST byte size
-     */
-    const OPTION_MAX_BYTES = 'maxBytes';
-
-    /**
-     * @var string The option key for additional params. @see __construct
-     */
-    const OPTION_ADDITIONAL_OPTIONS = 'additionalParams';
-
-    /**
-     * @var string The option key for the fallback Minifier
-     */
-    const OPTION_FALLBACK_FUNCTION = 'fallbackFunc';
-
-    /**
-     * @var string The option key for the service URL
-     */
-    const OPTION_COMPILER_URL = 'compilerUrl';
-
-    /**
-     * @var int The default maximum POST byte size according to https://developers.google.com/closure/compiler/docs/api-ref
-     */
-    const DEFAULT_MAX_BYTES = 200000;
-
-    /**
-     * @var string[] $DEFAULT_OPTIONS The default options to pass to the compiler service
-     *
-     * @note This would be a constant if PHP allowed it
-     */
-    private static $DEFAULT_OPTIONS = array(
-        'output_format' => 'text',
-        'compilation_level' => 'SIMPLE_OPTIMIZATIONS'
-    );
-
-    /**
-     * @var string $url URL of compiler server. defaults to Google's
-     */
-    protected $serviceUrl = 'http://closure-compiler.appspot.com/compile';
-
-    /**
-     * @var int $maxBytes The maximum JS size that can be sent to the compiler server in bytes
-     */
-    protected $maxBytes = self::DEFAULT_MAX_BYTES;
-
-    /**
-     * @var string[] $additionalOptions Additional options to pass to the compiler service
-     */
-    protected $additionalOptions = array();
-
-    /**
-     * @var callable Function to minify JS if service fails. Default is JSMin
-     */
-    protected $fallbackMinifier = array('JSMin', 'minify');
-
-    /**
-     * Minify JavaScript code via HTTP request to a Closure Compiler API
+     * Minify Javascript code via HTTP request to the Closure Compiler API
      *
      * @param string $js input code
-     * @param array $options Options passed to __construct(). @see __construct
-     *
+     * @param array $options unused at this point
      * @return string
      */
     public static function minify($js, array $options = array())
@@ -85,91 +30,53 @@ class Minify_JS_ClosureCompiler {
     }
 
     /**
-     * @param array $options Options with keys available below:
      *
-     *  fallbackFunc     : (callable) function to minify if service unavailable. Default is JSMin.
+     * @param array $options
      *
-     *  compilerUrl      : (string) URL to closure compiler server
-     *
-     *  maxBytes         : (int) The maximum amount of bytes to be sent as js_code in the POST request.
-     *                     Defaults to 200000.
-     *
-     *  additionalParams : (string[]) Additional parameters to pass to the compiler server. Can be anything named
-     *                     in https://developers.google.com/closure/compiler/docs/api-ref except for js_code and
-     *                     output_info
+     * fallbackFunc : default array($this, 'fallback');
      */
     public function __construct(array $options = array())
     {
-        if (isset($options[self::OPTION_FALLBACK_FUNCTION])) {
-            $this->fallbackMinifier = $options[self::OPTION_FALLBACK_FUNCTION];
-        }
-        if (isset($options[self::OPTION_COMPILER_URL])) {
-            $this->serviceUrl = $options[self::OPTION_COMPILER_URL];
-        }
-        if (isset($options[self::OPTION_ADDITIONAL_OPTIONS]) && is_array($options[self::OPTION_ADDITIONAL_OPTIONS])) {
-            $this->additionalOptions = $options[self::OPTION_ADDITIONAL_OPTIONS];
-        }
-        if (isset($options[self::OPTION_MAX_BYTES])) {
-            $this->maxBytes = (int) $options[self::OPTION_MAX_BYTES];
-        }
+        $this->_fallbackFunc = isset($options['fallbackMinifier'])
+            ? $options['fallbackMinifier']
+            : array($this, '_fallback');
     }
 
-    /**
-     * Call the service to perform the minification
-     *
-     * @param string $js JavaScript code
-     * @return string
-     * @throws Minify_JS_ClosureCompiler_Exception
-     */
     public function min($js)
     {
-        $postBody = $this->buildPostBody($js);
-
-        if ($this->maxBytes > 0) {
-            $bytes = (function_exists('mb_strlen') && ((int)ini_get('mbstring.func_overload') & 2))
-                ? mb_strlen($postBody, '8bit')
-                : strlen($postBody);
-            if ($bytes > $this->maxBytes) {
-                throw new Minify_JS_ClosureCompiler_Exception(
-                    'POST content larger than ' . $this->maxBytes . ' bytes'
-                );
-            }
+        $postBody = $this->_buildPostBody($js);
+        $bytes = (function_exists('mb_strlen') && ((int)ini_get('mbstring.func_overload') & 2))
+            ? mb_strlen($postBody, '8bit')
+            : strlen($postBody);
+        if ($bytes > 200000) {
+            throw new Minify_JS_ClosureCompiler_Exception(
+                'POST content larger than 200000 bytes'
+            );
         }
-
-        $response = $this->getResponse($postBody);
-
+        $response = $this->_getResponse($postBody);
         if (preg_match('/^Error\(\d\d?\):/', $response)) {
-            if (is_callable($this->fallbackMinifier)) {
-                // use fallback
+            if (is_callable($this->_fallbackFunc)) {
                 $response = "/* Received errors from Closure Compiler API:\n$response"
                           . "\n(Using fallback minifier)\n*/\n";
-                $response .= call_user_func($this->fallbackMinifier, $js);
+                $response .= call_user_func($this->_fallbackFunc, $js);
             } else {
                 throw new Minify_JS_ClosureCompiler_Exception($response);
             }
         }
-
         if ($response === '') {
-            $errors = $this->getResponse($this->buildPostBody($js, true));
+            $errors = $this->_getResponse($this->_buildPostBody($js, true));
             throw new Minify_JS_ClosureCompiler_Exception($errors);
         }
-
         return $response;
     }
 
-    /**
-     * Get the response for a given POST body
-     *
-     * @param string $postBody
-     * @return string
-     * @throws Minify_JS_ClosureCompiler_Exception
-     */
-    protected function getResponse($postBody)
+    protected $_fallbackFunc = null;
+
+    protected function _getResponse($postBody)
     {
         $allowUrlFopen = preg_match('/1|yes|on|true/i', ini_get('allow_url_fopen'));
-
         if ($allowUrlFopen) {
-            $contents = file_get_contents($this->serviceUrl, false, stream_context_create(array(
+            $contents = file_get_contents(self::URL, false, stream_context_create(array(
                 'http' => array(
                     'method' => 'POST',
                     'header' => "Content-type: application/x-www-form-urlencoded\r\nConnection: close\r\n",
@@ -179,7 +86,7 @@ class Minify_JS_ClosureCompiler {
                 )
             )));
         } elseif (defined('CURLOPT_POST')) {
-            $ch = curl_init($this->serviceUrl);
+            $ch = curl_init(self::URL);
             curl_setopt($ch, CURLOPT_POST, true);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-type: application/x-www-form-urlencoded'));
@@ -193,37 +100,32 @@ class Minify_JS_ClosureCompiler {
                "Could not make HTTP request: allow_url_open is false and cURL not available"
             );
         }
-
         if (false === $contents) {
             throw new Minify_JS_ClosureCompiler_Exception(
                "No HTTP response from server"
             );
         }
-
         return trim($contents);
     }
 
+    protected function _buildPostBody($js, $returnErrors = false)
+    {
+        return http_build_query(array(
+            'js_code' => $js,
+            'output_info' => ($returnErrors ? 'errors' : 'compiled_code'),
+            'output_format' => 'text',
+            'compilation_level' => 'SIMPLE_OPTIMIZATIONS'
+        ), null, '&');
+    }
+
     /**
-     * Build a POST request body
-     *
-     * @param string $js JavaScript code
-     * @param bool $returnErrors
+     * Default fallback function if CC API fails
+     * @param string $js
      * @return string
      */
-    protected function buildPostBody($js, $returnErrors = false)
+    protected function _fallback($js)
     {
-        return http_build_query(
-            array_merge(
-                self::$DEFAULT_OPTIONS,
-                $this->additionalOptions,
-                array(
-                    'js_code' => $js,
-                    'output_info' => ($returnErrors ? 'errors' : 'compiled_code')
-                )
-            ),
-            null,
-            '&'
-        );
+        return JSMin::minify($js);
     }
 }
 

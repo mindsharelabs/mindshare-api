@@ -11,6 +11,8 @@
  *
  */
 
+require_once(MAPI_DIR_PATH.'lib/BFI_Thumb.php');
+
 /**
  *
  * Resizes and outputs a WordPress featured image
@@ -57,9 +59,11 @@ function mapi_featured_img($args = array()) {
 				'alt'   => $alt,
 				'title' => $title,
 			);
+
 			return apply_filters('mapi_featured_image', $image);
 		}
 	}
+
 	return apply_filters('mapi_featured_image', FALSE); // no post thumbnail was found
 }
 
@@ -94,7 +98,7 @@ function mapi_get_attachment_image_title($attachment_id = NULL) {
 	}
 	$image = wp_get_attachment_image_src($attachment_id);
 	if($image) {
-		$attachment = & get_post($attachment_id);
+		$attachment = get_post($attachment_id);
 
 		$img_title = trim(strip_tags($attachment->post_excerpt)); // use caption field first
 		if($img_title == '') {
@@ -102,6 +106,7 @@ function mapi_get_attachment_image_title($attachment_id = NULL) {
 		} elseif($img_title == '') {
 			$img_title = trim(strip_tags(get_post_meta($attachment_id, '_wp_attachment_image_alt', TRUE))); // use the alt
 		}
+
 		return apply_filters('mapi_attachment_image_title', $img_title);
 	} else {
 		return apply_filters('mapi_attachment_image_title', FALSE);
@@ -120,7 +125,7 @@ function mapi_get_attachment_image_caption($attachment_id = NULL) {
 		$attachment_id = mapi_get_attachment_id();
 	}
 	if(wp_get_attachment_image_src($attachment_id)) {
-		$attachment = & get_post($attachment_id);
+		$attachment = get_post($attachment_id);
 
 		$img_title = trim(strip_tags($attachment->post_excerpt));
 		if(empty($img_title)) {
@@ -223,6 +228,7 @@ function mapi_get_link_url($id = NULL) {
 	if($id == NULL) {
 		$id = get_the_ID();
 	}
+
 	return apply_filters('mapi_link_url', get_post_meta($id, '_wp_attachment_url', TRUE));
 }
 
@@ -238,6 +244,7 @@ function mapi_get_link_url($id = NULL) {
 function mapi_gallery_filter($attr) {
 	$attr['alt'] = get_bloginfo('name');
 	$attr['title'] = __('Click for a larger image', 'mapi');
+
 	return apply_filters('mapi_gallery_image_attributes', $attr);
 }
 
@@ -249,7 +256,8 @@ function mapi_gallery_filter($attr) {
  * @see http://www.binarymoon.co.uk/2012/02/complete-timthumb-parameters-guide/
  * @see https://github.com/mindsharestudios/mthumb
  *
- * @param        $src               (string|array) Required. Parameters can be passed as an array or individually. If passing individually this first param should be a URL to the image otherwise this param is an array of arguments. All other params are optional.
+ * @param        $src               (string|array) Required. Parameters can be passed as an array or individually. If passing individually this first param should be a URL to the image otherwise this
+ *                                  param is an array of arguments. All other params are optional.
  * @param int    $w                 Width to resize in pixels
  * @param int    $h                 Height to resize in pixels
  * @param int    $q                 Quality of the resized image from 0-100
@@ -301,6 +309,7 @@ function mapi_thumb($src, $w = NULL, $h = NULL, $q = 90, $a = 'c', $zc = 1, $f =
 			'ct'  => $ct
 		);
 	}
+
 	return mapi_thumb_array($src);
 }
 
@@ -354,71 +363,55 @@ function mapi_thumb_array($args) {
 	extract($args, EXTR_SKIP);
 
 	if(empty($src)) {
-		return mapi_error(array('msg' => 'Parameter "src" cannot be empty', 'echo' => TRUE, 'die' => FALSE));
+		return mapi_error(array('msg' => 'Parameter "src" cannot be empty', 'echo' => FALSE, 'die' => FALSE));
 	} else {
 		$img_src = plugins_url('lib/mthumb.php', dirname(__FILE__)).'?src='.$src.'&amp;w='.$w.'&amp;h='.$h.'&amp;q='.$q.'&amp;a='.$a.'&amp;zc='.$zc.'&amp;f='.$f.'&amp;s='.$s.'&amp;cc='.$cc.'&amp;ct='.$ct;
+
 		return apply_filters('mapi_thumb', $img_src);
 	}
 }
 
-/**
- *
- * Checks for a TimThumb or mThumb configuration file (timthumb-config.php) in the root of the active theme.
- * This allows full user configuration of Timthumb without having to include the library in the theme itself.
- * See http://www.binarymoon.co.uk/2012/03/timthumb-configs/ for details.
- *
- * @see http://www.binarymoon.co.uk/2012/03/timthumb-configs/
- * @see https://github.com/mindsharestudios/mthumb
- *
- */
-function mapi_mthumb_config() {
-	global $ALLOWED_SITES;
+function mapi_image($src, $args = array(), $return = TRUE) {
 
-	if(file_exists(get_template_directory().'/mthumb-config.php')) {
-		include(get_template_directory().'/mthumb-config.php');
-	} elseif(file_exists(get_template_directory().'/timthumb-config.php')) {
-		include(get_template_directory().'/timthumb-config.php');
+	$defaults = array(
+		'src' => apply_filters('mapi_thumb_src', $args['src']),
+		'w'   => apply_filters('mapi_thumb_w', get_option('thumbnail_size_w')),
+		'h'   => apply_filters('mapi_thumb_h', NULL), //get_option('thumbnail_size_h'),
+		'q'   => apply_filters('mapi_thumb_q', 90), // quality 0-100
+		'a'   => apply_filters('mapi_thumb_a', 'c'), // crop alignment c, t, l, r, b, tl, tr, bl, br	(c = center, t = top, b = bottom, r = right, l = left)
+		'zc'  => apply_filters('mapi_thumb_zc', 1), // zoom/crop
+		//		0	Resize to Fit specified dimensions (no cropping)
+		//		1	Crop and resize to best fit the dimensions (default)
+		// 		2	Resize proportionally to fit entire image into specified dimensions, and add borders if required
+		// 		3	Resize proportionally adjusting size of scaled image so there are no borders gaps)
+		'f'   => apply_filters('mapi_thumb_f', NULL), // filters (can be combined) f=FILTER_ID,FILTER_PARAM,FILTER_PARAM|FILTER_ID,FILTER_PARAM
+		//		1 = Negate - Invert colours
+		// 		2 = Grayscale - turn the image into shades of grey
+		//		3 = Brightness - Requires 1 argument to specify the amount of brightness to add. Values can be negative to make the image darker.
+		//		4 = Contrast - Requires 1 argument to specify the amount of contrast to apply. Values greater than 0 will reduce the contrast and less than 0 will increase the contrast.
+		//		5 = Colorize/ Tint - Requires the most parameters of all filters. The arguments are RGBA
+		//		6 = Edge Detect - Detect the edges on an image
+		//		7 = Emboss - Emboss the image (give it a kind of depth), can look nice when combined with the colorize filter above.
+		//		8 = Gaussian Blur - blur the image, unfortunately you can't specify the amount, but you can apply the same filter multiple times (as shown in the demos)
+		//		9 = Selective Blur - a different type of blur. Not sure what the difference is, but this blur is less strong than the Gaussian blur.
+		//		10 = Mean Removal - Uses mean removal to create a "sketchy" effect.
+		//		11 = Smooth - Makes the image smoother.
+		's'   => apply_filters('mapi_thumb_s', 0), // sharpen 1 or 0
+		'cc'  => apply_filters('mapi_thumb_cc', NULL), // canvas color ffffff
+		'ct'  => apply_filters('mapi_thumb_ct', 1) // canvas transparency (overrides cc) 1 or 0
+	);
+	$args = wp_parse_args($args, $defaults);
+	extract($args, EXTR_SKIP);
+
+	if(empty($src)) {
+		return mapi_error(array('msg' => 'Parameter "src" cannot be empty', 'echo' => FALSE, 'die' => FALSE));
 	} else {
-		// Max sizes
-		if(!defined('MAX_WIDTH')) {
-			define('MAX_WIDTH', apply_filters('mapi_timthumb_max_width', 3600));
-		}
-		if(!defined('MAX_HEIGHT')) {
-			define('MAX_HEIGHT', apply_filters('mapi_timthumb_max_height', 3600));
-		}
+		$img_src = plugins_url('lib/mthumb.php', dirname(__FILE__)).'?src='.$src.'&amp;w='.$w.'&amp;h='.$h.'&amp;q='.$q.'&amp;a='.$a.'&amp;zc='.$zc.'&amp;f='.$f.'&amp;s='.$s.'&amp;cc='.$cc.'&amp;ct='.$ct;
 
-		// External Sites
-		$ALLOWED_SITES = apply_filters(
-			'mapi_timthumb_allowed_sites',
-			array(
-				'flickr.com',
-				'staticflickr.com',
-				'picasa.com',
-				'img.youtube.com',
-				'upload.wikimedia.org',
-				'photobucket.com',
-				'imgur.com',
-				'imageshack.us',
-				'tinypic.com',
-				'mind.sh',
-				'mindsharestudios.com'
-			)
-		);
-		if(!defined('ALLOW_EXTERNAL')) {
-			define('ALLOW_EXTERNAL', apply_filters('mapi_timthumb_allow_external', TRUE));
-		}
+		$img_src = bfi_thumb($src, $args, $return);
 
-		// Caching
-		if(!defined('MAX_WIDTH')) {
-			define('FILE_CACHE_DIRECTORY', apply_filters('mapi_timthumb_cache_dir', ABSPATH.'/wp-content/uploads/cache/'));
-		}
-		//define('FILE_CACHE_DIRECTORY',''); // leave blank for system directory
-		if(!defined('MAX_WIDTH')) {
-			define('FILE_CACHE_TIME_BETWEEN_CLEANS', apply_filters('mapi_timthumb_cache_interval', 172800)); // 2 days
-		}
-		if(!defined('MAX_WIDTH')) {
-			define('BROWSER_CACHE_MAX_AGE', apply_filters('mapi_timthumb_cache_max_age', 1728000)); // 20 days
-		}
+		return apply_filters('mapi_thumb', $img_src);
+
 	}
 }
 
