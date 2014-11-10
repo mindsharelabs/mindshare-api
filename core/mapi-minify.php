@@ -34,7 +34,7 @@ if(!class_exists('mapi_minify')) :
 		public $adv_options_on, $debug, $minify_config_location, $buffer_started = FALSE;
 		public $url_len_limit = 2000;
 		public $minify_limit = 50;
-		public $default_exclude = array();
+		public $default_exclude = array('cdn.jsdelivr.net', 'cdnjs.cloudflare.com');
 
 		public function __construct() {
 
@@ -89,6 +89,7 @@ if(!class_exists('mapi_minify')) :
 			} else {
 				// error and return false
 				add_action('admin_notices', $notify_cb);
+
 				return FALSE;
 			}
 		}
@@ -350,6 +351,7 @@ if(!class_exists('mapi_minify')) :
 					__('Error: Could not fetch and cache URL'),
 					__('You might need to exclude this file in WP Minify options.')
 				);
+
 				return '';
 			}
 		}
@@ -380,6 +382,7 @@ if(!class_exists('mapi_minify')) :
 			if($this->url_needs_splitting($url, $files)) {
 				$first_half = $this->check_and_split_url($base_url.'?f='.implode(',', array_slice($files, 0, $num_files / 2)), $latest_modified);
 				$second_half = $this->check_and_split_url($base_url.'?f='.implode(',', array_slice($files, $num_files / 2)), $latest_modified);
+
 				return $first_half + $second_half;
 			} else {
 
@@ -442,6 +445,7 @@ if(!class_exists('mapi_minify')) :
 				// no cache file.  fetch from internet and save to local cache
 				$content = $this->fetch_and_cache($url, $cache_file);
 			}
+
 			return $content;
 		}
 
@@ -575,6 +579,7 @@ if(!class_exists('mapi_minify')) :
 					return rtrim(trim($matches[1]), '\\/');
 				}
 			}
+
 			return '';
 		}
 
@@ -583,6 +588,7 @@ if(!class_exists('mapi_minify')) :
 		 */
 		public function get_base_from_siteurl() {
 			$site_url = trailingslashit(get_option('siteurl'));
+
 			return rtrim(preg_replace('/^https?:\/\/.*?\//', '', $site_url), '\\/');
 		}
 
@@ -594,6 +600,7 @@ if(!class_exists('mapi_minify')) :
 			if($base_from_min_args != '') {
 				return $base_from_min_args;
 			}
+
 			return $this->get_base_from_siteurl();
 		}
 
@@ -616,6 +623,7 @@ if(!class_exists('mapi_minify')) :
 					}
 				}
 			}
+
 			return $latest_modified;
 		}
 
@@ -688,6 +696,7 @@ if(!class_exists('mapi_minify')) :
 			}
 
 			$css_locations = array_unique($css_locations);
+
 			return array($content, $css_locations);
 		}
 
@@ -718,6 +727,7 @@ if(!class_exists('mapi_minify')) :
 					$content = preg_replace('/<head(>|\s[^>]*?>)/', "\\0\n$css_tags", $content, 1); // limit 1 replacement
 				}
 			}
+
 			return $content;
 		}
 
@@ -849,6 +859,7 @@ if(!class_exists('mapi_minify')) :
 
 				}
 			}
+
 			return $content;
 		}
 

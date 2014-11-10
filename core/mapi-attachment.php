@@ -371,47 +371,58 @@ function mapi_thumb_array($args) {
 	}
 }
 
-function mapi_image($src, $args = array(), $return = TRUE) {
+/** Uses WP's Image Editor Class to resize and filter images
+ *
+ * @param $url    string the local image URL to manipulate
+ * @param $params array the options to perform on the image. Keys and values supported:
+ *                'width' int pixels
+ *                'height' int pixels
+ *                'opacity' int 0-100
+ *                'color' string hex-color #000000-#ffffff
+ *                'grayscale' bool
+ *                'negate' bool
+ *                'crop' bool
+ *                'crop_only' bool
+ *                'crop_x' bool string
+ *                'crop_y' bool string
+ *                'crop_width' bool string
+ *                'crop_height' bool string
+ *                'quality' int 1-100
+ * @param $single boolean, if false then an array of data will be returned
+ *
+ * @return string|array containing the url of the resized modified image
+ */
+function mapi_image($src = '', $args = array(), $single = TRUE) {
 
 	$defaults = array(
-		'src' => apply_filters('mapi_thumb_src', $args['src']),
-		'w'   => apply_filters('mapi_thumb_w', get_option('thumbnail_size_w')),
-		'h'   => apply_filters('mapi_thumb_h', NULL), //get_option('thumbnail_size_h'),
-		'q'   => apply_filters('mapi_thumb_q', 90), // quality 0-100
-		'a'   => apply_filters('mapi_thumb_a', 'c'), // crop alignment c, t, l, r, b, tl, tr, bl, br	(c = center, t = top, b = bottom, r = right, l = left)
-		'zc'  => apply_filters('mapi_thumb_zc', 1), // zoom/crop
-		//		0	Resize to Fit specified dimensions (no cropping)
-		//		1	Crop and resize to best fit the dimensions (default)
-		// 		2	Resize proportionally to fit entire image into specified dimensions, and add borders if required
-		// 		3	Resize proportionally adjusting size of scaled image so there are no borders gaps)
-		'f'   => apply_filters('mapi_thumb_f', NULL), // filters (can be combined) f=FILTER_ID,FILTER_PARAM,FILTER_PARAM|FILTER_ID,FILTER_PARAM
-		//		1 = Negate - Invert colours
-		// 		2 = Grayscale - turn the image into shades of grey
-		//		3 = Brightness - Requires 1 argument to specify the amount of brightness to add. Values can be negative to make the image darker.
-		//		4 = Contrast - Requires 1 argument to specify the amount of contrast to apply. Values greater than 0 will reduce the contrast and less than 0 will increase the contrast.
-		//		5 = Colorize/ Tint - Requires the most parameters of all filters. The arguments are RGBA
-		//		6 = Edge Detect - Detect the edges on an image
-		//		7 = Emboss - Emboss the image (give it a kind of depth), can look nice when combined with the colorize filter above.
-		//		8 = Gaussian Blur - blur the image, unfortunately you can't specify the amount, but you can apply the same filter multiple times (as shown in the demos)
-		//		9 = Selective Blur - a different type of blur. Not sure what the difference is, but this blur is less strong than the Gaussian blur.
-		//		10 = Mean Removal - Uses mean removal to create a "sketchy" effect.
-		//		11 = Smooth - Makes the image smoother.
-		's'   => apply_filters('mapi_thumb_s', 0), // sharpen 1 or 0
-		'cc'  => apply_filters('mapi_thumb_cc', NULL), // canvas color ffffff
-		'ct'  => apply_filters('mapi_thumb_ct', 1) // canvas transparency (overrides cc) 1 or 0
+
+		'width'   => apply_filters('mapi_thumb_w', get_option('thumbnail_size_w')),
+		'height'  => apply_filters('mapi_thumb_h', NULL), //get_option('thumbnail_size_h'),
+		'quality' => apply_filters('mapi_thumb_q', 90), // quality 0-100
+		/** @todo
+		 *          'opacity' int 0-100
+		 *          'color' string hex-color #000000-#ffffff
+		 *          'grayscale' bool
+		 *          'negate' bool
+		 *          'crop' bool
+		 *          'crop_only' bool
+		 *          'crop_x' bool string
+		 *          'crop_y' bool string
+		 *          'crop_width' bool string
+		 *          'crop_height' bool string
+		 */
 	);
 	$args = wp_parse_args($args, $defaults);
 	extract($args, EXTR_SKIP);
 
+	$src = apply_filters('mapi_thumb_src', $src);
+
 	if(empty($src)) {
 		return mapi_error(array('msg' => 'Parameter "src" cannot be empty', 'echo' => FALSE, 'die' => FALSE));
 	} else {
-		$img_src = plugins_url('lib/mthumb.php', dirname(__FILE__)).'?src='.$src.'&amp;w='.$w.'&amp;h='.$h.'&amp;q='.$q.'&amp;a='.$a.'&amp;zc='.$zc.'&amp;f='.$f.'&amp;s='.$s.'&amp;cc='.$cc.'&amp;ct='.$ct;
-
-		$img_src = bfi_thumb($src, $args, $return);
+		$img_src = bfi_thumb($src, $args, $single);
 
 		return apply_filters('mapi_thumb', $img_src);
-
 	}
 }
 

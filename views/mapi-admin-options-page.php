@@ -436,7 +436,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_modernizr_js',
 	array(
-		'name' => 'Load Modernizr <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/modernizr/modernizr-latest.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">modernizr-latest.js</a></code>',
+		'name' => 'Load Modernizr <code>modernizr.js</code>',
 		'std'  => FALSE,
 		'desc' => 'View <a href="http://modernizr.com/docs/" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -463,7 +463,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_mapbox_js',
 	array(
-		'name' => 'Load Mapbox <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/mapbox/mapbox.min.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">mapbox.min.js</a></code> and <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/mapbox/mapbox.min.css', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">mapbox.min.css</a></code>',
+		'name' => 'Load Mapbox <code>mapbox.min.js</code> and <code>mapbox.min.css</code>',
 		'std'  => FALSE,
 		'desc' => 'Enqueues the Mapbox mapping library. View <a href="https://www.mapbox.com/" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -472,7 +472,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_retina_js',
 	array(
-		'name' => 'Load Retina <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/retina/js/retina.min.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">retina.js</a></code>',
+		'name' => 'Load Retina <code>retina.js</code>',
 		'std'  => FALSE,
 		'desc' => 'Enqueues the Retina library. View <a href="http://retinajs.com/" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -483,7 +483,7 @@ $mapi_options->addSubtitle('jQuery Plugins');
 $mapi_options->addCheckbox(
 	'load_bbq',
 	array(
-		'name' => 'Load jQuery BBQ plugin <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/jquery-bbq/jquery.ba-bbq.min.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">jquery.ba-bbq.min.js</a></code>',
+		'name' => 'Load jQuery BBQ plugin <code>jquery.ba-bbq.min.js</code>',
 		'std'  => FALSE,
 		'desc' => 'View <a href="https://github.com/cowboy/jquery-bbq/" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -492,7 +492,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_easylistsplitter_js',
 	array(
-		'name' => 'Load jQuery easyListSplitter plugin <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/easylistsplitter/jquery.easyListSplitter.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">jquery.easyListSplitter.js</a></code>',
+		'name' => 'Load jQuery easyListSplitter plugin <code>jquery.easyListSplitter.js</code>',
 		'std'  => FALSE,
 		'desc' => 'View <a href="http://www.madeincima.it/en/articles/resources-and-tools/easy-list-splitter-plugin/" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -501,7 +501,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_fittext_js',
 	array(
-		'name' => 'Load jQuery FitText plugin <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/fittext/jquery.fittext.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">jquery.fittext.js</a></code>',
+		'name' => 'Load jQuery FitText plugin <code>jquery.fittext.js</code>',
 		'std'  => FALSE,
 		'desc' => 'View <a href="https://github.com/davatron5000/FitText.js" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -510,7 +510,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_fitvids_js',
 	array(
-		'name' => 'Load jQuery FitVids plugin <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/fitvids/jquery.fitvids.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">jquery.fitvids.js</a></code>',
+		'name' => 'Load jQuery FitVids plugin <code>jquery.fitvids.js</code>',
 		'std'  => FALSE,
 		'desc' => 'View <a href="https://github.com/davatron5000/FitVids.js" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -519,7 +519,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_flexslider',
 	array(
-		'name' => 'Load jQuery FlexSlider plugin <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/flexslider/jquery.flexslider-min.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">jquery.flexslider-min.js</a></code>',
+		'name' => 'Load jQuery FlexSlider plugin <code>jquery.flexslider-min.js</code>',
 		'std'  => FALSE,
 		'desc' => 'View <a href="https://github.com/woothemes/FlexSlider" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -528,7 +528,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_isotope_js',
 	array(
-		'name' => 'Load jQuery Isotope plugin <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/isotope/jquery.isotope.min.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">jquery.isotope.min.js</a></code>',
+		'name' => 'Load jQuery Isotope plugin <code>jquery.isotope.min.js</code>',
 		'std'  => FALSE,
 		'desc' => 'View <a href="http://isotope.metafizzy.co/" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -537,7 +537,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_lettering_js',
 	array(
-		'name' => 'Load jQuery Lettering plugin <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/lettering/jquery.lettering.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">jquery.lettering.js</a></code>',
+		'name' => 'Load jQuery Lettering plugin <code>jquery.lettering.js</code>',
 		'std'  => FALSE,
 		'desc' => 'View <a href="https://github.com/davatron5000/Lettering.js" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -555,7 +555,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_pickadate_js',
 	array(
-		'name' => 'Load jQuery pickadate plugin <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/pickadate/picker.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">picker.js</a></code>',
+		'name' => 'Load jQuery pickadate plugin <code>pickadate.js</code>',
 		'std'  => FALSE,
 		'desc' => 'View <a href="https://github.com/amsul/pickadate.js" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -564,7 +564,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_replacetext_js',
 	array(
-		'name' => 'Load jQuery ReplaceText plugin <code><a title="View source in new tab" href="view-source:'.plugins_url('js/jquery.replacetext.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">jquery.replacetext.js</a></code>',
+		'name' => 'Load jQuery ReplaceText plugin <code>jquery.replacetext.js</code>',
 		'std'  => FALSE,
 		'desc' => 'View <a href="https://github.com/cowboy/jquery-replacetext" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -582,7 +582,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_tinysort_js',
 	array(
-		'name' => 'Load jQuery TinySort plugin <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/tinysort/jquery.tinysort.min.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">jquery.tinysort.min.js</a></code>',
+		'name' => 'Load jQuery TinySort plugin <code>jquery.tinysort.min.js</code>',
 		'std'  => FALSE,
 		'desc' => 'View <a href="https://github.com/Sjeiti/TinySort" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -590,7 +590,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_tiptip_js',
 	array(
-		'name' => 'Load jQuery TipTip plugin <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/tiptip/jquery.tipTip.minified.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">jquery.tipTip.minified.js</a></code>',
+		'name' => 'Load jQuery TipTip plugin <code>jquery.tipTip.minified.js</code>',
 		'std'  => FALSE,
 		'desc' => 'View <a href="https://github.com/drewwilson/TipTip" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -610,7 +610,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_superfish_js',
 	array(
-		'name' => 'Load Superfish <code><a title="View source in new tab" href="view-source:'.plugins_url('lib/superfish/superfish.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">superfish.js</a></code>',
+		'name' => 'Load Superfish <code>superfish.js</code>',
 		'std'  => FALSE,
 		'desc' => 'Enqueues the Superfish drop down menu JavaScript. View <a href="https://github.com/joeldbirch/superfish/" target="_blank">documentation &rsaquo;</a>'
 	)

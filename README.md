@@ -3,8 +3,8 @@ Mindshare Theme API
 
 - Author: Mindshare Studios, Inc.
 - License: GPL v3
-- Copyright: 2006-2014
-- Link: http://mindsharelabs.com/downloads/mindshare-theme-api/
+- Copyright: 2006-2015
+- Link: https://mindsharelabs.com/downloads/mindshare-theme-api/
 
 Provides a library of additional template tags, 3rd-party libraries, and functions for WordPress themes and additional features for WordPress CMS websites.
 
@@ -20,6 +20,8 @@ Preparation for version 1.0 launch:
 - added mapi_excerpt_more_text filter
 - update language on universal analytics
 - add CSS class for OS to body tag
+- Added CDN version of all libs
+- Removed mthhumb
 
 ## 0.7.8
 

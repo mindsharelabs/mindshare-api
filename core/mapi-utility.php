@@ -290,6 +290,7 @@ function mapi_add_os_body_class($classes) {
 	} elseif(stristr($_SERVER['HTTP_USER_AGENT'], "windows")) {
 		$classes[] = 'windows';
 	}
+
 	return $classes;
 }
 
@@ -769,7 +770,7 @@ function mapi_load_font_awesome() {
 function mapi_load_modernizr() {
 	if(!is_admin()) {
 		wp_deregister_script('modernizr');
-		wp_register_script('modernizr', plugins_url('lib/modernizr/modernizr-latest.js', dirname(__FILE__)));
+		wp_register_script('modernizr', '//cdn.jsdelivr.net/modernizr/2.8.3/modernizr.min.js', array('jquery'));
 		wp_enqueue_script('modernizr');
 	}
 }
@@ -804,11 +805,11 @@ function mapi_load_underscore() {
 function mapi_load_mapbox() {
 	if(!is_admin()) {
 		wp_deregister_style('mapbox-css');
-		wp_register_style('mapbox-css', plugins_url('lib/mapbox/mapbox.min.css', dirname(__FILE__)));
+		wp_register_style('mapbox-css', '//api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css');
 		wp_enqueue_style('mapbox-css');
 
 		wp_deregister_script('mapbox-js');
-		wp_register_script('mapbox-js', plugins_url('lib/mapbox/mapbox.min.js', dirname(__FILE__)));
+		wp_register_script('mapbox-js', '//api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js');
 		wp_enqueue_script('mapbox-js');
 	}
 }
@@ -821,7 +822,7 @@ function mapi_load_mapbox() {
 function mapi_load_retina() {
 	if(!is_admin()) {
 		wp_deregister_script('retina');
-		wp_register_script('retina', plugins_url('lib/retina/js/retina.min.js', dirname(__FILE__)));
+		wp_register_script('retina', '//cdn.jsdelivr.net/retinajs/1.1.0/retina.min.js');
 		wp_enqueue_script('retina');
 	}
 }
@@ -856,7 +857,7 @@ function mapi_load_masonry() {
 function mapi_load_isotope() {
 	if(!is_admin()) {
 		wp_deregister_script('isotope');
-		wp_register_script('isotope', plugins_url('lib/isotope/jquery.isotope.min.js', dirname(__FILE__)));
+		wp_register_script('isotope', '//cdn.jsdelivr.net/isotope/2.0.0/isotope.pkgd.min.js');
 		wp_enqueue_script('isotope');
 	}
 }
@@ -869,7 +870,7 @@ function mapi_load_isotope() {
 function mapi_load_superfish() {
 	if(!is_admin()) {
 		wp_deregister_script('superfish');
-		wp_register_script('superfish', plugins_url('lib/superfish/superfish.js', dirname(__FILE__)));
+		wp_register_script('superfish', '//cdn.jsdelivr.net/superfish/1.7.5/js/superfish.min.js');
 		wp_enqueue_script('superfish');
 	}
 }
@@ -882,20 +883,20 @@ function mapi_load_superfish() {
 function mapi_load_pickadate() {
 	if(!is_admin()) {
 		wp_deregister_script('pickadate');
-		wp_register_script('pickadate', plugins_url('lib/pickadate/picker.js', dirname(__FILE__)));
+		wp_register_script('pickadate', '//cdn.jsdelivr.net/jquery.pickadate.js/4.0.0-0/ui-pickadate.min.js', array('jquery'));
 		wp_enqueue_script('pickadate');
 
-		wp_deregister_script('pickadate-time');
-		wp_register_script('pickadate-time', plugins_url('lib/pickadate/picker.time.js', dirname(__FILE__)));
-		wp_enqueue_script('pickadate-time');
+		wp_deregister_script('pickadate-shadow');
+		wp_register_script('pickadate-shadow', '//cdn.jsdelivr.net/jquery.pickadate.js/4.0.0-0/shadow.min.js', array('jquery'));
+		wp_enqueue_script('pickadate-shadow');
 
-		wp_deregister_script('pickadate-date');
-		wp_register_script('pickadate-date', plugins_url('lib/pickadate/picker.date.js', dirname(__FILE__)));
-		wp_enqueue_script('pickadate-date');
+		wp_deregister_script('pickadate-picker');
+		wp_register_script('pickadate-picker', '//cdn.jsdelivr.net/jquery.pickadate.js/4.0.0-0/ui-picker.min.js', array('jquery'));
+		wp_enqueue_script('pickadate-picker');
 
-		wp_deregister_script('pickadate-legacy');
-		wp_register_script('pickadate-legacy', plugins_url('lib/pickadate/legacy.js', dirname(__FILE__)));
-		wp_enqueue_script('pickadate-legacy');
+		wp_deregister_style('pickadate-css');
+		wp_register_style('pickadate-css', '//cdn.jsdelivr.net/jquery.pickadate.js/4.0.0-0/css/styles.css');
+		wp_enqueue_style('pickadate-css');
 	}
 }
 
@@ -907,7 +908,7 @@ function mapi_load_pickadate() {
 function mapi_load_lettering() {
 	if(!is_admin()) {
 		wp_deregister_script('lettering');
-		wp_register_script('lettering', plugins_url('lib/lettering/jquery.lettering.js', dirname(__FILE__)));
+		wp_register_script('lettering', '//cdn.jsdelivr.net/lettering/0.6.1/jquery.lettering.min.js', array('jquery'));
 		wp_enqueue_script('lettering');
 	}
 }
@@ -920,7 +921,7 @@ function mapi_load_lettering() {
 function mapi_load_fitvids() {
 	if(!is_admin()) {
 		wp_deregister_script('fitvids');
-		wp_register_script('fitvids', plugins_url('lib/fitvids/jquery.fitvids.js', dirname(__FILE__)));
+		wp_register_script('fitvids', '//cdn.jsdelivr.net/fitvids/1.1.0/jquery.fitvids.js', array('jquery'));
 		wp_enqueue_script('fitvids');
 	}
 }
@@ -933,8 +934,10 @@ function mapi_load_fitvids() {
 function mapi_load_flexslider() {
 	if(!is_admin()) {
 		wp_deregister_script('flexslider');
-		wp_register_script('flexslider', plugins_url('lib/flexslider/jquery.flexslider-min.js', dirname(__FILE__)));
+		wp_register_script('flexslider', '//cdn.jsdelivr.net/flexslider/2.2.2/jquery.flexslider-min.js', array('jquery'));
 		wp_enqueue_script('flexslider');
+		//wp_register_style('flexslider', '//cdn.jsdelivr.net/flexslider/2.2.2/flexslider.css');
+		//wp_enqueue_style('flexslider');
 	}
 }
 
@@ -946,7 +949,7 @@ function mapi_load_flexslider() {
 function mapi_load_fittext() {
 	if(!is_admin()) {
 		wp_deregister_script('fittext');
-		wp_register_script('fittext', plugins_url('lib/fittext/jquery.fittext.js', dirname(__FILE__)));
+		wp_register_script('fittext', '//cdn.jsdelivr.net/fittext/1.2/jquery.fittext.js', array('jquery'));
 		wp_enqueue_script('fittext');
 	}
 }
@@ -959,7 +962,7 @@ function mapi_load_fittext() {
 function mapi_load_easylistsplitter() {
 	if(!is_admin()) {
 		wp_deregister_script('easylistsplitter');
-		wp_register_script('easylistsplitter', plugins_url('lib/easylistsplitter/jquery.easyListSplitter.js', dirname(__FILE__)));
+		wp_register_script('easylistsplitter', '//cdn.jsdelivr.net/easylistsplitter/1.0.2/jquery.easyListSplitter.js', array('jquery'));
 		wp_enqueue_script('easylistsplitter');
 	}
 }
@@ -972,8 +975,11 @@ function mapi_load_easylistsplitter() {
 function mapi_load_tinysort() {
 	if(!is_admin()) {
 		wp_deregister_script('tinysort');
-		wp_register_script('tinysort', plugins_url('lib/tinysort/jquery.tinysort.min.js', dirname(__FILE__)));
+		wp_register_script('tinysort', '//cdnjs.cloudflare.com/ajax/libs/tinysort/1.5.6/jquery.tinysort.min.js', array('jquery'));
 		wp_enqueue_script('tinysort');
+		wp_deregister_script('tinysort-char');
+		wp_register_script('tinysort-char', '//cdnjs.cloudflare.com/ajax/libs/tinysort/1.5.6/jquery.tinysort.charorder.min.js', array('jquery, tinysort'));
+		wp_enqueue_script('tinysort-char');
 	}
 }
 
@@ -985,7 +991,7 @@ function mapi_load_tinysort() {
 function mapi_load_bbq() {
 	if(!is_admin()) {
 		wp_deregister_script('bbq');
-		wp_register_script('bbq', plugins_url('lib/jquery-bbq/jquery.ba-bbq.min.js', dirname(__FILE__)));
+		wp_register_script('bbq', '//cdn.jsdelivr.net/jquery.ba-bbq/1.3pre/jquery.ba-bbq.min.js', array('jquery'));
 		wp_enqueue_script('bbq');
 	}
 }
@@ -998,7 +1004,7 @@ function mapi_load_bbq() {
 function mapi_load_tiptip() {
 	if(!is_admin()) {
 		wp_deregister_script('tiptip');
-		wp_register_script('tiptip', plugins_url('lib/tiptip/jquery.tipTip.minified.js', dirname(__FILE__)));
+		wp_register_script('tiptip', '//cdn.jsdelivr.net/tiptip/1.3/jquery.tipTip.minified.js');
 		wp_enqueue_script('tiptip');
 	}
 }
@@ -1063,6 +1069,7 @@ function mapi_edit_link() {
 /**
  *
  * Automatically sets external (offsite) links to open in a new window or tab. Updated to allow subdomains from the same TLD.
+ * Manually override the target by setting the data-target attribute to any valid frame/window target.
  *
  */
 function mapi_external_links() {
@@ -1070,11 +1077,14 @@ function mapi_external_links() {
 	if(!isset($MAPI_TLD) || empty($MAPI_TLD)) {
 		$MAPI_TLD = mapi_extract_domain(mapi_get_url());
 	}
-
 	?>
 	<script type="text/javascript">jQuery(document).ready(function() {
 			jQuery("a[href^='http']:not([href*='<?php echo $MAPI_TLD; ?>'])").each(function() {
-				jQuery(this).attr("target", "_blank");
+				if(jQuery(this).attr('data-target')) {
+					jQuery(this).attr("target", jQuery(this).data('target'));
+				} else {
+					jQuery(this).attr("target", "_blank");
+				}
 			});
 		});</script><?php
 }

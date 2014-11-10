@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name:Mindshare Theme API
-Plugin URI: http://mindsharelabs.com/downloads/mindshare-theme-api/
+Plugin URI: https://mindsharelabs.com/downloads/mindshare-theme-api/
 Description: Provides a library of additional template tags, 3rd-party libraries, and functions for WordPress themes and additional features for WordPress CMS websites.
 Author: Mindshare Studios, Inc
 Version: 0.7.9 DEV
-Author URI: http://mind.sh/are/
+Author URI: https://mind.sh/are/
 Network: false
 */
 
@@ -26,7 +26,7 @@ if(!defined('MAPI_PLUGIN_NAME')) {
 }
 
 if(!defined('MAPI_UPDATE_URL')) {
-	define('MAPI_UPDATE_URL', 'http://mindsharelabs.com');
+	define('MAPI_UPDATE_URL', 'https://mindsharelabs.com');
 }
 
 if(!defined('MAPI_PLUGIN_SLUG')) {
@@ -43,6 +43,11 @@ if(!defined('MAPI_DIR_URL')) {
 
 if(!defined('MAPI_OPTIONS')) {
 	define('MAPI_OPTIONS', 'mapi_options');
+}
+
+// cache folder for mapi_thumb within wp-content/uploads
+if(!defined('BFITHUMB_UPLOAD_DIR')) {
+	define('BFITHUMB_UPLOAD_DIR', 'cache');
 }
 
 // pre-0.7 version folder/file naming convention

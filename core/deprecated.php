@@ -13,6 +13,69 @@
 
 /**
  *
+ * Checks for a TimThumb or mThumb configuration file (timthumb-config.php) in the root of the active theme.
+ * This allows full user configuration of Timthumb without having to include the library in the theme itself.
+ * See http://www.binarymoon.co.uk/2012/03/timthumb-configs/ for details.
+ *
+ * @see http://www.binarymoon.co.uk/2012/03/timthumb-configs/
+ * @see https://github.com/mindsharestudios/mthumb
+ *
+ */
+function mapi_mthumb_config() {
+	_deprecated_function(__FUNCTION__, '4.0');
+
+	global $ALLOWED_SITES;
+
+	if(file_exists(get_template_directory().'/mthumb-config.php')) {
+		include(get_template_directory().'/mthumb-config.php');
+	} elseif(file_exists(get_template_directory().'/timthumb-config.php')) {
+		include(get_template_directory().'/timthumb-config.php');
+	} else {
+		// Max sizes
+		if(!defined('MAX_WIDTH')) {
+			define('MAX_WIDTH', apply_filters('mapi_timthumb_max_width', 3600));
+		}
+		if(!defined('MAX_HEIGHT')) {
+			define('MAX_HEIGHT', apply_filters('mapi_timthumb_max_height', 3600));
+		}
+
+		// External Sites
+		$ALLOWED_SITES = apply_filters(
+			'mapi_timthumb_allowed_sites',
+			array(
+				'flickr.com',
+				'staticflickr.com',
+				'picasa.com',
+				'img.youtube.com',
+				'upload.wikimedia.org',
+				'photobucket.com',
+				'imgur.com',
+				'imageshack.us',
+				'tinypic.com',
+				'mind.sh',
+				'mindsharestudios.com'
+			)
+		);
+		if(!defined('ALLOW_EXTERNAL')) {
+			define('ALLOW_EXTERNAL', apply_filters('mapi_timthumb_allow_external', TRUE));
+		}
+
+		// Caching
+		if(!defined('MAX_WIDTH')) {
+			define('FILE_CACHE_DIRECTORY', apply_filters('mapi_timthumb_cache_dir', ABSPATH.'/wp-content/uploads/cache/'));
+		}
+		//define('FILE_CACHE_DIRECTORY',''); // leave blank for system directory
+		if(!defined('MAX_WIDTH')) {
+			define('FILE_CACHE_TIME_BETWEEN_CLEANS', apply_filters('mapi_timthumb_cache_interval', 172800)); // 2 days
+		}
+		if(!defined('MAX_WIDTH')) {
+			define('BROWSER_CACHE_MAX_AGE', apply_filters('mapi_timthumb_cache_max_age', 1728000)); // 20 days
+		}
+	}
+}
+
+/**
+ *
  * Grabs the latest tweets from a user's timeline.
  *
  * @deprecated
