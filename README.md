@@ -26,9 +26,6 @@ Preparation for version 1.0 launch:
 - Added option to allow ediors acces to menus
 - Added PHP modules to sys info
 - Added mapi_get_nav_menu_item_children()
-- 
-
-
 
 ## 0.7.8
 
