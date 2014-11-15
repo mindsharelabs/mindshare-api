@@ -489,6 +489,26 @@ function mapi_intval_array($value) {
 
 /**
  *
+ * Search a multidimensional array for a value.
+ *
+ * @param mixed $needle   What to search for.
+ * @param array $haystack Array to search within.
+ * @param bool  $strict   Whether to use strict type checking or not.
+ *
+ * @return bool
+ */
+function mapi_in_array_r($needle, $haystack, $strict = FALSE) {
+	foreach($haystack as $item) {
+		if(($strict ? $item === $needle : $item == $needle) || (is_array($item) && mapi_in_array_r($needle, $item, $strict))) {
+			return TRUE;
+		}
+	}
+
+	return FALSE;
+}
+
+/**
+ *
  * Sanitizes an associative array removes keys with empty values and converts all numeric string values into integers.
  *
  * @param array $array The input array.

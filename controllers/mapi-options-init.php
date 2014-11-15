@@ -297,6 +297,13 @@ if(!class_exists('mapi_options')) :
 				remove_action('personal_options', '_admin_bar_preferences');
 			}
 
+			if(@$this->options['allow_editors_edit_menus']) {
+				$roleObject = get_role('editor');
+				if(!$roleObject->has_cap('edit_theme_options')) {
+					$roleObject->add_cap('edit_theme_options');
+				}
+			}
+
 			if(mapi_is_true(@$this->options['maintenance_mode']['enabled'])) {
 				add_action('get_header', array($this, 'start_maintenance_mode'));
 			}

@@ -364,6 +364,15 @@ $mapi_options->addCheckbox(
 );
 
 $mapi_options->addCheckbox(
+	'allow_editors_edit_menus',
+	array(
+		'name' => 'Allow Editors to access Menus',
+		'std'  => FALSE,
+		'desc' => 'Enables editing of WordPress menus for users with the Editor role.'
+	)
+);
+
+$mapi_options->addCheckbox(
 	'wp_admin_bar_disabled',
 	array(
 		'name' => 'Disable WordPress Toolbar',

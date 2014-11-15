@@ -51,3 +51,41 @@ function mapi_get_favicon_url() {
 	}
 }
 
+/**
+ *
+ * Outputs an array of child menu_item post object for a
+ * given page ID, if that page appears in the nav menu.
+ *
+ * This function only grabs first level children, grandchildren are ignored
+ * which is sad for them.
+ *
+ * @param        $menu
+ * @param string $parent_id
+ *
+ * @return array|bool Returns an array of menu_item post objects or FALSE.
+ */
+function mapi_get_nav_menu_item_children($menu, $parent_id = '') {
+
+	if(empty($parent_id)) {
+		return mapi_error(array('msg' => 'A menu parent ID is required.'));
+	}
+
+	$full_menu = wp_get_nav_menu_items($menu);
+	$children = array();
+	// check if we have a valid nav menu
+	if($full_menu) {
+		foreach($full_menu as $item) {
+			// test if the nav menu item is matched with the given parent post ID
+			if($parent_id == $item->object_id) {
+				$menu_parent = $item->ID;
+			}
+			if(isset($menu_parent) && $item->menu_item_parent == $menu_parent) {
+				$children[] = $item;
+			}
+		}
+
+		return $children;
+	} else {
+		return FALSE;
+	}
+}

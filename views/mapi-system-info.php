@@ -18,6 +18,10 @@ function mapi_system_info() {
 	$theme = wp_get_theme();
 	$browser = mapi_browser_from_ua();
 	$plugins = get_plugins();
+	if(function_exists('get_loaded_extensions')) {
+		$modules = get_loaded_extensions();
+	}
+
 	$active_plugins = get_option('active_plugins', array());
 
 	$sysinfo = "WordPress Version:      ".get_bloginfo('version')."\n";
@@ -93,6 +97,14 @@ function mapi_system_info() {
 			}
 
 			$sysinfo .= "\n";
+		}
+	}
+
+	if(is_array($modules)) {
+		$sysinfo .= "PHP Modules:\n\n";
+		natcasesort($modules);
+		foreach($modules as $module) {
+			$sysinfo .= '- '.$module."\n";
 		}
 	}
 

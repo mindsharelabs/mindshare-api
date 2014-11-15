@@ -395,22 +395,19 @@ function mapi_thumb_array($args) {
 function mapi_image($src = '', $args = array(), $single = TRUE) {
 
 	$defaults = array(
-
-		'width'   => apply_filters('mapi_thumb_w', get_option('thumbnail_size_w')),
-		'height'  => apply_filters('mapi_thumb_h', NULL), //get_option('thumbnail_size_h'),
-		'quality' => apply_filters('mapi_thumb_q', 90), // quality 0-100
-		/** @todo
-		 *          'opacity' int 0-100
-		 *          'color' string hex-color #000000-#ffffff
-		 *          'grayscale' bool
-		 *          'negate' bool
-		 *          'crop' bool
-		 *          'crop_only' bool
-		 *          'crop_x' bool string
-		 *          'crop_y' bool string
-		 *          'crop_width' bool string
-		 *          'crop_height' bool string
-		 */
+		'width'       => apply_filters('mapi_thumb_w', get_option('thumbnail_size_w')),
+		'height'      => apply_filters('mapi_thumb_h', NULL), //get_option('thumbnail_size_h'),
+		'quality'     => apply_filters('mapi_thumb_q', 90), // quality 0-100
+		'opacity'     => apply_filters('mapi_thumb_q', 100), //  0-100
+		'color'       => apply_filters('mapi_thumb_q', '#ffffff'), // #000000-#ffffff
+		'grayscale'   => apply_filters('mapi_thumb_grayscale', FALSE),
+		'negate'      => apply_filters('mapi_thumb_negate', FALSE),
+		'crop'        => apply_filters('mapi_thumb_crop', FALSE),
+		'crop_only'   => apply_filters('mapi_thumb_crop_only', FALSE),
+		'crop_x'      => apply_filters('mapi_thumb_crop_x', FALSE),
+		'crop_y'      => apply_filters('mapi_thumb_crop_width', FALSE),
+		'crop_width'  => apply_filters('mapi_thumb_crop_width', FALSE),
+		'crop_height' => apply_filters('mapi_thumb_crop_height', FALSE),
 	);
 	$args = wp_parse_args($args, $defaults);
 	extract($args, EXTR_SKIP);

@@ -10,7 +10,7 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
-## 0.7.9
+## 0.8
 
 Preparation for version 1.0 launch:
 - remove credits tab
@@ -21,7 +21,14 @@ Preparation for version 1.0 launch:
 - update language on universal analytics
 - add CSS class for OS to body tag
 - Added CDN version of all libs
-- Removed mthhumb
+- Update mThumb
+- Added BFI_Thumb functions
+- Added option to allow ediors acces to menus
+- Added PHP modules to sys info
+- Added mapi_get_nav_menu_item_children()
+- 
+
+
 
 ## 0.7.8
 
