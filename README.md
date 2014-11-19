@@ -10,6 +10,9 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.8.1
+* mThumb version number update to calm down some automated scanners that think this is an old version of TimThumb
+
 ## 0.8
 
 Preparation for version 1.0 launch:
