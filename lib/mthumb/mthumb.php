@@ -2,10 +2,10 @@
 /*
 mThumb
 URI: https://github.com/mindsharestudios/mthumb
-Description: TimThumb improved.
-Version: 3.0
+Description: A secure PHP image resize script.
+Version: 3.0.1
 Author: Mindshare Studios, Inc.
-Author URI: http://mind.sh/are/
+Author URI: https://mind.sh/are/
 License: GNU General Public License
 License URI: LICENSE
 */
@@ -14,10 +14,10 @@ License URI: LICENSE
  *
  * @created   12/21/13 2:02 PM
  * @author    Mindshare Studios, Inc.
- * @copyright Copyright (c) 2014
- * @link      http://www.mindsharelabs.com/kb/
+ * @copyright Copyright (c) 2013-2015
+ * @link      https://mindsharelabs.com/
  *
- * Copyright 2014  Mindshare Studios, Inc. (http://mind.sh/are/)
+ * Copyright 2013-2015  Mindshare Studios, Inc. (https://mind.sh/are/)
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 3, as
@@ -47,7 +47,7 @@ License URI: LICENSE
 /**
  * Version of this script *
  */
-define ('VERSION', '3.0');
+define ('VERSION', '3.0.1');
 
 //Load a config file if it exists. Otherwise, use the values below
 if(file_exists(dirname(__FILE__).'/mthumb-config.php')) {
@@ -66,14 +66,14 @@ if(!defined('DEBUG_LEVEL')) {
 	 * Debug level 1 is less noisy and 3 is the most noisy
 	 *
 	 */
-	define ('DEBUG_LEVEL', 2);
+	define ('DEBUG_LEVEL', 1);
 }
 
 if(!defined('DISPLAY_ERROR_MESSAGES')) {
 	/**
 	 * Display error messages. Set to false to turn off errors (good for production websites)
 	 */
-	define ('DISPLAY_ERROR_MESSAGES', TRUE);
+	define ('DISPLAY_ERROR_MESSAGES', FALSE);
 }
 
 if(!defined('ALLOW_EXTERNAL')) {
@@ -689,10 +689,10 @@ if(!class_exists('mthumb')) : /**
 		 *
 		 */
 		protected function serveErrors() {
-			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad Request');
 			if(!DISPLAY_ERROR_MESSAGES) {
 				return;
 			}
+			header($_SERVER['SERVER_PROTOCOL'].' 400 Bad Request');
 			$html = '<ul>';
 			foreach($this->errors as $err) {
 				$html .= '<li>'.htmlentities($err).'</li>';

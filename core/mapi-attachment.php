@@ -4,14 +4,14 @@
  *
  *
  * @author     Mindshare Studios, Inc.
- * @copyright  Copyright (c) 2014
- * @link       http://mindsharelabs.com/downloads/mindshare-theme-api/
+ * @copyright  Copyright (c) 2006-2015
+ * @link       https://mindsharelabs.com/downloads/mindshare-theme-api/
  * @filename   mapi-attachment.php
  *
  *
  */
 
-require_once(MAPI_DIR_PATH.'lib/BFI_Thumb.php');
+require_once(MAPI_DIR_PATH . 'lib/BFI_Thumb.php');
 
 /**
  *
@@ -31,8 +31,8 @@ require_once(MAPI_DIR_PATH.'lib/BFI_Thumb.php');
 function mapi_featured_img($args = array()) {
 
 	$defaults = array(
-		'w'     => get_option('large_size_w', '1024'),
-		'h'     => get_option('large_size_h', '1024'),
+		'w'     => get_option('large_size_w', '1170'),
+		'h'     => get_option('large_size_h', '1170'),
 		'id'    => get_the_ID(),
 		'echo'  => TRUE,
 		'alt'   => mapi_get_attachment_image_title(),
@@ -42,13 +42,13 @@ function mapi_featured_img($args = array()) {
 	extract($args, EXTR_SKIP);
 
 	if(has_post_thumbnail($id)) {
-		$featured_img = wp_get_attachment_image_src(mapi_get_attachment_id($id), array($w, $h));
+		$featured_img = wp_get_attachment_image_src(mapi_get_attachment_id($id), 'full');
 		$src = $featured_img[0];
 		$img = mapi_thumb(array('src' => $src, 'w' => $w, 'h' => $h, 'id' => $id));
 		if($echo === TRUE) {
 			echo apply_filters('mapi_featured_image_before', '<div class="mapi-featured-img">');
 			?>
-			<img alt="<?php echo $alt; ?>" <?php if($title) : echo 'title="'.$title.'"'; endif; ?> src="<?php echo $img; ?>" />
+			<img alt="<?php echo $alt; ?>" <?php if($title) : echo 'title="' . $title . '"'; endif; ?> src="<?php echo $img; ?>" />
 			<?php
 			echo apply_filters('mapi_featured_image_after', '</div>');
 		} else {
@@ -79,7 +79,7 @@ function mapi_featured_img($args = array()) {
 function mapi_featured_img_with_caption($args = array()) {
 	echo mapi_featured_img($args);
 	if(mapi_get_attachment_image_caption()) {
-		echo apply_filters('mapi_featured_img_caption', '<div class="caption">'.mapi_get_attachment_image_caption().'</div>');
+		echo apply_filters('mapi_featured_img_caption', '<div class="caption">' . mapi_get_attachment_image_caption() . '</div>');
 	}
 }
 
@@ -365,7 +365,7 @@ function mapi_thumb_array($args) {
 	if(empty($src)) {
 		return mapi_error(array('msg' => 'Parameter "src" cannot be empty', 'echo' => FALSE, 'die' => FALSE));
 	} else {
-		$img_src = plugins_url('lib/mthumb.php', dirname(__FILE__)).'?src='.$src.'&amp;w='.$w.'&amp;h='.$h.'&amp;q='.$q.'&amp;a='.$a.'&amp;zc='.$zc.'&amp;f='.$f.'&amp;s='.$s.'&amp;cc='.$cc.'&amp;ct='.$ct;
+		$img_src = plugins_url('lib/mthumb.php', dirname(__FILE__)) . '?src=' . $src . '&amp;w=' . $w . '&amp;h=' . $h . '&amp;q=' . $q . '&amp;a=' . $a . '&amp;zc=' . $zc . '&amp;f=' . $f . '&amp;s=' . $s . '&amp;cc=' . $cc . '&amp;ct=' . $ct;
 
 		return apply_filters('mapi_thumb', $img_src);
 	}
@@ -373,24 +373,25 @@ function mapi_thumb_array($args) {
 
 /** Uses WP's Image Editor Class to resize and filter images
  *
- * @param $url    string the local image URL to manipulate
- * @param $params array the options to perform on the image. Keys and values supported:
- *                'width' int pixels
- *                'height' int pixels
- *                'opacity' int 0-100
- *                'color' string hex-color #000000-#ffffff
- *                'grayscale' bool
- *                'negate' bool
- *                'crop' bool
- *                'crop_only' bool
- *                'crop_x' bool string
- *                'crop_y' bool string
- *                'crop_width' bool string
- *                'crop_height' bool string
- *                'quality' int 1-100
- * @param $single boolean, if false then an array of data will be returned
+ * @param string $src    The local image URL to manipulate
+ * @param array  $args   The options to perform on the image. Keys and values supported:
+ * @param        $args   array [int]width pixels
+ * @param        $args   array [int]height pixels
+ * @param        $args   array [int]opacity 0-100
+ * @param        $args   array [string] color HEX color #000000-#ffffff
+ * @param        $args   array [bool]grayscale
+ * @param        $args   array [bool]negate
+ * @param        $args   array [bool]crop
+ * @param        $args   array [bool] crop_only
+ * @param        $args   array [bool]crop_x
+ * @param        $args   array [bool]crop_y
+ * @param        $args   array [bool]crop_width
+ * @param        $args   array [bool]crop_height
+ * @param        $args   array [int]quality 1-100
  *
- * @return string|array containing the url of the resized modified image
+ * @param        $single boolean, if false then an array of data will be returned
+ *
+ * @return array|string containing the url of the resized modified image
  */
 function mapi_image($src = '', $args = array(), $single = TRUE) {
 
@@ -456,13 +457,13 @@ function mapi_random_img($args) {
 		'path'   => apply_filters('mapi_random_image_path', $upload_dir['path']),
 		'height' => apply_filters('mapi_random_image_height', get_option('large_size_h')),
 		'width'  => apply_filters('mapi_random_image_width', get_option('large_size_w')),
-		'alt'    => apply_filters('mapi_random_image_alt', get_bloginfo('name').' - '.get_bloginfo('description')),
+		'alt'    => apply_filters('mapi_random_image_alt', get_bloginfo('name') . ' - ' . get_bloginfo('description')),
 		'echo'   => TRUE
 	);
 	$args = wp_parse_args($args, $defaults);
 	extract($args, EXTR_SKIP);
 
-	$src = plugins_url('core/mapi-random.img.php', dirname(__FILE__)).'?dir='.$dir.'&amp;path='.$path;
+	$src = plugins_url('core/mapi-random.img.php', dirname(__FILE__)) . '?dir=' . $dir . '&amp;path=' . $path;
 
 	if($echo) {
 		do_action('mapi_random_image_before');
@@ -497,15 +498,15 @@ function mapi_remove_large_image($image_data) {
 		// paths to the uploaded image and the large image
 
 		$sub_dir_array = explode('/', $image_data['file']);
-		$sub_dir = $sub_dir_array[0].'/'.$sub_dir_array[1]; // eg. 2014/03
+		$sub_dir = $sub_dir_array[0] . '/' . $sub_dir_array[1]; // eg. 2014/03
 
-		$uploaded_image_location = $upload_dir['basedir'].'/'.$image_data['file'];
-		$large_image_location = $upload_dir['basedir'].'/'.$sub_dir.'/'.$image_data['sizes']['large']['file'];
+		$uploaded_image_location = $upload_dir['basedir'] . '/' . $image_data['file'];
+		$large_image_location = $upload_dir['basedir'] . '/' . $sub_dir . '/' . $image_data['sizes']['large']['file'];
 		// no year/month folders
 	} else {
 		// paths to the uploaded image and the large image
-		$uploaded_image_location = $upload_dir['basedir'].'/'.$image_data['file'];
-		$large_image_location = $upload_dir['path'].'/'.$image_data['sizes']['large']['file'];
+		$uploaded_image_location = $upload_dir['basedir'] . '/' . $image_data['file'];
+		$large_image_location = $upload_dir['path'] . '/' . $image_data['sizes']['large']['file'];
 	}
 
 	// delete the uploaded image

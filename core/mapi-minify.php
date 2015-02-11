@@ -4,17 +4,16 @@
  *
  *
  * @author     Mindshare Studios, Inc.
- * @copyright  Copyright (c) 2014
- * @link       http://mindsharelabs.com/downloads/mindshare-theme-api/
+ * @copyright  Copyright (c) 2006-2015
+ * @link       https://mindsharelabs.com/downloads/mindshare-theme-api/
  * @filename   mcms-minify.php
  *
- * Changelog:
- * - ported from http://omninoggin.com/wordpress-plugins/wp-minify-wordpress-plugin/
+ * Derived from http://omninoggin.com/wordpress-plugins/wp-minify-wordpress-plugin/
  *
  * Usage:
  * <code>
  * <!--compression-none-->
- * ... JS/CSS content here is left alone, other HTML is compressed, whitespace adn comments are stipped ...
+ * ... JS/CSS content here is left alone, other HTML is compressed, whitespace and comments are skipped ...
  * <!--compression-none-->
  * </code>
  *
@@ -43,15 +42,16 @@ if(!class_exists('mapi_minify')) :
 			$this->debug = apply_filters('mapi_minify_debug', $this->debug);
 			$this->url_len_limit = apply_filters('mapi_minify_url_len_limit', $this->url_len_limit);
 			$this->minify_limit = apply_filters('mapi_minify_minify_limit', $this->minify_limit);
-			$this->minify_config_location = apply_filters('mapi_minify_config_location', MAPI_DIR_PATH.'lib/minify-config.php');
+			$this->minify_config_location = apply_filters('mapi_minify_config_location', MAPI_DIR_PATH . 'lib/minify-config.php');
+			$this->default_exclude = apply_filters('mapi_minify_exclude', $this->default_exclude);
 
 			if(mapi_is_true(@$this->options['enable_adv_speed_options']['enabled'])) {
 				$this->adv_options_on = TRUE;
 			}
 
 			$uploads = wp_upload_dir();
-			$this->cache_location_url = apply_filters('mapi_minify_cache_url', trailingslashit($uploads['baseurl']).'minify-cache/');
-			$this->cache_location_path = apply_filters('mapi_minify_cache_location', trailingslashit($uploads['basedir']).'minify-cache/');
+			$this->cache_location_url = apply_filters('mapi_minify_cache_url', trailingslashit($uploads['baseurl']) . 'minify-cache/');
+			$this->cache_location_path = apply_filters('mapi_minify_cache_location', trailingslashit($uploads['basedir']) . 'minify-cache/');
 			$this->change_minify_config_location();
 			$this->maybe_create_cache_dir();
 			/*if(is_admin()) {
@@ -103,9 +103,9 @@ if(!class_exists('mapi_minify')) :
 		public function notify($message, $error = FALSE) {
 			if(is_admin()) {
 				if(!$error) {
-					echo '<div class="updated fade"><p>'.$message.'</p></div>';
+					echo '<div class="updated fade"><p>' . $message . '</p></div>';
 				} else {
-					echo '<div class="error"><p>'.$message.'</p></div>';
+					echo '<div class="error"><p>' . $message . '</p></div>';
 				}
 			}
 		}
@@ -122,12 +122,12 @@ if(!class_exists('mapi_minify')) :
 						if($obj == '.' || $obj == '..') {
 							continue;
 						}
-						unlink(trailingslashit($this->cache_location_path).$obj);
+						unlink(trailingslashit($this->cache_location_path) . $obj);
 					}
 					closedir($dh);
 				}
 				if(isset($_POST['mapi_options_clear_cache_submit'])) {
-					wp_die('Minify cache has been cleared. <a href="options-general.php?page='.MAPI_PLUGIN_SLUG.'-admin-settings">Continue &raquo;</a>');
+					wp_die('Minify cache has been cleared. <a href="options-general.php?page=' . MAPI_PLUGIN_SLUG . '-admin-settings">Continue &raquo;</a>');
 				} else {
 					$this->notify('Minify cache has been cleared.');
 				}
@@ -185,20 +185,20 @@ if(!class_exists('mapi_minify')) :
 			preg_match('/\/\/###WPM-CACHE-PATH-BEFORE###(.*)\/\/###WPM-CACHE-PATH-AFTER###/s', $content, $matches);
 			$cache_path_code = @trim($matches[1]);
 			$path = untrailingslashit($this->cache_location_path);
-			if($cache_path_code != '$min_cachePath = "'.$path.'";') {
+			if($cache_path_code != '$min_cachePath = "' . $path . '";') {
 				$content = preg_replace(
 					'/\/\/###WPM-CACHE-PATH-BEFORE###(.*)\/\/###WPM-CACHE-PATH-AFTER###/s',
-					"//###WPM-CACHE-PATH-BEFORE###\n".'$min_cachePath = "'.$path."\";\n//###WPM-CACHE-PATH-AFTER###",
+					"//###WPM-CACHE-PATH-BEFORE###\n" . '$min_cachePath = "' . $path . "\";\n//###WPM-CACHE-PATH-AFTER###",
 					$content);
 				$config_modified = TRUE;
 			}
 
 			preg_match('/\/\/###WPM-CACHE-AGE-BEFORE###(.*)\/\/###WPM-CACHE-AGE-AFTER###/s', $content, $matches);
 			$cache_age_code = @trim($matches[1]);
-			if($cache_age_code != '$min_serveOptions[\'maxAge\'] = '.@$this->options['cache_interval'].';') {
+			if($cache_age_code != '$min_serveOptions[\'maxAge\'] = ' . @$this->options['cache_interval'] . ';') {
 				$content = preg_replace(
 					'/\/\/###WPM-CACHE-AGE-BEFORE###(.*)\/\/###WPM-CACHE-AGE-AFTER###/s',
-					"//###WPM-CACHE-AGE-BEFORE###\n".'$min_serveOptions[\'maxAge\'] = '.@$this->options['cache_interval'].';'."\n//###WPM-CACHE-AGE-AFTER###",
+					"//###WPM-CACHE-AGE-BEFORE###\n" . '$min_serveOptions[\'maxAge\'] = ' . @$this->options['cache_interval'] . ';' . "\n//###WPM-CACHE-AGE-AFTER###",
 					$content);
 				$config_modified = TRUE;
 			}
@@ -218,9 +218,9 @@ if(!class_exists('mapi_minify')) :
 		 *
 		 */
 		public function change_minify_config_location() {
-			$filename = MAPI_DIR_PATH.'lib/min/config.php';
+			$filename = MAPI_DIR_PATH . 'lib/min/config.php';
 			$current_contents = file_get_contents($filename);
-			$new_contents = '<?php require_once("'.$this->minify_config_location.'"); ?>';
+			$new_contents = '<?php require_once("' . $this->minify_config_location . '"); ?>';
 			if($current_contents != $new_contents) {
 				file_put_contents($filename, $new_contents);
 			}
@@ -261,12 +261,12 @@ if(!class_exists('mapi_minify')) :
 
 			$content = preg_replace(
 				'/\/\/###WPM-DEBUG-FLAG-BEFORE###(.*)\/\/###WPM-DEBUG-FLAG-AFTER###/s',
-				"//###WPM-DEBUG-FLAG-BEFORE###\n".'$min_allowDebugFlag = '.$nominify.";\n//###WPM-DEBUG-FLAG-AFTER###",
+				"//###WPM-DEBUG-FLAG-BEFORE###\n" . '$min_allowDebugFlag = ' . $nominify . ";\n//###WPM-DEBUG-FLAG-AFTER###",
 				$content);
 
 			$content = preg_replace(
 				'/\/\/###WPM-ERROR-LOGGER-BEFORE###(.*)\/\/###WPM-ERROR-LOGGER-AFTER###/s',
-				"//###WPM-ERROR-LOGGER-BEFORE###\n".'$min_errorLogger = '.$firephp.";\n//###WPM-ERROR-LOGGER-AFTER###",
+				"//###WPM-ERROR-LOGGER-BEFORE###\n" . '$min_errorLogger = ' . $firephp . ";\n//###WPM-ERROR-LOGGER-AFTER###",
 				$content);
 
 			$fhandle = fopen($fname, "w");
@@ -347,7 +347,7 @@ if(!class_exists('mapi_minify')) :
 				return $content;
 			} else {
 				printf(
-					'%s: '.$url.'. %s<br/>',
+					'%s: ' . $url . '. %s<br/>',
 					__('Error: Could not fetch and cache URL'),
 					__('You might need to exclude this file in WP Minify options.')
 				);
@@ -380,8 +380,8 @@ if(!class_exists('mapi_minify')) :
 			$num_files = sizeof($files);
 
 			if($this->url_needs_splitting($url, $files)) {
-				$first_half = $this->check_and_split_url($base_url.'?f='.implode(',', array_slice($files, 0, $num_files / 2)), $latest_modified);
-				$second_half = $this->check_and_split_url($base_url.'?f='.implode(',', array_slice($files, $num_files / 2)), $latest_modified);
+				$first_half = $this->check_and_split_url($base_url . '?f=' . implode(',', array_slice($files, 0, $num_files / 2)), $latest_modified);
+				$second_half = $this->check_and_split_url($base_url . '?f=' . implode(',', array_slice($files, $num_files / 2)), $latest_modified);
 
 				return $first_half + $second_half;
 			} else {
@@ -398,7 +398,7 @@ if(!class_exists('mapi_minify')) :
 				// append base directory if needed
 				$base = $this->get_base();
 				if($base != '') {
-					$base_string = '&b='.$base; // weird issue when using &amp; -> throws 400 error
+					$base_string = '&b=' . $base; // weird issue when using &amp; -> throws 400 error
 				} else {
 					$base_string = '';
 				}
@@ -406,15 +406,15 @@ if(!class_exists('mapi_minify')) :
 				// get rid of any base directory specification in extra options
 				$extra_minify_options = preg_replace('/(&|&amp;|\b)b=[^&]*/', '', trim($this->options['enable_adv_speed_options']['extra_minify_options']));
 				if(trim($extra_minify_options) != '' && $this->adv_options_on) {
-					$extra_string = '&'.$extra_minify_options;
+					$extra_string = '&' . $extra_minify_options;
 				} else {
 					$extra_string = '';
 				}
 
 				// append last modified time
-				$latest_modified_string = '&m='.$latest_modified;
+				$latest_modified_string = '&m=' . $latest_modified;
 
-				return array($base_url.'?f='.implode(',', $files).$debug_string.$base_string.$extra_string.$latest_modified_string);
+				return array($base_url . '?f=' . implode(',', $files) . $debug_string . $base_string . $extra_string . $latest_modified_string);
 			}
 		}
 
@@ -425,7 +425,7 @@ if(!class_exists('mapi_minify')) :
 		 * @return mixed|string
 		 */
 		public function fetch_content($url, $type = '') {
-			$cache_file = $this->cache_location_url.md5($url).$type;
+			$cache_file = $this->cache_location_url . md5($url) . $type;
 
 			/** @noinspection PhpUnusedLocalVariableInspection */
 			$content = "";
@@ -457,7 +457,7 @@ if(!class_exists('mapi_minify')) :
 		public function local_version($url) {
 			$site_url = trailingslashit(get_option('siteurl'));
 			$url = str_replace($site_url, '', $url); // relative paths only for local urls
-			$url = preg_replace('/^\//', '', $url); // strip front / if any
+			//$url = preg_replace('/^\//', '', $url); // strip front / if any
 			$url = preg_replace('/\?.*/i', '', $url); // throws away parameters, if any
 			return $url;
 		}
@@ -472,8 +472,7 @@ if(!class_exists('mapi_minify')) :
 			if($localize) {
 				$url = $this->local_version($url);
 			}
-
-			if(substr($url, 0, 4) != 'http'
+			if(substr($url, 0, 4) != 'http' && substr($url, 0, 2) != '//'
 				&& (substr($url, -3, 3) == '.js' || substr($url, -4, 4) == '.css')
 			) {
 				return FALSE;
@@ -489,22 +488,22 @@ if(!class_exists('mapi_minify')) :
 		 */
 		public function get_js_location($src) {
 			if($this->debug) {
-				echo 'Script URL:'.$src."<br/>\n";
+				echo 'Script URL:' . $src . "<br/>\n";
 			}
 
 			$script_path = $this->local_version($src);
 			if($this->is_external($script_path, FALSE)) {
 				// fetch scripts if necessary
 				$this->fetch_content($src, '.js');
-				$location = $this->cache_location_url.md5($src).'.js';
+				$location = $this->cache_location_url . md5($src) . '.js';
 				if($this->debug) {
-					echo 'External script detected, cached as:'.md5($src)."<br/>\n";
+					echo 'External script detected, cached as:' . md5($src) . "<br/>\n";
 				}
 			} else {
 				// if script is local to server
 				$location = $script_path;
 				if($this->debug) {
-					echo 'Local script detected:'.$script_path."<br/>\n";
+					echo 'Local script detected:' . $script_path . "<br/>\n";
 				}
 			}
 
@@ -518,22 +517,22 @@ if(!class_exists('mapi_minify')) :
 		 */
 		public function get_css_location($src) {
 			if($this->debug) {
-				echo 'Style URL:'.$src."<br/>\n";
+				echo 'Style URL:' . $src . "<br/>\n";
 			}
 
 			$css_path = $this->local_version($src);
 			if($this->is_external($css_path, FALSE)) {
 				// fetch scripts if necessary
 				$this->fetch_content($src, '.css');
-				$location = $this->cache_location_url.md5($src).'.css';
+				$location = $this->cache_location_url . md5($src) . '.css';
 				if($this->debug) {
-					echo 'External css detected, cached as:'.md5($src)."<br/>\n";
+					echo 'External css detected, cached as:' . md5($src) . "<br/>\n";
 				}
 			} else {
 				$location = $css_path;
 				// if css is local to server
 				if($this->debug) {
-					echo 'Local css detected:'.$css_path."<br/>\n";
+					echo 'Local css detected:' . $css_path . "<br/>\n";
 				}
 			}
 
@@ -561,7 +560,7 @@ if(!class_exists('mapi_minify')) :
 		 */
 		public function build_minify_urls($locations) {
 
-			$minify_url = MAPI_DIR_URL.'lib/min/?f=';
+			$minify_url = MAPI_DIR_URL . 'lib/min/?f=';
 
 			$minify_url .= implode(',', $locations);
 			$latest_modified = $this->get_latest_modified_time($locations);
@@ -616,7 +615,7 @@ if(!class_exists('mapi_minify')) :
 				$base_path .= trailingslashit($this->get_base());
 
 				foreach($locations as $location) {
-					$path = $base_path.$location;
+					$path = $base_path . $location;
 					$mtime = filemtime($path);
 					if($latest_modified < $mtime) {
 						$latest_modified = $mtime;
@@ -687,7 +686,7 @@ if(!class_exists('mapi_minify')) :
 								}
 							}
 
-							$content = str_replace($link_tag.'</link>', '', $content);
+							$content = str_replace($link_tag . '</link>', '', $content);
 							$content = str_replace($link_tag, '', $content);
 							$css_locations[] = $this->get_css_location($href_match[1]);
 						}
@@ -714,7 +713,7 @@ if(!class_exists('mapi_minify')) :
 				$minify_urls = $this->build_minify_urls($css_locations);
 
 				foreach($minify_urls as $minify_url) {
-					$minify_url = apply_filters('mapi_minify_css_url', $minify_url); // Allow plugins to modify final minify URL
+					$minify_url = apply_filters('mapi_minify_css_url', htmlspecialchars($minify_url)); // Allow plugins to modify final minify URL
 					$css_tags .= "<!--suppress ALL --><link rel='stylesheet' href='$minify_url' type='text/css' media='all' />";
 				}
 
@@ -844,7 +843,7 @@ if(!class_exists('mapi_minify')) :
 				$minify_urls = $this->build_minify_urls($js_locations);
 
 				foreach($minify_urls as $minify_url) {
-					$minify_url = apply_filters('mapi_minify_js_url', $minify_url); // Allow plugins to modify final minify URL
+					$minify_url = apply_filters('mapi_minify_js_url', htmlspecialchars($minify_url)); // Allow plugins to modify final minify URL
 					$js_tags .= "<script type='text/javascript' src='$minify_url'></script>";
 				}
 
@@ -853,7 +852,6 @@ if(!class_exists('mapi_minify')) :
 				if($matches) {
 					$content = preg_replace('/<!--compression-none-->/', "$js_tags", $content, 1); // limit 1 replacement
 				} else {
-
 					// HTML5 has <header> tags so account for those in regex
 					$content = preg_replace('/<head(>|\s[^>]*?>)/', "\\0\n$js_tags", $content, 1); // limit 1 replacement
 
@@ -918,7 +916,7 @@ if(!class_exists('mapi_minify')) :
 			// minify HTML //maybe someday remove this?
 			if(@$this->options['enable_html']) {
 				if(!class_exists('Minify_HTML')) {
-					require_once(MAPI_DIR_PATH.'lib/min/lib/Minify/HTML.php');
+					require_once(MAPI_DIR_PATH . 'lib/min/lib/Minify/HTML.php');
 				}
 				$buffer = Minify_HTML::minify($buffer);
 			}

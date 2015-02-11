@@ -4,8 +4,8 @@
  *
  *
  * @author     Mindshare Studios, Inc.
- * @copyright  Copyright (c) 2014
- * @link       http://mindsharelabs.com/downloads/mindshare-theme-api/
+ * @copyright  Copyright (c) 2006-2015
+ * @link       https://mindsharelabs.com/downloads/mindshare-theme-api/
  * @filename   mapi-search.php
  *
  */

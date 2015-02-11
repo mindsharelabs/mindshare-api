@@ -4,8 +4,8 @@
  *
  *
  * @author     Mindshare Studios, Inc.
- * @copyright  Copyright (c) 2014
- * @link       http://mindsharelabs.com/downloads/mindshare-theme-api/
+ * @copyright  Copyright (c) 2006-2015
+ * @link       https://mindsharelabs.com/downloads/mindshare-theme-api/
  * @filename   mapi-page-post.php
  *
  */
@@ -50,8 +50,8 @@ function mapi_get_id($slug) {
  *
  * @return int|bool Returns the ID or FALSE if no post is found.
  */
-function mapi_slug_to_id($slug) {
-	$page = get_page_by_path($slug);
+function mapi_slug_to_id($slug, $post_type = 'page') {
+	$page = get_page_by_path($slug, $output = OBJECT, $post_type);
 	if($page) {
 		return $page->ID;
 	} else {
@@ -131,6 +131,7 @@ function mapi_get_top_parent_id($id) {
 		$test_post = get_post($id);
 		$ancestors = get_post_ancestors($test_post);
 		$root = count($ancestors) - 1;
+
 		return $ancestors[$root];
 	} else {
 		return $id;
@@ -160,9 +161,9 @@ function mapi_remove_title_prefix($content) {
 function mapi_list_children() {
 	global $post;
 	if($post->post_parent) {
-		$children = wp_list_pages("sort_column=menu_order&title_li=&child_of=".$post->post_parent."&echo=0");
+		$children = wp_list_pages("sort_column=menu_order&title_li=&child_of=" . $post->post_parent . "&echo=0");
 	} else {
-		$children = wp_list_pages("sort_column=menu_order&title_li=&child_of=".$post->ID."&echo=0");
+		$children = wp_list_pages("sort_column=menu_order&title_li=&child_of=" . $post->ID . "&echo=0");
 	}
 	if($children) {
 		echo '<ul class="list-children">';
@@ -199,6 +200,7 @@ function mapi_excerpt($excerpt_words = 55, $id = NULL) {
 		$x = strip_tags($x);
 	}
 	$x = mapi_word_limit($x, $excerpt_words);
+
 	return $x;
 }
 
@@ -277,26 +279,26 @@ function mapi_list_posts_array($args) {
 		if(!isset($slug)) {
 			mapi_error(array('msg' => 'no page slug was defined'));
 		} else {
-			$posts = get_posts("post_type=".$type."&name=".$slug);
+			$posts = get_posts("post_type=" . $type . "&name=" . $slug);
 		}
 	} else {
-		$posts = get_posts("post_type=".$type."&numberposts=".$num."&cat=".$cat);
+		$posts = get_posts("post_type=" . $type . "&numberposts=" . $num . "&cat=" . $cat);
 	}
 	$str = '<ul class="mapi list-posts">';
 	foreach($posts as $post) {
-		$str .= '<li><span class="link"><a href="'.get_permalink($post->ID).'" title="'.$post->post_title.'">'.$post->post_title.'</a></span>';
+		$str .= '<li><span class="link"><a href="' . get_permalink($post->ID) . '" title="' . $post->post_title . '">' . $post->post_title . '</a></span>';
 		if($show_excerpt) {
 			if($content_or_excerpt == 'excerpt') {
-				$str .= '<span class="excerpt">'.mapi_excerpt($excerpt_length, $post->ID).'</span>';
+				$str .= '<span class="excerpt">' . mapi_excerpt($excerpt_length, $post->ID) . '</span>';
 			}
 			if($content_or_excerpt == 'content') {
 				$content = apply_filters('the_content', $post->post_content);
 				$content = str_replace(']]>', ']]&gt;', $content);
-				$str .= '<span class="excerpt">'.$content.'</span>';
+				$str .= '<span class="excerpt">' . $content . '</span>';
 			}
 		}
 		if($show_more_link) {
-			$str .= '<span class="more">'.$more_before.'<a class="more" href="'.get_permalink($post->ID).'" title="'.the_title_attribute(array('echo' => 0)).'">'.$more_text.'</a>'.$more_after.'</span>';
+			$str .= '<span class="more">' . $more_before . '<a class="more" href="' . get_permalink($post->ID) . '" title="' . the_title_attribute(array('echo' => 0)) . '">' . $more_text . '</a>' . $more_after . '</span>';
 		}
 	}
 	$str .= '</li></ul>';

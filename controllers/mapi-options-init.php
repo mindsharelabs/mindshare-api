@@ -5,8 +5,8 @@
  * Initialize options
  *
  * @author    Mindshare Studios, Inc.
- * @copyright Copyright (c) 2014
- * @link      http://mindsharelabs.com/downloads/mindshare-theme-api/
+ * @copyright Copyright (c) 2006-2015
+ * @link      https://mindsharelabs.com/downloads/mindshare-theme-api/
  *
  */
 
@@ -52,7 +52,7 @@ if(!class_exists('mapi_options')) :
 
 					if(mapi_is_true(@$this->options['error_display']['error_display_log'])) {
 						@ini_set('log_errors', 1);
-						@ini_set('error_log', apply_filters('mapi_error_log_location', get_template_directory().'/mapi_error_log.txt'));
+						@ini_set('error_log', apply_filters('mapi_error_log_location', get_template_directory() . '/mapi_error_log.txt'));
 					}
 				}
 				//}
@@ -250,6 +250,23 @@ if(!class_exists('mapi_options')) :
 		 */
 		public function set_misc_options() {
 
+			/**
+			 * Register filters to encode exposed email addresses in
+			 * posts, pages, excerpts, comments and widgets.
+			 *
+			 * @todo move this, make filterable
+			 */
+			if(@$this->options['encode_email_addresses']) {
+				$filters = apply_filters('mapi_email_encode_filters', array('the_content', 'the_excerpt', 'widget_text', 'comment_text', 'comment_excerpt'));
+				foreach($filters as $filter) {
+					add_filter($filter, 'mapi_encode_emails', 100);
+				}
+			}
+
+			if(@$this->options['set_admin_color_scheme']) {
+				add_filter('get_user_option_admin_color', 'mapi_set_admin_color_scheme', 5);
+			}
+
 			if(@$this->options['enabled_htmlawed']) {
 				add_filter('the_content', 'mapi_html_cleanup');
 			}
@@ -302,6 +319,10 @@ if(!class_exists('mapi_options')) :
 				if(!$roleObject->has_cap('edit_theme_options')) {
 					$roleObject->add_cap('edit_theme_options');
 				}
+			}
+
+			if(@$this->options['move_menus']) {
+				add_action('admin_menu', 'mapi_admin_menu_nav_menus');
 			}
 
 			if(mapi_is_true(@$this->options['maintenance_mode']['enabled'])) {
@@ -395,7 +416,7 @@ if(!class_exists('mapi_options')) :
 						)
 					)
 				);
-				echo "<style type='text/css'>.login h1 a { height: 72px; width: 300px; background: url('".html_entity_decode($image)."') no-repeat top center !important; }</style>";
+				echo "<style type='text/css'>.login h1 a { height: 72px; width: 300px; background: url('" . html_entity_decode($image) . "') no-repeat top center !important; }</style>";
 			}
 		}
 

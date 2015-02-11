@@ -4,7 +4,7 @@ Plugin Name: Mindshare Theme API
 Plugin URI: https://mindsharelabs.com/downloads/mindshare-theme-api/
 Description: Provides a library of additional template tags, 3rd-party libraries, and functions for WordPress themes and additional features for WordPress CMS websites.
 Author: Mindshare Studios, Inc
-Version: 0.8.1
+Version: 0.8.2
 Author URI: https://mind.sh/are/
 Network: false
 */
@@ -18,7 +18,7 @@ $MAPI_ERRORS = array();
 $MAPI_TLD = ''; // global variable for grabbing the base URL w/o subdomains in mapi_external_links() to reduce processor/memory usage
 
 if(!defined('MAPI_MIN_WP_VERSION')) {
-	define('MAPI_MIN_WP_VERSION', '3.8');
+	define('MAPI_MIN_WP_VERSION', '4.0');
 }
 
 if(!defined('MAPI_PLUGIN_NAME')) {
@@ -58,7 +58,7 @@ if(!defined('MAPI_LEGACY_NAME')) {
 // check WordPress version
 global $wp_version;
 if(version_compare($wp_version, MAPI_MIN_WP_VERSION, "<")) {
-	exit(MAPI_PLUGIN_NAME.' requires WordPress '.MAPI_MIN_WP_VERSION.' or newer.');
+	exit(MAPI_PLUGIN_NAME . ' requires WordPress ' . MAPI_MIN_WP_VERSION . ' or newer.');
 }
 
 // deny direct access
@@ -70,13 +70,13 @@ if(!function_exists('add_action')) {
 
 // make sure a few WP functions are available
 if(!function_exists('is_plugin_active')) {
-	include_once(ABSPATH.'wp-admin/includes/plugin.php');
+	include_once(ABSPATH . 'wp-admin/includes/plugin.php');
 }
 
 // EDD updater
 if(!class_exists('Mindshare_API_Plugin_Updater')) {
 	// load our custom updater
-	include_once(MAPI_DIR_PATH.'lib/Mindshare_API_Plugin_Updater.php');
+	include_once(MAPI_DIR_PATH . 'lib/Mindshare_API_Plugin_Updater.php');
 }
 
 /**
@@ -85,8 +85,8 @@ if(!class_exists('Mindshare_API_Plugin_Updater')) {
  * wrapper class for the API
  *
  * @author    Mindshare Studios, Inc.
- * @copyright Copyright (c) 2014
- * @link      http://mindsharelabs.com/downloads/mindshare-theme-api/
+ * @copyright Copyright (c) 2006-2015
+ * @link      https://mindsharelabs.com/downloads/mindshare-theme-api/
  *
  */
 if(!class_exists("Mindshare_API")) :
@@ -106,7 +106,7 @@ if(!class_exists("Mindshare_API")) :
 		 *
 		 * @var string
 		 */
-		private $class_version = '0.8.1';
+		private $class_version = '0.8.2';
 
 		/**
 		 * Used for automatic updates
@@ -134,7 +134,7 @@ if(!class_exists("Mindshare_API")) :
 			add_filter('auto_update_plugin', '__return_true'); // WP 3.8+ auto updates
 
 			// include the TGM_Plugin_Activation class
-			require_once(MAPI_DIR_PATH.'lib/tgm-plugin-activation/class-tgm-plugin-activation.php');
+			require_once(MAPI_DIR_PATH . 'lib/tgm-plugin-activation/class-tgm-plugin-activation.php');
 			add_action('tgmpa_register', array($this, 'register_required_plugins'));
 		}
 
@@ -145,7 +145,7 @@ if(!class_exists("Mindshare_API")) :
 		 * @return string
 		 */
 		public function __toString() {
-			return MAPI_PLUGIN_NAME.' '.$this->class_version;
+			return MAPI_PLUGIN_NAME . ' ' . $this->class_version;
 		}
 
 		/**
@@ -166,7 +166,7 @@ if(!class_exists("Mindshare_API")) :
 				return;
 			}
 			deactivate_plugins(plugin_basename(__FILE__), TRUE, TRUE);
-			header('Location: '.network_admin_url('plugins.php?deactivate=true'));
+			header('Location: ' . network_admin_url('plugins.php?deactivate=true'));
 			exit;
 		}
 
@@ -301,9 +301,10 @@ if(!class_exists("Mindshare_API")) :
 		 */
 		public function plugin_action_links($links, $file) {
 			if($file == plugin_basename(__FILE__)) {
-				$settingslink = '<a href="themes.php?page='.MAPI_PLUGIN_SLUG.'-settings" title="Theme Settings">Theme</a> | <a href="options-general.php?page='.MAPI_PLUGIN_SLUG.'-admin-settings" title="Developer Settings">Developer</a>';
+				$settingslink = '<a href="themes.php?page=' . MAPI_PLUGIN_SLUG . '-settings" title="Theme Settings">Theme</a> | <a href="options-general.php?page=' . MAPI_PLUGIN_SLUG . '-admin-settings" title="Developer Settings">Developer</a>';
 				array_unshift($links, $settingslink);
 			}
+
 			return $links;
 		}
 
@@ -322,7 +323,7 @@ if(!class_exists("Mindshare_API")) :
 					$links,
 					array(
 						sprintf(
-							'<a href="http://mindsharelabs.com/topics/mindshare-theme-api/" title="%1$s" target="_blank">%1$s</a>',
+							'<a href="https://mindsharelabs.com/topics/mindshare-theme-api/" title="%1$s" target="_blank">%1$s</a>',
 							esc_html__('Function Reference', 'mapi')
 						),
 						sprintf(
@@ -336,6 +337,7 @@ if(!class_exists("Mindshare_API")) :
 					)
 				);
 			}
+
 			return $links;
 		}
 
@@ -373,6 +375,7 @@ if(!class_exists("Mindshare_API")) :
 					'gallery'          => 'GF72-8ME6-JS15-3PZC',
 				),
 			);
+
 			return apply_filters('mapi_acf_init', $options);
 		}
 
@@ -430,10 +433,11 @@ if(!is_plugin_active(MAPI_LEGACY_NAME)) {
 	function upgrade_admin_notice() {
 		?>
 		<div class="updated">
-			<p><?php _e('Upgrading the '.MAPI_PLUGIN_NAME.' is complete. <a href="plugins.php">Please refresh</a>.', 'mapi'); ?></p>
+			<p><?php _e('Upgrading the ' . MAPI_PLUGIN_NAME . ' is complete. <a href="plugins.php">Please refresh</a>.', 'mapi'); ?></p>
 		</div>
 	<?php
 	}
+
 	add_action('admin_notices', 'upgrade_admin_notice');
 }
 

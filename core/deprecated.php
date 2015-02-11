@@ -6,8 +6,8 @@
  *
  * @created   9/9/12 3:24 PM
  * @author    Mindshare Studios, Inc.
- * @copyright Copyright (c) 2014
- * @link      http://mindsharelabs.com/downloads/mindshare-theme-api/
+ * @copyright Copyright (c) 2006-2015
+ * @link      https://mindsharelabs.com/downloads/mindshare-theme-api/
  *
  */
 
@@ -24,54 +24,7 @@
 function mapi_mthumb_config() {
 	_deprecated_function(__FUNCTION__, '4.0');
 
-	global $ALLOWED_SITES;
-
-	if(file_exists(get_template_directory().'/mthumb-config.php')) {
-		include(get_template_directory().'/mthumb-config.php');
-	} elseif(file_exists(get_template_directory().'/timthumb-config.php')) {
-		include(get_template_directory().'/timthumb-config.php');
-	} else {
-		// Max sizes
-		if(!defined('MAX_WIDTH')) {
-			define('MAX_WIDTH', apply_filters('mapi_timthumb_max_width', 3600));
-		}
-		if(!defined('MAX_HEIGHT')) {
-			define('MAX_HEIGHT', apply_filters('mapi_timthumb_max_height', 3600));
-		}
-
-		// External Sites
-		$ALLOWED_SITES = apply_filters(
-			'mapi_timthumb_allowed_sites',
-			array(
-				'flickr.com',
-				'staticflickr.com',
-				'picasa.com',
-				'img.youtube.com',
-				'upload.wikimedia.org',
-				'photobucket.com',
-				'imgur.com',
-				'imageshack.us',
-				'tinypic.com',
-				'mind.sh',
-				'mindsharestudios.com'
-			)
-		);
-		if(!defined('ALLOW_EXTERNAL')) {
-			define('ALLOW_EXTERNAL', apply_filters('mapi_timthumb_allow_external', TRUE));
-		}
-
-		// Caching
-		if(!defined('MAX_WIDTH')) {
-			define('FILE_CACHE_DIRECTORY', apply_filters('mapi_timthumb_cache_dir', ABSPATH.'/wp-content/uploads/cache/'));
-		}
-		//define('FILE_CACHE_DIRECTORY',''); // leave blank for system directory
-		if(!defined('MAX_WIDTH')) {
-			define('FILE_CACHE_TIME_BETWEEN_CLEANS', apply_filters('mapi_timthumb_cache_interval', 172800)); // 2 days
-		}
-		if(!defined('MAX_WIDTH')) {
-			define('BROWSER_CACHE_MAX_AGE', apply_filters('mapi_timthumb_cache_max_age', 1728000)); // 20 days
-		}
-	}
+	return false;
 }
 
 /**
@@ -94,8 +47,8 @@ function mapi_tweets($args) {
 	_deprecated_function(__FUNCTION__, '3.8', 'mapi_tweets_oauth');
 	$defaults = array(
 		'screen_name' => NULL,
-		'num_items'   => 4,
-		'echo'        => TRUE
+		'num_items' => 4,
+		'echo' => TRUE
 	);
 	$args = wp_parse_args($args, $defaults);
 	extract($args, EXTR_SKIP);
@@ -105,7 +58,7 @@ function mapi_tweets($args) {
 	}
 
 	if(function_exists('simplexml_load_file')) {
-		$url = 'https://api.twitter.com/1/statuses/user_timeline.xml?screen_name='.$screen_name.'&count='.$num_items;
+		$url = 'https://api.twitter.com/1/statuses/user_timeline.xml?screen_name=' . $screen_name . '&count=' . $num_items;
 		$tweets_xml = @ simplexml_load_file($url); // error supression added to prevent issues when Twitter is down
 		if($tweets_xml) {
 			if($echo) {
@@ -114,8 +67,8 @@ function mapi_tweets($args) {
 				foreach($tweets as $tweet) : ?>
 					<li>
 						<span class="mapi-tweet-link"><?php echo $tweet->text; ?></span><br />
-						<span class="mapi-tweet-meta">Posted to <a class="mapi-tweet-link" href='https://twitter.com/<?php echo $screen_name; ?>/status/<?php echo $tweet->id; ?>' title='<?php echo 'Posted '.$tweet->created_at; ?>'>Twitter</a> on <?php echo $tweet->created_at; ?>
-							by <a href="https://twitter.com/<?php echo $screen_name; ?>" title="Connect with <?php bloginfo('name'); ?> on Twitter" target="_blank"><?php echo $screen_name; ?></a></span>
+						<span class="mapi-tweet-meta">Posted to <a class="mapi-tweet-link" href='https://twitter.com/<?php echo $screen_name; ?>/status/<?php echo $tweet->id; ?>' title='<?php echo 'Posted ' . $tweet->created_at; ?>'>Twitter</a> on <?php echo $tweet->created_at; ?>
+													  by <a href="https://twitter.com/<?php echo $screen_name; ?>" title="Connect with <?php bloginfo('name'); ?> on Twitter" target="_blank"><?php echo $screen_name; ?></a></span>
 					</li>
 				<?php
 				endforeach;
@@ -124,7 +77,7 @@ function mapi_tweets($args) {
 				return $tweets_xml;
 			}
 		} else {
-			mapi_error(array('msg' => 'Could not retrieve Twitter XML: '.$url, 'die' => FALSE, 'echo' => FALSE));
+			mapi_error(array('msg' => 'Could not retrieve Twitter XML: ' . $url, 'die' => FALSE, 'echo' => FALSE));
 		}
 	} else {
 		mapi_error(array('msg' => 'The PHP function simplexml_load_file was not found.', 'die' => FALSE, 'echo' => FALSE));
@@ -215,10 +168,10 @@ function mapi_nav($position = 'below') {
  *
  * @todo separate validation into separate functions, make optional
  *
- * @param string $key                    Required. The key for the custom field to retrieve.
- * @param int    $id                     Optional. Post ID. Defaults to the current post.
- * @param string $empty_str              Optional. String to return to the custom field value is empty.
- * @param string $processing_function    Optional. Name of a user-defined intermediary function to send the
+ * @param string $key Required. The key for the custom field to retrieve.
+ * @param int $id Optional. Post ID. Defaults to the current post.
+ * @param string $empty_str Optional. String to return to the custom field value is empty.
+ * @param string $processing_function Optional. Name of a user-defined intermediary function to send the
  *                                       retrieved custom field value for processing before it gets returned.
  *
  * @deprecated
@@ -279,8 +232,8 @@ if(version_compare($wp_version, MAPI_MIN_WP_VERSION, "<")) {
  *
  * @deprecated since version 0.6.7. Use mapi_maintenance_mode instead
  *
- * @param bool   $enabled Turns the offline mode on or off.
- * @param string $reason  A message explaining the downtime.
+ * @param bool $enabled Turns the offline mode on or off.
+ * @param string $reason A message explaining the downtime.
  */
 function mapi_security_audit($enabled = FALSE, $reason) {
 	_deprecated_function(__FUNCTION__, '3.8');
@@ -347,10 +300,10 @@ function mapi_list_children_menu() {
 		} else {
 			$depth = $post->post_parent;
 		}
-		$children .= wp_list_pages("sort_column=menu_order&title_li=&child_of=".$depth."&echo=0&depth=1");
+		$children .= wp_list_pages("sort_column=menu_order&title_li=&child_of=" . $depth . "&echo=0&depth=1");
 	} else {
-		if(wp_list_pages("sort_column=menu_order&title_li=&child_of=".$post->ID."&echo=0") != '') {
-			$children .= wp_list_pages("sort_column=menu_order&title_li=&child_of=".$post->ID."&echo=0&depth=1");
+		if(wp_list_pages("sort_column=menu_order&title_li=&child_of=" . $post->ID . "&echo=0") != '') {
+			$children .= wp_list_pages("sort_column=menu_order&title_li=&child_of=" . $post->ID . "&echo=0&depth=1");
 		}
 	}
 	if($children) {

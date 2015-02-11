@@ -6,7 +6,7 @@
  *
  * @created   4/2/14 11:52 AM
  * @author    Mindshare Studios, Inc.
- * @copyright Copyright (c) 2014
+ * @copyright Copyright (c) 2006-2015
  * @link      http://www.mindsharelabs.com/documentation/
  *
  */

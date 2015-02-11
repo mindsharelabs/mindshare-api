@@ -4,8 +4,8 @@
  *
  *
  * @author     Mindshare Studios, Inc.
- * @copyright  Copyright (c) 2014
- * @link       http://mindsharelabs.com/downloads/mindshare-theme-api/
+ * @copyright  Copyright (c) 2006-2015
+ * @link       https://mindsharelabs.com/downloads/mindshare-theme-api/
  * @filename   mapi-social.php
  * @since      File available since Rev 72
  *
@@ -36,12 +36,12 @@ function mapi_maintenance_mode($enabled = FALSE, $role = 'Subscriber', $reason =
 		$enabled = FALSE;
 	}
 	if(empty($css)) {
-		require_once(MAPI_DIR_PATH.'/views/mapi-maintenance-mode-css.php');
+		require_once(MAPI_DIR_PATH . '/views/mapi-maintenance-mode-css.php');
 		$css = $maintenance_mode_css;
 	}
 	$reason = stripslashes($reason);
 	if(empty($reason)) {
-		$reason = 'We\'re sorry, '.get_bloginfo('name').' is currently undergoing scheduled maintenance.<br /><br /> We\'ll be back online shortly.';
+		$reason = 'We\'re sorry, ' . get_bloginfo('name') . ' is currently undergoing scheduled maintenance.<br /><br /> We\'ll be back online shortly.';
 	}
 	if($enabled) {
 		if(!current_user_can(mapi_role_to_capability($role))) {
@@ -130,10 +130,10 @@ function mapi_role_to_capability($role) {
  * @return mixed|void
  */
 function mapi_html_cleanup($content) {
-	require_once(MAPI_DIR_PATH.'/lib/htmLawed/htmLawed.php');
+	require_once(MAPI_DIR_PATH . '/lib/htmLawed/htmLawed.php');
 
-	if(file_exists(get_template_directory().'/htmlawed-config.php')) {
-		include(get_template_directory().'/htmlawed-config.php');
+	if(file_exists(get_template_directory() . '/htmlawed-config.php')) {
+		include(get_template_directory() . '/htmlawed-config.php');
 	} else {
 		// add bootstrap classes in place of inline styles
 		//$content = str_ireplace('style="text-align: right;"', 'class="pull-right"', $content);
@@ -147,5 +147,105 @@ function mapi_html_cleanup($content) {
 		// remove empty tags
 		$content = preg_replace('%<(.*?)[^>]*>\\s*</\\1>%', '', $content);
 	}
+
 	return apply_filters('mapi_html_clean', $content);
+}
+
+/**
+ * Searches for plain email addresses in given $string and
+ * encodes them (by default) with the help of mapi_encode_str().
+ *
+ * Regular expression is based on based on John Gruber's Markdown.
+ * http://daringfireball.net/projects/markdown/
+ *
+ * @param string $string Text with email addresses to encode
+ *
+ * @return string $string Given text with encoded email addresses
+ */
+function mapi_encode_emails($string) {
+
+	// abort if $string doesn't contain a @-sign
+	if(apply_filters('mapi_at_sign_check', TRUE)) {
+		if(strpos($string, '@') === FALSE) {
+			return $string;
+		}
+	}
+
+	// override encoding function with the 'mapi_method' filter
+	$method = apply_filters('mapi_method', 'mapi_encode_str');
+
+	// override regex pattern with the 'mapi_regexp' filter
+	$regexp = apply_filters(
+		'mapi_regexp',
+		'{
+			(?:mailto:)?
+			(?:
+				[-!#$%&*+/=?^_`.{|}~\w\x80-\xFF]+
+			|
+				".*?"
+			)
+			\@
+			(?:
+				[-a-z0-9\x80-\xFF]+(\.[-a-z0-9\x80-\xFF]+)*\.[a-z]+
+			|
+				\[[\d.a-fA-F:]+\]
+			)
+		}xi'
+	);
+
+	return preg_replace_callback(
+		$regexp,
+		create_function(
+			'$matches',
+			'return ' . $method . '($matches[0]);'
+		),
+		$string
+	);
+}
+
+/**
+ * Encodes each character of the given string as either a decimal
+ * or hexadecimal entity, in the hopes of foiling most email address
+ * harvesting bots.
+ *
+ * Based on Michel Fortin's PHP Markdown:
+ *   http://michelf.com/projects/php-markdown/
+ * Which is based on John Gruber's original Markdown:
+ *   http://daringfireball.net/projects/markdown/
+ * Whose code is based on a filter by Matthew Wickline, posted to
+ * the BBEdit-Talk with some optimizations by Milian Wolff.
+ *
+ * @param string $string Text with email addresses to encode
+ *
+ * @return string $string Given text with encoded email addresses
+ */
+function mapi_encode_str($string) {
+
+	$chars = str_split($string);
+	$seed = mt_rand(0, (int) abs(crc32($string) / strlen($string)));
+
+	foreach($chars as $key => $char) {
+
+		$ord = ord($char);
+
+		if($ord < 128) { // ignore non-ascii chars
+
+			$r = ($seed * (1 + $key)) % 100; // pseudo "random function"
+
+			if($r > 60 && $char != '@') {
+				;
+			} // plain character (not encoded), if not @-sign
+			else {
+				if($r < 45) {
+					$chars[$key] = '&#x' . dechex($ord) . ';';
+				} // hexadecimal
+				else {
+					$chars[$key] = '&#' . $ord . ';';
+				}
+			} // decimal (ascii)
+
+		}
+	}
+
+	return implode('', $chars);
 }

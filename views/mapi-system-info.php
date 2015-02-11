@@ -6,14 +6,16 @@
  *
  * @created   4/11/13 5:58 PM
  * @author    Mindshare Studios, Inc.
- * @copyright Copyright (c) 2014
- * @link      http://mindsharelabs.com/downloads/mindshare-theme-api/
+ * @copyright Copyright (c) 2006-2015
+ * @link      https://mindsharelabs.com/downloads/mindshare-theme-api/
  *
  */
 
 require_once(MAPI_DIR_PATH.'/core/mapi-utility.php');
 
 function mapi_system_info() {
+
+	global $mapi;
 
 	$theme = wp_get_theme();
 	$browser = mapi_browser_from_ua();
@@ -26,6 +28,7 @@ function mapi_system_info() {
 
 	$sysinfo = "WordPress Version:      ".get_bloginfo('version')."\n";
 	$sysinfo .= "PHP Version:            ".PHP_VERSION."\n";
+	$sysinfo .= "API Version:            ".$mapi."\n";
 
 	if(class_exists('mysqli')) {
 		// if the host contains a port we need to split them up

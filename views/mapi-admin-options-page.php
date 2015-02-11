@@ -5,11 +5,11 @@ $mapi_options = new mindshare_options_framework(
 		'project_name' => MAPI_PLUGIN_NAME,
 		'project_slug' => MAPI_PLUGIN_SLUG,
 		'menu'         => 'settings',
-		'page_title'   => wp_get_theme().' Theme Developer Settings',
+		'page_title'   => wp_get_theme() . ' Theme Developer Settings',
 		'menu_title'   => 'Developer Settings',
 		'capability'   => 'manage_options',
 		'option_group' => MAPI_OPTIONS,
-		'id'           => MAPI_PLUGIN_SLUG.'-admin-settings',
+		'id'           => MAPI_PLUGIN_SLUG . '-admin-settings',
 		'fields'       => array(),
 	)
 );
@@ -47,7 +47,6 @@ $mapi_options->TabsListing(
 $mapi_options->OpenTab(sanitize_title($dev_options_label));
 $mapi_options->Title($dev_options_label);
 $mapi_options->addSubtitle('Maintenance Mode');
-
 
 $maintenance_mode[] = $mapi_options->addParagraph(
 	'Drag this bookmarklet to your browser bookmarks bar to quickly bypass Maintenance Mode when it is turned on.<br /><a class="bookmarklet button button-primary button-large" href="javascript:(function()%7Bjavascript%3Avoid((function()%7Bvar%20loc%20%3D%20location.href%3B%20loc.indexOf(%22%3F%22)%20%3D%3D%20-1%20%3F%20(location.href%20%3D%20loc%2B%22%3Fmaintenance%3Dbypass%22)%20%3A%20(location.href%20%3D%20loc%2B%22%26maintenance%3Dbypass%22)%3B%7D)())%7D)()">Bypass Maintenance Mode</a>', TRUE
@@ -95,12 +94,12 @@ $maintenance_mode[] = $mapi_options->addWysiwyg(
 	TRUE
 );
 
-require_once(MAPI_DIR_PATH.'/views/mapi-maintenance-mode-css.php'); // default CSS for offline mode
+require_once(MAPI_DIR_PATH . '/views/mapi-maintenance-mode-css.php'); // default CSS for offline mode
 $maintenance_mode[] = $mapi_options->addCode(
 	'maintenance_mode_css',
 	array(
-		 'std'    => $maintenance_mode_css,
-		 'desc'   => 'Enter custom CSS for Maintenance Mode screen.',
+		'std'    => $maintenance_mode_css,
+		'desc'   => 'Enter custom CSS for Maintenance Mode screen.',
 		//'style' => 'width:500px; height:400px',
 		'syntax' => 'css',
 		'name'   => 'Offline CSS'
@@ -130,7 +129,7 @@ $error_options[] = $mapi_options->addCheckbox(
 $error_options[] = $mapi_options->addCheckbox(
 	'error_display_log',
 	array(
-		'name'  => 'Also log error messages to <code><a title="View source in new tab" href="'.get_bloginfo('template_url').'/mapi_error_log.txt" target="_blank">mapi_error_log.txt</a></code> in current theme directory',
+		'name'  => 'Also log error messages to <code><a title="View source in new tab" href="' . get_bloginfo('template_url') . '/mapi_error_log.txt" target="_blank">mapi_error_log.txt</a></code> in current theme directory',
 		'std'   => FALSE,
 		'style' => 'simple'
 	),
@@ -224,6 +223,7 @@ $mapi_options->addCondition(
 		'std'    => TRUE
 	)
 );
+
 $mapi_options->addCheckbox(
 	'break_frames',
 	array(
@@ -288,7 +288,7 @@ $custom_branding[] = $mapi_options->addParagraph('<strong>Caution:</strong> disa
 $custom_branding[] = $mapi_options->addText(
 	'wp_login_title',
 	array(
-		'std'  => 'Powered by '.get_bloginfo('name'),
+		'std'  => 'Powered by ' . get_bloginfo('name'),
 		'desc' => 'Enter a custom title for the login screen. <strong>Default:</strong> Powered by WordPress',
 		'name' => 'WordPress Login Title'
 	),
@@ -334,7 +334,7 @@ $mapi_options->addCondition(
 	)
 );
 
-$mapi_options->addSubtitle('Misc. WordPress Settings');
+$mapi_options->addSubtitle('WordPress Content Settings');
 
 $mapi_options->addText(
 	'excerpt_more_txt',
@@ -346,11 +346,31 @@ $mapi_options->addText(
 );
 
 $mapi_options->addCheckbox(
+	'encode_email_addresses',
+	array(
+		'name' => 'Obfuscate email addresses',
+		'std'  => TRUE,
+		'desc' => 'Encodes email addresses in HTML output to hide them from most spam harvesters. By default this will be applied to the following filters: the_content, the_excerpt, widget_text, comment_text, comment_excerpt. Set different filters using the mapi_email_encode_filters filter.'
+	)
+);
+
+$mapi_options->addCheckbox(
 	'enabled_htmlawed',
 	array(
 		'name' => 'Cleanup HTML tags in the_content before output',
 		'std'  => FALSE,
 		'desc' => 'This enables <a href="http://goo.gl/OHgmij" title="View documentation" target="_blank">htmLawed</a> to purify HTML entered by users. By default this strips DIV tags, inline styles, and empty tags. You can override and change any settings by creating a PHP file in the current theme folder called <code>htmlawed-config.php</code>'
+	)
+);
+
+$mapi_options->addSubtitle('Misc. WordPress Settings');
+
+$mapi_options->addCheckbox(
+	'set_admin_color_scheme',
+	array(
+		'name' => 'Override WordPress admin color scheme',
+		'std'  => FALSE,
+		'desc' => 'This sets the admin colorl scheme to "midnight" by default for users. The default scheme can be changed using the <code>mapi_admin_color_scheme</code> filter.'
 	)
 );
 
@@ -367,8 +387,17 @@ $mapi_options->addCheckbox(
 	'allow_editors_edit_menus',
 	array(
 		'name' => 'Allow Editors to access Menus',
-		'std'  => FALSE,
+		'std'  => TRUE,
 		'desc' => 'Enables editing of WordPress menus for users with the Editor role.'
+	)
+);
+
+$mapi_options->addCheckbox(
+	'move_menus',
+	array(
+		'name' => 'Move Menus to top level',
+		'std'  => FALSE,
+		'desc' => 'Moves the Menus link out from under Appearance to the top level of the WordPress Admin Menu.'
 	)
 );
 
@@ -418,7 +447,7 @@ $mapi_options->addSubtitle('Libraries');
 $mapi_options->addCheckbox(
 	'load_jquery',
 	array(
-		'name' => 'Load jQuery <code><a title="View source in new tab" href="view-source:'.includes_url('js/jquery/jquery.js').'" target="_blank">jquery.js</a></code>',
+		'name' => 'Load jQuery <code><a title="View source in new tab" href="view-source:' . includes_url('js/jquery/jquery.js') . '" target="_blank">jquery.js</a></code>',
 		'std'  => TRUE,
 		'desc' => 'Enqueues the jQuery library bundled with WordPress. View <a href="http://api.jquery.com/" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -454,7 +483,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_backbone_js',
 	array(
-		'name' => 'Load Backbone <code><a title="View source in new tab" href="view-source:'.includes_url('js/backbone.min.js').'" target="_blank">backbone.min.js</a></code>',
+		'name' => 'Load Backbone <code><a title="View source in new tab" href="view-source:' . includes_url('js/backbone.min.js') . '" target="_blank">backbone.min.js</a></code>',
 		'std'  => FALSE,
 		'desc' => 'Enqueues the Backbone library bundled with WordPress. View <a href="http://backbonejs.org/" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -463,7 +492,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_underscore_js',
 	array(
-		'name' => 'Load Underscore <code><a title="View source in new tab" href="view-source:'.includes_url('js/underscore.min.js').'" target="_blank">underscore.min.js</a></code>',
+		'name' => 'Load Underscore <code><a title="View source in new tab" href="view-source:' . includes_url('js/underscore.min.js') . '" target="_blank">underscore.min.js</a></code>',
 		'std'  => FALSE,
 		'desc' => 'Enqueues the Underscore library bundled with WordPress. View <a href="http://underscorejs.org/" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -555,7 +584,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_masonry_js',
 	array(
-		'name' => 'Load jQuery Masonry plugin <code><a title="View source in new tab" href="view-source:'.includes_url('js/jquery/jquery.masonry.min.js').'" target="_blank">jquery.masonry.min.js</a></code>',
+		'name' => 'Load jQuery Masonry plugin <code><a title="View source in new tab" href="view-source:' . includes_url('js/jquery/jquery.masonry.min.js') . '" target="_blank">jquery.masonry.min.js</a></code>',
 		'std'  => FALSE,
 		'desc' => 'Enqueues the Masonry jQuery plugin bundled with WordPress. View <a href="http://masonry.desandro.com/" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -582,7 +611,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_search_highlighter_js',
 	array(
-		'name' => 'Load jQuery Search Highligther plugin <code><a title="View source in new tab" href="view-source:'.plugins_url('js/search-highlighter.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">search-highlighter.js</a></code>',
+		'name' => 'Load jQuery Search Highligther plugin <code><a title="View source in new tab" href="view-source:' . plugins_url('js/search-highlighter.js', MAPI_DIR_PATH . '/' . MAPI_PLUGIN_SLUG . '.php') . '" target="_blank">search-highlighter.js</a></code>',
 		'std'  => FALSE,
 		'desc' => 'Automatically highlights search terms on WordPress search results pages.'
 	)
@@ -628,7 +657,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'load_swfobject_js',
 	array(
-		'name' => 'Load SWFObject <code><a title="View source in new tab" href="view-source:'.includes_url('js/swfobject.js').'" target="_blank">swfobject.js</a></code>',
+		'name' => 'Load SWFObject <code><a title="View source in new tab" href="view-source:' . includes_url('js/swfobject.js') . '" target="_blank">swfobject.js</a></code>',
 		'std'  => FALSE,
 		'desc' => 'Enqueues the SWFObject library bundled with WordPress. View <a href="https://code.google.com/p/swfobject/" target="_blank">documentation &rsaquo;</a>'
 	)
@@ -637,7 +666,7 @@ $mapi_options->addCheckbox(
 $mapi_options->addCheckbox(
 	'fix_console',
 	array(
-		'name' => 'Load <code><a title="View source in new tab" href="view-source:'.plugins_url('js/mapi-fix-console.js', MAPI_DIR_PATH.'/'.MAPI_PLUGIN_SLUG.'.php').'" target="_blank">mapi-fix-console.js</a></code>',
+		'name' => 'Load <code><a title="View source in new tab" href="view-source:' . plugins_url('js/mapi-fix-console.js', MAPI_DIR_PATH . '/' . MAPI_PLUGIN_SLUG . '.php') . '" target="_blank">mapi-fix-console.js</a></code>',
 		'std'  => FALSE,
 		'desc' => 'Adds JavaScript to prevent any errors from calls to <code>console.log</code> in production environments (recommended).'
 	)
@@ -683,7 +712,7 @@ $mapi_options->addText(
 	)
 );
 $mapi_options->addParagraph(
-	'<span class="at-label"><label for="cache_interval">Clear minify cache</label></span>'.wp_nonce_field('clear-minify-cache', '_wpnonce', TRUE, FALSE).'<input class="button-secondary" type="submit" name="mapi_options_clear_cache_submit" value="Clear Cache Now" />'
+	'<span class="at-label"><label for="cache_interval">Clear minify cache</label></span>' . wp_nonce_field('clear-minify-cache', '_wpnonce', TRUE, FALSE) . '<input class="button-secondary" type="submit" name="mapi_options_clear_cache_submit" value="Clear Cache Now" />'
 );
 $speed_adv_options[] = $mapi_options->addParagraph('<strong>Caution:</strong> disabling this clears all Advanced Performance Tuning options below, so you may want to export your settings first.', TRUE);
 $speed_adv_options[] = $mapi_options->addSubtitle('Advanced JavaScript Options', TRUE);
@@ -776,7 +805,7 @@ $mapi_options->addCondition(
 	'enable_adv_speed_options',
 	array(
 
-		'name'   => 'Enable Advanced '.$speed_options_label.' options',
+		'name'   => 'Enable Advanced ' . $speed_options_label . ' options',
 		'std'    => FALSE,
 		'fields' => $speed_adv_options
 	)
@@ -795,7 +824,7 @@ $mapi_options->CloseTab();
  */
 $mapi_options->OpenTab(sanitize_title($sysinfo_options_label));
 $mapi_options->Title($sysinfo_options_label);
-$mapi_options->addParagraph('<a class="button-primary" href="#" onclick="window.open(\''.MAPI_DIR_URL.'views/mapi-phpinfo.php\',\'PHPInfo\',\'width=800,height=600,scrollbars=1\');return FALSE;">PHP Info</a>');
+$mapi_options->addParagraph('<a class="button-primary" href="#" onclick="window.open(\'' . MAPI_DIR_URL . 'views/mapi-phpinfo.php\',\'PHPInfo\',\'width=800,height=600,scrollbars=1\');return FALSE;">PHP Info</a>');
 $mapi_options->addTextarea(
 	'sysinfo',
 	array(
@@ -821,30 +850,30 @@ $mapi_options->HelpTab(
 	array(
 		'id'      => 'mapi-help-tab',
 		'title'   => 'API Documentation',
-		'content' => '<p>API documentation is available online at <a href="http://mindsharelabs.com/topics/mindshare-theme-api/" target="_blank">http://mindsharelabs.com/topics/mindshare-theme-api/</a></p>'
+		'content' => '<p>API documentation is available online at <a href="https://mindsharelabs.com/topics/mindshare-theme-api/" target="_blank">https://mindsharelabs.com/topics/mindshare-theme-api/</a></p>'
 	)
 );
 $mapi_options->HelpTab(
 	array(
 		'id'      => 'mapi-support-tab',
 		'title'   => 'API Support',
-		'content' => '<p>Get support on the Mindshare Labs forums: <a href="http://mindsharelabs.com/forums/" target="_blank">http://mindsharelabs.com/forums/</a></p><p>To get premium one-on-one support, contact us: <a href="http://mind.sh/are/contact/">http://mind.sh/are/contact/</a></p>'
+		'content' => '<p>Get support on the Mindshare Labs forums: <a href="https://mindsharelabs.com/forums/" target="_blank">https://mindsharelabs.com/forums/</a></p><p>To get premium one-on-one support, contact us: <a href="http://mind.sh/are/contact/">http://mind.sh/are/contact/</a></p>'
 	)
 );
 $mapi_options->HelpTab(
 	array(
 		'id'      => 'mapi-themes-tab',
 		'title'   => 'Get More Themes',
-		'content' => '<p>Download compatible free and premium themes from the Mindshare Labs: <a href="http://mindsharelabs.com/" target="_blank">http://mindsharelabs.com/</a></p>'
+		'content' => '<p>Download compatible free and premium themes from the Mindshare Labs: <a href="https://mindsharelabs.com/" target="_blank">https://mindsharelabs.com/</a></p>'
 	)
 );
-$secure_tab_content = "<p>Get the Mindshare Team to secure and protect your WordPress site for $9.95/month: <a href='http://mind.sh/are/wordpress-security-and-backup-service/check/?url=".get_bloginfo("url")."&amp;active=0&amp;sale=1&amp;d=".str_replace(
+$secure_tab_content = "<p>Get the Mindshare Team to secure and protect your WordPress site for $9.95/month: <a href='http://mind.sh/are/wordpress-security-and-backup-service/check/?url=" . get_bloginfo("url") . "&amp;active=0&amp;sale=1&amp;d=" . str_replace(
 		array(
 			"http://",
 			"https://"
 		),
 		"",
-		get_home_url())."' target='_blank'>http://mind.sh/are/wordpress-security-and-backup-service/</a></p>";
+		get_home_url()) . "' target='_blank'>http://mind.sh/are/wordpress-security-and-backup-service/</a></p>";
 $mapi_options->HelpTab(
 	array(
 		'id'      => 'mapi-security-tab',

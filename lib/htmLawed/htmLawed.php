@@ -1,7 +1,7 @@
 <?php
 
 /*
-htmLawed 1.2.beta.6, 2 August 2014
+htmLawed 1.2.beta.7, 19 January 2015
 Copyright Santosh Patnaik
 Dual licensed with LGPL 3 and GPL 2+
 A PHP Labware internal utility - http://www.bioinformatics.org/phplabware/internal_utilities/htmLawed/beta
@@ -504,7 +504,7 @@ function hl_tag($t){
 				$v = preg_replace_callback('`(url(?:\()(?: )*(?:\'|"|&(?:quot|apos);)?)(.+?)((?:\'|"|&(?:quot|apos);)?(?: )*(?:\)))`iS', 'hl_prot', $v);
 				$v = !$C['css_expression'] ? preg_replace('`expression`i', ' ', preg_replace('`\\\\\S|(/|(%2f))(\*|(%2a))`i', ' ', $v)) : $v;
 			}elseif(isset($aNP[$k]) or strpos($k, 'src') !== false or $k[0] == 'o'){
-				$v = str_replace("\xad", ' ', (strpos($v, '&') !== false ? str_replace(array('&#xad;', '&#173;', '&shy;'), ' ', $v) : $v));
+				$v = str_replace("­", ' ', (strpos($v, '&') !== false ? str_replace(array('&#xad;', '&#173;', '&shy;'), ' ', $v) : $v)); # double-quoted char is soft-hyphen; appears here as "­" or hyphen or something else depending on viewing software
 				$v = hl_prot($v, $k);
 				if($k == 'href'){ // X-spam
 					if($C['anti_mail_spam'] && strpos($v, 'mailto:') === 0){
@@ -694,6 +694,6 @@ function hl_tidy($t, $w, $p){
 
 function hl_version(){
 	// rel
-	return '1.2.beta.6';
+	return '1.2.beta.7';
 	// eof
 }

@@ -10,19 +10,39 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.8.2
+- Updated htmLawed
+- Updated gitignore
+- Updated Minify
+- Updated RegDom library
+- Updated TGM-Plugin-Activation
+- Updated bfi_thumb
+- Added option for changing admin color scheme
+- Added jokes
+- Bugfix for mapi_slug_to_id() for custom post types
+- Bugfix for mapi_featured_image()
+- Added fn mapi_check_server()
+- Added API version to sysinfo page
+- Fix for mapi_edit_link
+- Added mapi_minify_exclude filter
+- Added mapi_social_share_onclick filter
+- Added mapi_social_links_insert_before action to allow plugging in new networks
+- Added mapi_social_links_insert_after action to allow plugging in new networks
+- Fixed is_external in minify class
+- Fixed phpdocs for mapi_image and several other fns
+
 ## 0.8.1
-* mThumb version number update to calm down some automated scanners that think this is an old version of TimThumb
+- mThumb version number update to calm down some automated scanners that think this is an old version of TimThumb
 
 ## 0.8
-
 Preparation for version 1.0 launch:
-- remove credits tab
+- Remove credits tab
 - minify JS files
 - Fix favicon scaling
-- added new Twitter API Tweets function, mapi_tweets_oauth
-- added mapi_excerpt_more_text filter
-- update language on universal analytics
-- add CSS class for OS to body tag
+- Added new Twitter API Tweets function, mapi_tweets_oauth
+- Added mapi_excerpt_more_text filter
+- Update language on universal analytics
+- Add CSS class for OS to body tag
 - Added CDN version of all libs
 - Update mThumb
 - Added BFI_Thumb functions
@@ -31,22 +51,19 @@ Preparation for version 1.0 launch:
 - Added mapi_get_nav_menu_item_children()
 
 ## 0.7.8
-
-Fix PHP notice on Blankout
+- Fix PHP notice on Blankout
 
 ## 0.7.7
-
-Security update
+- Security update
 
 ## 0.7.6
-
-Fixed issue with favicon not being set, fix for DB_HOST having port number, PHP 5.3 fix
+- Fixed issue with favicon not being set, fix for DB_HOST having port number, PHP 5.3 fix
 
 ## 0.7.5.1
-Bugfixes for the options framework
+- Bugfixes for the options framework
 
 ## 0.7.5
-added fns mapi_console_log and mapi_die, fixed PHP notices, misc bugfixes, updated all external libraries, added options to set favicon and mapi_get_favicon_url() function
+- Added fns mapi_console_log and mapi_die, fixed PHP notices, misc bugfixes, updated all external libraries, added options to set favicon and mapi_get_favicon_url() function
 
 ## 0.7.4
 Fixed mThumb PHP Notices, added Maintenance Mode bypass for wp-config.php, disabled minify builder, updated domains list for mapi_extract_domain, fix for 3.9 in options framework
@@ -145,25 +162,25 @@ Updated external libraries, add WP 3.8 auto-update, removed unloading of jQuery,
 
 ## 0.6.2
 
- - fixed undefined indexes errors, added enhanced link attribution to GA, fixed issue with config clearing repeatedly
+ - Fixed undefined indexes errors, added enhanced link attribution to GA, fixed issue with config clearing repeatedly
 
 ## 0.6.1
 
- - fixed issue with text fields stripslashes, added auto update minify config on activation, added system information tab
+ - Fixed issue with text fields stripslashes, added auto update minify config on activation, added system information tab
 
 ## 0.6
 
- - fixed PHP notices on options init, added Modernizr, SWFObject, Backbone, Underscore, Adaptive Images and much more
+ - Fixed PHP notices on options init, added Modernizr, SWFObject, Backbone, Underscore, Adaptive Images and much more
 
 ## 0.5.2
 
- - updated MSAD lib to 0.4.2
+ - Updated MSAD lib to 0.4.2
 
  - bugfixes for update mechanism
 
 ## 0.5.1
 
- - updated MSAD lib
+ - Updated MSAD lib
 
 ## 0.5
 
@@ -175,11 +192,11 @@ Updated external libraries, add WP 3.8 auto-update, removed unloading of jQuery,
 
 ## 0.4.3.3
 
- - updates to mapi_thumb_array
+ - Updates to mapi_thumb_array
 
 ## 0.4.3.2
 
- - updates to mapi_thumb
+ - Updates to mapi_thumb
 
 ## 0.4.3.1
 
@@ -195,11 +212,11 @@ Updated external libraries, add WP 3.8 auto-update, removed unloading of jQuery,
 
 ## 0.4.2
 
- - added GA function (mapi_analytics)
+ - Added GA function (mapi_analytics)
 
 ## 0.4.1
 
- - fixed minify system, bugfixes, added maintenance mode
+ - Fixed minify system, bugfixes, added maintenance mode
 
 ## 0.4
 
@@ -207,23 +224,23 @@ Updated external libraries, add WP 3.8 auto-update, removed unloading of jQuery,
 
 ## 0.3.2.1
 
- - fixed ie update message bug
+ - Fixed ie update message bug
 
 ## 0.3.2
 
- - removed auto update mechanism because it was slow
+ - Removed auto update mechanism because it was slow
 
 ## 0.3.1
 
- - fixed css issue in mapi_facebook_like
+ - Fixed css issue in mapi_facebook_like
 
 ## 0.3
 
- - revamped options framework, major rewrite
+ - Revamped options framework, major rewrite
 
 ## 0.2.2
 
- - added function mapi_get_term_children_by_slug
+ - Added function mapi_get_term_children_by_slug
 
 ## 0.2.1
 
@@ -235,7 +252,7 @@ Updated external libraries, add WP 3.8 auto-update, removed unloading of jQuery,
 
 ## 0.1.5
 
- - added some new fields to options page, integrated mcms-compress plugin, added LESS.js
+ - Added some new fields to options page, integrated mcms-compress plugin, added LESS.js
 
 ## 0.1.4.8
 

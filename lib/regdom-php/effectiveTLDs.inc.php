@@ -543,50 +543,66 @@
 // za : http://www.zadna.org.za/slds.html
 // zm : http://en.wikipedia.org/wiki/.zm
 // zw : http://en.wikipedia.org/wiki/.zw
-// List of new gTLDs imported from https://newgtlds.icann.org/newgtlds.csv on 2014-11-03T18:02:06Z
+// List of new gTLDs imported from https://newgtlds.icann.org/newgtlds.csv on 2014-12-22T18:02:07Z
 // abb : 2014-10-24 ABB Ltd
 // abbott : 2014-07-24 Abbott Laboratories, Inc.
 // abogado : 2014-04-24 Top Level Domain Holdings Limited
 // academy : 2013-11-07 Half Oaks, LLC
 // accenture : 2014-08-15 Accenture plc
+// accountant : 2014-11-20 dot Accountant Limited
 // accountants : 2014-03-20 Knob Town, LLC
 // active : 2014-05-01 The Active Network, Inc
 // actor : 2013-12-12 United TLD Holdco Ltd.
+// ads : 2014-12-04 Charleston Road Registry Inc.
 // adult : 2014-10-16 ICM Registry AD LLC
 // afl : 2014-10-02 Australian Football League
 // africa : 2014-03-24 ZA Central Registry NPC trading as Registry.Africa
 // agency : 2013-11-14 Steel Falls, LLC
+// aig : 2014-12-18 American International Group, Inc.
 // airforce : 2014-03-06 United TLD Holdco Ltd.
 // airtel : 2014-10-24 Bharti Airtel Limited
 // allfinanz : 2014-07-03 Allfinanz Deutsche Vermögensberatung Aktiengesellschaft
 // alsace : 2014-07-02 REGION D ALSACE
 // amsterdam : 2014-07-24 Gemeente Amsterdam
+// analytics : 2014-12-18 Campus IP LLC
 // android : 2014-08-07 Charleston Road Registry Inc.
+// apartments : 2014-12-11 June Maple, LLC
 // aquarelle : 2014-07-24 Aquarelle.com
+// aramco : 2014-11-20 Aramco Services Company
 // archi : 2014-02-06 STARTING DOT LIMITED
 // army : 2014-03-06 United TLD Holdco Ltd.
+// arte : 2014-12-11 Association Relative à la Télévision Européenne G.E.I.E.
 // associates : 2014-03-06 Baxter Hill, LLC
-// attorney : 2014-03-20 
-// auction : 2014-03-20 
+// attorney : 2014-03-20  
+// auction : 2014-03-20  
 // audio : 2014-03-20 Uniregistry, Corp.
+// author : 2014-12-18 Amazon EU S.à r.l.
+// auto : 2014-11-13 Uniregistry, Corp.
 // autos : 2014-01-09 DERAutos, LLC
 // axa : 2013-12-19 AXA SA
-// band : 2014-06-12 
+// azure : 2014-12-18 Microsoft Corporation
+// band : 2014-06-12  
 // bank : 2014-09-25 fTLD Registry Services LLC
 // bar : 2013-12-12 Punto 2012 Sociedad Anonima Promotora de Inversion de Capital Variable
 // barcelona : 2014-07-24 Municipi de Barcelona
+// barclaycard : 2014-11-20 Barclays Bank PLC
+// barclays : 2014-11-20 Barclays Bank PLC
 // bargains : 2013-11-14 Half Hallow, LLC
 // bauhaus : 2014-04-17 Werkhaus GmbH
 // bayern : 2014-01-23 Bayern Connect GmbH
+// bbc : 2014-12-18 British Broadcasting Corporation
 // bbva : 2014-10-02 BANCO BILBAO VIZCAYA ARGENTARIA, S.A.
 // bcn : 2014-07-24 Municipi de Barcelona
 // beer : 2014-01-09 Top Level Domain Holdings Limited
+// bentley : 2014-12-18 Bentley Motors Limited
 // berlin : 2013-10-31 dotBERLIN GmbH & Co. KG
 // best : 2013-12-19 BestTLD Pty Ltd
 // bharti : 2014-01-09 Bharti Enterprises (Holding) Private Limited
 // bible : 2014-06-19 American Bible Society
 // bid : 2013-12-19 dot Bid Limited
 // bike : 2013-08-27 Grand Hollow, LLC
+// bing : 2014-12-18 Microsoft Corporation
+// bingo : 2014-12-04 Sand Cedar, LLC
 // bio : 2014-03-06 STARTING DOT LIMITED
 // black : 2014-01-16 Afilias Limited
 // blackfriday : 2014-01-16 Uniregistry, Corp.
@@ -596,19 +612,26 @@
 // bmw : 2014-01-09 Bayerische Motoren Werke Aktiengesellschaft
 // bnl : 2014-07-24 Banca Nazionale del Lavoro
 // bnpparibas : 2014-05-29 BNP Paribas
+// boats : 2014-12-04 DERBoats, LLC
 // bom : 2014-10-16 Núcleo de Informação e Coordenação do Ponto BR - NIC.br
 // bond : 2014-06-05 Bond University Limited
 // boo : 2014-01-30 Charleston Road Registry Inc.
+// bot : 2014-12-18 Amazon EU S.à r.l.
 // boutique : 2013-11-14 Over Galley, LLC
+// bradesco : 2014-12-18 Banco Bradesco S.A.
+// bridgestone : 2014-12-18 Bridgestone Corporation
+// broker : 2014-12-11 IG Group Holdings PLC
 // brussels : 2014-02-06 DNS.be vzw
 // budapest : 2013-11-21 Top Level Domain Holdings Limited
 // build : 2013-11-07 Plan Bee LLC
 // builders : 2013-11-07 Atomic Madison, LLC
 // business : 2013-11-07 Spring Cross, LLC
+// buy : 2014-12-18 Amazon EU S.à r.l.
 // buzz : 2013-10-02 DOTSTRATEGY CO.
 // bzh : 2014-02-27 Association www.bzh
 // cab : 2013-10-24 Half Sunset, LLC
 // cal : 2014-07-24 Charleston Road Registry Inc.
+// call : 2014-12-18 Amazon EU S.à r.l.
 // camera : 2013-08-27 Atomic Maple, LLC
 // camp : 2013-11-07 Delta Dynamite, LLC
 // cancerresearch : 2014-05-15 Australian Cancer Research Foundation
@@ -620,9 +643,11 @@
 // care : 2014-03-06 Goose Cross
 // career : 2013-10-09 dotCareer LLC
 // careers : 2013-10-02 Wild Corner, LLC
+// cars : 2014-11-13 Uniregistry, Corp.
 // cartier : 2014-06-23 Richemont DNS Inc.
 // casa : 2013-11-21 Top Level Domain Holdings Limited
 // cash : 2014-03-06 Delta Lake, LLC
+// casino : 2014-12-18 Binky Sky, LLC
 // catering : 2013-12-05 New Falls. LLC
 // cba : 2014-06-26 COMMONWEALTH BANK OF AUSTRALIA
 // cbn : 2014-08-22 The Christian Broadcasting Network, Inc.
@@ -630,14 +655,18 @@
 // ceo : 2013-11-07 CEOTLD Pty Ltd
 // cern : 2014-06-05 European Organization for Nuclear Research (\
 // cfa : 2014-08-28 CFA Institute
+// cfd : 2014-12-11 IG Group Holdings PLC
 // channel : 2014-05-08 Charleston Road Registry Inc.
+// chat : 2014-12-04 Sand Fields, LLC
 // cheap : 2013-11-14 Sand Cover, LLC
 // chloe : 2014-10-16 Richemont DNS Inc.
 // christmas : 2013-11-21 Uniregistry, Corp.
 // chrome : 2014-07-24 Charleston Road Registry Inc.
 // church : 2014-02-06 Holly Fileds, LLC
+// circle : 2014-12-18 Amazon EU S.à r.l.
 // citic : 2014-01-09 CITIC Group Corporation
 // city : 2014-05-29 Snow Sky, LLC
+// cityeats : 2014-12-11 Lifestyle Domain Holdings, Inc.
 // claims : 2014-03-20 Black Corner, LLC
 // cleaning : 2013-12-05 Fox Shadow, LLC
 // click : 2014-06-05 Uniregistry, Corp.
@@ -655,12 +684,13 @@
 // computer : 2013-10-24 Pine Mill, LLC
 // condos : 2013-12-05 Pine House, LLC
 // construction : 2013-09-16 Fox Dynamite, LLC
-// consulting : 2013-12-05 
+// consulting : 2013-12-05  
 // contractors : 2013-09-10 Magic Woods, LLC
 // cooking : 2013-11-21 Top Level Domain Holdings Limited
 // cool : 2013-11-14 Koko Lake, LLC
 // corsica : 2014-09-25 Collectivité Territoriale de Corse
 // country : 2013-12-19 Top Level Domain Holdings Limited
+// courses : 2014-12-04 OPEN UNIVERSITIES AUSTRALIA PTY LTD
 // credit : 2014-03-20 Snow Shadow, LLC
 // creditcard : 2014-03-20 Binky Frostbite, LLC
 // cricket : 2014-10-09 dot Cricket Limited
@@ -673,17 +703,20 @@
 // dabur : 2014-02-06 Dabur India Limited
 // dad : 2014-01-23 Charleston Road Registry Inc.
 // dance : 2013-10-24 United TLD Holdco Ltd.
+// date : 2014-11-20 dot Date Limited
 // dating : 2013-12-05 Pine Fest, LLC
 // datsun : 2014-03-27 NISSAN MOTOR CO., LTD.
 // day : 2014-01-30 Charleston Road Registry Inc.
+// dclk : 2014-11-20 Charleston Road Registry Inc.
 // deals : 2014-05-22 Sand Sunset, LLC
-// degree : 2014-03-06 
+// degree : 2014-03-06  
 // delivery : 2014-09-11 Steel Station, LLC
 // dell : 2014-10-24 Dell Inc.
 // democrat : 2013-10-24 United TLD Holdco Ltd.
 // dental : 2014-03-20 Tin Birch, LLC
-// dentist : 2014-03-20 
+// dentist : 2014-03-20  
 // desi : 2013-11-14 Desi Networks LLC
+// design : 2014-11-07 Top Level Design, LLC
 // dev : 2014-10-16 Charleston Road Registry Inc.
 // diamonds : 2013-09-22 John Edge, LLC
 // diet : 2014-06-26 Uniregistry, Corp.
@@ -693,12 +726,16 @@
 // discount : 2014-03-06 Holly Hill, LLC
 // dnp : 2013-12-13 Dai Nippon Printing Co., Ltd.
 // docs : 2014-10-16 Charleston Road Registry Inc.
+// dog : 2014-12-04 Koko Mill, LLC
 // doha : 2014-09-18 Communications Regulatory Authority (CRA)
 // domains : 2013-10-17 Sugar Cross, LLC
 // doosan : 2014-04-03 Doosan Corporation
+// download : 2014-11-20 dot Support Limited
 // durban : 2014-03-24 ZA Central Registry NPC trading as ZA Central Registry
 // dvag : 2014-06-23 Deutsche Vermögensberatung Aktiengesellschaft DVAG
+// earth : 2014-12-04 Interlink Co., Ltd.
 // eat : 2014-01-23 Charleston Road Registry Inc.
+// edeka : 2014-12-18 EDEKA Verband kaufmännischer Genossenschaften e.V.
 // education : 2013-11-07 Brice Way, LLC
 // email : 2013-10-31 Spring Madison, LLC
 // emerck : 2014-04-03 Merck KGaA
@@ -706,6 +743,7 @@
 // engineer : 2014-03-06 United TLD Holdco Ltd.
 // engineering : 2014-03-06 Romeo Canyon
 // enterprises : 2013-09-20 Snow Oaks, LLC
+// epson : 2014-12-04 Seiko Epson Corporation
 // equipment : 2013-08-27 Corn Station, LLC
 // erni : 2014-04-03 ERNI Group Holding AG
 // esq : 2014-05-08 Charleston Road Registry Inc.
@@ -717,17 +755,25 @@
 // exchange : 2014-03-06 Spring Falls, LLC
 // expert : 2013-11-21 Magic Pass, LLC
 // exposed : 2013-12-05 Victor Beach, LLC
+// fage : 2014-12-18 Fage International S.A.
 // fail : 2014-03-06 Atomic Pipe, LLC
-// fan : 2014-03-06 
+// fairwinds : 2014-11-13 FairWinds Partners, LLC
+// faith : 2014-11-20 dot Faith Limited
+// fan : 2014-03-06  
+// fans : 2014-11-07 Asiamix Digital Limited
 // farm : 2013-11-07 Just Maple, LLC
 // fashion : 2014-07-03 Top Level Domain Holdings Limited
+// fast : 2014-12-18 Amazon EU S.à r.l.
 // feedback : 2013-12-19 Top Level Spectrum, Inc.
+// ferrero : 2014-12-18 Ferrero Trading Lux S.A.
 // final : 2014-10-16 Núcleo de Informação e Coordenação do Ponto BR - NIC.br
 // finance : 2014-03-20 Cotton Cypress, LLC
 // financial : 2014-03-06 Just Cover, LLC
+// firestone : 2014-12-18 Bridgestone Corporation
 // firmdale : 2014-03-27 Firmdale Holdings Limited
 // fish : 2013-12-12 Fox Woods, LLC
 // fishing : 2013-11-21 Top Level Domain Holdings Limited
+// fit : 2014-11-07 Top Level Domain Holdings Limited
 // fitness : 2014-03-06 Brice Orchard, LLC
 // flights : 2013-12-05 Fox Station, LLC
 // florist : 2013-11-07 Half Cypress, LLC
@@ -735,23 +781,28 @@
 // flsmidth : 2014-07-24 FLSmidth A/S
 // fly : 2014-05-08 Charleston Road Registry Inc.
 // foo : 2014-01-23 Charleston Road Registry Inc.
-// forsale : 2014-05-22 
+// football : 2014-12-18 Foggy Farms, LLC
+// ford : 2014-11-13 Ford Motor Company
+// forex : 2014-12-11 IG Group Holdings PLC
+// forsale : 2014-05-22  
 // foundation : 2013-12-05 John Dale, LLC
 // frl : 2014-05-15 FRLregistry B.V.
 // frogans : 2013-12-19 OP3FT
 // fund : 2014-03-20 John Castle, LLC
 // furniture : 2014-03-20 Lone Fields, LLC
-// futbol : 2013-09-20 
+// futbol : 2013-09-20  
 // gal : 2013-11-07 Asociación puntoGAL
 // gallery : 2013-09-13 Sugar House, LLC
 // garden : 2014-06-26 Top Level Domain Holdings Limited
 // gbiz : 2014-07-17 Charleston Road Registry Inc.
 // gdn : 2014-07-31 Joint Stock Company \
+// gea : 2014-12-04 GEA Group Aktiengesellschaft
 // gent : 2014-01-23 COMBELL GROUP NV/SA
 // ggee : 2014-01-09 GMO Internet, Inc.
 // gift : 2013-10-17 Uniregistry, Corp.
 // gifts : 2014-07-03 Goose Sky, LLC
 // gives : 2014-03-06 United TLD Holdco Ltd.
+// giving : 2014-11-13 Giving Limited
 // glass : 2013-11-07 Black Cover, LLC
 // gle : 2014-07-24 Charleston Road Registry Inc.
 // global : 2014-04-17 Dot GLOBAL AS
@@ -759,19 +810,26 @@
 // gmail : 2014-05-01 Charleston Road Registry Inc.
 // gmo : 2014-01-09 GMO Internet, Inc.
 // gmx : 2014-04-24 1&1 Mail & Media GmbH
+// goldpoint : 2014-11-20 YODOBASHI CAMERA CO.,LTD.
+// golf : 2014-12-18 Lone falls, LLC
+// goo : 2014-12-18 NTT Resonant Inc.
+// goog : 2014-11-20 Charleston Road Registry Inc.
 // google : 2014-07-24 Charleston Road Registry Inc.
 // gop : 2014-01-16 Republican State Leadership Committee, Inc.
+// got : 2014-12-18 Amazon EU S.à r.l.
 // graphics : 2013-09-13 Over Madison, LLC
 // gratis : 2014-03-20 Pioneer Tigers, LLC
 // green : 2014-05-08 Afilias Limited
 // gripe : 2014-03-06 Corn Sunset, LLC
 // group : 2014-08-15 Romeo Town, LLC
+// gucci : 2014-11-13 Guccio Gucci S.p.a.
 // guge : 2014-08-28 Charleston Road Registry Inc.
 // guide : 2013-09-13 Snow Moon, LLC
 // guitars : 2013-11-14 Uniregistry, Corp.
 // guru : 2013-08-27 Pioneer Cypress, LLC
 // hamburg : 2014-02-20 Hamburg Top-Level-Domain GmbH
-// haus : 2013-12-05 
+// hangout : 2014-11-13 Charleston Road Registry Inc.
+// haus : 2013-12-05  
 // healthcare : 2014-06-12 Silver Glen, LLC
 // help : 2014-06-26 Uniregistry, Corp.
 // here : 2014-02-06 Charleston Road Registry Inc.
@@ -782,9 +840,11 @@
 // holdings : 2013-08-27 John Madison, LLC
 // holiday : 2013-11-07 Goose Woods, LLC
 // homes : 2014-01-09 DERHomes, LLC
+// honda : 2014-12-18 Honda Motor Co., Ltd.
 // horse : 2013-11-21 Top Level Domain Holdings Limited
 // host : 2014-04-17 DotHost Inc.
 // hosting : 2014-05-29 Uniregistry, Corp.
+// hotmail : 2014-12-18 Microsoft Corporation
 // house : 2013-11-07 Sugar Park, LLC
 // how : 2014-01-23 Charleston Road Registry Inc.
 // hsbc : 2014-10-24 HSBC Holdings PLC
@@ -808,24 +868,33 @@
 // istanbul : 2014-08-28 Istanbul Metropolitan Municipality
 // itau : 2014-10-02 Itau Unibanco Holding S.A.
 // iwc : 2014-06-23 Richemont DNS Inc.
+// jaguar : 2014-11-13 Jaguar Land Rover Ltd
 // java : 2014-06-19 Oracle Corporation
+// jcb : 2014-11-20 JCB Co., Ltd.
 // jetzt : 2014-01-09 New TLD Company AB
+// jlc : 2014-12-04 Richemont DNS Inc.
 // joburg : 2014-03-24 ZA Central Registry NPC trading as ZA Central Registry
+// jot : 2014-12-18 Amazon EU S.à r.l.
+// joy : 2014-12-18 Amazon EU S.à r.l.
 // jprs : 2014-09-18 Japan Registry Services Co., Ltd.
 // juegos : 2014-03-20 Uniregistry, Corp.
 // kaufen : 2013-11-07 United TLD Holdco Ltd.
 // kddi : 2014-09-12 KDDI CORPORATION
+// kfh : 2014-12-04 Kuwait Finance House
 // kim : 2013-09-23 Afilias Limited
+// kinder : 2014-11-07 Ferrero Trading Lux S.A.
 // kitchen : 2013-09-20 Just Goodbye, LLC
 // kiwi : 2013-09-20 DOT KIWI LIMITED
 // koeln : 2014-01-09 NetCologne Gesellschaft für Telekommunikation mbH
 // krd : 2013-12-05 KRG Department of Information Technology
 // kred : 2013-12-19 KredTLD Pty Ltd
+// kyoto : 2014-11-07 Academic Institution: Kyoto Jyoho Gakuen
 // lacaixa : 2014-01-09 CAIXA D'ESTALVIS I PENSIONS DE BARCELONA
 // land : 2013-09-10 Pine Moon, LLC
+// landrover : 2014-11-13 Jaguar Land Rover Ltd
 // lat : 2014-10-16 ECOM-LAC Federaciòn de Latinoamèrica y el Caribe para Internet y el Comercio Electrònico
 // latrobe : 2014-06-16 La Trobe University
-// lawyer : 2014-03-20 
+// lawyer : 2014-03-20  
 // lds : 2014-03-20 IRI Domain Management, LLC (\
 // lease : 2014-03-06 Victor Trail, LLC
 // leclerc : 2014-08-07 A.C.D. LEC Association des Centres Distributeurs Edouard Leclerc
@@ -834,24 +903,34 @@
 // liaison : 2014-10-02 Liaison Technologies, Incorporated
 // lidl : 2014-09-18 Schwarz Domains und Services GmbH & Co. KG
 // life : 2014-02-06 Trixy Oaks, LLC
+// lifestyle : 2014-12-11 Lifestyle Domain Holdings, Inc.
 // lighting : 2013-08-27 John McCook, LLC
+// like : 2014-12-18 Amazon EU S.à r.l.
 // limited : 2014-03-06 Big Fest, LLC
 // limo : 2013-10-17 Hidden Frostbite, LLC
+// lincoln : 2014-11-13 Ford Motor Company
+// linde : 2014-12-04 Linde Aktiengesellschaft
 // link : 2013-11-14 Uniregistry, Corp.
+// live : 2014-12-04 Half Woods, LLC
+// loan : 2014-11-20 dot Loan Limited
 // loans : 2014-03-20 June Woods, LLC
 // london : 2013-11-14 Dot London Domains Limited
+// lotte : 2014-11-07 Lotte Holdings Co., Ltd.
 // lotto : 2014-04-10 Afilias Limited
 // ltd : 2014-09-25 Over Corner, LLC
 // ltda : 2014-04-17 DOMAIN ROBOT SERVICOS DE HOSPEDAGEM NA INTERNET LTDA
+// lupin : 2014-11-07 LUPIN LIMITED
 // luxe : 2014-01-09 Top Level Domain Holdings Limited
 // luxury : 2013-10-17 Luxury Partners, LLC
 // madrid : 2014-05-01 Comunidad de Madrid
 // maif : 2014-10-02 Mutuelle Assurance Instituteur France (MAIF)
 // maison : 2013-12-05 Victor Frostbite, LLC
+// man : 2014-12-04 MAN SE
 // management : 2013-11-07 John Goodbye, LLC
 // mango : 2013-10-24 PUNTO FA S.L.
-// market : 2014-03-06 
+// market : 2014-03-06  
 // marketing : 2013-11-07 Fern Pass, LLC
+// markets : 2014-12-11 IG Group Holdings PLC
 // marriott : 2014-10-09 Marriott Worldwide Corporation
 // media : 2014-03-06 Grand Glen, LLC
 // meet : 2014-01-16 Afilias Limited
@@ -859,30 +938,41 @@
 // meme : 2014-01-30 Charleston Road Registry Inc.
 // memorial : 2014-10-16 Dog Beach, LLC
 // menu : 2013-09-11 Wedding TLD2, LLC
+// meo : 2014-11-07 PT Comunicacoes S.A.
 // miami : 2013-12-19 Top Level Domain Holdings Limited
+// microsoft : 2014-12-18 Microsoft Corporation
 // mini : 2014-01-09 Bayerische Motoren Werke Aktiengesellschaft
+// mma : 2014-11-07 MMA IARD
+// mobily : 2014-12-18 GreenTech Consultancy Company W.L.L.
 // moda : 2013-11-07 United TLD Holdco Ltd.
 // moe : 2013-11-13 Interlink Co., Ltd.
+// moi : 2014-12-18 Amazon EU S.à r.l.
 // monash : 2013-09-30 Monash University
 // money : 2014-10-16 Outer McCook, LLC
 // montblanc : 2014-06-23 Richemont DNS Inc.
 // mormon : 2013-12-05 IRI Domain Management, LLC (\
-// mortgage : 2014-03-20 
+// mortgage : 2014-03-20  
 // moscow : 2013-12-19 Foundation for Assistance for Internet Technologies and Infrastructure Development (FAITID)
 // motorcycles : 2014-01-09 DERMotorcycles, LLC
 // mov : 2014-01-30 Charleston Road Registry Inc.
 // movistar : 2014-10-16 Telefónica S.A.
+// mtn : 2014-12-04 MTN Dubai Limited
+// mtpc : 2014-11-20 Mitsubishi Tanabe Pharma Corporation
+// nadex : 2014-12-11 IG Group Holdings PLC
 // nagoya : 2013-10-24 GMO Registry, Inc.
 // navy : 2014-03-06 United TLD Holdco Ltd.
 // netbank : 2014-06-26 COMMONWEALTH BANK OF AUSTRALIA
 // network : 2013-11-14 Trixy Manor, LLC
 // neustar : 2013-12-05 NeuStar, Inc.
 // new : 2014-01-30 Charleston Road Registry Inc.
+// news : 2014-12-18 Hidden Bloom, LLC
 // nexus : 2014-07-24 Charleston Road Registry Inc.
 // ngo : 2014-03-06 Public Interest Registry
 // nhk : 2014-02-13 Japan Broadcasting Corporation (NHK)
+// nico : 2014-12-04 DWANGO Co., Ltd.
 // ninja : 2013-11-07 United TLD Holdco Ltd.
 // nissan : 2014-03-27 NISSAN MOTOR CO., LTD.
+// norton : 2014-12-04 Symantec Corporation
 // nowruz : 2014-09-04 Asia Green IT System Bilgisayar San. ve Tic. Ltd. Sti.
 // nra : 2014-05-22 NRA Holdings Company, INC.
 // nrw : 2013-11-21 Minds + Machines GmbH
@@ -890,6 +980,7 @@
 // nyc : 2014-01-23 The City of New York by and through the New York City Department of Information Technology & Telecommunications
 // obi : 2014-09-25 OBI Group Holding SE & Co. KGaA
 // okinawa : 2013-12-05 BusinessRalliart Inc.
+// one : 2014-11-07 One.com A/S
 // ong : 2014-03-06 Public Interest Registry
 // onl : 2013-09-16 I-Registry Ltd.
 // ooo : 2014-01-09 INFIBEAM INCORPORATION LIMITED
@@ -898,12 +989,15 @@
 // osaka : 2014-09-04 Interlink Co., Ltd.
 // otsuka : 2013-10-11 Otsuka Holdings Co., Ltd.
 // ovh : 2014-01-16 OVH SAS
+// page : 2014-12-04 Charleston Road Registry Inc.
+// panerai : 2014-11-07 Richemont DNS Inc.
 // paris : 2014-01-30 City of Paris
 // pars : 2014-09-04 Asia Green IT System Bilgisayar San. ve Tic. Ltd. Sti.
 // partners : 2013-12-05 Magic Glen, LLC
 // parts : 2013-12-05 Sea Goodbye, LLC
 // party : 2014-09-11 Blue Sky Registry Limited
 // pharmacy : 2014-06-19 National Association of Boards of Pharmacy
+// philips : 2014-11-07 Koninklijke Philips N.V.
 // photo : 2013-11-14 Uniregistry, Corp.
 // photography : 2013-09-20 Sugar Glen, LLC
 // photos : 2013-10-17 Sea Corner, LLC
@@ -912,6 +1006,7 @@
 // pics : 2013-11-14 Uniregistry, Corp.
 // pictet : 2014-06-26 Pictet Europe S.A.
 // pictures : 2014-03-06 Foggy Sky, LLC
+// pin : 2014-12-18 Amazon EU S.à r.l.
 // pink : 2013-10-01 Afilias Limited
 // pizza : 2014-06-26 Foggy Moon, LLC
 // place : 2014-04-24 Snow Galley, LLC
@@ -924,11 +1019,14 @@
 // prod : 2014-01-23 Charleston Road Registry Inc.
 // productions : 2013-12-05 Magic Birch, LLC
 // prof : 2014-07-24 Charleston Road Registry Inc.
+// promo : 2014-12-18 Play.PROMO Oy
 // properties : 2013-12-05 Big Pass, LLC
 // property : 2014-05-22 Uniregistry, Corp.
 // pub : 2013-12-12 United TLD Holdco Ltd.
 // qpon : 2013-11-14 dotCOOL, Inc.
 // quebec : 2013-12-19 PointQuébec Inc
+// racing : 2014-12-04 Premier Registry Limited
+// read : 2014-12-18 Amazon EU S.à r.l.
 // realtor : 2014-05-29 Real Estate Domains LLC
 // recipes : 2013-10-17 Grand Island, LLC
 // red : 2013-11-07 Afilias Limited
@@ -938,41 +1036,56 @@
 // reisen : 2014-03-06 New Cypress, LLC
 // reit : 2014-09-04 National Association of Real Estate Investment Trusts, Inc.
 // ren : 2013-12-12 Beijing Qianxiang Wangjing Technology Development Co., Ltd.
+// rent : 2014-12-04 DERRent, LLC
 // rentals : 2013-12-05 Big Hollow,LLC
 // repair : 2013-11-07 Lone Sunset, LLC
 // report : 2013-12-05 Binky Glen, LLC
 // republican : 2014-03-20 United TLD Holdco Ltd.
 // rest : 2013-12-19 Punto 2012 Sociedad Anonima Promotora de Inversion de Capital Variable
 // restaurant : 2014-07-03 Snow Avenue, LLC
-// reviews : 2013-09-13 
+// review : 2014-11-20 dot Review Limited
+// reviews : 2013-09-13  
 // rich : 2013-11-21 I-Registry Ltd.
+// ricoh : 2014-11-20 Ricoh Company, Ltd.
 // rio : 2014-02-27 Empresa Municipal de Informática SA - IPLANRIO
 // rip : 2014-07-10 United TLD Holdco Ltd.
-// rocks : 2013-11-14 
+// rocher : 2014-12-18 Ferrero Trading Lux S.A.
+// rocks : 2013-11-14  
 // rodeo : 2013-12-19 Top Level Domain Holdings Limited
+// room : 2014-12-18 Amazon EU S.à r.l.
 // rsvp : 2014-05-08 Charleston Road Registry Inc.
 // ruhr : 2013-10-02 regiodot GmbH & Co. KG
 // ryukyu : 2014-01-09 BusinessRalliart Inc.
 // saarland : 2013-12-12 dotSaarland GmbH
-// sale : 2014-10-16 Half Bloom, LLC
+// safe : 2014-12-18 Amazon EU S.à r.l.
+// sakura : 2014-12-18 SAKURA Internet Inc.
+// sale : 2014-10-16  
+// salon : 2014-12-11 Outer Orchard, LLC
 // samsung : 2014-04-03 SAMSUNG SDS CO., LTD
+// sandvik : 2014-11-13 Sandvik AB
+// sandvikcoromant : 2014-11-07 Sandvik AB
 // sanofi : 2014-10-09 Sanofi
 // sap : 2014-03-27 SAP AG
+// sapo : 2014-11-07 PT Comunicacoes S.A.
 // sarl : 2014-07-03 Delta Orchard, LLC
 // saxo : 2014-10-31 Saxo Bank A/S
+// sbs : 2014-11-07 SPECIAL BROADCASTING SERVICE CORPORATION
 // sca : 2014-03-13 SVENSKA CELLULOSA AKTIEBOLAGET SCA (publ)
 // scb : 2014-02-20 The Siam Commercial Bank Public Company Limited (\
 // schmidt : 2014-04-03 SALM S.A.S.
 // scholarships : 2014-04-24 Scholarships.com, LLC
+// school : 2014-12-18 Little Galley, LLC
 // schule : 2014-03-06 Outer Moon, LLC
 // schwarz : 2014-09-18 Schwarz Domains und Services GmbH & Co. KG
 // science : 2014-09-11 dot Science Limited
 // scor : 2014-10-31 SCOR SE
 // scot : 2014-01-23 Dot Scot Registry Limited
 // seat : 2014-05-22 SEAT, S.A. (Sociedad Unipersonal)
+// seek : 2014-12-04 Seek Limited
 // sener : 2014-10-24 Sener Ingeniería y Sistemas, S.A.
 // services : 2014-02-27 Fox Castle, LLC
 // sew : 2014-07-17 SEW-EURODRIVE GmbH & Co KG
+// sex : 2014-11-13 ICM Registry SX LLC
 // sexy : 2013-09-11 Uniregistry, Corp.
 // sharp : 2014-05-01 Sharp Corporation
 // shia : 2014-09-04 Asia Green IT System Bilgisayar San. ve Tic. Ltd. Sti.
@@ -981,16 +1094,24 @@
 // shriram : 2014-01-23 Shriram Capital Ltd.
 // singles : 2013-08-27 Fern Madison, LLC
 // sky : 2014-06-19 Sky IP International Ltd, a company incorporated in England and Wales, operating via its registered Swiss branch
+// skype : 2014-12-18 Microsoft Corporation
+// smile : 2014-12-18 Amazon EU S.à r.l.
 // social : 2013-11-07 United TLD Holdco Ltd.
-// software : 2014-03-20 
+// software : 2014-03-20  
 // sohu : 2013-12-19 Sohu.com Limited
 // solar : 2013-11-07 Ruby Town, LLC
 // solutions : 2013-11-07 Silver Cover, LLC
 // soy : 2014-01-23 Charleston Road Registry Inc.
 // space : 2014-04-03 DotSpace Inc.
 // spiegel : 2014-02-05 SPIEGEL-Verlag Rudolf Augstein GmbH & Co. KG
+// spreadbetting : 2014-12-11 IG Group Holdings PLC
+// stada : 2014-11-13 STADA Arzneimittel AG
+// statoil : 2014-12-04 Statoil ASA
 // stc : 2014-10-09 Saudi Telecom Company
 // stcgroup : 2014-10-09 Saudi Telecom Company
+// stockholm : 2014-12-18 Stockholms kommun
+// study : 2014-12-11 OPEN UNIVERSITIES AUSTRALIA PTY LTD
+// style : 2014-12-04 Binky Moon, LLC
 // supplies : 2013-12-19 Atomic Fields, LLC
 // supply : 2013-12-19 Half Falls, LLC
 // support : 2013-10-24 Grand Orchard, LLC
@@ -999,7 +1120,9 @@
 // suzuki : 2014-02-20 SUZUKI MOTOR CORPORATION
 // swiss : 2014-10-16 Swiss Confederation
 // sydney : 2014-09-18 State of New South Wales, Department of Premier and Cabinet
+// symantec : 2014-12-04 Symantec Corporation
 // systems : 2013-11-07 Dash Cypress, LLC
+// tab : 2014-12-04 Tabcorp Holdings Limited
 // taipei : 2014-07-10 Taipei City Government
 // tatar : 2014-04-24 Limited Liability Company \
 // tattoo : 2013-08-30 Uniregistry, Corp.
@@ -1008,35 +1131,43 @@
 // technology : 2013-09-13 Auburn Falls
 // telefonica : 2014-10-16 Telefónica S.A.
 // temasek : 2014-08-07 Temasek Holdings (Private) Limited
+// tennis : 2014-12-04 Cotton Bloom, LLC
 // tienda : 2013-11-14 Victor Manor, LLC
 // tips : 2013-09-20 Corn Willow, LLC
+// tires : 2014-11-07 Dog Edge, LLC
 // tirol : 2014-04-24 punkt Tirol GmbH
 // today : 2013-09-20 Pearl Woods, LLC
 // tokyo : 2013-11-13 GMO Registry, Inc.
 // tools : 2013-11-21 Pioneer North, LLC
 // top : 2014-03-20 Jiangsu Bangning Science & Technology Co.,Ltd.
+// toray : 2014-12-18 Toray Industries, Inc.
 // toshiba : 2014-04-10 TOSHIBA Corporation
 // town : 2014-03-06 Koko Moon, LLC
 // toys : 2014-03-06 Pioneer Orchard, LLC
 // trade : 2014-01-23 Elite Registry Limited
+// trading : 2014-12-11 IG Group Holdings PLC
 // training : 2013-11-07 Wild Willow, LLC
-// trust : 2014-10-16 
+// trust : 2014-10-16  
 // tui : 2014-07-03 TUI AG
+// tushu : 2014-12-18 Amazon EU S.à r.l.
+// ubs : 2014-12-11 UBS AG
 // university : 2014-03-06 Little Station, LLC
 // uno : 2013-09-11 Dot Latin LLC
 // uol : 2014-05-01 UBN INTERNET LTDA.
 // vacations : 2013-12-05 Atomic Tigers, LLC
+// vana : 2014-12-11 Lifestyle Domain Holdings, Inc.
 // vegas : 2014-01-16 Dot Vegas, Inc.
 // ventures : 2013-08-27 Binky Lake, LLC
 // versicherung : 2014-03-20 dotversicherung-registry GmbH
-// vet : 2014-03-06 
+// vet : 2014-03-06  
 // viajes : 2013-10-17 Black Madison, LLC
-// video : 2014-10-16 Lone Tigers, LLC
+// video : 2014-10-16  
 // villas : 2013-12-05 New Sky, LLC
 // virgin : 2014-09-25 Virgin Enterprises Limited
 // vision : 2013-12-05 Koko Station, LLC
 // vista : 2014-09-18 Vistaprint Limited
 // vistaprint : 2014-09-18 Vistaprint Limited
+// viva : 2014-11-07 Saudi Telecom Company
 // vlaanderen : 2014-02-06 DNS.be vzw
 // vodka : 2013-12-19 Top Level Domain Holdings Limited
 // vote : 2013-11-21 Monolith Registry LLC
@@ -1044,7 +1175,9 @@
 // voto : 2013-11-21 Monolith Registry LLC
 // voyage : 2013-08-27 Ruby House, LLC
 // wales : 2014-05-08 Nominet UK
+// walter : 2014-11-13 Sandvik AB
 // wang : 2013-10-24 Zodiac Leo Limited
+// wanggou : 2014-12-18 Amazon EU S.à r.l.
 // watch : 2013-11-14 Sand Shadow, LLC
 // webcam : 2014-01-23 dot Webcam Limited
 // website : 2014-04-03 DotWebsite Inc.
@@ -1054,13 +1187,17 @@
 // wien : 2013-10-28 punkt.wien GmbH
 // wiki : 2013-11-07 Top Level Design, LLC
 // williamhill : 2014-03-13 William Hill Organization Limited
+// win : 2014-11-20 First Registry Limited
+// windows : 2014-12-18 Microsoft Corporation
 // wme : 2014-02-13 William Morris Endeavor Entertainment, LLC
 // work : 2013-12-19 Top Level Domain Holdings Limited
 // works : 2013-11-14 Little Dynamite, LLC
 // world : 2014-06-12 Bitter Fields, LLC
 // wtc : 2013-12-19 World Trade Centers Association, Inc.
 // wtf : 2014-03-06 Hidden Way, LLC
+// xbox : 2014-12-18 Microsoft Corporation
 // xerox : 2014-10-24 Xerox DNHC LLC
+// xin : 2014-12-11 Elegant Leader Limited
 // xn--1qqw23a : 2014-01-09 Guangzhou YU Wei Information Technology Co., Ltd.
 // xn--30rr7y : 2014-06-12 Excellent First Limited
 // xn--3bst00m : 2013-09-13 Eagle Horizon Limited
@@ -1082,6 +1219,7 @@
 // xn--czrs0t : 2013-12-19 Wild Island, LLC
 // xn--czru2d : 2013-11-21 Zodiac Capricorn Limited
 // xn--d1acj3b : 2013-11-20 The Foundation for Network Initiatives “The Smart Internet”
+// xn--eckvdtc9d : 2014-12-18 Amazon EU S.à r.l.
 // xn--efvy88h : 2014-08-22 Xinhua News Agency Guangdong Branch 新华通讯社广东分社
 // xn--fiq228c5hs : 2013-09-08 TLD REGISTRY LIMITED
 // xn--fiq64b : 2013-10-14 CITIC Group Corporation
@@ -1089,14 +1227,20 @@
 // xn--flw351e : 2014-07-31 Charleston Road Registry Inc.
 // xn--hxt814e : 2014-05-15 Zodiac Libra Limited
 // xn--i1b6b1a6a2e : 2013-11-14 Public Interest Registry
+// xn--imr513n : 2014-12-11 HU YI GLOBAL INFORMATION RESOURCES (HOLDING) COMPANY. HONGKONG LIMITED
 // xn--io0a7i : 2013-11-14 Computer Network Information Center of Chinese Academy of Sciences （China Internet Network Information Center）
+// xn--kcrx77d1x4a : 2014-11-07 Koninklijke Philips N.V.
 // xn--kput3i : 2014-02-13 Beijing RITT-Net Technology Development Co., Ltd
+// xn--mgba3a3ejt : 2014-11-20 Aramco Services Company
 // xn--mgbab2bd : 2013-10-31 CORE Association
+// xn--mgbb9fbpob : 2014-12-18 GreenTech Consultancy Company W.L.L.
 // xn--mgbt3dhd : 2014-09-04 Asia Green IT System Bilgisayar San. ve Tic. Ltd. Sti.
 // xn--mxtq1m : 2014-03-06 Net-Chinese Co., Ltd.
 // xn--ngbc5azd : 2013-07-13 International Domain Registry Pty. Ltd.
+// xn--ngbe9e0a : 2014-12-04 Kuwait Finance House
 // xn--nqv7f : 2013-11-14 Public Interest Registry
 // xn--nqv7fs00ema : 2013-11-14 Public Interest Registry
+// xn--nyqy26a : 2014-11-07 Stable Tone Limited
 // xn--p1acf : 2013-12-12 Rusnames Limited
 // xn--q9jyb4c : 2013-09-17 Charleston Road Registry Inc.
 // xn--qcka1pmc : 2014-07-31 Charleston Road Registry Inc.
@@ -1111,18 +1255,23 @@
 // xn--zfr164b : 2013-11-08 China Organizational Name Administration Center
 // xyz : 2013-12-05 XYZ.COM LLC
 // yachts : 2014-01-09 DERYachts, LLC
+// yamaxun : 2014-12-18 Amazon EU S.à r.l.
 // yandex : 2014-04-10 YANDEX, LLC
+// yodobashi : 2014-11-20 YODOBASHI CAMERA CO.,LTD.
 // yoga : 2014-05-29 Top Level Domain Holdings Limited
 // yokohama : 2013-12-12 GMO Registry, Inc.
 // youtube : 2014-05-01 Charleston Road Registry Inc.
+// zara : 2014-11-07 Industria de Diseño Textil, S.A. (INDITEX, S.A.)
+// zero : 2014-12-18 Amazon EU S.à r.l.
 // zip : 2014-05-08 Charleston Road Registry Inc.
 // zone : 2013-11-14 Outer Falls, LLC
+// zuerich : 2014-11-07 Kanton Zürich (Canton of Zurich)
 // ===END ICANN DOMAINS===
 // ===BEGIN PRIVATE DOMAINS===
 // Amazon CloudFront : https://aws.amazon.com/cloudfront/
 // Submitted by Donavan Miller <donavanm@amazon.com> 2013-03-22
 // Amazon Elastic Compute Cloud: https://aws.amazon.com/ec2/
-// Submitted by Osman Surkatty <osmans@amazon.com> 2014-05-20
+// Submitted by Osman Surkatty <osmans@amazon.com> 2014-12-16
 // Amazon Elastic Beanstalk : https://aws.amazon.com/elasticbeanstalk/
 // Submitted by Adam Stein <astein@amazon.com> 2013-04-02
 // Amazon Elastic Load Balancing : https://aws.amazon.com/elasticloadbalancing/
@@ -1164,7 +1313,7 @@
 // GlobeHosting, Inc.
 // Submitted by Zoltan Egresi <egresi@globehosting.com> 2013-07-12
 // Google, Inc.
-// Submitted by Eduardo Vela <evn@google.com> 2012-10-24
+// Submitted by Eduardo Vela <evn@google.com> 2014-12-19
 // Heroku : https://www.heroku.com/
 // Submitted by Tom Maher <tmaher@heroku.com> 2013-05-02
 // iki.fi
@@ -1191,6 +1340,8 @@
 // priv.at : http://www.nic.priv.at/
 // Submitted by registry <lendl@nic.at> 2008-06-09
 // TASK geographical domains (www.task.gda.pl/uslugi/dns)
+// UDR Limited : http://www.udr.hk.com
+// Submitted by registry <hostmaster@udr.hk.com> 2014-11-07
 // Yola : https://www.yola.com/
 // Submitted by Stefano Rivera <stefano@yola.com> 2014-07-09
 // ZaNiC : http://www.za.net/
@@ -1763,6 +1914,7 @@ $tldTree = array(
         'ap-southeast-1' => array(),
         'ap-southeast-2' => array(),
         'eu-west-1' => array(),
+        'eu-central-1' => array(),
         'sa-east-1' => array(),
         'us-gov-west-1' => array(),
         'us-west-1' => array(),
@@ -1977,6 +2129,7 @@ $tldTree = array(
     'codespot' => array(),
     'googleapis' => array(),
     'googlecode' => array(),
+    'pagespeedmobilizer' => array(),
     'withgoogle' => array(),
     'herokuapp' => array(),
     'herokussl' => array(),
@@ -1984,6 +2137,7 @@ $tldTree = array(
     'operaunite' => array(),
     'outsystemscloud' => array(),
     'rhcloud' => array(),
+    'hk' => array(),
     'yolasite' => array()),
   'coop' => array(),
   'cr' => array(
@@ -2233,7 +2387,9 @@ $tldTree = array(
     '组织' => array(),
     '組織' => array(),
     '組织' => array(),
-    'blogspot' => array()),
+    'blogspot' => array(),
+    'ltd' => array(),
+    'inc' => array()),
   'hm' => array(),
   'hn' => array(
     'com' => array(),
@@ -6397,6 +6553,7 @@ $tldTree = array(
     'servegame' => array(),
     'stuff-4-sale' => array(),
     'webhop' => array(),
+    'hk' => array(),
     'za' => array()),
   'pa' => array(
     'ac' => array(),
@@ -7621,44 +7778,60 @@ $tldTree = array(
   'abogado' => array(),
   'academy' => array(),
   'accenture' => array(),
+  'accountant' => array(),
   'accountants' => array(),
   'active' => array(),
   'actor' => array(),
+  'ads' => array(),
   'adult' => array(),
   'afl' => array(),
   'africa' => array(),
   'agency' => array(),
+  'aig' => array(),
   'airforce' => array(),
   'airtel' => array(),
   'allfinanz' => array(),
   'alsace' => array(),
   'amsterdam' => array(),
+  'analytics' => array(),
   'android' => array(),
+  'apartments' => array(),
   'aquarelle' => array(),
+  'aramco' => array(),
   'archi' => array(),
   'army' => array(),
+  'arte' => array(),
   'associates' => array(),
   'attorney' => array(),
   'auction' => array(),
   'audio' => array(),
+  'author' => array(),
+  'auto' => array(),
   'autos' => array(),
   'axa' => array(),
+  'azure' => array(),
   'band' => array(),
   'bank' => array(),
   'bar' => array(),
   'barcelona' => array(),
+  'barclaycard' => array(),
+  'barclays' => array(),
   'bargains' => array(),
   'bauhaus' => array(),
   'bayern' => array(),
+  'bbc' => array(),
   'bbva' => array(),
   'bcn' => array(),
   'beer' => array(),
+  'bentley' => array(),
   'berlin' => array(),
   'best' => array(),
   'bharti' => array(),
   'bible' => array(),
   'bid' => array(),
   'bike' => array(),
+  'bing' => array(),
+  'bingo' => array(),
   'bio' => array(),
   'black' => array(),
   'blackfriday' => array(),
@@ -7668,19 +7841,26 @@ $tldTree = array(
   'bmw' => array(),
   'bnl' => array(),
   'bnpparibas' => array(),
+  'boats' => array(),
   'bom' => array(),
   'bond' => array(),
   'boo' => array(),
+  'bot' => array(),
   'boutique' => array(),
+  'bradesco' => array(),
+  'bridgestone' => array(),
+  'broker' => array(),
   'brussels' => array(),
   'budapest' => array(),
   'build' => array(),
   'builders' => array(),
   'business' => array(),
+  'buy' => array(),
   'buzz' => array(),
   'bzh' => array(),
   'cab' => array(),
   'cal' => array(),
+  'call' => array(),
   'camera' => array(),
   'camp' => array(),
   'cancerresearch' => array(),
@@ -7692,9 +7872,11 @@ $tldTree = array(
   'care' => array(),
   'career' => array(),
   'careers' => array(),
+  'cars' => array(),
   'cartier' => array(),
   'casa' => array(),
   'cash' => array(),
+  'casino' => array(),
   'catering' => array(),
   'cba' => array(),
   'cbn' => array(),
@@ -7702,14 +7884,18 @@ $tldTree = array(
   'ceo' => array(),
   'cern' => array(),
   'cfa' => array(),
+  'cfd' => array(),
   'channel' => array(),
+  'chat' => array(),
   'cheap' => array(),
   'chloe' => array(),
   'christmas' => array(),
   'chrome' => array(),
   'church' => array(),
+  'circle' => array(),
   'citic' => array(),
   'city' => array(),
+  'cityeats' => array(),
   'claims' => array(),
   'cleaning' => array(),
   'click' => array(),
@@ -7733,6 +7919,7 @@ $tldTree = array(
   'cool' => array(),
   'corsica' => array(),
   'country' => array(),
+  'courses' => array(),
   'credit' => array(),
   'creditcard' => array(),
   'cricket' => array(),
@@ -7745,9 +7932,11 @@ $tldTree = array(
   'dabur' => array(),
   'dad' => array(),
   'dance' => array(),
+  'date' => array(),
   'dating' => array(),
   'datsun' => array(),
   'day' => array(),
+  'dclk' => array(),
   'deals' => array(),
   'degree' => array(),
   'delivery' => array(),
@@ -7756,6 +7945,7 @@ $tldTree = array(
   'dental' => array(),
   'dentist' => array(),
   'desi' => array(),
+  'design' => array(),
   'dev' => array(),
   'diamonds' => array(),
   'diet' => array(),
@@ -7765,12 +7955,16 @@ $tldTree = array(
   'discount' => array(),
   'dnp' => array(),
   'docs' => array(),
+  'dog' => array(),
   'doha' => array(),
   'domains' => array(),
   'doosan' => array(),
+  'download' => array(),
   'durban' => array(),
   'dvag' => array(),
+  'earth' => array(),
   'eat' => array(),
+  'edeka' => array(),
   'education' => array(),
   'email' => array(),
   'emerck' => array(),
@@ -7778,6 +7972,7 @@ $tldTree = array(
   'engineer' => array(),
   'engineering' => array(),
   'enterprises' => array(),
+  'epson' => array(),
   'equipment' => array(),
   'erni' => array(),
   'esq' => array(),
@@ -7789,17 +7984,25 @@ $tldTree = array(
   'exchange' => array(),
   'expert' => array(),
   'exposed' => array(),
+  'fage' => array(),
   'fail' => array(),
+  'fairwinds' => array(),
+  'faith' => array(),
   'fan' => array(),
+  'fans' => array(),
   'farm' => array(),
   'fashion' => array(),
+  'fast' => array(),
   'feedback' => array(),
+  'ferrero' => array(),
   'final' => array(),
   'finance' => array(),
   'financial' => array(),
+  'firestone' => array(),
   'firmdale' => array(),
   'fish' => array(),
   'fishing' => array(),
+  'fit' => array(),
   'fitness' => array(),
   'flights' => array(),
   'florist' => array(),
@@ -7807,6 +8010,9 @@ $tldTree = array(
   'flsmidth' => array(),
   'fly' => array(),
   'foo' => array(),
+  'football' => array(),
+  'ford' => array(),
+  'forex' => array(),
   'forsale' => array(),
   'foundation' => array(),
   'frl' => array(),
@@ -7819,11 +8025,13 @@ $tldTree = array(
   'garden' => array(),
   'gbiz' => array(),
   'gdn' => array(),
+  'gea' => array(),
   'gent' => array(),
   'ggee' => array(),
   'gift' => array(),
   'gifts' => array(),
   'gives' => array(),
+  'giving' => array(),
   'glass' => array(),
   'gle' => array(),
   'global' => array(),
@@ -7831,18 +8039,25 @@ $tldTree = array(
   'gmail' => array(),
   'gmo' => array(),
   'gmx' => array(),
+  'goldpoint' => array(),
+  'golf' => array(),
+  'goo' => array(),
+  'goog' => array(),
   'google' => array(),
   'gop' => array(),
+  'got' => array(),
   'graphics' => array(),
   'gratis' => array(),
   'green' => array(),
   'gripe' => array(),
   'group' => array(),
+  'gucci' => array(),
   'guge' => array(),
   'guide' => array(),
   'guitars' => array(),
   'guru' => array(),
   'hamburg' => array(),
+  'hangout' => array(),
   'haus' => array(),
   'healthcare' => array(),
   'help' => array(),
@@ -7854,9 +8069,11 @@ $tldTree = array(
   'holdings' => array(),
   'holiday' => array(),
   'homes' => array(),
+  'honda' => array(),
   'horse' => array(),
   'host' => array(),
   'hosting' => array(),
+  'hotmail' => array(),
   'house' => array(),
   'how' => array(),
   'hsbc' => array(),
@@ -7880,21 +8097,30 @@ $tldTree = array(
   'istanbul' => array(),
   'itau' => array(),
   'iwc' => array(),
+  'jaguar' => array(),
   'java' => array(),
+  'jcb' => array(),
   'jetzt' => array(),
+  'jlc' => array(),
   'joburg' => array(),
+  'jot' => array(),
+  'joy' => array(),
   'jprs' => array(),
   'juegos' => array(),
   'kaufen' => array(),
   'kddi' => array(),
+  'kfh' => array(),
   'kim' => array(),
+  'kinder' => array(),
   'kitchen' => array(),
   'kiwi' => array(),
   'koeln' => array(),
   'krd' => array(),
   'kred' => array(),
+  'kyoto' => array(),
   'lacaixa' => array(),
   'land' => array(),
+  'landrover' => array(),
   'lat' => array(),
   'latrobe' => array(),
   'lawyer' => array(),
@@ -7906,24 +8132,34 @@ $tldTree = array(
   'liaison' => array(),
   'lidl' => array(),
   'life' => array(),
+  'lifestyle' => array(),
   'lighting' => array(),
+  'like' => array(),
   'limited' => array(),
   'limo' => array(),
+  'lincoln' => array(),
+  'linde' => array(),
   'link' => array(),
+  'live' => array(),
+  'loan' => array(),
   'loans' => array(),
   'london' => array(),
+  'lotte' => array(),
   'lotto' => array(),
   'ltd' => array(),
   'ltda' => array(),
+  'lupin' => array(),
   'luxe' => array(),
   'luxury' => array(),
   'madrid' => array(),
   'maif' => array(),
   'maison' => array(),
+  'man' => array(),
   'management' => array(),
   'mango' => array(),
   'market' => array(),
   'marketing' => array(),
+  'markets' => array(),
   'marriott' => array(),
   'media' => array(),
   'meet' => array(),
@@ -7931,10 +8167,15 @@ $tldTree = array(
   'meme' => array(),
   'memorial' => array(),
   'menu' => array(),
+  'meo' => array(),
   'miami' => array(),
+  'microsoft' => array(),
   'mini' => array(),
+  'mma' => array(),
+  'mobily' => array(),
   'moda' => array(),
   'moe' => array(),
+  'moi' => array(),
   'monash' => array(),
   'money' => array(),
   'montblanc' => array(),
@@ -7944,17 +8185,23 @@ $tldTree = array(
   'motorcycles' => array(),
   'mov' => array(),
   'movistar' => array(),
+  'mtn' => array(),
+  'mtpc' => array(),
+  'nadex' => array(),
   'nagoya' => array(),
   'navy' => array(),
   'netbank' => array(),
   'network' => array(),
   'neustar' => array(),
   'new' => array(),
+  'news' => array(),
   'nexus' => array(),
   'ngo' => array(),
   'nhk' => array(),
+  'nico' => array(),
   'ninja' => array(),
   'nissan' => array(),
+  'norton' => array(),
   'nowruz' => array(),
   'nra' => array(),
   'nrw' => array(),
@@ -7962,6 +8209,7 @@ $tldTree = array(
   'nyc' => array(),
   'obi' => array(),
   'okinawa' => array(),
+  'one' => array(),
   'ong' => array(),
   'onl' => array(),
   'ooo' => array(),
@@ -7970,12 +8218,15 @@ $tldTree = array(
   'osaka' => array(),
   'otsuka' => array(),
   'ovh' => array(),
+  'page' => array(),
+  'panerai' => array(),
   'paris' => array(),
   'pars' => array(),
   'partners' => array(),
   'parts' => array(),
   'party' => array(),
   'pharmacy' => array(),
+  'philips' => array(),
   'photo' => array(),
   'photography' => array(),
   'photos' => array(),
@@ -7984,6 +8235,7 @@ $tldTree = array(
   'pics' => array(),
   'pictet' => array(),
   'pictures' => array(),
+  'pin' => array(),
   'pink' => array(),
   'pizza' => array(),
   'place' => array(),
@@ -7996,11 +8248,14 @@ $tldTree = array(
   'prod' => array(),
   'productions' => array(),
   'prof' => array(),
+  'promo' => array(),
   'properties' => array(),
   'property' => array(),
   'pub' => array(),
   'qpon' => array(),
   'quebec' => array(),
+  'racing' => array(),
+  'read' => array(),
   'realtor' => array(),
   'recipes' => array(),
   'red' => array(),
@@ -8010,41 +8265,56 @@ $tldTree = array(
   'reisen' => array(),
   'reit' => array(),
   'ren' => array(),
+  'rent' => array(),
   'rentals' => array(),
   'repair' => array(),
   'report' => array(),
   'republican' => array(),
   'rest' => array(),
   'restaurant' => array(),
+  'review' => array(),
   'reviews' => array(),
   'rich' => array(),
+  'ricoh' => array(),
   'rio' => array(),
   'rip' => array(),
+  'rocher' => array(),
   'rocks' => array(),
   'rodeo' => array(),
+  'room' => array(),
   'rsvp' => array(),
   'ruhr' => array(),
   'ryukyu' => array(),
   'saarland' => array(),
+  'safe' => array(),
+  'sakura' => array(),
   'sale' => array(),
+  'salon' => array(),
   'samsung' => array(),
+  'sandvik' => array(),
+  'sandvikcoromant' => array(),
   'sanofi' => array(),
   'sap' => array(),
+  'sapo' => array(),
   'sarl' => array(),
   'saxo' => array(),
+  'sbs' => array(),
   'sca' => array(),
   'scb' => array(),
   'schmidt' => array(),
   'scholarships' => array(),
+  'school' => array(),
   'schule' => array(),
   'schwarz' => array(),
   'science' => array(),
   'scor' => array(),
   'scot' => array(),
   'seat' => array(),
+  'seek' => array(),
   'sener' => array(),
   'services' => array(),
   'sew' => array(),
+  'sex' => array(),
   'sexy' => array(),
   'sharp' => array(),
   'shia' => array(),
@@ -8053,6 +8323,8 @@ $tldTree = array(
   'shriram' => array(),
   'singles' => array(),
   'sky' => array(),
+  'skype' => array(),
+  'smile' => array(),
   'social' => array(),
   'software' => array(),
   'sohu' => array(),
@@ -8061,8 +8333,14 @@ $tldTree = array(
   'soy' => array(),
   'space' => array(),
   'spiegel' => array(),
+  'spreadbetting' => array(),
+  'stada' => array(),
+  'statoil' => array(),
   'stc' => array(),
   'stcgroup' => array(),
+  'stockholm' => array(),
+  'study' => array(),
+  'style' => array(),
   'supplies' => array(),
   'supply' => array(),
   'support' => array(),
@@ -8071,7 +8349,9 @@ $tldTree = array(
   'suzuki' => array(),
   'swiss' => array(),
   'sydney' => array(),
+  'symantec' => array(),
   'systems' => array(),
+  'tab' => array(),
   'taipei' => array(),
   'tatar' => array(),
   'tattoo' => array(),
@@ -8080,24 +8360,31 @@ $tldTree = array(
   'technology' => array(),
   'telefonica' => array(),
   'temasek' => array(),
+  'tennis' => array(),
   'tienda' => array(),
   'tips' => array(),
+  'tires' => array(),
   'tirol' => array(),
   'today' => array(),
   'tokyo' => array(),
   'tools' => array(),
   'top' => array(),
+  'toray' => array(),
   'toshiba' => array(),
   'town' => array(),
   'toys' => array(),
   'trade' => array(),
+  'trading' => array(),
   'training' => array(),
   'trust' => array(),
   'tui' => array(),
+  'tushu' => array(),
+  'ubs' => array(),
   'university' => array(),
   'uno' => array(),
   'uol' => array(),
   'vacations' => array(),
+  'vana' => array(),
   'vegas' => array(),
   'ventures' => array(),
   'versicherung' => array(),
@@ -8109,6 +8396,7 @@ $tldTree = array(
   'vision' => array(),
   'vista' => array(),
   'vistaprint' => array(),
+  'viva' => array(),
   'vlaanderen' => array(),
   'vodka' => array(),
   'vote' => array(),
@@ -8116,7 +8404,9 @@ $tldTree = array(
   'voto' => array(),
   'voyage' => array(),
   'wales' => array(),
+  'walter' => array(),
   'wang' => array(),
+  'wanggou' => array(),
   'watch' => array(),
   'webcam' => array(),
   'website' => array(),
@@ -8126,13 +8416,17 @@ $tldTree = array(
   'wien' => array(),
   'wiki' => array(),
   'williamhill' => array(),
+  'win' => array(),
+  'windows' => array(),
   'wme' => array(),
   'work' => array(),
   'works' => array(),
   'world' => array(),
   'wtc' => array(),
   'wtf' => array(),
+  'xbox' => array(),
   'xerox' => array(),
+  'xin' => array(),
   '佛山' => array(),
   '慈善' => array(),
   '集团' => array(),
@@ -8154,6 +8448,7 @@ $tldTree = array(
   '商店' => array(),
   '商城' => array(),
   'дети' => array(),
+  'ポイント' => array(),
   '新闻' => array(),
   '中文网' => array(),
   '中信' => array(),
@@ -8161,14 +8456,20 @@ $tldTree = array(
   '谷歌' => array(),
   '网店' => array(),
   'संगठन' => array(),
+  '餐厅' => array(),
   '网络' => array(),
+  '飞利浦' => array(),
   '手机' => array(),
+  'ارامكو' => array(),
   'بازار' => array(),
+  'موبايلي' => array(),
   'همراه' => array(),
   '政府' => array(),
   'شبكة' => array(),
+  'بيتك' => array(),
   '机构' => array(),
   '组织机构' => array(),
+  '健康' => array(),
   'рус' => array(),
   'みんな' => array(),
   'グーグル' => array(),
@@ -8183,10 +8484,15 @@ $tldTree = array(
   '政务' => array(),
   'xyz' => array(),
   'yachts' => array(),
+  'yamaxun' => array(),
   'yandex' => array(),
+  'yodobashi' => array(),
   'yoga' => array(),
   'yokohama' => array(),
   'youtube' => array(),
+  'zara' => array(),
+  'zero' => array(),
   'zip' => array(),
-  'zone' => array());
+  'zone' => array(),
+  'zuerich' => array());
 return $tldTree;

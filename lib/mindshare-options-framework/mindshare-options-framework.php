@@ -4,8 +4,8 @@
  *
  * @version        0.3.5
  * @author         Mindshare Studios, Inc.
- * @copyright      Copyright (c) 2014
- * @link           http://mindsharelabs.com/downloads/mindshare-theme-api/
+ * @copyright      Copyright (c) 2006-2015
+ * @link           https://mindsharelabs.com/downloads/mindshare-theme-api/
  *
  * @credits        Forked from: Admin Page Class 0.9.9 by Ohad Raz http://bainternet.info
  *                 Icons: http://www.famfamfam.com/lab/icons/silk/
@@ -3978,7 +3978,7 @@ if(!class_exists('mindshare_options_framework')) :
 					return $options[$name];
 				}
 			} else {
-				return $this->error(array('msg' => 'get_option returned FALSE', 'echo' => FALSE, 'die' => FALSE));
+				return $this->error(array('msg' => 'get_option returned FALSE. Your code expects a value here but the user hasn\'t set one on the options page.', 'echo' => FALSE, 'die' => FALSE));
 			}
 		}
 

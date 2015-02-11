@@ -544,21 +544,21 @@ $mapi_options->HelpTab(
 	array(
 		 'id'      => 'mapi-help-tab',
 		 'title'   => 'API Documentation',
-		 'content' => '<p>API documentation is available online at <a href="http://mindsharelabs.com/topics/mindshare-theme-api/" target="_blank">http://mindsharelabs.com/topics/mindshare-theme-api/</a></p>'
+		 'content' => '<p>API documentation is available online at <a href="https://mindsharelabs.com/topics/mindshare-theme-api/" target="_blank">https://mindsharelabs.com/topics/mindshare-theme-api/</a></p>'
 	)
 );
 $mapi_options->HelpTab(
 	array(
 		 'id'      => 'mapi-support-tab',
 		 'title'   => 'API Support',
-		 'content' => '<p>Get support on the Mindshare Labs forums: <a href="http://mindsharelabs.com/forums/" target="_blank">http://mindsharelabs.com/forums/</a></p><p>To get premium one-on-one support, contact us: <a href="http://mind.sh/are/contact/">http://mind.sh/are/contact/</a></p>'
+		 'content' => '<p>Get support on the Mindshare Labs forums: <a href="https://mindsharelabs.com/forums/" target="_blank">https://mindsharelabs.com/forums/</a></p><p>To get premium one-on-one support, contact us: <a href="http://mind.sh/are/contact/">http://mind.sh/are/contact/</a></p>'
 	)
 );
 $mapi_options->HelpTab(
 	array(
 		 'id'      => 'mapi-themes-tab',
 		 'title'   => 'Get More Themes',
-		 'content' => '<p>Download compatible free and premium themes from the Mindshare Labs: <a href="http://mindsharelabs.com/" target="_blank">http://mindsharelabs.com/</a></p>'
+		 'content' => '<p>Download compatible free and premium themes from the Mindshare Labs: <a href="https://mindsharelabs.com/" target="_blank">https://mindsharelabs.com/</a></p>'
 	)
 );
 $secure_tab_content = "<p>Get the Mindshare Team to secure and protect your WordPress site for $9.95/month: <a href='http://mind.sh/are/wordpress-security-and-backup-service/check/?url=".get_bloginfo("url")."&amp;active=0&amp;sale=1&amp;d=".str_replace(

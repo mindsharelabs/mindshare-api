@@ -4,10 +4,52 @@
  *
  * @created   3/6/14 12:43 PM
  * @author    Mindshare Studios, Inc.
- * @copyright Copyright (c) 2014
+ * @copyright Copyright (c) 2006-2015
  * @link      http://www.mindsharelabs.com/documentation/
  *
  */
+
+/**
+ *
+ * Sets the admin color scheme to "midnight" by default.
+ * Override the default with another filter like so:
+ *
+ * <code>
+ * add_filter('mapi_admin_color_scheme', 'mapi_my_admin_color_scheme', 5);
+ * function mapi_my_admin_color_scheme() {
+ *        return 'ectoplasm';
+ * }
+ * </code>
+ *
+ *
+ * @param $color_scheme
+ *
+ * @return mixed|void
+ */
+function mapi_set_admin_color_scheme($color_scheme) {
+	if('classic' == $color_scheme || 'fresh' == $color_scheme) {
+		$color_scheme = 'midnight';
+	}
+
+	return apply_filters('mapi_admin_color_scheme', $color_scheme);
+}
+
+/**
+ * Moves the Menus nav item to the top level of the WordPress Admin Menu
+ * instead of being nested below the Appearance sub menu.
+ *
+ */
+function mapi_admin_menu_nav_menus() {
+	add_menu_page('Menus', 'Menus', 'edit_theme_options', 'nav-menus.php', '', 'dashicons-networking', 6);
+	add_submenu_page('nav-menus.php', 'All Menus', 'All Menus', 'edit_theme_options', 'nav-menus.php');
+	add_submenu_page('nav-menus.php', 'Add New', 'Add New', 'edit_theme_options', '?action=edit&menu=0');
+	add_submenu_page('nav-menus.php', 'Menu Locations', 'Menu Locations', 'edit_theme_options', '?action=locations');
+	$menus = wp_get_nav_menus(array('orderby' => 'name'));
+	foreach($menus as $menu) {
+		add_submenu_page(
+			'nav-menus.php', esc_attr(ucwords($menu->name)), esc_attr(ucwords($menu->name)), 'edit_theme_options', 'nav-menus.php?action=edit&amp;menu=' . $menu->term_id, '');
+	}
+}
 
 /**
  * If an email address is entered in the username box, then look up the matching username and authenticate as per normal, using that.
@@ -30,7 +72,6 @@ function mapi_email_login_authenticate($user, $username, $password) {
 	return wp_authenticate_username_password(NULL, $username, $password);
 }
 
-
 /**
  * Modify the string on the login page to prompt for username or email address
  */
@@ -38,7 +79,7 @@ function mapi_username_or_email_login() {
 	?>
 	<script type="text/javascript">
 		// Form Label
-		document.getElementById('loginform').childNodes[1].childNodes[1].childNodes[0].nodeValue = 'Username or Email';
+		document.getElementById('loginform').childNodes[ 1 ].childNodes[ 1 ].childNodes[ 0 ].nodeValue = 'Username or Email';
 		// Error Messages
 		if(document.getElementById('login_error')) {
 			document.getElementById('login_error').innerHTML = document.getElementById('login_error').innerHTML.replace('username', 'Username or Email');
@@ -59,9 +100,11 @@ function mapi_get_author_id($post_id = NULL) {
 	}
 	$post = get_post($post_id);
 	$author_id = (int) $post->post_author;
+
 	/*if($author_id === 0) {
 
 	}*/
+
 	return $author_id;
 }
 
@@ -115,6 +158,7 @@ function mapi_get_post_count($user_id, $post_type) {
 	global $wpdb;
 	$where = get_posts_by_author_sql($post_type, TRUE, $user_id);
 	$count = $wpdb->get_var("SELECT COUNT(*) FROM $wpdb->posts $where");
+
 	return apply_filters('get_usernumposts', $count, $user_id);
 }
 

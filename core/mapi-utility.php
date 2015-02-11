@@ -3,8 +3,8 @@
  * Mindshare Theme API UTILITY FUNCTIONS
  *
  * @author     Mindshare Studios, Inc.
- * @copyright  Copyright (c) 2014
- * @link       http://mindsharelabs.com/downloads/mindshare-theme-api/
+ * @copyright  Copyright (c) 2006-2015
+ * @link       https://mindsharelabs.com/downloads/mindshare-theme-api/
  * @filename   mcms-utility.php
  *
  * Gotta love utility functions!
@@ -18,8 +18,8 @@
  *
  * @since  0.6.7
  *
- * @param string $string        The natural language value
- * @param array  $true_synonyms A list strings that are TRUE
+ * @param string $string The natural language value
+ * @param array $true_synonyms A list strings that are TRUE
  *
  * @return boolean The boolean value of the provided text
  **/
@@ -51,7 +51,7 @@ function mapi_excerpt_more($more = NULL) {
 		$more = apply_filters('mapi_excerpt_more_text', $options['excerpt_more_txt']);
 	}
 
-	return apply_filters('mapi_excerpt_more', '&nbsp;<a class="mapi excerpt-more" title="'.the_title_attribute('echo=0').'" href="'.get_permalink(get_the_ID()).'">'.$more.'</a>');
+	return apply_filters('mapi_excerpt_more', '&nbsp;<a class="mapi excerpt-more" title="' . the_title_attribute('echo=0') . '" href="' . get_permalink(get_the_ID()) . '">' . $more . '</a>');
 }
 
 /**
@@ -76,10 +76,10 @@ function mapi_word_limit($string, $length) {
  */
 function mapi_get_url() {
 	$s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
-	$protocol = substr(strtolower($_SERVER["SERVER_PROTOCOL"]), 0, strpos(strtolower($_SERVER["SERVER_PROTOCOL"]), "/")).$s;
-	$port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":".$_SERVER["SERVER_PORT"]);
+	$protocol = substr(strtolower($_SERVER["SERVER_PROTOCOL"]), 0, strpos(strtolower($_SERVER["SERVER_PROTOCOL"]), "/")) . $s;
+	$port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":" . $_SERVER["SERVER_PORT"]);
 
-	return $protocol."://".$_SERVER['SERVER_NAME'].$port.$_SERVER['REQUEST_URI'];
+	return $protocol . "://" . $_SERVER['SERVER_NAME'] . $port . $_SERVER['REQUEST_URI'];
 }
 
 /**
@@ -159,7 +159,7 @@ function mapi_browser_from_ua() {
 
 	// get the correct version number
 	$known = array('Version', $browser_name_short, 'other');
-	$pattern = '#(?<browser>'.join('|', $known).')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
+	$pattern = '#(?<browser>' . join('|', $known) . ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
 	if(@!preg_match_all($pattern, $user_agent, $matches)) {
 		// We have no matching number just continue
 	}
@@ -185,10 +185,10 @@ function mapi_browser_from_ua() {
 
 	return array(
 		'user_agent' => $user_agent,
-		'name'       => $browser_name,
-		'version'    => $version,
-		'platform'   => $platform,
-		'pattern'    => $pattern
+		'name' => $browser_name,
+		'version' => $version,
+		'platform' => $platform,
+		'pattern' => $pattern
 	);
 }
 
@@ -210,10 +210,10 @@ function mapi_broswer_class($show_major_version = FALSE, $show_minor_version = F
 
 		$class = $browser['browser'];
 		if(!empty($browser['majorver']) && $show_major_version) {
-			$class .= '-'.$browser['majorver'];
+			$class .= '-' . $browser['majorver'];
 		}
 		if(!empty($browser['minorver']) && $show_minor_version) {
-			$class .= '-'.$browser['minorver'];
+			$class .= '-' . $browser['minorver'];
 		}
 		$class = strtolower($class);
 	} else {
@@ -265,7 +265,7 @@ function mapi_add_body_classes($classes = array()) {
 		$classes[] = 'iphone';
 	} // add post "type-slug"
 	if(isset($post)) {
-		$classes[] = $post->post_type.'-'.$post->post_name;
+		$classes[] = $post->post_type . '-' . $post->post_name;
 	}
 
 	return $classes;
@@ -311,9 +311,9 @@ function mapi_error($args) {
 		$msg = 'Fatal error: mapi_error must be passed an array.';
 	}
 	$defaults = array(
-		'msg'  => 'An unspecified error occurred',
+		'msg' => 'An unspecified error occurred',
 		'echo' => FALSE,
-		'die'  => FALSE
+		'die' => FALSE
 	);
 	$args = wp_parse_args($args, $defaults);
 	extract($args, EXTR_SKIP);
@@ -327,13 +327,13 @@ function mapi_error($args) {
 	if($echo) {
 		$str .= '<div id="message" class="error"><p><strong>';
 	}
-	$str .= "[".$debug[$i]["function"]."]";
+	$str .= "[" . $debug[$i]["function"] . "]";
 	if($echo) {
 		$str .= '</strong>';
 	}
 
 	/** @noinspection PhpUndefinedVariableInspection */
-	@$str .= ": ".$msg." in ".$debug[$i]["file"]." on line ".$debug[$i]["line"];
+	@$str .= ": " . $msg . " in " . $debug[$i]["file"] . " on line " . $debug[$i]["line"];
 	if($echo) {
 		$str .= '</p></div>';
 	}
@@ -359,9 +359,9 @@ function mapi_error($args) {
  */
 function mapi_die($msg) {
 	mapi_error(array(
-		'msg'  => $msg,
+		'msg' => $msg,
 		'echo' => TRUE,
-		'die'  => TRUE
+		'die' => TRUE
 	));
 }
 
@@ -372,10 +372,24 @@ function mapi_die($msg) {
  */
 function mapi_console_log($msg) {
 	mapi_error(array(
-		'msg'  => $msg,
+		'msg' => $msg,
 		'echo' => FALSE,
-		'die'  => FALSE
+		'die' => FALSE
 	));
+}
+
+/**
+ * Outputs a mustache to the JavaScript console.
+ *
+ * @param $msg
+ */
+function mapi_kirts($msg = NULL) {
+	if($msg == "happy") {
+		$msg = ":{)"; // unusual
+	} else {
+		$msg = ":{\\"; // normal
+	}
+	mapi_console_log($msg);
 }
 
 /**
@@ -388,7 +402,7 @@ function mapi_error_console() {
 	if(count($MAPI_ERRORS) != 0) {
 		echo '<script type="text/javascript">';
 		foreach($MAPI_ERRORS as $error) {
-			echo 'console.log("'.$error.'");';
+			echo 'console.log("' . $error . '");';
 		}
 		echo '</script>';
 	}
@@ -399,8 +413,8 @@ function mapi_error_console() {
  * Optionally, will stop PHP execution if $die is set to TRUE. Does nothing iif the current
  * user does not have the right $capability (defaults to 'manage_options').
  *
- * @param mixed  $var
- * @param bool   $die
+ * @param mixed $var
+ * @param bool $die
  * @param string $capability
  */
 function mapi_var_dump($var = NULL, $die = FALSE, $capability = 'manage_options') {
@@ -428,7 +442,7 @@ function mapi_poop() {
  *
  * @todo make recursive (optionally)
  *
- * @param null   $dir
+ * @param null $dir
  * @param string $exts
  *
  * @return array
@@ -445,8 +459,8 @@ function mapi_file_array_dir($dir = NULL, $exts = 'jpg,jpeg,png,gif') {
 		$exts = explode(',', strtolower($exts));
 		while(FALSE !== ($file = readdir($handle))) {
 			foreach($exts as $ext) {
-				if(preg_match('/\.'.$ext.'$/i', $file, $test)) {
-					$files[] = mapi_path_to_url($dir.$file);
+				if(preg_match('/\.' . $ext . '$/i', $file, $test)) {
+					$files[] = mapi_path_to_url($dir . $file);
 					++$i;
 				}
 			}
@@ -491,9 +505,9 @@ function mapi_intval_array($value) {
  *
  * Search a multidimensional array for a value.
  *
- * @param mixed $needle   What to search for.
+ * @param mixed $needle What to search for.
  * @param array $haystack Array to search within.
- * @param bool  $strict   Whether to use strict type checking or not.
+ * @param bool $strict Whether to use strict type checking or not.
  *
  * @return bool
  */
@@ -525,18 +539,18 @@ function mapi_sanitize_array($array) {
  *
  * Preloads given assets in the background.
  *
- * @param null   $dir
+ * @param null $dir
  * @param string $exts
  */
 function mapi_preload($dir = NULL, $exts = 'jpg,jpeg,png,gif') {
-	$preload_var = 'preload_'.rand(); // create a random var name for us in JS
+	$preload_var = 'preload_' . rand(); // create a random var name for us in JS
 	$preload_arr = mapi_file_array_dir(trailingslashit($dir), $exts);
 	?>
 	<script type="text/javascript">
-		if(typeof jQuery != 'undefined') {
+		if (typeof jQuery != 'undefined') {
 			var <?php echo $preload_var?> = <?php echo json_encode($preload_arr); ?>;
 			jQuery(<?php echo $preload_var; ?>).each(function() {
-				jQuery('<img/>')[0].src = this;
+				jQuery('<img/>')[ 0 ].src = this;
 				//console.log(this + ' loaded');
 			});
 		}
@@ -602,7 +616,7 @@ function mapi_remove_recent_comments_style() {
  * @return string
  */
 function mapi_toggle_html_compression($echo = TRUE) {
-	$comment = PHP_EOL.'<!--compression-none-->'.PHP_EOL;
+	$comment = PHP_EOL . '<!--compression-none-->' . PHP_EOL;
 	if($echo) {
 		echo $comment;
 	} else {
@@ -624,7 +638,7 @@ function mapi_ie_warning() {
 		<script type="text/javascript">
 			var IE6UPDATE_OPTIONS = {
 				icons_path: "<?php echo plugins_url('lib/ie6update/images/', dirname(__FILE__)); ?>",
-				message:    "Internet Explorer is missing updates required to properly view this website. Click here to update your browser... "
+				message: "Internet Explorer is missing updates required to properly view this website. Click here to update your browser... "
 			}
 		</script>
 		<script type="text/javascript" src="<?php echo plugins_url('lib/ie6update/ie6update.js', dirname(__FILE__)); ?>"></script>
@@ -652,7 +666,7 @@ function mapi_get_option($name = NULL) {
 		return $options[$name];
 	} else {
 		if(current_user_can('manage_options')) {
-			return mapi_error(array('msg' => 'get_option returned FALSE', 'echo' => FALSE, 'die' => FALSE));
+			return mapi_error(array('msg' => 'get_option returned FALSE. Your code expects a value here but the user hasn\'t set one on the options page.', 'echo' => FALSE, 'die' => FALSE));
 		}
 	}
 }
@@ -1052,7 +1066,6 @@ function mapi_remove_all_styles() {
 }
 
 /**
- *
  * Add JavaScript to break out of any HTML frames.
  *
  */
@@ -1060,9 +1073,9 @@ function mapi_break_frames() {
 	?>
 	<script type="text/javascript">
 		//console.log(self.location.toString());
-		if(top.location.toString() != self.location.toString()) {
-			if(top.location.toString().indexOf('wp-admin/customize.php') == -1) {
-				if(top.location != self.location) {
+		if (top.location.toString() != self.location.toString()) {
+			if (top.location.toString().indexOf('wp-admin/customize.php') == -1) {
+				if (top.location != self.location) {
 					top.location = self.location.href;
 				}
 			}
@@ -1074,16 +1087,17 @@ function mapi_break_frames() {
  * Outputs an edit post link with built in support for custom post types. Used in place of the standard WordPress function edit_post_link()
  *
  */
-
 function mapi_edit_link() {
 	global $post;
 	$label = get_post_type_object(get_post_type($post));
 	$label = ucwords($label->labels->singular_name);
 	if(!empty($label)) {
-		return apply_filters('mapi_edit_link', edit_post_link('Edit '.$label, '<p class="mapi edit-link btn btn-xs btn-default">', '</p>'));
+		$label = 'Edit ' . $label;
 	} else {
-		return apply_filters('mapi_edit_link', edit_post_link('Edit Page', '<p class="mapi edit-link btn btn-xs btn-default">', '</p>'));
+		$label = 'Edit Page';
 	}
+
+	return apply_filters('mapi_edit_link', '<p class="mapi edit-link btn btn-xs btn-default"><a href="' . get_edit_post_link() . '">' . $label . '</a></p>');
 }
 
 /**
@@ -1100,7 +1114,7 @@ function mapi_external_links() {
 	?>
 	<script type="text/javascript">jQuery(document).ready(function() {
 			jQuery("a[href^='http']:not([href*='<?php echo $MAPI_TLD; ?>'])").each(function() {
-				if(jQuery(this).attr('data-target')) {
+				if (jQuery(this).attr('data-target')) {
 					jQuery(this).attr("target", jQuery(this).data('target'));
 				} else {
 					jQuery(this).attr("target", "_blank");
@@ -1282,7 +1296,7 @@ function mapi_enqueue_scripts() {
  *
  * Outputs Google Analytics code.
  *
- * @param null $ga_id                  (string)
+ * @param null $ga_id (string)
  * @param null $allow_multiple_domains (string)
  * @param null $enhanced_link_attribution
  * @param null $universal_analytics
@@ -1327,7 +1341,7 @@ function mapi_analytics($ga_id = NULL, $allow_multiple_domains = NULL, $enhanced
 
 	if(mapi_is_true($universal_analytics)) {
 		$ga_code .= "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');";
-		$ga_code .= "ga('create', '".$ga_id."', '".$domain."');";
+		$ga_code .= "ga('create', '" . $ga_id . "', '" . $domain . "');";
 		$ga_code .= "ga('send', 'pageview');";
 	} else {
 
@@ -1336,7 +1350,7 @@ function mapi_analytics($ga_id = NULL, $allow_multiple_domains = NULL, $enhanced
 			$ga_code .= "var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';\n";
 			$ga_code .= "_gaq.push(['_require', 'inpage_linkid', pluginUrl]);\n";
 		}
-		$ga_code .= "\t_gaq.push(['_setAccount', '".$ga_id."']);\n\t_gaq.push(['_setDomainName', '".$domain."']);\n";
+		$ga_code .= "\t_gaq.push(['_setAccount', '" . $ga_id . "']);\n\t_gaq.push(['_setDomainName', '" . $domain . "']);\n";
 		if(mapi_is_true($allow_multiple_domains)) {
 			$ga_code .= "\t_gaq.push(['_setAllowLinker', true]);\n";
 		}
@@ -1368,8 +1382,8 @@ function mapi_analytics($ga_id = NULL, $allow_multiple_domains = NULL, $enhanced
 function mapi_extract_domain($url) {
 	$domain = parse_url($url);
 	$domain = $domain['host'];
-	require_once(MAPI_DIR_PATH.'lib/regdom-php/effectiveTLDs.inc.php');
-	$tldTree = require_once(MAPI_DIR_PATH.'lib/regdom-php/regDomain.inc.php');
+	require_once(MAPI_DIR_PATH . 'lib/regdom-php/effectiveTLDs.inc.php');
+	$tldTree = require_once(MAPI_DIR_PATH . 'lib/regdom-php/regDomain.inc.php');
 	$domain = getRegisteredDomain($domain, $tldTree);
 
 	return $domain;
@@ -1379,14 +1393,14 @@ function mapi_extract_domain($url) {
  * Takes any phone number and returns a URI formatted version (for click to call links).
  *
  * @param $prefix (string) A prefix to add before $tel. Defaults to "+1".
- * @param $tel    (string) A phone number.
+ * @param $tel (string) A phone number.
  *
  * @return string
  */
 function mapi_tel_uri($tel, $prefix = "+1") {
 	$tel = mapi_strip_nonnumeric($tel);
 
-	return apply_filters('mapi_tel_uri', $prefix.$tel);
+	return apply_filters('mapi_tel_uri', $prefix . $tel);
 }
 
 /**
@@ -1492,9 +1506,9 @@ function mapi_hex_to_rgb($hex_color) {
 		$hex_color = substr($hex_color, 1);
 	}
 	if(strlen($hex_color) == 6) {
-		list($r, $g, $b) = array($hex_color[0].$hex_color[1], $hex_color[2].$hex_color[3], $hex_color[4].$hex_color[5]);
+		list($r, $g, $b) = array($hex_color[0] . $hex_color[1], $hex_color[2] . $hex_color[3], $hex_color[4] . $hex_color[5]);
 	} elseif(strlen($hex_color) == 3) {
-		list($r, $g, $b) = array($hex_color[0].$hex_color[0], $hex_color[1].$hex_color[1], $hex_color[2].$hex_color[2]);
+		list($r, $g, $b) = array($hex_color[0] . $hex_color[0], $hex_color[1] . $hex_color[1], $hex_color[2] . $hex_color[2]);
 	} else {
 		return FALSE;
 	}
@@ -1582,4 +1596,25 @@ function mapi_get_ip_by_host($host) {
 	} else {
 		return mapi_error(array('msg' => 'gethostbyname() not available.'));
 	}
+}
+
+/**
+ * Returns a lowercase string with the web server software.
+ * Currently supports "apache", "nginx", and "other".
+ *
+ * @return string
+ */
+function mapi_check_server() {
+	if(array_key_exists('SERVER_SOFTWARE', $_SERVER)) {
+		$server = $_SERVER['SERVER_SOFTWARE'];
+		if(stripos($server, 'nginx') !== FALSE) {
+			$server = 'nginx';
+		} elseif(stripos($server, 'apache') !== FALSE) {
+			$server = 'apache';
+		} else {
+			$server = 'other';
+		}
+	}
+
+	return $server;
 }

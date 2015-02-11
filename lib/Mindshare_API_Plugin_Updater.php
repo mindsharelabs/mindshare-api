@@ -31,7 +31,7 @@ class Mindshare_API_Plugin_Updater {
 		$this->api_url = trailingslashit($_api_url);
 		$this->api_data = urlencode_deep($_api_data);
 		$this->name = plugin_basename($_plugin_file);
-		$this->slug = basename($_plugin_file, '.php');
+		$this->slug = basename($_plugin_file, '.php'); // @todo Add alternate API info for development track?
 		$this->version = $_api_data['version'];
 
 		// Set up hooks.
@@ -80,6 +80,7 @@ class Mindshare_API_Plugin_Updater {
 				$_transient_data->response[$this->name] = $api_response;
 			}
 		}
+
 		return $_transient_data;
 	}
 
@@ -122,6 +123,7 @@ class Mindshare_API_Plugin_Updater {
 		if(strpos($url, 'https://') !== FALSE && strpos($url, 'edd_action=package_download')) {
 			$args['sslverify'] = FALSE;
 		}
+
 		return $args;
 	}
 
@@ -147,8 +149,9 @@ class Mindshare_API_Plugin_Updater {
 			return;
 		}
 
-		if(empty($data['license']))
+		if(empty($data['license'])) {
 			return;
+		}
 
 		$api_params = array(
 			'edd_action' => 'get_version',
@@ -161,8 +164,10 @@ class Mindshare_API_Plugin_Updater {
 
 		if(!is_wp_error($request)):
 			$request = json_decode(wp_remote_retrieve_body($request));
-			if($request && isset($request->sections))
+			if($request && isset($request->sections)) {
 				$request->sections = maybe_unserialize($request->sections);
+			}
+
 			return $request;
 		else:
 			return FALSE;

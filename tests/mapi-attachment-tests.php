@@ -8,7 +8,7 @@
 
 
 include_once('../../../../wp-blog-header.php');
-$q = new WP_Query(apply_filters('mapi_test_query', 'page_id=2'));
+$q = new WP_Query(apply_filters('mapi_test_query', 'page_id=1086'));
 get_header();
 ?>
 <div id="main" class="site-main">
@@ -24,7 +24,7 @@ get_header();
 
 						<?php //the_content(); ?>
 
-						<?php //mapi_featured_img(array('h' => 300, 'w' => 500, 'alt' => 'test', 'title' => 'ok!')); ?>
+						<?php mapi_featured_img(array('h' => 300, 'w' => 500, 'alt' => 'test', 'title' => 'ok!')); ?>
 						<?php mapi_var_dump(mapi_get_first_post_image_src(get_the_ID())); ?>
 						<?php mapi_var_dump(mapi_get_first_post_image_src(666)); ?>
 
