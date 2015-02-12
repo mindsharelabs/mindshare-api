@@ -50,17 +50,15 @@ function mapi_query() {
 		foreach($terms as $term) {
 			$term = esc_attr(trim(str_replace(array('"', '\'', '%22'), '', $term)));
 			if(!empty($term)) {
-				$filtered[] = '"'.$term.'"';
+				$filtered[] = '"' . $term . '"';
 			}
 		}
 		if(count($filtered) > 0) {
 			$mapi_do_extend = TRUE;
-			echo '<script type="text/javascript">var mapi_query = new Array('.implode(',', $filtered).');var mapi_areas = new Array("'.implode('","', $areas).'");</script>';
+			echo '<script type="text/javascript">var mapi_query = new Array(' . implode(',', $filtered) . ');var mapi_areas = new Array("' . implode('","', $areas) . '");</script>';
 		}
 	}
 }
-
-
 
 /**
  * Replaces the GET variable 's' with a nice URL, like 'search'.
@@ -80,7 +78,7 @@ function mapi_nice_search_redirect() {
 	$search_base = apply_filters('mapi_search_base', $wp_rewrite->search_base);
 
 	if(is_search() && !is_admin() && strpos($_SERVER['REQUEST_URI'], "/{$search_base}/") === FALSE) {
-		wp_redirect(home_url("/{$search_base}/".urlencode(get_query_var('s'))));
+		wp_redirect(home_url("/{$search_base}/" . urlencode(get_query_var('s'))));
 		exit();
 	}
 }

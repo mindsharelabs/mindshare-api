@@ -10,6 +10,10 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.8.3
+- Bugfix for mapi_edit_link()
+- Tested custom search options
+
 ## 0.8.2
 - Updated htmLawed
 - Updated gitignore
