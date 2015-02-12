@@ -378,19 +378,23 @@ function mapi_console_log($msg) {
 	));
 }
 
+
 /**
  * Outputs a mustache to the JavaScript console.
+ * Needs tob e hooked to an early action, for example 'init'.
  *
  * @param $msg
  */
 function mapi_kirts($msg = NULL) {
+	global $MAPI_ERRORS;
 	if($msg == "happy") {
 		$msg = ":{)"; // unusual
 	} else {
-		$msg = ":{\\"; // normal
+		$msg = ':{'; // normal
 	}
-	mapi_console_log($msg);
+	$MAPI_ERRORS[] = $msg;
 }
+
 
 /**
  *
