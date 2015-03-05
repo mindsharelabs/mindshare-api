@@ -10,6 +10,9 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.8.4
+- PHP notice fix for mapi_browser_from_ua()
+
 ## 0.8.3
 - Bugfix for mapi_edit_link()
 - Tested custom search options

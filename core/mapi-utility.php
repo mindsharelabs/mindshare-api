@@ -18,8 +18,8 @@
  *
  * @since  0.6.7
  *
- * @param string $string        The natural language value
- * @param array  $true_synonyms A list strings that are TRUE
+ * @param string $string The natural language value
+ * @param array $true_synonyms A list strings that are TRUE
  *
  * @return boolean The boolean value of the provided text
  **/
@@ -120,7 +120,12 @@ function mapi_path_to_url($file) {
 function mapi_browser_from_ua() {
 	// based on http://www.php.net/manual/en/function.get-browser.php#101125
 
-	$user_agent = $_SERVER['HTTP_USER_AGENT'];
+	if(isset($_SERVER) && array_key_exists('HTTP_USER_AGENT', $_SERVER)) {
+		$user_agent = $_SERVER['HTTP_USER_AGENT'];
+	} else {
+		return FALSE;
+	}
+
 	$browser_name = 'Unknown';
 	$platform = 'Unknown';
 
@@ -185,10 +190,10 @@ function mapi_browser_from_ua() {
 
 	return array(
 		'user_agent' => $user_agent,
-		'name'       => $browser_name,
-		'version'    => $version,
-		'platform'   => $platform,
-		'pattern'    => $pattern
+		'name' => $browser_name,
+		'version' => $version,
+		'platform' => $platform,
+		'pattern' => $pattern
 	);
 }
 
@@ -311,9 +316,9 @@ function mapi_error($args) {
 		$msg = 'Fatal error: mapi_error must be passed an array.';
 	}
 	$defaults = array(
-		'msg'  => 'An unspecified error occurred',
+		'msg' => 'An unspecified error occurred',
 		'echo' => FALSE,
-		'die'  => FALSE
+		'die' => FALSE
 	);
 	$args = wp_parse_args($args, $defaults);
 	extract($args, EXTR_SKIP);
@@ -359,9 +364,9 @@ function mapi_error($args) {
  */
 function mapi_die($msg) {
 	mapi_error(array(
-		'msg'  => $msg,
+		'msg' => $msg,
 		'echo' => TRUE,
-		'die'  => TRUE
+		'die' => TRUE
 	));
 }
 
@@ -372,9 +377,9 @@ function mapi_die($msg) {
  */
 function mapi_console_log($msg) {
 	mapi_error(array(
-		'msg'  => $msg,
+		'msg' => $msg,
 		'echo' => FALSE,
-		'die'  => FALSE
+		'die' => FALSE
 	));
 }
 
@@ -415,8 +420,8 @@ function mapi_error_console() {
  * Optionally, will stop PHP execution if $die is set to TRUE. Does nothing iif the current
  * user does not have the right $capability (defaults to 'manage_options').
  *
- * @param mixed  $var
- * @param bool   $die
+ * @param mixed $var
+ * @param bool $die
  * @param string $capability
  */
 function mapi_var_dump($var = NULL, $die = FALSE, $capability = 'manage_options') {
@@ -444,7 +449,7 @@ function mapi_poop() {
  *
  * @todo make recursive (optionally)
  *
- * @param null   $dir
+ * @param null $dir
  * @param string $exts
  *
  * @return array
@@ -507,9 +512,9 @@ function mapi_intval_array($value) {
  *
  * Search a multidimensional array for a value.
  *
- * @param mixed $needle   What to search for.
+ * @param mixed $needle What to search for.
  * @param array $haystack Array to search within.
- * @param bool  $strict   Whether to use strict type checking or not.
+ * @param bool $strict Whether to use strict type checking or not.
  *
  * @return bool
  */
@@ -541,7 +546,7 @@ function mapi_sanitize_array($array) {
  *
  * Preloads given assets in the background.
  *
- * @param null   $dir
+ * @param null $dir
  * @param string $exts
  */
 function mapi_preload($dir = NULL, $exts = 'jpg,jpeg,png,gif') {
@@ -549,7 +554,7 @@ function mapi_preload($dir = NULL, $exts = 'jpg,jpeg,png,gif') {
 	$preload_arr = mapi_file_array_dir(trailingslashit($dir), $exts);
 	?>
 	<script type="text/javascript">
-		if(typeof jQuery != 'undefined') {
+		if (typeof jQuery != 'undefined') {
 			var <?php echo $preload_var?> = <?php echo json_encode($preload_arr); ?>;
 			jQuery(<?php echo $preload_var; ?>).each(function() {
 				jQuery('<img/>')[ 0 ].src = this;
@@ -1075,9 +1080,9 @@ function mapi_break_frames() {
 	?>
 	<script type="text/javascript">
 		//console.log(self.location.toString());
-		if(top.location.toString() != self.location.toString()) {
-			if(top.location.toString().indexOf('wp-admin/customize.php') == -1) {
-				if(top.location != self.location) {
+		if (top.location.toString() != self.location.toString()) {
+			if (top.location.toString().indexOf('wp-admin/customize.php') == -1) {
+				if (top.location != self.location) {
 					top.location = self.location.href;
 				}
 			}
@@ -1120,7 +1125,7 @@ function mapi_external_links() {
 	?>
 	<script type="text/javascript">jQuery(document).ready(function() {
 			jQuery("a[href^='http']:not([href*='<?php echo $MAPI_TLD; ?>'])").each(function() {
-				if(jQuery(this).attr('data-target')) {
+				if (jQuery(this).attr('data-target')) {
 					jQuery(this).attr("target", jQuery(this).data('target'));
 				} else {
 					jQuery(this).attr("target", "_blank");
@@ -1302,7 +1307,7 @@ function mapi_enqueue_scripts() {
  *
  * Outputs Google Analytics code.
  *
- * @param null $ga_id                  (string)
+ * @param null $ga_id (string)
  * @param null $allow_multiple_domains (string)
  * @param null $enhanced_link_attribution
  * @param null $universal_analytics
@@ -1399,7 +1404,7 @@ function mapi_extract_domain($url) {
  * Takes any phone number and returns a URI formatted version (for click to call links).
  *
  * @param $prefix (string) A prefix to add before $tel. Defaults to "+1".
- * @param $tel    (string) A phone number.
+ * @param $tel (string) A phone number.
  *
  * @return string
  */
