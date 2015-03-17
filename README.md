@@ -12,6 +12,9 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 ## 0.8.4
 - PHP notice fix for mapi_browser_from_ua()
+- Added optional filter to add custom post type to "Right Now" box
+- Added fn mapi_has_role()
+- Added fn mapi_current_user_has_role()
 
 ## 0.8.3
 - Bugfix for mapi_edit_link()

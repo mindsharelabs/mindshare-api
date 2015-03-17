@@ -81,9 +81,6 @@ if(!class_exists('mapi_options')) :
 				if(!empty($this->options['enable_adv_speed_options']['enqueue_scripts_txt'])) {
 					add_action('wp_enqueue_scripts', 'mapi_enqueue_scripts', 100);
 				}
-				/*if(!empty($this->options['enable_adv_speed_options']['register_scripts_txt'])) {
-					add_action('wp_enqueue_scripts', 'mapi_register_scripts', 100);
-				}*/
 			}
 
 			if(@$this->options['load_jquery']) {
@@ -197,12 +194,7 @@ if(!class_exists('mapi_options')) :
 		public function set_inline_post_options() {
 			if(@$this->options['enable_inline_post_functions']) {
 				add_action('init', 'mapi_inline_post_btns'); // add shortcode buttons to TinyMCE
-			} /*else {
-				if(shortcode_exists('inline-post')) {
-					remove_shortcode('inline-post');
-					remove_shortcode('inline-query');
-				}
-			}*/
+			}
 		}
 
 		/**
@@ -213,14 +205,7 @@ if(!class_exists('mapi_options')) :
 		public function set_member_options() {
 			if(@$this->options['enable_member_functions']) {
 				add_action('admin_init', 'mapi_member_btns'); // add member shortcode buttons to TinyMCE
-			} /*else {
-				if(shortcode_exists('mapi_access_check_shortcode')) {
-					// keeping these on for security
-					//remove_shortcode('mapi_access_check_shortcode');
-					//remove_shortcode('mapi_member_check_shortcode');
-					remove_shortcode('mapi_visitor_check_shortcode');
-				}
-			}*/
+			}
 		}
 
 		/**
@@ -254,7 +239,6 @@ if(!class_exists('mapi_options')) :
 			 * Register filters to encode exposed email addresses in
 			 * posts, pages, excerpts, comments and widgets.
 			 *
-			 * @todo move this, make filterable
 			 */
 			if(@$this->options['encode_email_addresses']) {
 				$filters = apply_filters('mapi_email_encode_filters', array('the_content', 'the_excerpt', 'widget_text', 'comment_text', 'comment_excerpt'));
@@ -339,7 +323,8 @@ if(!class_exists('mapi_options')) :
 			add_action('wp_head', 'mapi_set_contstants_js', 5);
 			add_action('wp_footer', 'mapi_error_console');
 			add_action('admin_head', 'mapi_set_contstants_js', 5);
-			add_action('admin_menu', array($this, 'sort_dashboard_menu'), 999);
+			add_action('admin_menu', array($this, 'sort_dashboard_menu'), 9999);
+			add_action('dashboard_glance_items', 'mapi_right_now_content_table_end');
 
 			add_action('wp_enqueue_scripts', 'mapi_remove_version_scripts', 100);
 			add_action('wp_print_footer_scripts', 'mapi_remove_version_scripts', 100);

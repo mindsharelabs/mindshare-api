@@ -47,7 +47,7 @@ function mapi_admin_menu_nav_menus() {
 	$menus = wp_get_nav_menus(array('orderby' => 'name'));
 	foreach($menus as $menu) {
 		add_submenu_page(
-			'nav-menus.php', esc_attr(ucwords($menu->name)), esc_attr(ucwords($menu->name)), 'edit_theme_options', 'nav-menus.php?action=edit&amp;menu=' . $menu->term_id, '');
+			'nav-menus.php', esc_attr(ucwords($menu->name)), esc_attr(ucwords($menu->name)), 'edit_theme_options', 'nav-menus.php?action=edit&amp;menu='.$menu->term_id, '');
 	}
 }
 
@@ -81,7 +81,7 @@ function mapi_username_or_email_login() {
 		// Form Label
 		document.getElementById('loginform').childNodes[ 1 ].childNodes[ 1 ].childNodes[ 0 ].nodeValue = 'Username or Email';
 		// Error Messages
-		if(document.getElementById('login_error')) {
+		if (document.getElementById('login_error')) {
 			document.getElementById('login_error').innerHTML = document.getElementById('login_error').innerHTML.replace('username', 'Username or Email');
 		}
 	</script><?php
@@ -215,3 +215,50 @@ function mapi_is_login() {
 	return in_array($GLOBALS['pagenow'], array('wp-login.php'));
 }
 
+/**
+ * Tests to see if a user has a given WordPress User Role.
+ *
+ * @param $user string|object User Id or User Object
+ * @param $role string The role to test for.
+ *
+ * @return bool|string True on success. False or error on failure.
+ */
+function mapi_has_role($user, $role) {
+
+	if(empty($role)) {
+		return mapi_error(array('msg' => 'No role was specified.', 'echo' => FALSE, 'die' => FALSE));
+	}
+
+	if(!is_object($user)) {
+		$user = get_userdata($user);
+	}
+
+	if(!$user || !$user->exists()) {
+		return FALSE;
+	}
+
+	if(in_array($role, (array) $user->roles)) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+/**
+ *
+ * Tests to see if the logged in user has a given WordPress User Role.
+ *
+ * @param $role
+ *
+ * @return bool|string
+ */
+function mapi_current_user_has_role($role) {
+
+	if(empty($role)) {
+		return mapi_error(array('msg' => 'No role was specified.', 'echo' => FALSE, 'die' => FALSE));
+	}
+
+	$user = wp_get_current_user();
+
+	return mapi_has_role($user, $role);
+}
