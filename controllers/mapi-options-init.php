@@ -385,8 +385,7 @@ if(!class_exists('mapi_options')) :
 		}
 
 		public function login_head() {
-			$img_url = parse_url($this->options['custom_branding']['wp_login_img']['src']);
-			//			echo '<pre>'; var_dump($img_url); echo '</pre>'; die;
+			$img_url = parse_url(@$this->options['custom_branding']['wp_login_img']['src']);
 
 			if(!empty($img_url['path'])) {
 				$image = mapi_thumb(

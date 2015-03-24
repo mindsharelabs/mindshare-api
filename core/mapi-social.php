@@ -89,10 +89,10 @@ function mapi_facebook_lookup($facebook_uri = NULL, $lookup_type = 'uri') {
 	}
 
 	if($lookup_type == 'username' || $lookup_type == 'id') {
-		$facebook_lookup_uri = 'https://graph.facebook.com' . $facebook_uri;
+		$facebook_lookup_uri = 'https://graph.facebook.com'.$facebook_uri;
 	} else {
 		$facebook_uri = parse_url($facebook_uri);
-		$facebook_lookup_uri = 'https://graph.facebook.com' . $facebook_uri['path'];
+		$facebook_lookup_uri = 'https://graph.facebook.com'.$facebook_uri['path'];
 	}
 
 	$facebook_graph_api_request = wp_remote_get($facebook_lookup_uri);
@@ -124,47 +124,46 @@ function mapi_facebook_lookup($facebook_uri = NULL, $lookup_type = 'uri') {
 function mapi_facebook_rss($args = array()) {
 
 	$defaults = array(
-		'rss_uri' => NULL,
+		'rss_uri'   => NULL,
 		'num_items' => 4,
 		'num_words' => 7,
-		'echo' => TRUE
+		'echo'      => TRUE
 	);
 	$args = wp_parse_args($args, $defaults);
-	extract($args, EXTR_SKIP);
 
-	if(empty($rss_uri)) {
+	if(empty($args['rss_uri'])) {
 		// nothing was passed in so let's see if we can build the proper URL based on API settings
 		$facebook_id = mapi_get_facebook_id();
 		if($facebook_id) {
-			$rss_uri = 'https://www.facebook.com/feeds/page.php?id=' . $facebook_id . '&format=rss20';
+			$args['rss_uri'] = 'https://www.facebook.com/feeds/page.php?id='.$facebook_id.'&format=rss20';
 		} else {
 			return mapi_error(array('msg' => 'Facebook RSS URI is required'));
 		}
 	}
 
 	// include WP RSS functions
-	include_once(ABSPATH . WPINC . '/feed.php');
+	include_once(ABSPATH.WPINC.'/feed.php');
 
 	// fetch the feed
-	$rss = fetch_feed($rss_uri);
+	$rss = fetch_feed($args['rss_uri']);
 	if(!is_wp_error($rss)) {
-		$maxitems = $rss->get_item_quantity($num_items);
+		$maxitems = $rss->get_item_quantity($args['num_items']);
 		$rss_items = $rss->get_items(0, $maxitems);
 	}
 
 	// parse the feed
 	if($maxitems != 0) {
-		if($echo) {
+		if($args['echo']) {
 			echo '<ul class="mapi-facebook-rss">';
 			foreach($rss_items as $item) {
 				?>
 				<?php if($item->get_title() != '') : ?>
 					<li>
-						<span class="mapi-fb-link"><a class="mapi-fb-link" href='<?php echo $item->get_permalink(); ?>' title='<?php echo 'Posted ' . $item->get_date('m/d/y | g:i a'); ?>'><?php echo mapi_word_limit(mapi_strip_url($item->get_title()), $num_words); ?></a>...</span><br /><span class="mapi-fb-meta">Posted to <a href="<?php mapi_option('facebook_uri'); ?>" title="Connect with <?php bloginfo('name'); ?> on Facebook" target="_blank">Facebook</a> on <?php echo $item->get_date('m/d/y @ g:i a'); ?></span>
+						<span class="mapi-fb-link"><a class="mapi-fb-link" href='<?php echo $item->get_permalink(); ?>' title='<?php echo 'Posted '.$item->get_date('m/d/y | g:i a'); ?>'><?php echo mapi_word_limit(mapi_strip_url($item->get_title()), $args['num_words']); ?></a>...</span><br /><span class="mapi-fb-meta">Posted to <a href="<?php mapi_option('facebook_uri'); ?>" title="Connect with <?php bloginfo('name'); ?> on Facebook" target="_blank">Facebook</a> on <?php echo $item->get_date('m/d/y @ g:i a'); ?></span>
 					</li>
 				<?php else : ?>
 					<li>
-						<span class="mapi-fb-link"><a class="mapi-fb-link" href='<?php echo $item->get_permalink(); ?>' title='<?php echo 'Posted ' . $item->get_date('m/d/y | g:i a'); ?>'><?php echo mapi_word_limit(strip_tags(mapi_strip_url($item->get_description())), $num_words); ?></a>...</span><br /><span class="mapi-fb-meta">Posted to <a href="<?php mapi_option('facebook_uri'); ?>" title="Connect with <?php bloginfo('name'); ?> on Facebook" target="_blank">Facebook</a> on <?php echo $item->get_date('m/d/y @ g:i a'); ?></span>
+						<span class="mapi-fb-link"><a class="mapi-fb-link" href='<?php echo $item->get_permalink(); ?>' title='<?php echo 'Posted '.$item->get_date('m/d/y | g:i a'); ?>'><?php echo mapi_word_limit(strip_tags(mapi_strip_url($item->get_description())), $args['num_words']); ?></a>...</span><br /><span class="mapi-fb-meta">Posted to <a href="<?php mapi_option('facebook_uri'); ?>" title="Connect with <?php bloginfo('name'); ?> on Facebook" target="_blank">Facebook</a> on <?php echo $item->get_date('m/d/y @ g:i a'); ?></span>
 					</li>
 				<?php endif; ?>
 			<?php
@@ -174,7 +173,7 @@ function mapi_facebook_rss($args = array()) {
 			return $rss_items;
 		}
 	} else {
-		return mapi_error(array('msg' => 'No Facebook status updates were found in the feed at ' . $rss_uri, 'echo' => TRUE, 'die' => FALSE));
+		return mapi_error(array('msg' => 'No Facebook status updates were found in the feed at '.$args['rss_uri'], 'echo' => TRUE, 'die' => FALSE));
 	}
 }
 
@@ -198,17 +197,16 @@ function mapi_facebook_rss($args = array()) {
 function mapi_facebook_like($args) {
 
 	$defaults = array(
-		'href' => get_permalink(get_the_ID()), // url to like
-		'width' => 120, // integer
-		'send' => 'false', // boolean
-		'show_faces' => 'false', // boolean
-		'layout' => 'button_count', // standard, button_count, box_count
-		'action' => 'like', // 'like', 'recommend'
+		'href'        => get_permalink(get_the_ID()), // url to like
+		'width'       => 120, // integer
+		'send'        => 'false', // boolean
+		'show_faces'  => 'false', // boolean
+		'layout'      => 'button_count', // standard, button_count, box_count
+		'action'      => 'like', // 'like', 'recommend'
 		'colorscheme' => 'light', // light, dark
-		'font' => 'segoe ui' // 'arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'
+		'font'        => 'segoe ui' // 'arial', 'lucida grande', 'segoe ui', 'tahoma', 'trebuchet ms', 'verdana'
 	);
 	$args = wp_parse_args($args, $defaults);
-	extract($args, EXTR_SKIP);
 
 	?>
 	<!-- Facebook Like button -->
@@ -226,14 +224,14 @@ function mapi_facebook_like($args) {
 		}(document, 'script', 'facebook-jssdk'));
 	</script>
 	<div class="fb-like"
-		 data-href="<?php echo $href; ?>"
-		 data-send="<?php echo $send; ?>"
-		 data-layout="<?php echo $layout; ?>"
-		 data-width="<?php echo $width; ?>"
-		 data-show-faces="<?php echo $show_faces; ?>"
-		 data-action="<?php echo $action; ?>"
-		 data-colorscheme="<?php echo $colorscheme; ?>"
-		 data-font="<?php echo $font; ?>">
+		 data-href="<?php echo $args['href']; ?>"
+		 data-send="<?php echo $args['send']; ?>"
+		 data-layout="<?php echo $args['layout']; ?>"
+		 data-width="<?php echo $args['width']; ?>"
+		 data-show-faces="<?php echo $args['show_faces']; ?>"
+		 data-action="<?php echo $args['action']; ?>"
+		 data-colorscheme="<?php echo $args['colorscheme']; ?>"
+		 data-font="<?php echo $args['font']; ?>">
 	</div>
 <?php
 }
@@ -252,7 +250,7 @@ function mapi_facebook_head() {
 		<?php
 		// the post does not have featured image, use a default image
 		if(!has_post_thumbnail(get_the_ID())) : ?>
-			<meta property="og:image" content="<?php echo get_template_directory_uri() . '/img/nothumb.gif'; ?>" />
+			<meta property="og:image" content="<?php echo get_template_directory_uri().'/img/nothumb.gif'; ?>" />
 		<?php else : ?>
 			<meta property="og:image" content="<?php echo esc_attr(mapi_get_attachment_image_src(NULL, 'medium')); ?>" />
 		<?php endif; ?>
@@ -267,7 +265,7 @@ function mapi_facebook_head() {
  * @return string
  */
 function mapi_add_opengraph_doctype($output) {
-	return $output . ' xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"';
+	return $output.' xmlns:og="http://opengraphprotocol.org/schema/" xmlns:fb="http://www.facebook.com/2008/fbml"';
 }
 
 /**
@@ -287,20 +285,19 @@ function mapi_add_opengraph_doctype($output) {
  */
 function mapi_google_plus_one($args) {
 	$defaults = array(
-		'href' => get_permalink(get_the_ID()), // url to plus one
-		'width' => 'medium', // small, medium, standard, tall
+		'href'       => get_permalink(get_the_ID()), // url to plus one
+		'width'      => 'medium', // small, medium, standard, tall
 		'annotation' => 'none', // none, bubble, inline
-		'size' => 120, // 120 is smallest, default is 450
-		'callback' => NULL // JS callback function name, function(jsonParamObj)
+		'size'       => 120, // 120 is smallest, default is 450
+		'callback'   => NULL // JS callback function name, function(jsonParamObj)
 	);
 	$args = wp_parse_args($args, $defaults);
-	extract($args, EXTR_SKIP);
 
 	?>
 	<!-- Google +1 button -->
-	<div class="g-plusone mcms-social" data-size="<?php echo $width; ?>" data-annotation="<?php echo $annotation; ?>" data-href="<?php echo $href; ?>"
-		<?php if($annotation == 'inline') { ?> data-width="<?php echo $size; ?>" <?php } ?>
-		<?php if(!empty($callback)) { ?> callback="<?php echo $var; ?>" <?php } ?>></div>
+	<div class="g-plusone mcms-social" data-size="<?php echo $args['width']; ?>" data-annotation="<?php echo $args['annotation']; ?>" data-href="<?php echo $args['href']; ?>"
+		<?php if($args['annotation'] == 'inline') { ?> data-width="<?php echo $args['size']; ?>" <?php } ?>
+		<?php if(!empty($args['callback'])) { ?> callback="<?php echo $var; ?>" <?php } ?>></div>
 	<script type="text/javascript">
 		(function() {
 			var po = document.createElement('script');
@@ -411,64 +408,63 @@ function mapi_social_links($networks = array(), $share_or_follow = 'share', $ech
  */
 function mapi_social_link($args) {
 	if(!is_array($args)) {
-		return mapi_error(array('msg' => 'Fatal error: ' . __FUNCTION__ . ' must be passed an array.'));
+		return mapi_error(array('msg' => 'Fatal error: '.__FUNCTION__.' must be passed an array.'));
 	}
 	$defaults = array(
-		'class' => 'mapi-social-link',
-		'echo' => TRUE,
-		'id' => get_the_ID(),
-		'network' => NULL,
+		'class'    => 'mapi-social-link',
+		'echo'     => TRUE,
+		'id'       => get_the_ID(),
+		'network'  => NULL,
 		'nofollow' => TRUE,
-		'share' => TRUE,
-		'target' => '_blank',
-		'title' => NULL,
+		'share'    => TRUE,
+		'target'   => '_blank',
+		'title'    => NULL,
 	);
 	$args = wp_parse_args($args, $defaults);
-	extract($args, EXTR_SKIP);
 
-	if(empty($network)) {
+	if(empty($args['network'])) {
 		return mapi_error(array('msg' => 'No social network was specified.'));
 	} else {
-		$network = trim(strtolower($network));
+		$args['network'] = trim(strtolower($args['network']));
 	}
 
-	if(empty($title)) {
-		if($share) {
-			$title = 'Share this ' . get_post_type($id) . ' on ' . ucwords($network);
+	if(empty($args['title'])) {
+		if($args['share']) {
+			$args['title'] = 'Share this '.get_post_type($args['id']).' on '.ucwords($args['network']);
 		} else {
-			$title = 'Follow ' . get_bloginfo_rss('name') . ' on ' . ucwords($network);
+			$args['title'] = 'Follow '.get_bloginfo_rss('name').' on '.ucwords($args['network']);
 		}
-		if($network == 'rss') {
-			$title = get_bloginfo_rss('name') . ' RSS feed';
+		if($args['network'] == 'rss') {
+			$args['title'] = get_bloginfo_rss('name').' RSS feed';
 		}
 	}
 
 	$link = '<a class="';
 
-	$link .= $class . ' ' . sanitize_title($network) . '" ';
+	$link .= $args['class'].' '.sanitize_title($args['network']).'" ';
 
-	if($nofollow) {
+	if($args['nofollow']) {
 		$link .= 'rel="nofollow" ';
 	}
 
 	$link .= 'data-placement="top" ';
-	$link .= 'target="' . $target . '" ';
-	$link .= 'title="' . apply_filters('mapi_social_link_title_attribute', $title) . '" ';
+	$link .= 'target="'.$args['target'].'" ';
+	$link .= 'title="'.apply_filters('mapi_social_link_title_attribute', $args['title']).'" ';
 	$link .= 'href="';
 
-	if($share) {
-		$link .= _mapi_social_share_href($network, $id);
+	if($args['share']) {
+		$link .= _mapi_social_share_href($args['network'], $args['id']);
 	} else {
-		$link .= _mapi_social_follow_href($network, $id);
+		$link .= _mapi_social_follow_href($args['network'], $args['id']);
 	}
 
 	// for the most part FA classes work, but not for "email"
-	if($network == 'email') {
-		$network = 'envelope-square';
+	if($args['network'] == 'email') {
+		$args['network'] = 'envelope-square';
 	}
-	$link .= '"><i class="fa fa-' . $network . '">&nbsp;</i></a>';
+	$link .= '"><i class="fa fa-'.$args['network'].'">&nbsp;</i></a>';
 
-	if($echo) {
+	if($args['echo']) {
 		echo apply_filters('mapi_social_link', $link);
 	} else {
 		return apply_filters('mapi_social_link', $link);
@@ -491,68 +487,67 @@ function mapi_social_link($args) {
  */
 function mapi_social_link_js($args) {
 	if(!is_array($args)) {
-		return mapi_error(array('msg' => 'Fatal error: ' . __FUNCTION__ . ' must be passed an array.'));
+		return mapi_error(array('msg' => 'Fatal error: '.__FUNCTION__.' must be passed an array.'));
 	}
 	$defaults = array(
-		'class' => 'mapi-social-link',
-		'echo' => TRUE,
-		'id' => get_the_ID(),
-		'network' => NULL,
+		'class'    => 'mapi-social-link',
+		'echo'     => TRUE,
+		'id'       => get_the_ID(),
+		'network'  => NULL,
 		'nofollow' => TRUE,
-		'share' => TRUE,
+		'share'    => TRUE,
 		//'target'   => '_blank',
-		'title' => NULL,
+		'title'    => NULL,
 	);
 	$args = wp_parse_args($args, $defaults);
-	extract($args, EXTR_SKIP);
 
 	$win_w = apply_filters('mapi_social_link_js_width', 626);
 	$win_h = apply_filters('mapi_social_link_js_height', 436);
 
-	if(empty($network)) {
+	if(empty($args['network'])) {
 		return mapi_error(array('msg' => 'No social network was specified.'));
 	} else {
-		$network = trim(strtolower($network));
+		$args['network'] = trim(strtolower($args['network']));
 	}
 
-	if(empty($title)) {
-		if($share) {
-			$title = 'Share this ' . get_post_type($id) . ' on ' . ucwords($network);
+	if(empty($args['title'])) {
+		if($args['share']) {
+			$args['title'] = 'Share this '.get_post_type($args['id']).' on '.ucwords($args['network']);
 		} else {
-			$title = 'Follow ' . get_bloginfo_rss('name') . ' on ' . ucwords($network);
+			$args['title'] = 'Follow '.get_bloginfo_rss('name').' on '.ucwords($args['network']);
 		}
-		if($network == 'rss') {
-			$title = get_bloginfo_rss('name') . ' RSS feed';
+		if($args['network'] == 'rss') {
+			$args['title'] = get_bloginfo_rss('name').' RSS feed';
 		}
 	}
 
 	$link = PHP_EOL;
 	$link .= '<a class="';
 
-	$link .= $class . ' ' . sanitize_title($network) . '" ';
+	$link .= $args['class'].' '.sanitize_title($args['network']).'" ';
 
-	if($nofollow) {
+	if($args['nofollow']) {
 		$link .= 'rel="nofollow" ';
 	}
 
-	$link .= 'title="' . apply_filters('mapi_social_link_title_attribute', $title) . '" ';
+	$link .= 'title="'.apply_filters('mapi_social_link_title_attribute', $args['title']).'" ';
 	$link .= 'href="#" ';
 	$link .= 'onclick="window.open(\'';
 
-	if($share) {
-		$link .= _mapi_social_share_onclick($network, $id); // @TODO fix this stuff
+	if($args['share']) {
+		$link .= _mapi_social_share_onclick($args['network'], $args['id']); // @TODO fix this stuff
 	} else {
-		$link .= _mapi_social_share_onclick($network, $id);
+		$link .= _mapi_social_share_onclick($args['network'], $args['id']);
 	}
-	$link .= ",'mapi-share-dialog','width=" . $win_w . ",height=" . $win_h . ",left=20,top=20'); return false;";
+	$link .= ",'mapi-share-dialog','width=".$win_w.",height=".$win_h.",left=20,top=20'); return false;";
 
 	// for the most part FA classes work, but not for "email"
-	if($network == 'email') {
-		$network = 'envelope-square';
+	if($args['network'] == 'email') {
+		$args['network'] = 'envelope-square';
 	}
-	$link .= '"><i class="fa fa-' . $network . '">&nbsp;</i></a>';
+	$link .= '"><i class="fa fa-'.$args['network'].'">&nbsp;</i></a>';
 
-	if($echo) {
+	if($args['echo']) {
 		echo apply_filters('mapi_social_link', $link);
 	} else {
 		return apply_filters('mapi_social_link', $link);
@@ -570,23 +565,23 @@ function mapi_social_link_js($args) {
 function _mapi_social_share_href($network, $id) {
 	switch($network) {
 		case 'twitter' :
-			$href = 'http://twitter.com/home?status=' . get_permalink($id);
+			$href = 'http://twitter.com/home?status='.get_permalink($id);
 			break;
 		case 'facebook' :
-			$href = 'http://www.facebook.com/sharer.php?u=' . get_permalink($id) . '&amp;t=' . urlencode(get_the_title_rss($id));
+			$href = 'http://www.facebook.com/sharer.php?u='.get_permalink($id).'&amp;t='.urlencode(get_the_title_rss($id));
 			break;
 		case 'google-plus' :
-			$href = 'https://plus.google.com/share?url=' . get_permalink($id);
+			$href = 'https://plus.google.com/share?url='.get_permalink($id);
 			break;
 		case 'pinterest' :
-			$href = 'http://www.pinterest.com/pin/create/link/?url=' . get_permalink($id) . '&amp;media=' . urlencode(mapi_get_attachment_image_src(mapi_get_attachment_id($id))) . '&amp;description=' . urlencode(get_the_title_rss($id));
+			$href = 'http://www.pinterest.com/pin/create/link/?url='.get_permalink($id).'&amp;media='.urlencode(mapi_get_attachment_image_src(mapi_get_attachment_id($id))).'&amp;description='.urlencode(get_the_title_rss($id));
 			break;
 		case 'linkedin' :
-			$href = 'http://www.linkedin.com/shareArticle?mini=true&amp;url=' . get_permalink($id) . '&amp;title=' . urlencode(get_the_title_rss($id));
+			$href = 'http://www.linkedin.com/shareArticle?mini=true&amp;url='.get_permalink($id).'&amp;title='.urlencode(get_the_title_rss($id));
 			//&amp;summary={articleSummary}&amp;source={articleSource};
 			break;
 		case 'tumblr' :
-			$href = 'http://www.tumblr.com/share/link?url=' . urlencode(get_permalink($id)) . '&amp;name=' . urlencode(get_the_title_rss($id)); // &amp;description=
+			$href = 'http://www.tumblr.com/share/link?url='.urlencode(get_permalink($id)).'&amp;name='.urlencode(get_the_title_rss($id)); // &amp;description=
 			break;
 		case 'youtube' :
 			// youtube doesn't have a "share" feature so we'll use the "follow" format instead
@@ -597,7 +592,7 @@ function _mapi_social_share_href($network, $id) {
 			$href = _mapi_social_follow_href('rss', $id);
 			break;
 		case 'email' :
-			$href = 'mailto:?body=' . apply_filters('mapi_social_mailto_body', 'Check out this ' . get_post_type() . ': ' . get_permalink($id)) . '&amp;subject=' . get_the_title_rss($id);
+			$href = 'mailto:?body='.apply_filters('mapi_social_mailto_body', 'Check out this '.get_post_type().': '.get_permalink($id)).'&amp;subject='.get_the_title_rss($id);
 			break;
 	}
 
@@ -618,30 +613,30 @@ function _mapi_social_share_onclick($network, $id) {
 			$onclick = "https://twitter.com/share?url='+encodeURIComponent(location.href)";
 			break;
 		case 'facebook' :
-			$onclick = 'http://www.facebook.com/sharer.php?u=\'+encodeURIComponent(location.href)+\'&amp;t=' . urlencode(get_the_title_rss($id)) . '\'';
+			$onclick = 'http://www.facebook.com/sharer.php?u=\'+encodeURIComponent(location.href)+\'&amp;t='.urlencode(get_the_title_rss($id)).'\'';
 			break;
 		case 'google-plus' :
-			$onclick = 'https://plus.google.com/share?url=' . get_permalink($id) . '\'';
+			$onclick = 'https://plus.google.com/share?url='.get_permalink($id).'\'';
 			break;
 		case 'pinterest' :
-			$onclick = 'http://www.pinterest.com/pin/create/link/?url=' . get_permalink($id) . '&amp;media=' . urlencode(mapi_get_attachment_image_src(mapi_get_attachment_id($id))) . '&amp;description=' . urlencode(get_the_title_rss($id)) . '\'';
+			$onclick = 'http://www.pinterest.com/pin/create/link/?url='.get_permalink($id).'&amp;media='.urlencode(mapi_get_attachment_image_src(mapi_get_attachment_id($id))).'&amp;description='.urlencode(get_the_title_rss($id)).'\'';
 			break;
 		case 'linkedin' :
-			$onclick = 'http://www.linkedin.com/shareArticle?mini=true&amp;url=\'+encodeURIComponent(location.href)+\'&amp;title=' . urlencode(get_the_title_rss($id)) . '\'';
+			$onclick = 'http://www.linkedin.com/shareArticle?mini=true&amp;url=\'+encodeURIComponent(location.href)+\'&amp;title='.urlencode(get_the_title_rss($id)).'\'';
 			break;
 		case 'tumblr' :
-			$onclick = 'http://www.tumblr.com/share/link?url=' . urlencode(get_permalink($id)) . '&amp;name=' . urlencode(get_the_title_rss($id)) . '\'';
+			$onclick = 'http://www.tumblr.com/share/link?url='.urlencode(get_permalink($id)).'&amp;name='.urlencode(get_the_title_rss($id)).'\'';
 			break;
 		case 'youtube' :
 			// youtube doesn't have a "share" feature so we'll use the "follow" format instead
-			$onclick = _mapi_social_follow_href('youtube', $id) . '\'';
+			$onclick = _mapi_social_follow_href('youtube', $id).'\'';
 			break;
 		case 'rss' :
 			// rss doesn't have a "share" feature so we'll use the "follow" format instead
-			$onclick = _mapi_social_follow_href('rss', $id) . '\'';
+			$onclick = _mapi_social_follow_href('rss', $id).'\'';
 			break;
 		case 'email' :
-			$onclick = 'mailto:?body=' . apply_filters('mapi_social_mailto_body', 'Check out this ' . get_post_type() . ': ' . get_permalink($id)) . '&amp;subject=' . get_the_title_rss($id) . '\'';
+			$onclick = 'mailto:?body='.apply_filters('mapi_social_mailto_body', 'Check out this '.get_post_type().': '.get_permalink($id)).'&amp;subject='.get_the_title_rss($id).'\'';
 			break;
 	}
 
@@ -705,50 +700,49 @@ function _mapi_social_follow_href($network, $id) {
 function mapi_tweets_oauth($args) {
 
 	if(!class_exists('TwitterAPIExchange')) {
-		require_once(MAPI_DIR_PATH . '/lib/twitter-api-php/TwitterAPIExchange.php');
+		require_once(MAPI_DIR_PATH.'/lib/twitter-api-php/TwitterAPIExchange.php');
 	}
 
 	//  Set access tokens here - see: https://dev.twitter.com/apps/
 	$settings = array(
-		'oauth_access_token' =>
+		'oauth_access_token'        =>
 			apply_filters('mapi_twitter_oauth_access_token', "45686564-2vwoGVrN88RScUl6TOqr5guSYBbzQ3DOWAbWLRq7R"),
 		'oauth_access_token_secret' =>
 			apply_filters('mapi_twitter_oauth_access_token_secret', "g1J8oT2il0ruIJtbr2zyZqM2O59m2PKvN6CdPeYealu1c"),
-		'consumer_key' =>
+		'consumer_key'              =>
 			apply_filters('mapi_twitter_consumer_key', "wOgvxmU8JYXjfXGnolhXsNtPV"),
-		'consumer_secret' =>
+		'consumer_secret'           =>
 			apply_filters('mapi_twitter_consumer_secret', "26l1pgAgmblBb8l5Vi6JD2ybmrTVHc5X5arBwiZAhskqzZI5ff")
 	);
 
 	$defaults = array(
 		'screen_name' => NULL,
-		'num_tweets' => 4,
-		'echo' => TRUE,
-		'oauth' => $settings
+		'num_tweets'  => 4,
+		'echo'        => TRUE,
+		'oauth'       => $settings
 	);
 	$args = wp_parse_args($args, $defaults);
-	extract($args, EXTR_SKIP);
 
-	if(empty($screen_name)) {
+	if(empty($args['screen_name'])) {
 		return mapi_error(array('msg' => 'A valid Twitter screen name is required.'));
 	}
 
 	//  Perform a GET request and echo the response, note: Set the GET field BEFORE calling buildOauth();
 	$url = 'https://api.twitter.com/1.1/statuses/user_timeline.json';
-	$getfield = '?screen_name=' . $screen_name;
+	$getfield = '?screen_name='.$args['screen_name'];
 	$requestMethod = 'GET';
 	$twitter = new TwitterAPIExchange($settings);
 	$tweets = json_decode($twitter->setGetfield($getfield)->buildOauth($url, $requestMethod)->performRequest());
 
 	if($tweets) {
-		$tweets = array_slice($tweets, 0, $num_tweets);
-		if($echo) {
+		$tweets = array_slice($tweets, 0, $args['num_tweets']);
+		if($args['echo']) {
 			echo '<ul class="mapi-twitter-feed mapi-twitter-rss">';
 			foreach($tweets as $tweet) : ?>
 				<li>
 					<span class="mapi-tweet-link"><?php echo $tweet->text; ?></span><br />
-						<span class="mapi-tweet-meta">Posted to <a class="mapi-tweet-link" href='https://twitter.com/<?php echo $screen_name; ?>/status/<?php echo $tweet->id; ?>' title='<?php echo 'Posted ' . $tweet->created_at; ?>'>Twitter</a> on <?php echo $tweet->created_at; ?>
-													  by <a href="https://twitter.com/<?php echo $screen_name; ?>" title="Connect with <?php bloginfo('name'); ?> on Twitter" target="_blank"><?php echo $screen_name; ?></a></span>
+						<span class="mapi-tweet-meta">Posted to <a class="mapi-tweet-link" href='https://twitter.com/<?php echo $args['screen_name']; ?>/status/<?php echo $tweet->id; ?>' title='<?php echo 'Posted '.$tweet->created_at; ?>'>Twitter</a> on <?php echo $tweet->created_at; ?>
+													  by <a href="https://twitter.com/<?php echo $args['screen_name']; ?>" title="Connect with <?php bloginfo('name'); ?> on Twitter" target="_blank"><?php echo $args['screen_name']; ?></a></span>
 				</li>
 			<?php
 			endforeach;
@@ -757,7 +751,7 @@ function mapi_tweets_oauth($args) {
 			return $tweets;
 		}
 	} else {
-		mapi_error(array('msg' => 'Could not retrieve Twitter timeline: ' . $url, 'die' => FALSE, 'echo' => FALSE));
+		mapi_error(array('msg' => 'Could not retrieve Twitter timeline: '.$url, 'die' => FALSE, 'echo' => FALSE));
 	}
 }
 
@@ -771,7 +765,7 @@ function mapi_tweets_oauth($args) {
 function mapi_social_css() {
 	if(!is_admin()) {
 		wp_deregister_style('mapi-social');
-		wp_register_style('mapi-social', MAPI_DIR_URL . 'css/social.css');
+		wp_register_style('mapi-social', MAPI_DIR_URL.'css/social.css');
 		wp_enqueue_style('mapi-social');
 	}
 }

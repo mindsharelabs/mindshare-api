@@ -4015,28 +4015,27 @@ if(!class_exists('mindshare_options_framework')) :
 				'die'  => TRUE
 			);
 			$args = wp_parse_args($args, $defaults);
-			extract($args, EXTR_SKIP);
 
 			$debug = debug_backtrace();
 
 			$str = '';
 
-			if($echo) {
+			if($args['echo']) {
 				$str .= '<div id="message" class="error"><p><strong>';
 			}
 			$str .= $this."->error['".$debug[1]["function"]."']";
-			if($echo) {
+			if($args['echo']) {
 				$str .= '</strong>';
 			}
 
-			$str .= ": ".$msg." in ".$debug[1]["file"]." on line ".$debug[1]["line"];
-			if($echo) {
+			$str .= ": ".$args['msg']." in ".$debug[1]["file"]." on line ".$debug[1]["line"];
+			if($args['echo']) {
 				$str .= '</p></div>';
 			}
 
-			if($echo) {
+			if($args['echo']) {
 
-				if($die) {
+				if($args['die']) {
 					die($str);
 				} else {
 					echo($str);

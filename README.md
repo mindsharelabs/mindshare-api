@@ -10,6 +10,13 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.8.5
+- PHP notice fix in wp_login_img()
+- Refactored most calls to the PHP function extract() to improve debugging and readability
+- Added filters for all mapi_featured_img() defaults
+- Improved mapi_data_uri() fn
+- Fixes for non-standard WP installs, mod_userdir URIs, and mThumb
+
 ## 0.8.4
 - PHP notice fix for mapi_browser_from_ua()
 - Added optional filter to add custom post type to "Right Now" box
@@ -47,7 +54,7 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 ## 0.8
 Preparation for version 1.0 launch:
 - Remove credits tab
-- minify JS files
+- Minify JS files
 - Fix favicon scaling
 - Added new Twitter API Tweets function, mapi_tweets_oauth
 - Added mapi_excerpt_more_text filter

@@ -18,8 +18,8 @@
  *
  * @since  0.6.7
  *
- * @param string $string The natural language value
- * @param array $true_synonyms A list strings that are TRUE
+ * @param string $string        The natural language value
+ * @param array  $true_synonyms A list strings that are TRUE
  *
  * @return boolean The boolean value of the provided text
  **/
@@ -51,7 +51,7 @@ function mapi_excerpt_more($more = NULL) {
 		$more = apply_filters('mapi_excerpt_more_text', $options['excerpt_more_txt']);
 	}
 
-	return apply_filters('mapi_excerpt_more', '&nbsp;<a class="mapi excerpt-more" title="' . the_title_attribute('echo=0') . '" href="' . get_permalink(get_the_ID()) . '">' . $more . '</a>');
+	return apply_filters('mapi_excerpt_more', '&nbsp;<a class="mapi excerpt-more" title="'.the_title_attribute('echo=0').'" href="'.get_permalink(get_the_ID()).'">'.$more.'</a>');
 }
 
 /**
@@ -76,10 +76,10 @@ function mapi_word_limit($string, $length) {
  */
 function mapi_get_url() {
 	$s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
-	$protocol = substr(strtolower($_SERVER["SERVER_PROTOCOL"]), 0, strpos(strtolower($_SERVER["SERVER_PROTOCOL"]), "/")) . $s;
-	$port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":" . $_SERVER["SERVER_PORT"]);
+	$protocol = substr(strtolower($_SERVER["SERVER_PROTOCOL"]), 0, strpos(strtolower($_SERVER["SERVER_PROTOCOL"]), "/")).$s;
+	$port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":".$_SERVER["SERVER_PORT"]);
 
-	return $protocol . "://" . $_SERVER['SERVER_NAME'] . $port . $_SERVER['REQUEST_URI'];
+	return $protocol."://".$_SERVER['SERVER_NAME'].$port.$_SERVER['REQUEST_URI'];
 }
 
 /**
@@ -126,7 +126,6 @@ function mapi_browser_from_ua() {
 		return FALSE;
 	}
 
-	$browser_name = 'Unknown';
 	$platform = 'Unknown';
 
 	// First get the platform
@@ -164,7 +163,7 @@ function mapi_browser_from_ua() {
 
 	// get the correct version number
 	$known = array('Version', $browser_name_short, 'other');
-	$pattern = '#(?<browser>' . join('|', $known) . ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
+	$pattern = '#(?<browser>'.join('|', $known).')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
 	if(@!preg_match_all($pattern, $user_agent, $matches)) {
 		// We have no matching number just continue
 	}
@@ -190,10 +189,10 @@ function mapi_browser_from_ua() {
 
 	return array(
 		'user_agent' => $user_agent,
-		'name' => $browser_name,
-		'version' => $version,
-		'platform' => $platform,
-		'pattern' => $pattern
+		'name'       => $browser_name,
+		'version'    => $version,
+		'platform'   => $platform,
+		'pattern'    => $pattern
 	);
 }
 
@@ -215,10 +214,10 @@ function mapi_broswer_class($show_major_version = FALSE, $show_minor_version = F
 
 		$class = $browser['browser'];
 		if(!empty($browser['majorver']) && $show_major_version) {
-			$class .= '-' . $browser['majorver'];
+			$class .= '-'.$browser['majorver'];
 		}
 		if(!empty($browser['minorver']) && $show_minor_version) {
-			$class .= '-' . $browser['minorver'];
+			$class .= '-'.$browser['minorver'];
 		}
 		$class = strtolower($class);
 	} else {
@@ -270,7 +269,7 @@ function mapi_add_body_classes($classes = array()) {
 		$classes[] = 'iphone';
 	} // add post "type-slug"
 	if(isset($post)) {
-		$classes[] = $post->post_type . '-' . $post->post_name;
+		$classes[] = $post->post_type.'-'.$post->post_name;
 	}
 
 	return $classes;
@@ -313,15 +312,14 @@ function mapi_add_os_body_class($classes) {
 function mapi_error($args) {
 	global $MAPI_ERRORS;
 	if(!is_array($args)) {
-		$msg = 'Fatal error: mapi_error must be passed an array.';
+		$args['msg'] = 'Fatal error: mapi_error must be passed an array.';
 	}
 	$defaults = array(
-		'msg' => 'An unspecified error occurred',
+		'msg'  => 'An unspecified error occurred',
 		'echo' => FALSE,
-		'die' => FALSE
+		'die'  => FALSE
 	);
 	$args = wp_parse_args($args, $defaults);
-	extract($args, EXTR_SKIP);
 
 	$debug = debug_backtrace();
 	$i = (empty($debug[1]["function"])) ? 0 : 1;
@@ -329,24 +327,24 @@ function mapi_error($args) {
 	$str = '';
 
 	/** @noinspection PhpUndefinedVariableInspection */
-	if($echo) {
+	if($args['echo']) {
 		$str .= '<div id="message" class="error"><p><strong>';
 	}
-	$str .= "[" . $debug[$i]["function"] . "]";
-	if($echo) {
+	$str .= "[".$debug[$i]["function"]."]";
+	if($args['echo']) {
 		$str .= '</strong>';
 	}
 
 	/** @noinspection PhpUndefinedVariableInspection */
-	@$str .= ": " . $msg . " in " . $debug[$i]["file"] . " on line " . $debug[$i]["line"];
-	if($echo) {
+	@$str .= ": ".$args['msg']." in ".$debug[$i]["file"]." on line ".$debug[$i]["line"];
+	if($args['echo']) {
 		$str .= '</p></div>';
 	}
 
-	if($echo) {
+	if($args['echo']) {
 
 		/** @noinspection PhpUndefinedVariableInspection */
-		if($die) {
+		if($args['die']) {
 			die($str);
 		} else {
 			echo($str);
@@ -364,9 +362,9 @@ function mapi_error($args) {
  */
 function mapi_die($msg) {
 	mapi_error(array(
-		'msg' => $msg,
+		'msg'  => $msg,
 		'echo' => TRUE,
-		'die' => TRUE
+		'die'  => TRUE
 	));
 }
 
@@ -377,9 +375,9 @@ function mapi_die($msg) {
  */
 function mapi_console_log($msg) {
 	mapi_error(array(
-		'msg' => $msg,
+		'msg'  => $msg,
 		'echo' => FALSE,
-		'die' => FALSE
+		'die'  => FALSE
 	));
 }
 
@@ -409,7 +407,7 @@ function mapi_error_console() {
 	if(count($MAPI_ERRORS) != 0) {
 		echo '<script type="text/javascript">';
 		foreach($MAPI_ERRORS as $error) {
-			echo 'console.log("' . $error . '");';
+			echo 'console.log("'.$error.'");';
 		}
 		echo '</script>';
 	}
@@ -420,8 +418,8 @@ function mapi_error_console() {
  * Optionally, will stop PHP execution if $die is set to TRUE. Does nothing iif the current
  * user does not have the right $capability (defaults to 'manage_options').
  *
- * @param mixed $var
- * @param bool $die
+ * @param mixed  $var
+ * @param bool   $die
  * @param string $capability
  */
 function mapi_var_dump($var = NULL, $die = FALSE, $capability = 'manage_options') {
@@ -429,6 +427,7 @@ function mapi_var_dump($var = NULL, $die = FALSE, $capability = 'manage_options'
 		echo '<pre>';
 		var_dump($var);
 		echo '</pre>';
+		/** @var bool $die */
 		if($die) {
 			die;
 		}
@@ -447,9 +446,9 @@ function mapi_poop() {
  *
  * Returns an array of file URLs for a given directory filterable by file extension(s).
  *
- * @todo make recursive (optionally)
+ * @todo use SPL
  *
- * @param null $dir
+ * @param null   $dir
  * @param string $exts
  *
  * @return array
@@ -466,8 +465,8 @@ function mapi_file_array_dir($dir = NULL, $exts = 'jpg,jpeg,png,gif') {
 		$exts = explode(',', strtolower($exts));
 		while(FALSE !== ($file = readdir($handle))) {
 			foreach($exts as $ext) {
-				if(preg_match('/\.' . $ext . '$/i', $file, $test)) {
-					$files[] = mapi_path_to_url($dir . $file);
+				if(preg_match('/\.'.$ext.'$/i', $file, $test)) {
+					$files[] = mapi_path_to_url($dir.$file);
 					++$i;
 				}
 			}
@@ -512,9 +511,9 @@ function mapi_intval_array($value) {
  *
  * Search a multidimensional array for a value.
  *
- * @param mixed $needle What to search for.
+ * @param mixed $needle   What to search for.
  * @param array $haystack Array to search within.
- * @param bool $strict Whether to use strict type checking or not.
+ * @param bool  $strict   Whether to use strict type checking or not.
  *
  * @return bool
  */
@@ -546,11 +545,11 @@ function mapi_sanitize_array($array) {
  *
  * Preloads given assets in the background.
  *
- * @param null $dir
+ * @param null   $dir
  * @param string $exts
  */
 function mapi_preload($dir = NULL, $exts = 'jpg,jpeg,png,gif') {
-	$preload_var = 'preload_' . rand(); // create a random var name for us in JS
+	$preload_var = 'preload_'.rand(); // create a random var name for us in JS
 	$preload_arr = mapi_file_array_dir(trailingslashit($dir), $exts);
 	?>
 	<script type="text/javascript">
@@ -623,7 +622,7 @@ function mapi_remove_recent_comments_style() {
  * @return string
  */
 function mapi_toggle_html_compression($echo = TRUE) {
-	$comment = PHP_EOL . '<!--compression-none-->' . PHP_EOL;
+	$comment = PHP_EOL.'<!--compression-none-->'.PHP_EOL;
 	if($echo) {
 		echo $comment;
 	} else {
@@ -651,7 +650,7 @@ function mapi_ie_warning() {
 		<script type="text/javascript" src="<?php echo plugins_url('lib/ie6update/ie6update.js', dirname(__FILE__)); ?>"></script>
 		<![endif]-->
 		<?php
-		mapi_toggle_html_compression(); // @todo test w/o this
+		mapi_toggle_html_compression();
 	}
 }
 
@@ -697,6 +696,8 @@ function mapi_update_option($name, $value) {
 		$options[$name] = $value;
 
 		return update_option(MAPI_OPTIONS, $options);
+	} else {
+		return FALSE;
 	}
 }
 
@@ -728,6 +729,8 @@ function mapi_delete_option($name) {
 		$options[$name] = '';
 
 		return update_option(MAPI_OPTIONS, $options);
+	} else {
+		return FALSE;
 	}
 }
 
@@ -1100,12 +1103,12 @@ function mapi_edit_link() {
 		$label = get_post_type_object(get_post_type($post));
 		$label = ucwords($label->labels->singular_name);
 		if(!empty($label)) {
-			$label = 'Edit ' . $label;
+			$label = 'Edit '.$label;
 		} else {
 			$label = 'Edit Page';
 		}
 
-		return apply_filters('mapi_edit_link', '<p class="mapi edit-link btn btn-xs btn-default"><a href="' . get_edit_post_link() . '">' . $label . '</a></p>');
+		return apply_filters('mapi_edit_link', '<p class="mapi edit-link btn btn-xs btn-default"><a href="'.get_edit_post_link().'">'.$label.'</a></p>');
 	} else {
 		return FALSE;
 	}
@@ -1307,7 +1310,7 @@ function mapi_enqueue_scripts() {
  *
  * Outputs Google Analytics code.
  *
- * @param null $ga_id (string)
+ * @param null $ga_id                  (string)
  * @param null $allow_multiple_domains (string)
  * @param null $enhanced_link_attribution
  * @param null $universal_analytics
@@ -1352,7 +1355,7 @@ function mapi_analytics($ga_id = NULL, $allow_multiple_domains = NULL, $enhanced
 
 	if(mapi_is_true($universal_analytics)) {
 		$ga_code .= "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');";
-		$ga_code .= "ga('create', '" . $ga_id . "', '" . $domain . "');";
+		$ga_code .= "ga('create', '".$ga_id."', '".$domain."');";
 		$ga_code .= "ga('send', 'pageview');";
 	} else {
 
@@ -1361,7 +1364,7 @@ function mapi_analytics($ga_id = NULL, $allow_multiple_domains = NULL, $enhanced
 			$ga_code .= "var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';\n";
 			$ga_code .= "_gaq.push(['_require', 'inpage_linkid', pluginUrl]);\n";
 		}
-		$ga_code .= "\t_gaq.push(['_setAccount', '" . $ga_id . "']);\n\t_gaq.push(['_setDomainName', '" . $domain . "']);\n";
+		$ga_code .= "\t_gaq.push(['_setAccount', '".$ga_id."']);\n\t_gaq.push(['_setDomainName', '".$domain."']);\n";
 		if(mapi_is_true($allow_multiple_domains)) {
 			$ga_code .= "\t_gaq.push(['_setAllowLinker', true]);\n";
 		}
@@ -1393,8 +1396,8 @@ function mapi_analytics($ga_id = NULL, $allow_multiple_domains = NULL, $enhanced
 function mapi_extract_domain($url) {
 	$domain = parse_url($url);
 	$domain = $domain['host'];
-	require_once(MAPI_DIR_PATH . 'lib/regdom-php/effectiveTLDs.inc.php');
-	$tldTree = require_once(MAPI_DIR_PATH . 'lib/regdom-php/regDomain.inc.php');
+	require_once(MAPI_DIR_PATH.'lib/regdom-php/effectiveTLDs.inc.php');
+	$tldTree = require_once(MAPI_DIR_PATH.'lib/regdom-php/regDomain.inc.php');
 	$domain = getRegisteredDomain($domain, $tldTree);
 
 	return $domain;
@@ -1404,14 +1407,14 @@ function mapi_extract_domain($url) {
  * Takes any phone number and returns a URI formatted version (for click to call links).
  *
  * @param $prefix (string) A prefix to add before $tel. Defaults to "+1".
- * @param $tel (string) A phone number.
+ * @param $tel    (string) A phone number.
  *
  * @return string
  */
 function mapi_tel_uri($tel, $prefix = "+1") {
 	$tel = mapi_strip_nonnumeric($tel);
 
-	return apply_filters('mapi_tel_uri', $prefix . $tel);
+	return apply_filters('mapi_tel_uri', $prefix.$tel);
 }
 
 /**
@@ -1475,25 +1478,25 @@ function mapi_remove_quick_edit($actions) {
  * @link http://www.wprecipes.com/list-all-hooked-wordpress-functions
  *
  * @param bool $tag A tag referencing a hook or filter.
+ *
+ * @return string
  */
 function mapi_list_hooked_functions($tag = FALSE) {
 	global $wp_filter;
 	if($tag) {
 		$hook[$tag] = $wp_filter[$tag];
 		if(!is_array($hook[$tag])) {
-			mapi_error(array('msg' => "Nothing found for '$tag' hook", 'echo' => TRUE));
-
-			return;
+			return mapi_error(array('msg' => "Nothing found for '$tag' hook", 'echo' => TRUE));
 		}
 	} else {
 		$hook = $wp_filter;
 		ksort($hook);
 	}
 	echo '<pre>';
-	foreach($hook as $tag => $priority) {
+	foreach($hook as $tag => $priorities) {
 		echo "<br /><strong>$tag</strong><br />";
-		ksort($priority);
-		foreach($priority as $priority => $function) {
+		ksort($priorities);
+		foreach($priorities as $priority => $function) {
 			echo $priority;
 			foreach($function as $name => $properties) {
 				echo "\t$name<br />";
@@ -1501,8 +1504,6 @@ function mapi_list_hooked_functions($tag = FALSE) {
 		}
 	}
 	echo '</pre>';
-
-	return;
 }
 
 /**
@@ -1517,9 +1518,9 @@ function mapi_hex_to_rgb($hex_color) {
 		$hex_color = substr($hex_color, 1);
 	}
 	if(strlen($hex_color) == 6) {
-		list($r, $g, $b) = array($hex_color[0] . $hex_color[1], $hex_color[2] . $hex_color[3], $hex_color[4] . $hex_color[5]);
+		list($r, $g, $b) = array($hex_color[0].$hex_color[1], $hex_color[2].$hex_color[3], $hex_color[4].$hex_color[5]);
 	} elseif(strlen($hex_color) == 3) {
-		list($r, $g, $b) = array($hex_color[0] . $hex_color[0], $hex_color[1] . $hex_color[1], $hex_color[2] . $hex_color[2]);
+		list($r, $g, $b) = array($hex_color[0].$hex_color[0], $hex_color[1].$hex_color[1], $hex_color[2].$hex_color[2]);
 	} else {
 		return FALSE;
 	}
@@ -1531,15 +1532,20 @@ function mapi_hex_to_rgb($hex_color) {
 }
 
 /**
+ *
  * Converts a given file (and MIME type) to data URI.
  *
- * @param $file
- * @param $mime
+ * @param        $file
+ * @param string $mime
+ *
+ * @return string
  */
-function mapi_data_uri($file, $mime) {
-	$contents = file_get_contents($file);
-	$base64 = base64_encode($contents);
-	echo "data:$mime;base64,$base64";
+function mapi_data_uri($file, $mime = '') {
+	if(function_exists('mime_content_type')) {
+		return 'data: '.mime_content_type($file).';base64,'.base64_encode(file_get_contents($file));
+	} else {
+		return 'data: '.$mime.';base64,'.base64_encode(file_get_contents($file));
+	}
 }
 
 /**

@@ -8,7 +8,7 @@
 
 
 include_once('../../../../wp-blog-header.php');
-$q = new WP_Query(apply_filters('mapi_test_query', 'page_id=1086'));
+$q = new WP_Query(apply_filters('mapi_test_query', 'page_id=2'));
 get_header();
 ?>
 <div id="main" class="site-main">

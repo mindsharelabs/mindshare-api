@@ -272,37 +272,36 @@ function mapi_list_posts_array($args) {
 		'slug'               => NULL
 	);
 	$args = wp_parse_args($args, $defaults);
-	extract($args, EXTR_SKIP);
 
-	if($type == 'page') {
+	if($args['type'] == 'page') {
 		// get a single page by its slug
-		if(!isset($slug)) {
+		if(!isset($args['slug'])) {
 			mapi_error(array('msg' => 'no page slug was defined'));
 		} else {
-			$posts = get_posts("post_type=" . $type . "&name=" . $slug);
+			$posts = get_posts("post_type=" . $args['type'] . "&name=" . $args['slug']);
 		}
 	} else {
-		$posts = get_posts("post_type=" . $type . "&numberposts=" . $num . "&cat=" . $cat);
+		$posts = get_posts("post_type=" . $args['type'] . "&numberposts=" . $args['num'] . "&cat=" . $args['cat']);
 	}
 	$str = '<ul class="mapi list-posts">';
 	foreach($posts as $post) {
 		$str .= '<li><span class="link"><a href="' . get_permalink($post->ID) . '" title="' . $post->post_title . '">' . $post->post_title . '</a></span>';
-		if($show_excerpt) {
-			if($content_or_excerpt == 'excerpt') {
+		if($args['show_excerpt']) {
+			if($args['content_or_excerpt'] == 'excerpt') {
 				$str .= '<span class="excerpt">' . mapi_excerpt($excerpt_length, $post->ID) . '</span>';
 			}
-			if($content_or_excerpt == 'content') {
+			if($args['content_or_excerpt'] == 'content') {
 				$content = apply_filters('the_content', $post->post_content);
 				$content = str_replace(']]>', ']]&gt;', $content);
 				$str .= '<span class="excerpt">' . $content . '</span>';
 			}
 		}
-		if($show_more_link) {
-			$str .= '<span class="more">' . $more_before . '<a class="more" href="' . get_permalink($post->ID) . '" title="' . the_title_attribute(array('echo' => 0)) . '">' . $more_text . '</a>' . $more_after . '</span>';
+		if($args['show_more_link']) {
+			$str .= '<span class="more">' . $args['more_before'] . '<a class="more" href="' . get_permalink($post->ID) . '" title="' . the_title_attribute(array('echo' => 0)) . '">' . $args['more_text'] . '</a>' . $args['more_after'] . '</span>';
 		}
 	}
 	$str .= '</li></ul>';
-	if($echo) {
+	if($args['echo']) {
 		echo $str;
 	} else {
 		return $str;
