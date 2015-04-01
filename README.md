@@ -10,6 +10,10 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.8.6
+- Bugfix for automatic updates
+- Speed improvements
+
 ## 0.8.5
 - PHP notice fix in wp_login_img()
 - Refactored most calls to the PHP function extract() to improve debugging and readability

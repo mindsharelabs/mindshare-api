@@ -4,7 +4,7 @@ Plugin Name: Mindshare Theme API
 Plugin URI: https://mindsharelabs.com/downloads/mindshare-theme-api/
 Description: Provides a library of additional template tags, 3rd-party libraries, and functions for WordPress themes and additional features for WordPress CMS websites.
 Author: Mindshare Studios, Inc
-Version: 0.8.5
+Version: 0.8.6
 Author URI: https://mind.sh/are/
 Network: false
 */
@@ -106,7 +106,7 @@ if(!class_exists("Mindshare_API")) :
 		 *
 		 * @var string
 		 */
-		private $class_version = '0.8.5';
+		private $class_version = '0.8.6';
 
 		/**
 		 * Used for automatic updates
@@ -239,11 +239,6 @@ if(!class_exists("Mindshare_API")) :
 
 		public function check_update() {
 
-			// delete old version, if it still exists
-			if(is_plugin_inactive(MAPI_LEGACY_NAME)) {
-				delete_plugins(array(MAPI_LEGACY_NAME));
-			}
-
 			$edd_active = get_option('mapi_license_status');
 
 			// EDD updates are already activated for this site, so exit
@@ -254,7 +249,8 @@ if(!class_exists("Mindshare_API")) :
 						array(
 							'edd_action' => 'activate_license',
 							'license'    => $this->license_key,
-							'item_name'  => urlencode(MAPI_PLUGIN_NAME) // the name of our product in EDD
+							'item_name'  => urlencode(MAPI_PLUGIN_NAME), // the name of our product in EDD
+							'url'        => home_url()
 						),
 						MAPI_UPDATE_URL
 					),
