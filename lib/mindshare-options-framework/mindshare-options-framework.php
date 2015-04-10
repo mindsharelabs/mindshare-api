@@ -772,7 +772,7 @@ if(!class_exists('mindshare_options_framework')) :
 					<input type="submit" name="Submit" class="<?php echo apply_filters('mindshare_options_framework_submit_class', 'button-primary'); ?>" value="<?php echo esc_attr(__('Save Changes')); ?>" />
 					<input type="hidden" name="action" value="save" />
 					<?php if($this->show_reset_button == TRUE) : ?>
-						<input class="button-secondary" type="button" value="Restore Defautls" onclick="document.getElementById('mindshare-framework-reset').style.display = 'block';document.getElementById('mindshare-framework-uninst').style.display = 'none';" />
+						<input class="button-secondary" type="button" value="Restore Defaults" onclick="document.getElementById('mindshare-framework-reset').style.display = 'block';document.getElementById('mindshare-framework-uninst').style.display = 'none';" />
 					<?php endif; ?>
 					<?php if($this->show_uninstall_button == TRUE) : ?>
 						<input class="button-secondary" type="button" value="Uninstall" onclick="document.getElementById('mindshare-framework-uninst').style.display = 'block';document.getElementById('mindshare-framework-reset').style.display = 'none';" />
