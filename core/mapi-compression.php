@@ -2,33 +2,27 @@
 /**
  * Mindshare Theme API HTML COMPRESSION, formerly "mCMS Compression"
  *
- *
  * @author     Mindshare Studios, Inc.
  * @copyright  Copyright (c) 2006-2015
  * @link       https://mindsharelabs.com/downloads/mindshare-theme-api/
  * @filename   mcms-compresion.php
- *
- * Changelog:
- * - rewrote based on http://www.svachon.com/wp-html-compression/
- * - changed to strip comments + whitespace
- * - Removes HTML comments, leaving in IE Conditional Comments, by removing comments that start with " <!--&nbsp;"
- * - initial release
- *
- * Usage:
- * <code>
- * <?php mapi_toggle_html_compression(); ?>
- * ... code/HTML content here is left alone, other HTML is compressed, whitespace adn comments are stipped ...
- * <?php mapi_toggle_html_compression(); ?>
- * </code>
- *
+ *             Changelog:
+ *             - rewrote based on http://www.svachon.com/wp-html-compression/
+ *             - changed to strip comments + whitespace
+ *             - Removes HTML comments, leaving in IE Conditional Comments, by removing comments that start with " <!--&nbsp;"
+ *             - initial release
+ *             Usage:
+ *             <code>
+ *             <?php mapi_toggle_html_compression(); ?>
+ *             ... code/HTML content here is left alone, other HTML is compressed, whitespace adn comments are stipped ...
+ *             <?php mapi_toggle_html_compression(); ?>
+ *             </code>
  */
 
 /**
  * Class mapi_compression
- *
  * Handles compression of inline HTML, JS and CSS. This class is called directly by the Theme API. Typically there is
  * no reason to use it directly.
- *
  */
 class mapi_compression {
 
@@ -55,6 +49,9 @@ class mapi_compression {
 	protected $html;
 
 	public function __construct($html) {
+		$this->compress_js = apply_filters('mapi_compress_js', FALSE);
+		$this->info_comment = apply_filters('mapi_compress_info', FALSE);
+
 		if(!empty($html)) {
 			$this->parse_html($html);
 		}
@@ -77,7 +74,8 @@ class mapi_compression {
 		$compressed = strlen($compressed);
 		$savings = ($raw - $compressed) / $raw * 100;
 		$savings = round($savings, 2);
-		return '<!-- '.MAPI_PLUGIN_NAME.' crunched this document by '.$savings.'%. The file was '.$raw.' bytes, but is now '.$compressed.' bytes -->';
+
+		return '<!-- ' . MAPI_PLUGIN_NAME . ' crunched this document by ' . $savings . '%. The file was ' . $raw . ' bytes, but is now ' . $compressed . ' bytes -->';
 	}
 
 	/**
@@ -94,7 +92,7 @@ class mapi_compression {
 		$raw_tag = FALSE;
 		// Variable reused for output
 		$html = '';
-		foreach($matches as $token) {
+		foreach ($matches as $token) {
 			$tag = (isset($token['tag'])) ? strtolower($token['tag']) : NULL;
 			$content = $token[0];
 			if(is_null($tag)) {
@@ -143,6 +141,7 @@ class mapi_compression {
 			}
 			$html .= $content;
 		}
+
 		return $html;
 	}
 
@@ -155,7 +154,7 @@ class mapi_compression {
 		$this->html = $this->minify_html($html);
 		$comment_override = apply_filters('mapi_compress_comment', FALSE);
 		if($this->info_comment || $comment_override) {
-			$this->html .= "\n".$this->btm_comment($html, $this->html);
+			$this->html .= "\n" . $this->btm_comment($html, $this->html);
 		}
 	}
 
@@ -173,14 +172,13 @@ class mapi_compression {
 		while(stristr($str, '  ')) {
 			$str = str_replace('  ', ' ', $str);
 		}
+
 		return $str;
 	}
 }
 
 /**
- *
  * Callback function
- *
  * Can be filtered using the 'mapi_html_compression' hook.
  * Accepts output buffer string, returns output buffer string.
  *
@@ -201,10 +199,9 @@ function mapi_compress_start() {
 
 /**
  * Outputs an HTML comment to turn off HTML/CSS/JS compression.
- *
  */
 function mapi_stop_compression() {
-	echo '<!--compression-none-->';
+	mapi_toggle_html_compression(TRUE);
 }
 
 /**
@@ -212,5 +209,24 @@ function mapi_stop_compression() {
  * it was turned off using mapi_stop_compression().
  */
 function mapi_start_compression() {
-	mapi_stop_compression();
+	mapi_toggle_html_compression(TRUE);
+}
+
+/**
+ * Outputs an HTML comment to disable HTML compression
+ * (until this function is called again). Only relevant
+ * when HTML compression is enabled in Developer Settings >
+ * Performance Tuning > Minify HTML.
+ *
+ * @param bool $echo Whether to echo or return the HTML comment. Default is TRUE.
+ *
+ * @return string
+ */
+function mapi_toggle_html_compression($echo = TRUE) {
+	$comment = '<!--compression-none-->';
+	if($echo) {
+		echo $comment;
+	} else {
+		return $comment;
+	}
 }

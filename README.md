@@ -10,6 +10,18 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.8.7
+- Added fn `mapi_is_reserved_ipv4()`
+- Updated `mapi_rich_snippets()` to use current microdata formats
+- Added `mapi_rich_snippets_schema` filter
+- Added `mapi_rich_snippets_class` filter
+- Made error reporting on `mapi_get_option` sensitive to WP_DEBUG setting
+- Bugfix for `mapi_stop_compression()` and `mapi_start_compression()`
+- Added `mapi_social_link_class` filter
+- Added `mapi_compress_js` filter
+- Added `mapi_compress_info` filter
+- Added new filters to change the default WordPress email and from name for system generated messages
+ 
 ## 0.8.6
 - Bugfix for automatic updates
 - Speed improvements

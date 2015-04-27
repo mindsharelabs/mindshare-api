@@ -51,7 +51,7 @@ function mapi_excerpt_more($more = NULL) {
 		$more = apply_filters('mapi_excerpt_more_text', $options['excerpt_more_txt']);
 	}
 
-	return apply_filters('mapi_excerpt_more', '&nbsp;<a class="mapi excerpt-more" title="'.the_title_attribute('echo=0').'" href="'.get_permalink(get_the_ID()).'">'.$more.'</a>');
+	return apply_filters('mapi_excerpt_more', '&nbsp;<a class="mapi excerpt-more" title="' . the_title_attribute('echo=0') . '" href="' . get_permalink(get_the_ID()) . '">' . $more . '</a>');
 }
 
 /**
@@ -75,11 +75,11 @@ function mapi_word_limit($string, $length) {
  * @return string
  */
 function mapi_get_url() {
-	$s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
-	$protocol = substr(strtolower($_SERVER["SERVER_PROTOCOL"]), 0, strpos(strtolower($_SERVER["SERVER_PROTOCOL"]), "/")).$s;
-	$port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":".$_SERVER["SERVER_PORT"]);
+	$s        = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
+	$protocol = substr(strtolower($_SERVER["SERVER_PROTOCOL"]), 0, strpos(strtolower($_SERVER["SERVER_PROTOCOL"]), "/")) . $s;
+	$port     = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":" . $_SERVER["SERVER_PORT"]);
 
-	return $protocol."://".$_SERVER['SERVER_NAME'].$port.$_SERVER['REQUEST_URI'];
+	return $protocol . "://" . $_SERVER['SERVER_NAME'] . $port . $_SERVER['REQUEST_URI'];
 }
 
 /**
@@ -139,31 +139,31 @@ function mapi_browser_from_ua() {
 
 	// Next get the name of the user agent yes separately and for good reason
 	if(preg_match('/MSIE/i', $user_agent) && !preg_match('/Opera/i', $user_agent)) {
-		$browser_name = 'Internet Explorer';
+		$browser_name       = 'Internet Explorer';
 		$browser_name_short = "MSIE";
 	} elseif(preg_match('/Firefox/i', $user_agent)) {
-		$browser_name = 'Mozilla Firefox';
+		$browser_name       = 'Mozilla Firefox';
 		$browser_name_short = "Firefox";
 	} elseif(preg_match('/Chrome/i', $user_agent)) {
-		$browser_name = 'Google Chrome';
+		$browser_name       = 'Google Chrome';
 		$browser_name_short = "Chrome";
 	} elseif(preg_match('/Safari/i', $user_agent)) {
-		$browser_name = 'Apple Safari';
+		$browser_name       = 'Apple Safari';
 		$browser_name_short = "Safari";
 	} elseif(preg_match('/Opera/i', $user_agent)) {
-		$browser_name = 'Opera';
+		$browser_name       = 'Opera';
 		$browser_name_short = "Opera";
 	} elseif(preg_match('/Netscape/i', $user_agent)) {
-		$browser_name = 'Netscape';
+		$browser_name       = 'Netscape';
 		$browser_name_short = "Netscape";
 	} else {
-		$browser_name = '';
+		$browser_name       = '';
 		$browser_name_short = "";
 	}
 
 	// get the correct version number
-	$known = array('Version', $browser_name_short, 'other');
-	$pattern = '#(?<browser>'.join('|', $known).')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
+	$known   = array('Version', $browser_name_short, 'other');
+	$pattern = '#(?<browser>' . join('|', $known) . ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
 	if(@!preg_match_all($pattern, $user_agent, $matches)) {
 		// We have no matching number just continue
 	}
@@ -214,10 +214,10 @@ function mapi_broswer_class($show_major_version = FALSE, $show_minor_version = F
 
 		$class = $browser['browser'];
 		if(!empty($browser['majorver']) && $show_major_version) {
-			$class .= '-'.$browser['majorver'];
+			$class .= '-' . $browser['majorver'];
 		}
 		if(!empty($browser['minorver']) && $show_minor_version) {
-			$class .= '-'.$browser['minorver'];
+			$class .= '-' . $browser['minorver'];
 		}
 		$class = strtolower($class);
 	} else {
@@ -269,7 +269,7 @@ function mapi_add_body_classes($classes = array()) {
 		$classes[] = 'iphone';
 	} // add post "type-slug"
 	if(isset($post)) {
-		$classes[] = $post->post_type.'-'.$post->post_name;
+		$classes[] = $post->post_type . '-' . $post->post_name;
 	}
 
 	return $classes;
@@ -319,10 +319,10 @@ function mapi_error($args) {
 		'echo' => FALSE,
 		'die'  => FALSE
 	);
-	$args = wp_parse_args($args, $defaults);
+	$args     = wp_parse_args($args, $defaults);
 
 	$debug = debug_backtrace();
-	$i = (empty($debug[1]["function"])) ? 0 : 1;
+	$i     = (empty($debug[1]["function"])) ? 0 : 1;
 
 	$str = '';
 
@@ -330,13 +330,13 @@ function mapi_error($args) {
 	if($args['echo']) {
 		$str .= '<div id="message" class="error"><p><strong>';
 	}
-	$str .= "[".$debug[$i]["function"]."]";
+	$str .= "[" . $debug[ $i ]["function"] . "]";
 	if($args['echo']) {
 		$str .= '</strong>';
 	}
 
 	/** @noinspection PhpUndefinedVariableInspection */
-	@$str .= ": ".$args['msg']." in ".$debug[$i]["file"]." on line ".$debug[$i]["line"];
+	@$str .= ": " . $args['msg'] . " in " . $debug[ $i ]["file"] . " on line " . $debug[ $i ]["line"];
 	if($args['echo']) {
 		$str .= '</p></div>';
 	}
@@ -406,8 +406,8 @@ function mapi_error_console() {
 	global $MAPI_ERRORS;
 	if(count($MAPI_ERRORS) != 0) {
 		echo '<script type="text/javascript">';
-		foreach($MAPI_ERRORS as $error) {
-			echo 'console.log("'.$error.'");';
+		foreach ($MAPI_ERRORS as $error) {
+			echo 'console.log("' . $error . '");';
 		}
 		echo '</script>';
 	}
@@ -459,15 +459,15 @@ function mapi_file_array_dir($dir = NULL, $exts = 'jpg,jpeg,png,gif') {
 		//mapi_error(array('msg' => $dir));
 	}
 	if(file_exists($dir)) {
-		$files = array();
-		$i = -1;
+		$files  = array();
+		$i      = - 1;
 		$handle = opendir($dir);
-		$exts = explode(',', strtolower($exts));
+		$exts   = explode(',', strtolower($exts));
 		while(FALSE !== ($file = readdir($handle))) {
-			foreach($exts as $ext) {
-				if(preg_match('/\.'.$ext.'$/i', $file, $test)) {
-					$files[] = mapi_path_to_url($dir.$file);
-					++$i;
+			foreach ($exts as $ext) {
+				if(preg_match('/\.' . $ext . '$/i', $file, $test)) {
+					$files[] = mapi_path_to_url($dir . $file);
+					++ $i;
 				}
 			}
 		}
@@ -518,7 +518,7 @@ function mapi_intval_array($value) {
  * @return bool
  */
 function mapi_in_array_r($needle, $haystack, $strict = FALSE) {
-	foreach($haystack as $item) {
+	foreach ($haystack as $item) {
 		if(($strict ? $item === $needle : $item == $needle) || (is_array($item) && mapi_in_array_r($needle, $item, $strict))) {
 			return TRUE;
 		}
@@ -549,7 +549,7 @@ function mapi_sanitize_array($array) {
  * @param string $exts
  */
 function mapi_preload($dir = NULL, $exts = 'jpg,jpeg,png,gif') {
-	$preload_var = 'preload_'.rand(); // create a random var name for us in JS
+	$preload_var = 'preload_' . rand(); // create a random var name for us in JS
 	$preload_arr = mapi_file_array_dir(trailingslashit($dir), $exts);
 	?>
 	<script type="text/javascript">
@@ -561,7 +561,7 @@ function mapi_preload($dir = NULL, $exts = 'jpg,jpeg,png,gif') {
 			});
 		}
 	</script>
-<?php
+	<?php
 }
 
 /**
@@ -612,26 +612,6 @@ function mapi_remove_recent_comments_style() {
 
 /**
  *
- * Outputs an HTML comment to disable HTML compression
- * (until this function is called again). Only relevant
- * when HTML compression is enabled in Developer Settings >
- * Performance Tuning > Minify HTML.
- *
- * @param bool $echo Whether to echo or return the HTML comment. Default is TRUE.
- *
- * @return string
- */
-function mapi_toggle_html_compression($echo = TRUE) {
-	$comment = PHP_EOL.'<!--compression-none-->'.PHP_EOL;
-	if($echo) {
-		echo $comment;
-	} else {
-		return $comment;
-	}
-}
-
-/**
- *
  * Gives an alert to users of older version of IE that they should update their browser.
  *
  */
@@ -669,11 +649,13 @@ function mapi_get_option($name = NULL) {
 
 	$options = get_option(MAPI_OPTIONS);
 	if($options && array_key_exists($name, $options)) {
-		return $options[$name];
+		return $options[ $name ];
 	} else {
-		if(current_user_can('manage_options')) {
-			return mapi_error(array('msg' => 'get_option returned FALSE. Your code expects a value here but the user hasn\'t set one on the options page.', 'echo' => FALSE, 'die' => FALSE));
+		if(current_user_can('manage_options') && WP_DEBUG) {
+			mapi_error(array('msg' => 'get_option returned FALSE. Your code expects a value here but the user hasn\'t set one on the options page.', 'echo' => FALSE, 'die' => FALSE));
 		}
+
+		return FALSE;
 	}
 }
 
@@ -693,7 +675,7 @@ function mapi_update_option($name, $value) {
 
 	$options = get_option(MAPI_OPTIONS);
 	if($options) {
-		$options[$name] = $value;
+		$options[ $name ] = $value;
 
 		return update_option(MAPI_OPTIONS, $options);
 	} else {
@@ -726,7 +708,7 @@ function mapi_delete_option($name) {
 
 	$options = get_option(MAPI_OPTIONS);
 	if($options) {
-		$options[$name] = '';
+		$options[ $name ] = '';
 
 		return update_option(MAPI_OPTIONS, $options);
 	} else {
@@ -1103,12 +1085,12 @@ function mapi_edit_link() {
 		$label = get_post_type_object(get_post_type($post));
 		$label = ucwords($label->labels->singular_name);
 		if(!empty($label)) {
-			$label = 'Edit '.$label;
+			$label = 'Edit ' . $label;
 		} else {
 			$label = 'Edit Page';
 		}
 
-		return apply_filters('mapi_edit_link', '<p class="mapi edit-link btn btn-xs btn-default"><a href="'.get_edit_post_link().'">'.$label.'</a></p>');
+		return apply_filters('mapi_edit_link', '<p class="mapi edit-link btn btn-xs btn-default"><a href="' . get_edit_post_link() . '">' . $label . '</a></p>');
 	} else {
 		return FALSE;
 	}
@@ -1159,8 +1141,8 @@ function mapi_remove_version_scripts() {
 	if(!is_a($wp_scripts, 'WP_Scripts')) {
 		return;
 	}
-	foreach($wp_scripts->registered as $handle => $script) {
-		$wp_scripts->registered[$handle]->ver = NULL;
+	foreach ($wp_scripts->registered as $handle => $script) {
+		$wp_scripts->registered[ $handle ]->ver = NULL;
 	}
 }
 
@@ -1173,8 +1155,8 @@ function mapi_remove_version_styles() {
 	if(!is_a($wp_styles, 'WP_Styles')) {
 		return;
 	}
-	foreach($wp_styles->registered as $handle => $style) {
-		$wp_styles->registered[$handle]->ver = NULL;
+	foreach ($wp_styles->registered as $handle => $style) {
+		$wp_styles->registered[ $handle ]->ver = NULL;
 	}
 }
 
@@ -1204,7 +1186,7 @@ function mapi_dequeue_css() {
 	} else {
 		$arr = explode("\r\n", $enable_adv_speed_options['dequeue_styles_txt']);
 	}
-	foreach($arr as $item) {
+	foreach ($arr as $item) {
 		wp_dequeue_style($item);
 	}
 }
@@ -1223,7 +1205,7 @@ function mapi_deregister_css() {
 	} else {
 		$arr = explode("\r\n", $enable_adv_speed_options['deregister_styles_txt']);
 	}
-	foreach($arr as $item) {
+	foreach ($arr as $item) {
 		wp_deregister_style($item);
 	}
 }
@@ -1242,7 +1224,7 @@ function mapi_dequeue_scripts() {
 	} else {
 		$arr = explode("\r\n", $enable_adv_speed_options['dequeue_scripts_txt']);
 	}
-	foreach($arr as $item) {
+	foreach ($arr as $item) {
 		wp_dequeue_script($item);
 	}
 }
@@ -1261,7 +1243,7 @@ function mapi_deregister_scripts() {
 	} else {
 		$arr = explode("\r\n", $enable_adv_speed_options['deregister_scripts_txt']);
 	}
-	foreach($arr as $item) {
+	foreach ($arr as $item) {
 		wp_deregister_script($item);
 	}
 }
@@ -1280,7 +1262,7 @@ function mapi_enqueue_scripts() {
 	} else {
 		$arr = explode("\r\n", $enable_adv_speed_options['enqueue_scripts_txt']);
 	}
-	foreach($arr as $item) {
+	foreach ($arr as $item) {
 		wp_enqueue_script($item);
 	}
 }
@@ -1355,7 +1337,7 @@ function mapi_analytics($ga_id = NULL, $allow_multiple_domains = NULL, $enhanced
 
 	if(mapi_is_true($universal_analytics)) {
 		$ga_code .= "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');";
-		$ga_code .= "ga('create', '".$ga_id."', '".$domain."');";
+		$ga_code .= "ga('create', '" . $ga_id . "', '" . $domain . "');";
 		$ga_code .= "ga('send', 'pageview');";
 	} else {
 
@@ -1364,7 +1346,7 @@ function mapi_analytics($ga_id = NULL, $allow_multiple_domains = NULL, $enhanced
 			$ga_code .= "var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';\n";
 			$ga_code .= "_gaq.push(['_require', 'inpage_linkid', pluginUrl]);\n";
 		}
-		$ga_code .= "\t_gaq.push(['_setAccount', '".$ga_id."']);\n\t_gaq.push(['_setDomainName', '".$domain."']);\n";
+		$ga_code .= "\t_gaq.push(['_setAccount', '" . $ga_id . "']);\n\t_gaq.push(['_setDomainName', '" . $domain . "']);\n";
 		if(mapi_is_true($allow_multiple_domains)) {
 			$ga_code .= "\t_gaq.push(['_setAllowLinker', true]);\n";
 		}
@@ -1396,9 +1378,9 @@ function mapi_analytics($ga_id = NULL, $allow_multiple_domains = NULL, $enhanced
 function mapi_extract_domain($url) {
 	$domain = parse_url($url);
 	$domain = $domain['host'];
-	require_once(MAPI_DIR_PATH.'lib/regdom-php/effectiveTLDs.inc.php');
-	$tldTree = require_once(MAPI_DIR_PATH.'lib/regdom-php/regDomain.inc.php');
-	$domain = getRegisteredDomain($domain, $tldTree);
+	require_once(MAPI_DIR_PATH . 'lib/regdom-php/effectiveTLDs.inc.php');
+	$tldTree = require_once(MAPI_DIR_PATH . 'lib/regdom-php/regDomain.inc.php');
+	$domain  = getRegisteredDomain($domain, $tldTree);
 
 	return $domain;
 }
@@ -1414,7 +1396,7 @@ function mapi_extract_domain($url) {
 function mapi_tel_uri($tel, $prefix = "+1") {
 	$tel = mapi_strip_nonnumeric($tel);
 
-	return apply_filters('mapi_tel_uri', $prefix.$tel);
+	return apply_filters('mapi_tel_uri', $prefix . $tel);
 }
 
 /**
@@ -1484,8 +1466,8 @@ function mapi_remove_quick_edit($actions) {
 function mapi_list_hooked_functions($tag = FALSE) {
 	global $wp_filter;
 	if($tag) {
-		$hook[$tag] = $wp_filter[$tag];
-		if(!is_array($hook[$tag])) {
+		$hook[ $tag ] = $wp_filter[ $tag ];
+		if(!is_array($hook[ $tag ])) {
 			return mapi_error(array('msg' => "Nothing found for '$tag' hook", 'echo' => TRUE));
 		}
 	} else {
@@ -1493,12 +1475,12 @@ function mapi_list_hooked_functions($tag = FALSE) {
 		ksort($hook);
 	}
 	echo '<pre>';
-	foreach($hook as $tag => $priorities) {
+	foreach ($hook as $tag => $priorities) {
 		echo "<br /><strong>$tag</strong><br />";
 		ksort($priorities);
-		foreach($priorities as $priority => $function) {
+		foreach ($priorities as $priority => $function) {
 			echo $priority;
-			foreach($function as $name => $properties) {
+			foreach ($function as $name => $properties) {
 				echo "\t$name<br />";
 			}
 		}
@@ -1518,9 +1500,9 @@ function mapi_hex_to_rgb($hex_color) {
 		$hex_color = substr($hex_color, 1);
 	}
 	if(strlen($hex_color) == 6) {
-		list($r, $g, $b) = array($hex_color[0].$hex_color[1], $hex_color[2].$hex_color[3], $hex_color[4].$hex_color[5]);
+		list($r, $g, $b) = array($hex_color[0] . $hex_color[1], $hex_color[2] . $hex_color[3], $hex_color[4] . $hex_color[5]);
 	} elseif(strlen($hex_color) == 3) {
-		list($r, $g, $b) = array($hex_color[0].$hex_color[0], $hex_color[1].$hex_color[1], $hex_color[2].$hex_color[2]);
+		list($r, $g, $b) = array($hex_color[0] . $hex_color[0], $hex_color[1] . $hex_color[1], $hex_color[2] . $hex_color[2]);
 	} else {
 		return FALSE;
 	}
@@ -1542,9 +1524,9 @@ function mapi_hex_to_rgb($hex_color) {
  */
 function mapi_data_uri($file, $mime = '') {
 	if(function_exists('mime_content_type')) {
-		return 'data: '.mime_content_type($file).';base64,'.base64_encode(file_get_contents($file));
+		return 'data: ' . mime_content_type($file) . ';base64,' . base64_encode(file_get_contents($file));
 	} else {
-		return 'data: '.$mime.';base64,'.base64_encode(file_get_contents($file));
+		return 'data: ' . $mime . ';base64,' . base64_encode(file_get_contents($file));
 	}
 }
 
@@ -1557,12 +1539,12 @@ function mapi_data_uri($file, $mime = '') {
  * @return string
  */
 function mapi_random_string($length = 16) {
-	$salt = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-	$len = strlen($salt);
+	$salt          = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	$len           = strlen($salt);
 	$random_string = '';
-	mt_srand(10000000 * (double) microtime());
-	for($i = 0; $i < $length; $i++) {
-		$random_string .= $salt[mt_rand(0, $len - 1)];
+	mt_srand(10000000 * (double)microtime());
+	for ($i = 0; $i < $length; $i ++) {
+		$random_string .= $salt[ mt_rand(0, $len - 1) ];
 	}
 
 	return $random_string;
@@ -1634,4 +1616,31 @@ function mapi_check_server() {
 	}
 
 	return $server;
+}
+
+/**
+ * Checks an IPv4 address to see if it is a public IP or an internal (reserved) IP address.
+ *
+ * @param $ip
+ *
+ * @return bool
+ */
+function mapi_is_reserved_ipv4($ip) {
+	$reserved_ips = array(
+		// not an exhaustive list
+		'167772160'  => 184549375, // 10.0.0.0 - 10.255.255.255
+		'3232235520' => 3232301055, // 192.168.0.0 - 192.168.255.255 
+		'2130706432' => 2147483647, // 127.0.0.0 - 127.255.255.255 
+		'2851995648' => 2852061183, // 169.254.0.0 - 169.254.255.255 
+		'2886729728' => 2887778303, // 172.16.0.0 - 172.31.255.255 
+		'3758096384' => 4026531839, // 224.0.0.0 - 239.255.255.255 
+	);
+	$ip_long      = sprintf('%u', ip2long($ip));
+	foreach ($reserved_ips as $ip_start => $ip_end) {
+		if(($ip_long >= $ip_start) && ($ip_long <= $ip_end)) {
+			return TRUE;
+		}
+	}
+
+	return FALSE;
 }
