@@ -144,8 +144,6 @@ function mapi_html_cleanup($content) {
 		// remove all empty p tags, even those with $nbsp;, <br>, etc.
 		$content = preg_replace("/<p[^>]*>[\s|&nbsp;]*<\/p>/", '', $content);
 
-		// remove empty tags
-		$content = preg_replace('%<(.*?)[^>]*>\\s*</\\1>%', '', $content);
 	}
 
 	return apply_filters('mapi_html_clean', $content);

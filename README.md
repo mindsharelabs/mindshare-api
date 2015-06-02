@@ -10,6 +10,9 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.8.8
+- Minor fix for mapi_html_cleanup() 
+
 ## 0.8.7
 - Added fn `mapi_is_reserved_ipv4()`
 - Updated `mapi_rich_snippets()` to use current microdata formats
