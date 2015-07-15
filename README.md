@@ -11,7 +11,7 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 # Changelog:
 
 ## 0.8.9
-- Add Instgram to `mapi_social_links()`
+- Add Instagram to `mapi_social_links()`
 
 ## 0.8.8
 - Minor fix for mapi_html_cleanup() 
