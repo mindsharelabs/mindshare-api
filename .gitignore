@@ -1,4 +1,5 @@
-# Mindshare .gitignore template
+### Mindshare .gitignore template v 1.0.2
+# https://raw.githubusercontent.com/mindsharestudios/gitignore/master/.gitignore
 
 ### Composer template
 composer.phar

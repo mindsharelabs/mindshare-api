@@ -10,8 +10,13 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.8.9
+- Add Instgram to `mapi_social_links()`
+
 ## 0.8.8
 - Minor fix for mapi_html_cleanup() 
+- Minor fix for mapi_social email links
+- Add Instagram to supported social networks
 
 ## 0.8.7
 - Added fn `mapi_is_reserved_ipv4()`

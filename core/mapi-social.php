@@ -147,7 +147,7 @@ function mapi_facebook_rss($args = array()) {
 	if($maxitems != 0) {
 		if($args['echo']) {
 			echo '<ul class="mapi-facebook-rss">';
-			foreach ($rss_items as $item) {
+			foreach($rss_items as $item) {
 				?>
 				<?php if($item->get_title() != '') : ?>
 					<li>
@@ -202,7 +202,7 @@ function mapi_facebook_like($args) {
 	<!-- Facebook Like button -->
 	<div id="fb-root" class="mcms-social"></div>
 	<script type="text/javascript">
-		(function(d, s, id) {
+		(function (d, s, id) {
 			var js, fjs = d.getElementsByTagName(s)[ 0 ];
 			if (d.getElementById(id)) {
 				return;
@@ -285,7 +285,7 @@ function mapi_google_plus_one($args) {
 		<?php if($args['annotation'] == 'inline') { ?> data-width="<?php echo $args['size']; ?>" <?php } ?>
 		<?php if(!empty($args['callback'])) { ?> callback="<?php echo $var; ?>" <?php } ?>></div>
 	<script type="text/javascript">
-		(function() {
+		(function () {
 			var po = document.createElement('script');
 			po.type = 'text/javascript';
 			po.async = true;
@@ -368,10 +368,9 @@ function mapi_rich_snippets() {
 /**
  * Outputs Font Awesome social icon links wrapped in a DIV.
  *
- * @todo add Instagram
  * @todo add callback function to allow plugging in new networks?
  *
- * @param array  $networks        An array of the social networks to include. Currently supported options are: facebook, twitter, linkedin, google-plus, pinterest, tumblr, youtube, rss, email.
+ * @param array  $networks        An array of the social networks to include. Currently supported options are: facebook, twitter, instagram, linkedin, google-plus, pinterest, tumblr, youtube, rss, email.
  * @param string $share_or_follow Whether to return "sharing" links or "follow" links. Valid options are: 'share' or 'follow'. Default is 'share'.
  * @param bool   $echo            Output or return the HTML. Default is TRUE.
  * @param bool   $js              Open links in a JavaScript popup window. Default is FALSE.
@@ -382,6 +381,7 @@ function mapi_social_links($networks = array(), $share_or_follow = 'share', $ech
 		$networks = array(
 			'facebook',
 			'twitter',
+			'instagram',
 			'linkedin',
 			'google-plus',
 			'pinterest',
@@ -404,7 +404,7 @@ function mapi_social_links($networks = array(), $share_or_follow = 'share', $ech
 
 		do_action('mapi_social_links_insert_before');
 
-		foreach ($networks as $network) {
+		foreach($networks as $network) {
 			if($js == TRUE) {
 				mapi_social_link_js(array('network' => $network, 'share' => $share, 'class' => $mapi_social_links_class));
 			} else {
@@ -416,7 +416,7 @@ function mapi_social_links($networks = array(), $share_or_follow = 'share', $ech
 
 		echo apply_filters('mapi_social_links_after', '</div>');
 	} else {
-		foreach ($networks as $network) {
+		foreach($networks as $network) {
 			mapi_social_link(array('network' => $network, 'share' => $share, 'echo' => FALSE, 'class' => $mapi_social_links_class));
 		}
 	}
@@ -565,9 +565,9 @@ function mapi_social_link_js($args) {
 	$link .= 'onclick="window.open(\'';
 
 	if($args['share']) {
-		$link .= _mapi_social_share_onclick($args['network'], $args['id']); // @TODO fix this stuff
-	} else {
 		$link .= _mapi_social_share_onclick($args['network'], $args['id']);
+	} else {
+		$link .= _mapi_social_share_onclick($args['network'], $args['id']);  // @TODO do we need _mapi_follow_share_onclick ?
 	}
 	$link .= ",'mapi-share-dialog','width=" . $win_w . ",height=" . $win_h . ",left=20,top=20'); return false;";
 
@@ -593,12 +593,16 @@ function mapi_social_link_js($args) {
  * @return string
  */
 function _mapi_social_share_href($network, $id) {
-	switch ($network) {
+	switch($network) {
 		case 'twitter' :
 			$href = 'http://twitter.com/home?status=' . get_permalink($id);
 			break;
 		case 'facebook' :
 			$href = 'http://www.facebook.com/sharer.php?u=' . get_permalink($id) . '&amp;t=' . urlencode(get_the_title_rss($id));
+			break;
+		case 'instagram' :
+			// instagram doesn't have a "share" feature so we'll use the "follow" format instead
+			$href = _mapi_social_follow_href('instagram', $id);
 			break;
 		case 'google-plus' :
 			$href = 'https://plus.google.com/share?url=' . get_permalink($id);
@@ -622,7 +626,7 @@ function _mapi_social_share_href($network, $id) {
 			$href = _mapi_social_follow_href('rss', $id);
 			break;
 		case 'email' :
-			$href = 'mailto:?body=' . apply_filters('mapi_social_mailto_body', 'Check out this ' . get_post_type() . ': ' . get_permalink($id)) . '&amp;subject=' . get_the_title_rss($id);
+			$href = 'mailto:?body=' . urlencode(apply_filters('mapi_social_mailto_body', 'Check out this ' . get_post_type() . ': ' . get_permalink($id)) . '&subject=' . get_the_title_rss($id));
 			break;
 	}
 
@@ -638,24 +642,24 @@ function _mapi_social_share_href($network, $id) {
  * @return string
  */
 function _mapi_social_share_onclick($network, $id) {
-	switch ($network) {
+	switch($network) {
 		case 'twitter' :
 			$onclick = "https://twitter.com/share?url='+encodeURIComponent(location.href)";
 			break;
 		case 'facebook' :
-			$onclick = 'http://www.facebook.com/sharer.php?u=\'+encodeURIComponent(location.href)+\'&amp;t=' . urlencode(get_the_title_rss($id)) . '\'';
+			$onclick = 'https://www.facebook.com/sharer.php?u=\'+encodeURIComponent(location.href)+\'&amp;t=' . urlencode(get_the_title_rss($id)) . '\'';
 			break;
 		case 'google-plus' :
 			$onclick = 'https://plus.google.com/share?url=' . get_permalink($id) . '\'';
 			break;
 		case 'pinterest' :
-			$onclick = 'http://www.pinterest.com/pin/create/link/?url=' . get_permalink($id) . '&amp;media=' . urlencode(mapi_get_attachment_image_src(mapi_get_attachment_id($id))) . '&amp;description=' . urlencode(get_the_title_rss($id)) . '\'';
+			$onclick = 'https://www.pinterest.com/pin/create/link/?url=' . get_permalink($id) . '&amp;media=' . urlencode(mapi_get_attachment_image_src(mapi_get_attachment_id($id))) . '&amp;description=' . urlencode(get_the_title_rss($id)) . '\'';
 			break;
 		case 'linkedin' :
-			$onclick = 'http://www.linkedin.com/shareArticle?mini=true&amp;url=\'+encodeURIComponent(location.href)+\'&amp;title=' . urlencode(get_the_title_rss($id)) . '\'';
+			$onclick = 'https://www.linkedin.com/shareArticle?mini=true&amp;url=\'+encodeURIComponent(location.href)+\'&amp;title=' . urlencode(get_the_title_rss($id)) . '\'';
 			break;
 		case 'tumblr' :
-			$onclick = 'http://www.tumblr.com/share/link?url=' . urlencode(get_permalink($id)) . '&amp;name=' . urlencode(get_the_title_rss($id)) . '\'';
+			$onclick = 'https://www.tumblr.com/share/link?url=' . urlencode(get_permalink($id)) . '&amp;name=' . urlencode(get_the_title_rss($id)) . '\'';
 			break;
 		case 'youtube' :
 			// youtube doesn't have a "share" feature so we'll use the "follow" format instead
@@ -666,7 +670,10 @@ function _mapi_social_share_onclick($network, $id) {
 			$onclick = _mapi_social_follow_href('rss', $id) . '\'';
 			break;
 		case 'email' :
-			$onclick = 'mailto:?body=' . apply_filters('mapi_social_mailto_body', 'Check out this ' . get_post_type() . ': ' . get_permalink($id)) . '&amp;subject=' . get_the_title_rss($id) . '\'';
+			$onclick = 'mailto:?body=' . urlencode(apply_filters('mapi_social_mailto_body', 'Check out this ' . get_post_type() . ': ' . get_permalink($id)) . '&amp;subject=' . get_the_title_rss($id)) . '\'';
+			break;
+		case 'instagram' :
+			mapi_console_log('Instagram doesn\'t have a share feature, so no link has been output');
 			break;
 	}
 
@@ -682,12 +689,15 @@ function _mapi_social_share_onclick($network, $id) {
  * @return string
  */
 function _mapi_social_follow_href($network, $id) {
-	switch ($network) {
+	switch($network) {
 		case 'twitter' :
 			$href = mapi_get_option('twitter_uri');
 			break;
 		case 'facebook' :
 			$href = mapi_get_option('facebook_uri');
+			break;
+		case 'instagram' :
+			$href = "https://instagram.com/" . mapi_get_option('instagram_id_slug'); // @TODO make this match the others?
 			break;
 		case 'google-plus' :
 			$href = mapi_get_option('google_plus_uri');
@@ -768,7 +778,7 @@ function mapi_tweets_oauth($args) {
 		$tweets = array_slice($tweets, 0, $args['num_tweets']);
 		if($args['echo']) {
 			echo '<ul class="mapi-twitter-feed mapi-twitter-rss">';
-			foreach ($tweets as $tweet) : ?>
+			foreach($tweets as $tweet) : ?>
 				<li>
 					<span class="mapi-tweet-link"><?php echo $tweet->text; ?></span><br />
 						<span class="mapi-tweet-meta">Posted to <a class="mapi-tweet-link" href='https://twitter.com/<?php echo $args['screen_name']; ?>/status/<?php echo $tweet->id; ?>' title='<?php echo 'Posted ' . $tweet->created_at; ?>'>Twitter</a> on <?php echo $tweet->created_at; ?>
