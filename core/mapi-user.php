@@ -40,7 +40,7 @@ function mapi_set_admin_color_scheme($color_scheme) {
  *
  */
 function mapi_admin_menu_nav_menus() {
-	add_menu_page('Menus', 'Menus', 'edit_theme_options', 'nav-menus.php', '', 'dashicons-networking', 6);
+	add_menu_page('Menus', 'Menus', 'edit_theme_options', 'nav-menus.php', '', 'dashicons-networking', 6.5);
 	add_submenu_page('nav-menus.php', 'All Menus', 'All Menus', 'edit_theme_options', 'nav-menus.php');
 	add_submenu_page('nav-menus.php', 'Add New', 'Add New', 'edit_theme_options', '?action=edit&menu=0');
 	add_submenu_page('nav-menus.php', 'Menu Locations', 'Menu Locations', 'edit_theme_options', '?action=locations');
