@@ -40,14 +40,14 @@ function mapi_set_admin_color_scheme($color_scheme) {
  *
  */
 function mapi_admin_menu_nav_menus() {
-	add_menu_page('Menus', 'Menus', 'edit_theme_options', 'nav-menus.php', '', 'dashicons-networking');
+	add_menu_page('Menus', 'Menus', 'edit_theme_options', 'nav-menus.php', '', 'dashicons-networking', '6.55');
 	add_submenu_page('nav-menus.php', 'All Menus', 'All Menus', 'edit_theme_options', 'nav-menus.php');
 	add_submenu_page('nav-menus.php', 'Add New', 'Add New', 'edit_theme_options', '?action=edit&menu=0');
 	add_submenu_page('nav-menus.php', 'Menu Locations', 'Menu Locations', 'edit_theme_options', '?action=locations');
 	$menus = wp_get_nav_menus(array('orderby' => 'name'));
 	foreach($menus as $menu) {
 		add_submenu_page(
-			'nav-menus.php', esc_attr(ucwords($menu->name)), esc_attr(ucwords($menu->name)), 'edit_theme_options', 'nav-menus.php?action=edit&amp;menu='.$menu->term_id, '');
+			'nav-menus.php', esc_attr(ucwords($menu->name)), esc_attr(ucwords($menu->name)), 'edit_theme_options', 'nav-menus.php?action=edit&amp;menu=' . $menu->term_id, '');
 	}
 }
 
@@ -99,7 +99,7 @@ function mapi_get_author_id($post_id = NULL) {
 		$post_id = get_the_ID();
 	}
 	$post = get_post($post_id);
-	$author_id = (int) $post->post_author;
+	$author_id = (int)$post->post_author;
 
 	/*if($author_id === 0) {
 
@@ -237,7 +237,7 @@ function mapi_has_role($user, $role) {
 		return FALSE;
 	}
 
-	if(in_array($role, (array) $user->roles)) {
+	if(in_array($role, (array)$user->roles)) {
 		return TRUE;
 	} else {
 		return FALSE;

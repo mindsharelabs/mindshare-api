@@ -10,6 +10,9 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 0.9
+- Bug fix for moving nav menus to top
+
 ## 0.8.9
 - Add Instagram to `mapi_social_links()`
 
