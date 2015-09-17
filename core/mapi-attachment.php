@@ -11,7 +11,7 @@
  *
  */
 
-require_once(MAPI_DIR_PATH.'lib/BFI_Thumb.php');
+require_once(MAPI_DIR_PATH . 'lib/BFI_Thumb.php');
 
 /**
  *
@@ -37,26 +37,27 @@ function mapi_featured_img($args = array()) {
 		'echo'  => apply_filters('mapi_featured_img_echo', TRUE),
 		'alt'   => apply_filters('mapi_featured_img_alt', mapi_get_attachment_image_title()),
 		'title' => apply_filters('mapi_featured_img_title', mapi_get_attachment_image_title()),
+		'class' => apply_filters('mapi_featured_img_class', 'mapi-featured-img'),
 	);
 	$args = wp_parse_args($args, $defaults);
 
-	if(has_post_thumbnail($args['id'])) {
-		$featured_img = wp_get_attachment_image_src(mapi_get_attachment_id($args['id']), 'full');
-		$args['src'] = $featured_img[0];
-		$args['img'] = mapi_thumb(array('src' => $args['src'], 'w' => $args['w'], 'h' => $args['h'], 'id' => $args['id']));
-		if($args['echo'] === TRUE) {
-			echo apply_filters('mapi_featured_image_before', '<div class="mapi-featured-img">');
+	if (has_post_thumbnail($args[ 'id' ])) {
+		$featured_img = wp_get_attachment_image_src(mapi_get_attachment_id($args[ 'id' ]), 'full');
+		$args[ 'src' ] = $featured_img[ 0 ];
+		$args[ 'img' ] = mapi_thumb(array( 'src' => $args[ 'src' ], 'w' => $args[ 'w' ], 'h' => $args[ 'h' ], 'id' => $args[ 'id' ] ));
+		if ($args[ 'echo' ] === TRUE) {
+			echo apply_filters('mapi_featured_image_before', '<div class="' . $args[ 'class' ] . '">');
 			?>
-			<img alt="<?php echo $args['alt']; ?>" <?php if($args['title']) : echo 'title="'.$args['title'].'"'; endif; ?> src="<?php echo $args['img']; ?>" />
+			<img alt="<?php echo $args[ 'alt' ]; ?>" <?php if ($args[ 'title' ]) : echo 'title="' . $args[ 'title' ] . '"'; endif; ?> src="<?php echo $args[ 'img' ]; ?>" />
 			<?php
 			echo apply_filters('mapi_featured_image_after', '</div>');
 		} else {
 			$image = array(
-				'w'     => $args['w'],
-				'h'     => $args['h'],
-				'src'   => $args['img'],
-				'alt'   => $args['alt'],
-				'title' => $args['title'],
+				'w'     => $args[ 'w' ],
+				'h'     => $args[ 'h' ],
+				'src'   => $args[ 'img' ],
+				'alt'   => $args[ 'alt' ],
+				'title' => $args[ 'title' ],
 			);
 
 			return apply_filters('mapi_featured_image', $image);
@@ -77,8 +78,8 @@ function mapi_featured_img($args = array()) {
  */
 function mapi_featured_img_with_caption($args = array()) {
 	echo mapi_featured_img($args);
-	if(mapi_get_attachment_image_caption()) {
-		echo apply_filters('mapi_featured_img_caption', '<div class="caption">'.mapi_get_attachment_image_caption().'</div>');
+	if (mapi_get_attachment_image_caption()) {
+		echo apply_filters('mapi_featured_img_caption', '<div class="caption">' . mapi_get_attachment_image_caption() . '</div>');
 	}
 }
 
@@ -92,17 +93,17 @@ function mapi_featured_img_with_caption($args = array()) {
  * @return bool|string returns false if no title is found, otherwise returns the title
  */
 function mapi_get_attachment_image_title($attachment_id = NULL) {
-	if($attachment_id == NULL) {
+	if ($attachment_id == NULL) {
 		$attachment_id = mapi_get_attachment_id();
 	}
 	$image = wp_get_attachment_image_src($attachment_id);
-	if($image) {
+	if ($image) {
 		$attachment = get_post($attachment_id);
 
 		$img_title = trim(strip_tags($attachment->post_excerpt)); // use caption field first
-		if($img_title == '') {
+		if ($img_title == '') {
 			$img_title = trim(strip_tags($attachment->post_title)); // use the title
-		} elseif($img_title == '') {
+		} elseif ($img_title == '') {
 			$img_title = trim(strip_tags(get_post_meta($attachment_id, '_wp_attachment_image_alt', TRUE))); // use the alt
 		}
 
@@ -120,14 +121,14 @@ function mapi_get_attachment_image_title($attachment_id = NULL) {
  * @return bool|string returns false if no title is found, otherwise returns the caption
  */
 function mapi_get_attachment_image_caption($attachment_id = NULL) {
-	if($attachment_id == NULL) {
+	if ($attachment_id == NULL) {
 		$attachment_id = mapi_get_attachment_id();
 	}
-	if(wp_get_attachment_image_src($attachment_id)) {
+	if (wp_get_attachment_image_src($attachment_id)) {
 		$attachment = get_post($attachment_id);
 
 		$img_title = trim(strip_tags($attachment->post_excerpt));
-		if(empty($img_title)) {
+		if (empty($img_title)) {
 			return FALSE;
 		} else {
 			return apply_filters('mapi_attachment_image_caption', $img_title);
@@ -148,15 +149,15 @@ function mapi_get_attachment_image_caption($attachment_id = NULL) {
  * @return bool|string returns false if no image is found, otherwise src ULR is returned
  */
 function mapi_get_attachment_image_src($attachment_id = NULL, $dimensions = NULL) {
-	if($attachment_id == NULL) {
+	if ($attachment_id == NULL) {
 		$attachment_id = mapi_get_attachment_id();
 	}
-	if($dimensions == NULL) {
+	if ($dimensions == NULL) {
 		$dimensions = 'full';
 	}
 	$image = wp_get_attachment_image_src($attachment_id, $dimensions);
-	if($image) {
-		return apply_filters('mapi_attachment_image_src', $image[0]);
+	if ($image) {
+		return apply_filters('mapi_attachment_image_src', $image[ 0 ]);
 	} else {
 		return apply_filters('mapi_attachment_image_src', FALSE);
 	}
@@ -172,7 +173,7 @@ function mapi_get_attachment_image_src($attachment_id = NULL, $dimensions = NULL
  * @return int
  */
 function mapi_get_attachment_id($id = NULL) {
-	if(isset($id)) {
+	if (isset($id)) {
 		return get_post_thumbnail_id($id);
 	} else {
 		return get_post_thumbnail_id(get_the_ID());
@@ -189,20 +190,20 @@ function mapi_get_attachment_id($id = NULL) {
  * @return bool|null
  */
 function mapi_get_first_post_image_src($post_id = NULL, $fallback_img = NULL) {
-	if($post_id == NULL) {
+	if ($post_id == NULL) {
 		$post_id = get_the_ID();
 	}
 	$img_post = get_post($post_id);
-	if($img_post) {
+	if ($img_post) {
 		ob_start();
 		ob_end_clean();
 		preg_match_all('/<img.+src=[\'"]([^\'"]+)[\'"].*>/i', $img_post->post_content, $matches);
 
-		$first_img = @$matches[1][0];
+		$first_img = @$matches[ 1 ][ 0 ];
 
-		if(empty($first_img)) {
+		if (empty($first_img)) {
 			// if no image was found use fallback image if one is available
-			if(!empty($fallback_img)) {
+			if (!empty($fallback_img)) {
 				return $fallback_img;
 			} else {
 				return FALSE; // no luck return nothing
@@ -224,7 +225,7 @@ function mapi_get_first_post_image_src($post_id = NULL, $fallback_img = NULL) {
  * @return string Returns the Link URL field
  */
 function mapi_get_link_url($id = NULL) {
-	if($id == NULL) {
+	if ($id == NULL) {
 		$id = get_the_ID();
 	}
 
@@ -241,8 +242,8 @@ function mapi_get_link_url($id = NULL) {
  * @return array Returns the modified array to WordPress' Gallery shortcode
  */
 function mapi_gallery_filter($attr) {
-	$attr['alt'] = get_bloginfo('name');
-	$attr['title'] = __('Click for a larger image', 'mapi');
+	$attr[ 'alt' ] = get_bloginfo('name');
+	$attr[ 'title' ] = __('Click for a larger image', 'mapi');
 
 	return apply_filters('mapi_gallery_image_attributes', $attr);
 }
@@ -294,7 +295,7 @@ function mapi_gallery_filter($attr) {
  * @return string Returns the URL of the newly resized/filtered image.
  */
 function mapi_thumb($src, $w = NULL, $h = NULL, $q = 90, $a = 'c', $zc = 1, $f = NULL, $s = 0, $cc = NULL, $ct = 1) {
-	if(!is_array($src)) {
+	if (!is_array($src)) {
 		$src = array(
 			'src' => $src,
 			'w'   => $w,
@@ -332,7 +333,7 @@ function mapi_thumb($src, $w = NULL, $h = NULL, $q = 90, $a = 'c', $zc = 1, $f =
 function mapi_thumb_array($args) {
 
 	$defaults = array(
-		'src' => apply_filters('mapi_thumb_src', $args['src']),
+		'src' => apply_filters('mapi_thumb_src', $args[ 'src' ]),
 		'w'   => apply_filters('mapi_thumb_w', get_option('thumbnail_size_w')),
 		'h'   => apply_filters('mapi_thumb_h', NULL), //get_option('thumbnail_size_h'),
 		'q'   => apply_filters('mapi_thumb_q', 90), // quality 0-100
@@ -360,10 +361,10 @@ function mapi_thumb_array($args) {
 	);
 	$args = wp_parse_args($args, $defaults);
 
-	if(empty($args['src'])) {
-		return mapi_error(array('msg' => 'Parameter "src" cannot be empty', 'echo' => FALSE, 'die' => FALSE));
+	if (empty($args[ 'src' ])) {
+		return mapi_error(array( 'msg' => 'Parameter "src" cannot be empty', 'echo' => FALSE, 'die' => FALSE ));
 	} else {
-		$img_src = plugins_url('lib/mthumb.php', dirname(__FILE__)).'?src='.$args['src'].'&amp;w='.$args['w'].'&amp;h='.$args['h'].'&amp;q='.$args['q'].'&amp;a='.$args['a'].'&amp;zc='.$args['zc'].'&amp;f='.$args['f'].'&amp;s='.$args['s'].'&amp;cc='.$args['cc'].'&amp;ct='.$args['ct'];
+		$img_src = plugins_url('lib/mthumb.php', dirname(__FILE__)) . '?src=' . $args[ 'src' ] . '&amp;w=' . $args[ 'w' ] . '&amp;h=' . $args[ 'h' ] . '&amp;q=' . $args[ 'q' ] . '&amp;a=' . $args[ 'a' ] . '&amp;zc=' . $args[ 'zc' ] . '&amp;f=' . $args[ 'f' ] . '&amp;s=' . $args[ 's' ] . '&amp;cc=' . $args[ 'cc' ] . '&amp;ct=' . $args[ 'ct' ];
 
 		return apply_filters('mapi_thumb', $img_src);
 	}
@@ -412,8 +413,8 @@ function mapi_image($src = '', $args = array(), $single = TRUE) {
 
 	$src = apply_filters('mapi_thumb_src', $src);
 
-	if(empty($src)) {
-		return mapi_error(array('msg' => 'Parameter "src" cannot be empty', 'echo' => FALSE, 'die' => FALSE));
+	if (empty($src)) {
+		return mapi_error(array( 'msg' => 'Parameter "src" cannot be empty', 'echo' => FALSE, 'die' => FALSE ));
 	} else {
 		$img_src = bfi_thumb($src, $args, $single);
 
@@ -450,21 +451,21 @@ function mapi_image($src = '', $args = array(), $single = TRUE) {
 function mapi_random_img($args) {
 	$upload_dir = wp_upload_dir();
 	$defaults = array(
-		'dir'    => apply_filters('mapi_random_image_dir', $upload_dir['baseurl']),
-		'path'   => apply_filters('mapi_random_image_path', $upload_dir['path']),
+		'dir'    => apply_filters('mapi_random_image_dir', $upload_dir[ 'baseurl' ]),
+		'path'   => apply_filters('mapi_random_image_path', $upload_dir[ 'path' ]),
 		'height' => apply_filters('mapi_random_image_height', get_option('large_size_h')),
 		'width'  => apply_filters('mapi_random_image_width', get_option('large_size_w')),
-		'alt'    => apply_filters('mapi_random_image_alt', get_bloginfo('name').' - '.get_bloginfo('description')),
+		'alt'    => apply_filters('mapi_random_image_alt', get_bloginfo('name') . ' - ' . get_bloginfo('description')),
 		'echo'   => TRUE
 	);
 	$args = wp_parse_args($args, $defaults);
 
-	$src = plugins_url('core/mapi-random.img.php', dirname(__FILE__)).'?dir='.$args['dir'].'&amp;path='.$args['path'];
+	$src = plugins_url('core/mapi-random.img.php', dirname(__FILE__)) . '?dir=' . $args[ 'dir' ] . '&amp;path=' . $args[ 'path' ];
 
-	if($args['echo']) {
+	if ($args[ 'echo' ]) {
 		do_action('mapi_random_image_before');
 		?>
-		<img class="mapi-random-img" src="<?php echo $src ?>" width="<?php echo $args['width'] ?>" height="<?php echo $args['height'] ?>" alt="<?php echo $args['alt'] ?>" title="<?php echo $args['alt'] ?>" />
+		<img class="mapi-random-img" src="<?php echo $src ?>" width="<?php echo $args[ 'width' ] ?>" height="<?php echo $args[ 'height' ] ?>" alt="<?php echo $args[ 'alt' ] ?>" title="<?php echo $args[ 'alt' ] ?>" />
 		<?php
 		do_action('mapi_random_image_after');
 	} else {
@@ -484,25 +485,25 @@ function mapi_random_img($args) {
  */
 function mapi_remove_large_image($image_data) {
 	// if there is no large image : return
-	if(!isset($image_data['sizes']['large'])) {
+	if (!isset($image_data[ 'sizes' ][ 'large' ])) {
 		return $image_data;
 	}
 	$upload_dir = wp_upload_dir();
 
 	// if using year/month folders
-	if(get_option('uploads_use_yearmonth_folders')) {
+	if (get_option('uploads_use_yearmonth_folders')) {
 		// paths to the uploaded image and the large image
 
-		$sub_dir_array = explode('/', $image_data['file']);
-		$sub_dir = $sub_dir_array[0].'/'.$sub_dir_array[1]; // eg. 2014/03
+		$sub_dir_array = explode('/', $image_data[ 'file' ]);
+		$sub_dir = $sub_dir_array[ 0 ] . '/' . $sub_dir_array[ 1 ]; // eg. 2014/03
 
-		$uploaded_image_location = $upload_dir['basedir'].'/'.$image_data['file'];
-		$large_image_location = $upload_dir['basedir'].'/'.$sub_dir.'/'.$image_data['sizes']['large']['file'];
+		$uploaded_image_location = $upload_dir[ 'basedir' ] . '/' . $image_data[ 'file' ];
+		$large_image_location = $upload_dir[ 'basedir' ] . '/' . $sub_dir . '/' . $image_data[ 'sizes' ][ 'large' ][ 'file' ];
 		// no year/month folders
 	} else {
 		// paths to the uploaded image and the large image
-		$uploaded_image_location = $upload_dir['basedir'].'/'.$image_data['file'];
-		$large_image_location = $upload_dir['path'].'/'.$image_data['sizes']['large']['file'];
+		$uploaded_image_location = $upload_dir[ 'basedir' ] . '/' . $image_data[ 'file' ];
+		$large_image_location = $upload_dir[ 'path' ] . '/' . $image_data[ 'sizes' ][ 'large' ][ 'file' ];
 	}
 
 	// delete the uploaded image
@@ -512,9 +513,9 @@ function mapi_remove_large_image($image_data) {
 	rename($large_image_location, $uploaded_image_location);
 
 	// update image metadata and return them
-	$image_data['width'] = $image_data['sizes']['large']['width'];
-	$image_data['height'] = $image_data['sizes']['large']['height'];
-	unset($image_data['sizes']['large']);
+	$image_data[ 'width' ] = $image_data[ 'sizes' ][ 'large' ][ 'width' ];
+	$image_data[ 'height' ] = $image_data[ 'sizes' ][ 'large' ][ 'height' ];
+	unset($image_data[ 'sizes' ][ 'large' ]);
 
 	return $image_data;
 }
