@@ -22,14 +22,13 @@
  * @return mixed
  */
 function mapi_tinymce_line_breaks($init) {
-	$init["forced_root_block"] = FALSE;
-	$init["force_br_newlines"] = TRUE;
-	$init["force_p_newlines"] = FALSE;
-	$init["convert_newlines_to_brs"] = TRUE;
+	$init[ "forced_root_block" ] = FALSE;
+	$init[ "force_br_newlines" ] = TRUE;
+	$init[ "force_p_newlines" ] = FALSE;
+	$init[ "convert_newlines_to_brs" ] = TRUE;
 
 	return $init;
 }
-
 
 /**
  * Add all custom post types to the "Right Now" box on the Dashboard
@@ -40,9 +39,9 @@ function mapi_tinymce_line_breaks($init) {
 function mapi_right_now_content_table_end() {
 	$post_types = get_post_types(array('show_in_nav_menus' => TRUE, '_builtin' => FALSE), 'objects');
 
-	foreach($post_types as $post_type => $post_type_obj) {
+	foreach ($post_types as $post_type => $post_type_obj) {
 		$num_posts = wp_count_posts($post_type);
-		if($num_posts && $num_posts->publish) {
+		if ($num_posts && $num_posts->publish) {
 			printf(
 				'<li class="%1$s-count"><a href="edit.php?post_type=%1$s">%2$s %3$s</a></li>',
 				$post_type,
@@ -53,4 +52,19 @@ function mapi_right_now_content_table_end() {
 	}
 }
 
-;
+/**
+ * Remove Yoast SEO Dashboard Widget
+ *
+ */
+function mapi_remove_wpseo_dashboard_overview() {
+	remove_meta_box('wpseo-dashboard-overview', 'dashboard', 'side');
+}
+
+/**
+ * Remove customizer from Admin bar
+ */
+function mapi_before_admin_bar_render() {
+	global $wp_admin_bar;
+
+	$wp_admin_bar->remove_menu('customize');
+}

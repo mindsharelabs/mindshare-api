@@ -24,10 +24,10 @@
  * @return boolean The boolean value of the provided text
  **/
 function mapi_is_true($string, $true_synonyms = array('yes', 'y', 'true', '1', 'on', 'open', 'affirmative', '+', 'positive')) {
-	if(is_array($string)) {
+	if (is_array($string)) {
 		return FALSE;
 	}
-	if(is_bool($string)) {
+	if (is_bool($string)) {
 		return $string;
 	}
 
@@ -43,12 +43,12 @@ function mapi_is_true($string, $true_synonyms = array('yes', 'y', 'true', '1', '
  * @return string
  */
 function mapi_excerpt_more($more = NULL) {
-	if(empty($more)) {
+	if (empty($more)) {
 		$more = __('Read more...', 'mapi');
 	}
 	$options = get_option(MAPI_OPTIONS);
-	if(!empty($options['excerpt_more_txt'])) {
-		$more = apply_filters('mapi_excerpt_more_text', $options['excerpt_more_txt']);
+	if (!empty($options[ 'excerpt_more_txt' ])) {
+		$more = apply_filters('mapi_excerpt_more_text', $options[ 'excerpt_more_txt' ]);
 	}
 
 	return apply_filters('mapi_excerpt_more', '&nbsp;<a class="mapi excerpt-more" title="' . the_title_attribute('echo=0') . '" href="' . get_permalink(get_the_ID()) . '">' . $more . '</a>');
@@ -75,11 +75,11 @@ function mapi_word_limit($string, $length) {
  * @return string
  */
 function mapi_get_url() {
-	$s        = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
-	$protocol = substr(strtolower($_SERVER["SERVER_PROTOCOL"]), 0, strpos(strtolower($_SERVER["SERVER_PROTOCOL"]), "/")) . $s;
-	$port     = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":" . $_SERVER["SERVER_PORT"]);
+	$s = empty($_SERVER[ "HTTPS" ]) ? '' : ($_SERVER[ "HTTPS" ] == "on") ? "s" : "";
+	$protocol = substr(strtolower($_SERVER[ "SERVER_PROTOCOL" ]), 0, strpos(strtolower($_SERVER[ "SERVER_PROTOCOL" ]), "/")) . $s;
+	$port = ($_SERVER[ "SERVER_PORT" ] == "80") ? "" : (":" . $_SERVER[ "SERVER_PORT" ]);
 
-	return $protocol . "://" . $_SERVER['SERVER_NAME'] . $port . $_SERVER['REQUEST_URI'];
+	return $protocol . "://" . $_SERVER[ 'SERVER_NAME' ] . $port . $_SERVER[ 'REQUEST_URI' ];
 }
 
 /**
@@ -91,7 +91,7 @@ function mapi_get_url() {
  * @return bool
  */
 function mapi_in_url($text) {
-	if(stristr(mapi_get_url(), $text)) {
+	if (stristr(mapi_get_url(), $text)) {
 		return TRUE;
 	} else {
 		return FALSE;
@@ -107,7 +107,7 @@ function mapi_in_url($text) {
  * @return mixed
  */
 function mapi_path_to_url($file) {
-	return str_replace($_SERVER['DOCUMENT_ROOT'], '', $file);
+	return str_replace($_SERVER[ 'DOCUMENT_ROOT' ], '', $file);
 }
 
 /**
@@ -120,8 +120,8 @@ function mapi_path_to_url($file) {
 function mapi_browser_from_ua() {
 	// based on http://www.php.net/manual/en/function.get-browser.php#101125
 
-	if(isset($_SERVER) && array_key_exists('HTTP_USER_AGENT', $_SERVER)) {
-		$user_agent = $_SERVER['HTTP_USER_AGENT'];
+	if (isset($_SERVER) && array_key_exists('HTTP_USER_AGENT', $_SERVER)) {
+		$user_agent = $_SERVER[ 'HTTP_USER_AGENT' ];
 	} else {
 		return FALSE;
 	}
@@ -129,61 +129,61 @@ function mapi_browser_from_ua() {
 	$platform = 'Unknown';
 
 	// First get the platform
-	if(preg_match('/linux/i', $user_agent)) {
+	if (preg_match('/linux/i', $user_agent)) {
 		$platform = 'Linux';
-	} elseif(preg_match('/macintosh|mac os x/i', $user_agent)) {
+	} elseif (preg_match('/macintosh|mac os x/i', $user_agent)) {
 		$platform = 'Mac';
-	} elseif(preg_match('/windows|win32/i', $user_agent)) {
+	} elseif (preg_match('/windows|win32/i', $user_agent)) {
 		$platform = 'Windows';
 	}
 
 	// Next get the name of the user agent yes separately and for good reason
-	if(preg_match('/MSIE/i', $user_agent) && !preg_match('/Opera/i', $user_agent)) {
-		$browser_name       = 'Internet Explorer';
+	if (preg_match('/MSIE/i', $user_agent) && !preg_match('/Opera/i', $user_agent)) {
+		$browser_name = 'Internet Explorer';
 		$browser_name_short = "MSIE";
-	} elseif(preg_match('/Firefox/i', $user_agent)) {
-		$browser_name       = 'Mozilla Firefox';
+	} elseif (preg_match('/Firefox/i', $user_agent)) {
+		$browser_name = 'Mozilla Firefox';
 		$browser_name_short = "Firefox";
-	} elseif(preg_match('/Chrome/i', $user_agent)) {
-		$browser_name       = 'Google Chrome';
+	} elseif (preg_match('/Chrome/i', $user_agent)) {
+		$browser_name = 'Google Chrome';
 		$browser_name_short = "Chrome";
-	} elseif(preg_match('/Safari/i', $user_agent)) {
-		$browser_name       = 'Apple Safari';
+	} elseif (preg_match('/Safari/i', $user_agent)) {
+		$browser_name = 'Apple Safari';
 		$browser_name_short = "Safari";
-	} elseif(preg_match('/Opera/i', $user_agent)) {
-		$browser_name       = 'Opera';
+	} elseif (preg_match('/Opera/i', $user_agent)) {
+		$browser_name = 'Opera';
 		$browser_name_short = "Opera";
-	} elseif(preg_match('/Netscape/i', $user_agent)) {
-		$browser_name       = 'Netscape';
+	} elseif (preg_match('/Netscape/i', $user_agent)) {
+		$browser_name = 'Netscape';
 		$browser_name_short = "Netscape";
 	} else {
-		$browser_name       = '';
+		$browser_name = '';
 		$browser_name_short = "";
 	}
 
 	// get the correct version number
-	$known   = array('Version', $browser_name_short, 'other');
+	$known = array('Version', $browser_name_short, 'other');
 	$pattern = '#(?<browser>' . join('|', $known) . ')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
-	if(@!preg_match_all($pattern, $user_agent, $matches)) {
+	if (@!preg_match_all($pattern, $user_agent, $matches)) {
 		// We have no matching number just continue
 	}
 
 	// see how many we have
-	$i = count($matches['browser']);
-	if($i != 1) {
+	$i = count($matches[ 'browser' ]);
+	if ($i != 1) {
 		// We will have two since we are not using 'other' argument yet
 		// See if version is before or after the name
-		if(strripos($user_agent, "Version") < strripos($user_agent, $browser_name_short)) {
-			$version = @$matches['version'][0];
+		if (strripos($user_agent, "Version") < strripos($user_agent, $browser_name_short)) {
+			$version = @$matches[ 'version' ][ 0 ];
 		} else {
-			$version = @$matches['version'][1];
+			$version = @$matches[ 'version' ][ 1 ];
 		}
 	} else {
-		$version = @$matches['version'][0];
+		$version = @$matches[ 'version' ][ 0 ];
 	}
 
 	// check if we have a number
-	if($version == NULL || $version == "") {
+	if ($version == NULL || $version == "") {
 		$version = "?";
 	}
 
@@ -192,7 +192,7 @@ function mapi_browser_from_ua() {
 		'name'       => $browser_name,
 		'version'    => $version,
 		'platform'   => $platform,
-		'pattern'    => $pattern
+		'pattern'    => $pattern,
 	);
 }
 
@@ -209,15 +209,15 @@ function mapi_browser_from_ua() {
  * @return string
  */
 function mapi_broswer_class($show_major_version = FALSE, $show_minor_version = FALSE) {
-	if(function_exists('php_browser_info')) {
+	if (function_exists('php_browser_info')) {
 		$browser = php_browser_info();
 
-		$class = $browser['browser'];
-		if(!empty($browser['majorver']) && $show_major_version) {
-			$class .= '-' . $browser['majorver'];
+		$class = $browser[ 'browser' ];
+		if (!empty($browser[ 'majorver' ]) && $show_major_version) {
+			$class .= '-' . $browser[ 'majorver' ];
 		}
-		if(!empty($browser['minorver']) && $show_minor_version) {
-			$class .= '-' . $browser['minorver'];
+		if (!empty($browser[ 'minorver' ]) && $show_minor_version) {
+			$class .= '-' . $browser[ 'minorver' ];
 		}
 		$class = strtolower($class);
 	} else {
@@ -238,37 +238,37 @@ function mapi_broswer_class($show_major_version = FALSE, $show_minor_version = F
  */
 function mapi_add_body_classes($classes = array()) {
 	global $is_lynx, $is_gecko, $is_winIE, $is_macIE, $is_opera, $is_NS4, $is_safari, $is_chrome, $is_iphone, $post;
-	if($is_lynx) {
+	if ($is_lynx) {
 		$classes[] = 'lynx';
 	}
-	if($is_gecko) {
+	if ($is_gecko) {
 		$classes[] = 'gecko';
 	}
-	if($is_winIE) {
+	if ($is_winIE) {
 		$classes[] = 'win-ie';
 	}
-	if($is_macIE) {
+	if ($is_macIE) {
 		$classes[] = 'mac-ie';
 	}
-	if($is_winIE || $is_macIE) {
+	if ($is_winIE || $is_macIE) {
 		$classes[] = 'ie';
 	}
-	if($is_opera) {
+	if ($is_opera) {
 		$classes[] = 'opera';
 	}
-	if($is_NS4) {
+	if ($is_NS4) {
 		$classes[] = 'ns4';
 	} // yeah right
-	if($is_safari) {
+	if ($is_safari) {
 		$classes[] = 'safari';
 	}
-	if($is_chrome) {
+	if ($is_chrome) {
 		$classes[] = 'chrome';
 	}
-	if($is_iphone) {
+	if ($is_iphone) {
 		$classes[] = 'iphone';
 	} // add post "type-slug"
-	if(isset($post)) {
+	if (isset($post)) {
 		$classes[] = $post->post_type . '-' . $post->post_name;
 	}
 
@@ -283,15 +283,15 @@ function mapi_add_body_classes($classes = array()) {
  * @return array
  */
 function mapi_add_os_body_class($classes) {
-	if(stristr($_SERVER['HTTP_USER_AGENT'], "iphone") || stristr($_SERVER['HTTP_USER_AGENT'], "ipad")) {
+	if (stristr($_SERVER[ 'HTTP_USER_AGENT' ], "iphone") || stristr($_SERVER[ 'HTTP_USER_AGENT' ], "ipad")) {
 		$classes[] = 'ios';
-	} elseif(stristr($_SERVER['HTTP_USER_AGENT'], "android")) {
+	} elseif (stristr($_SERVER[ 'HTTP_USER_AGENT' ], "android")) {
 		$classes[] = 'android';
-	} elseif(stristr($_SERVER['HTTP_USER_AGENT'], "mac")) {
+	} elseif (stristr($_SERVER[ 'HTTP_USER_AGENT' ], "mac")) {
 		$classes[] = 'osx';
-	} elseif(stristr($_SERVER['HTTP_USER_AGENT'], "linux")) {
+	} elseif (stristr($_SERVER[ 'HTTP_USER_AGENT' ], "linux")) {
 		$classes[] = 'linux';
-	} elseif(stristr($_SERVER['HTTP_USER_AGENT'], "windows")) {
+	} elseif (stristr($_SERVER[ 'HTTP_USER_AGENT' ], "windows")) {
 		$classes[] = 'windows';
 	}
 
@@ -311,40 +311,40 @@ function mapi_add_os_body_class($classes) {
  */
 function mapi_error($args) {
 	global $MAPI_ERRORS;
-	if(!is_array($args)) {
-		$args['msg'] = 'Fatal error: mapi_error must be passed an array.';
+	if (!is_array($args)) {
+		$args[ 'msg' ] = 'Fatal error: mapi_error must be passed an array.';
 	}
 	$defaults = array(
 		'msg'  => 'An unspecified error occurred',
 		'echo' => FALSE,
-		'die'  => FALSE
+		'die'  => FALSE,
 	);
-	$args     = wp_parse_args($args, $defaults);
+	$args = wp_parse_args($args, $defaults);
 
 	$debug = debug_backtrace();
-	$i     = (empty($debug[1]["function"])) ? 0 : 1;
+	$i = (empty($debug[ 1 ][ "function" ])) ? 0 : 1;
 
 	$str = '';
 
 	/** @noinspection PhpUndefinedVariableInspection */
-	if($args['echo']) {
+	if ($args[ 'echo' ]) {
 		$str .= '<div id="message" class="error"><p><strong>';
 	}
-	$str .= "[" . $debug[ $i ]["function"] . "]";
-	if($args['echo']) {
+	$str .= "[" . $debug[ $i ][ "function" ] . "]";
+	if ($args[ 'echo' ]) {
 		$str .= '</strong>';
 	}
 
 	/** @noinspection PhpUndefinedVariableInspection */
-	@$str .= ": " . $args['msg'] . " in " . $debug[ $i ]["file"] . " on line " . $debug[ $i ]["line"];
-	if($args['echo']) {
+	@$str .= ": " . $args[ 'msg' ] . " in " . $debug[ $i ][ "file" ] . " on line " . $debug[ $i ][ "line" ];
+	if ($args[ 'echo' ]) {
 		$str .= '</p></div>';
 	}
 
-	if($args['echo']) {
+	if ($args[ 'echo' ]) {
 
 		/** @noinspection PhpUndefinedVariableInspection */
-		if($args['die']) {
+		if ($args[ 'die' ]) {
 			die($str);
 		} else {
 			echo($str);
@@ -362,10 +362,10 @@ function mapi_error($args) {
  */
 function mapi_die($msg) {
 	mapi_error(array(
-		'msg'  => $msg,
-		'echo' => TRUE,
-		'die'  => TRUE
-	));
+				   'msg'  => $msg,
+				   'echo' => TRUE,
+				   'die'  => TRUE,
+			   ));
 }
 
 /**
@@ -375,10 +375,10 @@ function mapi_die($msg) {
  */
 function mapi_console_log($msg) {
 	mapi_error(array(
-		'msg'  => $msg,
-		'echo' => FALSE,
-		'die'  => FALSE
-	));
+				   'msg'  => $msg,
+				   'echo' => FALSE,
+				   'die'  => FALSE,
+			   ));
 }
 
 /**
@@ -389,7 +389,7 @@ function mapi_console_log($msg) {
  */
 function mapi_kirts($msg = NULL) {
 	global $MAPI_ERRORS;
-	if($msg == "happy") {
+	if ($msg == "happy") {
 		$msg = ":{)"; // unusual
 	} else {
 		$msg = ':{'; // normal
@@ -404,7 +404,7 @@ function mapi_kirts($msg = NULL) {
  */
 function mapi_error_console() {
 	global $MAPI_ERRORS;
-	if(count($MAPI_ERRORS) != 0) {
+	if (count($MAPI_ERRORS) != 0) {
 		echo '<script type="text/javascript">';
 		foreach ($MAPI_ERRORS as $error) {
 			echo 'console.log("' . $error . '");';
@@ -423,12 +423,12 @@ function mapi_error_console() {
  * @param string $capability
  */
 function mapi_var_dump($var = NULL, $die = FALSE, $capability = 'manage_options') {
-	if(current_user_can($capability)) {
+	if (current_user_can($capability)) {
 		echo '<pre>';
 		var_dump($var);
 		echo '</pre>';
 		/** @var bool $die */
-		if($die) {
+		if ($die) {
 			die;
 		}
 	}
@@ -454,20 +454,20 @@ function mapi_poop() {
  * @return array
  */
 function mapi_file_array_dir($dir = NULL, $exts = 'jpg,jpeg,png,gif') {
-	if(!isset($dir)) {
+	if (!isset($dir)) {
 		$dir = './';
 		//mapi_error(array('msg' => $dir));
 	}
-	if(file_exists($dir)) {
-		$files  = array();
-		$i      = - 1;
+	if (file_exists($dir)) {
+		$files = array();
+		$i = -1;
 		$handle = opendir($dir);
-		$exts   = explode(',', strtolower($exts));
-		while(FALSE !== ($file = readdir($handle))) {
+		$exts = explode(',', strtolower($exts));
+		while (FALSE !== ($file = readdir($handle))) {
 			foreach ($exts as $ext) {
-				if(preg_match('/\.' . $ext . '$/i', $file, $test)) {
+				if (preg_match('/\.' . $ext . '$/i', $file, $test)) {
 					$files[] = mapi_path_to_url($dir . $file);
-					++ $i;
+					++$i;
 				}
 			}
 		}
@@ -500,7 +500,7 @@ function mapi_get_file_extension($file_name) {
  * @return int
  */
 function mapi_intval_array($value) {
-	if(is_numeric($value)) {
+	if (is_numeric($value)) {
 		return intval($value);
 	} else {
 		return $value;
@@ -519,7 +519,7 @@ function mapi_intval_array($value) {
  */
 function mapi_in_array_r($needle, $haystack, $strict = FALSE) {
 	foreach ($haystack as $item) {
-		if(($strict ? $item === $needle : $item == $needle) || (is_array($item) && mapi_in_array_r($needle, $item, $strict))) {
+		if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && mapi_in_array_r($needle, $item, $strict))) {
 			return TRUE;
 		}
 	}
@@ -607,7 +607,7 @@ function mapi_fix_console() {
  */
 function mapi_remove_recent_comments_style() {
 	global $wp_widget_factory;
-	remove_action('wp_head', array($wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style'));
+	remove_action('wp_head', array($wp_widget_factory->widgets[ 'WP_Widget_Recent_Comments' ], 'recent_comments_style'));
 }
 
 /**
@@ -617,7 +617,7 @@ function mapi_remove_recent_comments_style() {
  */
 function mapi_ie_warning() {
 	$load_ieupdate = mapi_get_option('load_ieupdate');
-	if(!empty($load_ieupdate['load_ieupdate_version_txt'])) {
+	if (!empty($load_ieupdate[ 'load_ieupdate_version_txt' ])) {
 		mapi_toggle_html_compression();
 		?>
 		<!--[if lt IE <?php echo $load_ieupdate['load_ieupdate_version_txt']; ?>]>
@@ -643,15 +643,15 @@ function mapi_ie_warning() {
  * @return string
  */
 function mapi_get_option($name = NULL) {
-	if(empty($name)) {
+	if (empty($name)) {
 		return mapi_error(array('msg' => 'Option name is NULL', 'echo' => FALSE, 'die' => FALSE));
 	}
 
 	$options = get_option(MAPI_OPTIONS);
-	if($options && array_key_exists($name, $options)) {
+	if ($options && array_key_exists($name, $options)) {
 		return $options[ $name ];
 	} else {
-		if(current_user_can('manage_options') && WP_DEBUG) {
+		if (current_user_can('manage_options') && WP_DEBUG) {
 			mapi_error(array('msg' => 'get_option returned FALSE. Your code expects a value here but the user hasn\'t set one on the options page.', 'echo' => FALSE, 'die' => FALSE));
 		}
 
@@ -669,12 +669,12 @@ function mapi_get_option($name = NULL) {
  */
 function mapi_update_option($name, $value) {
 	$name = trim($name);
-	if(empty($name)) {
+	if (empty($name)) {
 		return FALSE;
 	}
 
 	$options = get_option(MAPI_OPTIONS);
-	if($options) {
+	if ($options) {
 		$options[ $name ] = $value;
 
 		return update_option(MAPI_OPTIONS, $options);
@@ -702,12 +702,12 @@ function mapi_add_option($name, $value) {
  */
 function mapi_delete_option($name) {
 	$name = trim($name);
-	if(empty($name)) {
+	if (empty($name)) {
 		return FALSE;
 	}
 
 	$options = get_option(MAPI_OPTIONS);
-	if($options) {
+	if ($options) {
 		$options[ $name ] = '';
 
 		return update_option(MAPI_OPTIONS, $options);
@@ -732,7 +732,7 @@ function mapi_option($name = NULL) {
  *
  */
 function mapi_unload_jquery() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_script('jquery');
 		wp_dequeue_script('jquery');
 	}
@@ -744,7 +744,7 @@ function mapi_unload_jquery() {
  *
  */
 function mapi_load_jquery() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_enqueue_script('jquery');
 	}
 }
@@ -755,9 +755,9 @@ function mapi_load_jquery() {
  *
  */
 function mapi_load_bootstrap() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_script('bootstrap');
-		wp_register_script('bootstrap', '//cdn.jsdelivr.net/bootstrap/3.3.0/js/bootstrap.min.js', array('jquery'));
+		wp_register_script('bootstrap', '//cdn.jsdelivr.net/bootstrap/3.3.6/js/bootstrap.min.js', array('jquery'));
 		wp_enqueue_script('bootstrap');
 	}
 }
@@ -768,9 +768,9 @@ function mapi_load_bootstrap() {
  *
  */
 function mapi_load_bootstrap_css() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_style('bootstrap');
-		wp_register_style('bootstrap', '//cdn.jsdelivr.net/bootstrap/3.3.0/css/bootstrap.min.css');
+		wp_register_style('bootstrap', '//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css');
 		wp_enqueue_style('bootstrap');
 	}
 }
@@ -781,9 +781,9 @@ function mapi_load_bootstrap_css() {
  *
  */
 function mapi_load_font_awesome() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_style('font-awesome');
-		wp_register_style('font-awesome', '//cdn.jsdelivr.net/fontawesome/4.2.0/css/font-awesome.min.css');
+		wp_register_style('font-awesome', '//cdn.jsdelivr.net/fontawesome/4.5.0/css/font-awesome.min.css');
 		wp_enqueue_style('font-awesome');
 	}
 }
@@ -794,7 +794,7 @@ function mapi_load_font_awesome() {
  *
  */
 function mapi_load_modernizr() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_script('modernizr');
 		wp_register_script('modernizr', '//cdn.jsdelivr.net/modernizr/2.8.3/modernizr.min.js', array('jquery'));
 		wp_enqueue_script('modernizr');
@@ -807,7 +807,7 @@ function mapi_load_modernizr() {
  *
  */
 function mapi_load_backbone() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_enqueue_script('backbone');
 	}
 }
@@ -818,7 +818,7 @@ function mapi_load_backbone() {
  *
  */
 function mapi_load_underscore() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_enqueue_script('underscore');
 	}
 }
@@ -829,13 +829,13 @@ function mapi_load_underscore() {
  *
  */
 function mapi_load_mapbox() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_style('mapbox-css');
-		wp_register_style('mapbox-css', '//api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.css');
+		wp_register_style('mapbox-css', '//api.tiles.mapbox.com/mapbox.js/v2.2.4/mapbox.css');
 		wp_enqueue_style('mapbox-css');
 
 		wp_deregister_script('mapbox-js');
-		wp_register_script('mapbox-js', '//api.tiles.mapbox.com/mapbox.js/v2.1.4/mapbox.js');
+		wp_register_script('mapbox-js', '//api.tiles.mapbox.com/mapbox.js/v2.2.4/mapbox.js');
 		wp_enqueue_script('mapbox-js');
 	}
 }
@@ -846,9 +846,9 @@ function mapi_load_mapbox() {
  *
  */
 function mapi_load_retina() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_script('retina');
-		wp_register_script('retina', '//cdn.jsdelivr.net/retinajs/1.1.0/retina.min.js');
+		wp_register_script('retina', '//cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js');
 		wp_enqueue_script('retina');
 	}
 }
@@ -859,7 +859,7 @@ function mapi_load_retina() {
  *
  */
 function mapi_load_swfobject() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_enqueue_script('swfobject');
 	}
 }
@@ -870,7 +870,7 @@ function mapi_load_swfobject() {
  *
  */
 function mapi_load_masonry() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_enqueue_script('jquery-masonry');
 	}
 }
@@ -881,9 +881,9 @@ function mapi_load_masonry() {
  *
  */
 function mapi_load_isotope() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_script('isotope');
-		wp_register_script('isotope', '//cdn.jsdelivr.net/isotope/2.0.0/isotope.pkgd.min.js');
+		wp_register_script('isotope', '//cdn.jsdelivr.net/isotope/2.2.2/isotope.pkgd.min.js');
 		wp_enqueue_script('isotope');
 	}
 }
@@ -894,9 +894,9 @@ function mapi_load_isotope() {
  *
  */
 function mapi_load_superfish() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_script('superfish');
-		wp_register_script('superfish', '//cdn.jsdelivr.net/superfish/1.7.5/js/superfish.min.js');
+		wp_register_script('superfish', '//cdn.jsdelivr.net/superfish/1.7.7/js/superfish.min.js');
 		wp_enqueue_script('superfish');
 	}
 }
@@ -907,7 +907,7 @@ function mapi_load_superfish() {
  *
  */
 function mapi_load_pickadate() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_script('pickadate');
 		wp_register_script('pickadate', '//cdn.jsdelivr.net/jquery.pickadate.js/4.0.0-0/ui-pickadate.min.js', array('jquery'));
 		wp_enqueue_script('pickadate');
@@ -932,9 +932,9 @@ function mapi_load_pickadate() {
  *
  */
 function mapi_load_lettering() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_script('lettering');
-		wp_register_script('lettering', '//cdn.jsdelivr.net/lettering/0.6.1/jquery.lettering.min.js', array('jquery'));
+		wp_register_script('lettering', '//cdn.jsdelivr.net/lettering/0.7.0/jquery.lettering.min.js', array('jquery'));
 		wp_enqueue_script('lettering');
 	}
 }
@@ -945,7 +945,7 @@ function mapi_load_lettering() {
  *
  */
 function mapi_load_fitvids() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_script('fitvids');
 		wp_register_script('fitvids', '//cdn.jsdelivr.net/fitvids/1.1.0/jquery.fitvids.js', array('jquery'));
 		wp_enqueue_script('fitvids');
@@ -958,9 +958,9 @@ function mapi_load_fitvids() {
  *
  */
 function mapi_load_flexslider() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_script('flexslider');
-		wp_register_script('flexslider', '//cdn.jsdelivr.net/flexslider/2.2.2/jquery.flexslider-min.js', array('jquery'));
+		wp_register_script('flexslider', '//cdn.jsdelivr.net/flexslider/2.6.0/jquery.flexslider-min.js', array('jquery'));
 		wp_enqueue_script('flexslider');
 		//wp_register_style('flexslider', '//cdn.jsdelivr.net/flexslider/2.2.2/flexslider.css');
 		//wp_enqueue_style('flexslider');
@@ -973,7 +973,7 @@ function mapi_load_flexslider() {
  *
  */
 function mapi_load_fittext() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_script('fittext');
 		wp_register_script('fittext', '//cdn.jsdelivr.net/fittext/1.2/jquery.fittext.js', array('jquery'));
 		wp_enqueue_script('fittext');
@@ -986,7 +986,7 @@ function mapi_load_fittext() {
  *
  */
 function mapi_load_easylistsplitter() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_script('easylistsplitter');
 		wp_register_script('easylistsplitter', '//cdn.jsdelivr.net/easylistsplitter/1.0.2/jquery.easyListSplitter.js', array('jquery'));
 		wp_enqueue_script('easylistsplitter');
@@ -999,12 +999,12 @@ function mapi_load_easylistsplitter() {
  *
  */
 function mapi_load_tinysort() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_script('tinysort');
-		wp_register_script('tinysort', '//cdnjs.cloudflare.com/ajax/libs/tinysort/1.5.6/jquery.tinysort.min.js', array('jquery'));
+		wp_register_script('tinysort', '//cdnjs.cloudflare.com/ajax/libs/tinysort/2.2.4/tinysort.min.js', array('jquery'));
 		wp_enqueue_script('tinysort');
 		wp_deregister_script('tinysort-char');
-		wp_register_script('tinysort-char', '//cdnjs.cloudflare.com/ajax/libs/tinysort/1.5.6/jquery.tinysort.charorder.min.js', array('jquery, tinysort'));
+		wp_register_script('tinysort-char', '//cdnjs.cloudflare.com/ajax/libs/tinysort/2.2.4/tinysort.charorder.min.js', array('jquery, tinysort'));
 		wp_enqueue_script('tinysort-char');
 	}
 }
@@ -1015,7 +1015,7 @@ function mapi_load_tinysort() {
  *
  */
 function mapi_load_bbq() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_script('bbq');
 		wp_register_script('bbq', '//cdn.jsdelivr.net/jquery.ba-bbq/1.3pre/jquery.ba-bbq.min.js', array('jquery'));
 		wp_enqueue_script('bbq');
@@ -1028,7 +1028,7 @@ function mapi_load_bbq() {
  *
  */
 function mapi_load_tiptip() {
-	if(!is_admin()) {
+	if (!is_admin()) {
 		wp_deregister_script('tiptip');
 		wp_register_script('tiptip', '//cdn.jsdelivr.net/tiptip/1.3/jquery.tipTip.minified.js');
 		wp_enqueue_script('tiptip');
@@ -1081,10 +1081,10 @@ function mapi_break_frames() {
  */
 function mapi_edit_link() {
 	global $post;
-	if(current_user_can('edit_post', $post->ID)) {
+	if (current_user_can('edit_post', $post->ID)) {
 		$label = get_post_type_object(get_post_type($post));
 		$label = ucwords($label->labels->singular_name);
-		if(!empty($label)) {
+		if (!empty($label)) {
 			$label = 'Edit ' . $label;
 		} else {
 			$label = 'Edit Page';
@@ -1104,7 +1104,7 @@ function mapi_edit_link() {
  */
 function mapi_external_links() {
 	global $MAPI_TLD;
-	if(!isset($MAPI_TLD) || empty($MAPI_TLD)) {
+	if (!isset($MAPI_TLD) || empty($MAPI_TLD)) {
 		$MAPI_TLD = mapi_extract_domain(mapi_get_url());
 	}
 	?>
@@ -1138,7 +1138,7 @@ function mapi_set_contstants_js() {
  */
 function mapi_remove_version_scripts() {
 	global $wp_scripts;
-	if(!is_a($wp_scripts, 'WP_Scripts')) {
+	if (!is_a($wp_scripts, 'WP_Scripts')) {
 		return;
 	}
 	foreach ($wp_scripts->registered as $handle => $script) {
@@ -1152,7 +1152,7 @@ function mapi_remove_version_scripts() {
  */
 function mapi_remove_version_styles() {
 	global $wp_styles;
-	if(!is_a($wp_styles, 'WP_Styles')) {
+	if (!is_a($wp_styles, 'WP_Styles')) {
 		return;
 	}
 	foreach ($wp_styles->registered as $handle => $style) {
@@ -1181,10 +1181,10 @@ function mapi_dequeue_css() {
 	$enable_adv_speed_options = mapi_get_option('enable_adv_speed_options');
 	// check to see if there is comma delimiting in the textarea
 	// this format is still silently supported for backward compatibility
-	if(strpos($enable_adv_speed_options['dequeue_styles_txt'], ',') !== FALSE) {
-		$arr = explode(',', $enable_adv_speed_options['dequeue_styles_txt']);
+	if (strpos($enable_adv_speed_options[ 'dequeue_styles_txt' ], ',') !== FALSE) {
+		$arr = explode(',', $enable_adv_speed_options[ 'dequeue_styles_txt' ]);
 	} else {
-		$arr = explode("\r\n", $enable_adv_speed_options['dequeue_styles_txt']);
+		$arr = explode("\r\n", $enable_adv_speed_options[ 'dequeue_styles_txt' ]);
 	}
 	foreach ($arr as $item) {
 		wp_dequeue_style($item);
@@ -1200,10 +1200,10 @@ function mapi_deregister_css() {
 	$enable_adv_speed_options = mapi_get_option('enable_adv_speed_options');
 	// check to see if there is comma delimiting in the textarea
 	// this format is still silently supported for backward compatibility
-	if(strpos($enable_adv_speed_options['deregister_styles_txt'], ',') !== FALSE) {
-		$arr = explode(',', $enable_adv_speed_options['deregister_styles_txt']);
+	if (strpos($enable_adv_speed_options[ 'deregister_styles_txt' ], ',') !== FALSE) {
+		$arr = explode(',', $enable_adv_speed_options[ 'deregister_styles_txt' ]);
 	} else {
-		$arr = explode("\r\n", $enable_adv_speed_options['deregister_styles_txt']);
+		$arr = explode("\r\n", $enable_adv_speed_options[ 'deregister_styles_txt' ]);
 	}
 	foreach ($arr as $item) {
 		wp_deregister_style($item);
@@ -1219,10 +1219,10 @@ function mapi_dequeue_scripts() {
 	$enable_adv_speed_options = mapi_get_option('enable_adv_speed_options');
 	// check to see if there is comma delimiting in the textarea
 	// this format is still silently supported for backward compatibility
-	if(strpos($enable_adv_speed_options['dequeue_scripts_txt'], ',') !== FALSE) {
-		$arr = explode(',', $enable_adv_speed_options['dequeue_scripts_txt']);
+	if (strpos($enable_adv_speed_options[ 'dequeue_scripts_txt' ], ',') !== FALSE) {
+		$arr = explode(',', $enable_adv_speed_options[ 'dequeue_scripts_txt' ]);
 	} else {
-		$arr = explode("\r\n", $enable_adv_speed_options['dequeue_scripts_txt']);
+		$arr = explode("\r\n", $enable_adv_speed_options[ 'dequeue_scripts_txt' ]);
 	}
 	foreach ($arr as $item) {
 		wp_dequeue_script($item);
@@ -1238,10 +1238,10 @@ function mapi_deregister_scripts() {
 	$enable_adv_speed_options = mapi_get_option('enable_adv_speed_options');
 	// check to see if there is comma delimiting in the textarea
 	// this format is still silently supported for backward compatibility
-	if(strpos($enable_adv_speed_options['deregister_scripts_txt'], ',') !== FALSE) {
-		$arr = explode(',', $enable_adv_speed_options['deregister_scripts_txt']);
+	if (strpos($enable_adv_speed_options[ 'deregister_scripts_txt' ], ',') !== FALSE) {
+		$arr = explode(',', $enable_adv_speed_options[ 'deregister_scripts_txt' ]);
 	} else {
-		$arr = explode("\r\n", $enable_adv_speed_options['deregister_scripts_txt']);
+		$arr = explode("\r\n", $enable_adv_speed_options[ 'deregister_scripts_txt' ]);
 	}
 	foreach ($arr as $item) {
 		wp_deregister_script($item);
@@ -1257,10 +1257,10 @@ function mapi_enqueue_scripts() {
 	$enable_adv_speed_options = mapi_get_option('enable_adv_speed_options');
 	// check to see if there is comma delimiting in the textarea
 	// this format is still silently supported for backward compatibility
-	if(strpos($enable_adv_speed_options['enqueue_scripts_txt'], ',') !== FALSE) {
-		$arr = explode(',', $enable_adv_speed_options['enqueue_scripts_txt']);
+	if (strpos($enable_adv_speed_options[ 'enqueue_scripts_txt' ], ',') !== FALSE) {
+		$arr = explode(',', $enable_adv_speed_options[ 'enqueue_scripts_txt' ]);
 	} else {
-		$arr = explode("\r\n", $enable_adv_speed_options['enqueue_scripts_txt']);
+		$arr = explode("\r\n", $enable_adv_speed_options[ 'enqueue_scripts_txt' ]);
 	}
 	foreach ($arr as $item) {
 		wp_enqueue_script($item);
@@ -1301,33 +1301,33 @@ function mapi_enqueue_scripts() {
  */
 function mapi_analytics($ga_id = NULL, $allow_multiple_domains = NULL, $enhanced_link_attribution = NULL, $universal_analytics = NULL) {
 
-	if(empty($ga_id)) {
+	if (empty($ga_id)) {
 		// no GA web property was passed, so grab the one from the API options page
 		$ga_id = mapi_get_option('ga_acct_txt');
-		if(empty($ga_id)) {
+		if (empty($ga_id)) {
 			mapi_error(array('msg' => 'No Google Analytics Web Property ID was found.', 'echo' => FALSE, 'die' => FALSE));
 		}
 	}
 
-	if(empty($allow_multiple_domains)) {
+	if (empty($allow_multiple_domains)) {
 		// allow_multiple_domains flag was not passed, so grab the one from the API options page
 		$ga_adv_options = mapi_get_option('enable_adv_ga_options');
-		if(array_key_exists('multiple_domains', $ga_adv_options)) {
-			$allow_multiple_domains = @$ga_adv_options['multiple_domains'];
+		if (array_key_exists('multiple_domains', $ga_adv_options)) {
+			$allow_multiple_domains = @$ga_adv_options[ 'multiple_domains' ];
 		}
 	}
-	if(empty($enhanced_link_attribution)) {
+	if (empty($enhanced_link_attribution)) {
 		// enhanced_link_attribution flag was not passed, so grab the one from the API options page
 		$ga_adv_options = mapi_get_option('enable_adv_ga_options');
-		if(array_key_exists('enhanced_link_attribution', $ga_adv_options)) {
-			$enhanced_link_attribution = @$ga_adv_options['enhanced_link_attribution'];
+		if (array_key_exists('enhanced_link_attribution', $ga_adv_options)) {
+			$enhanced_link_attribution = @$ga_adv_options[ 'enhanced_link_attribution' ];
 		}
 	}
-	if(empty($universal_analytics)) {
+	if (empty($universal_analytics)) {
 		// allow_multiple_domains flag was not passed, so grab the one from the API options page
 		$ga_adv_options = mapi_get_option('enable_adv_ga_options');
-		if(array_key_exists('universal_analytics', $ga_adv_options)) {
-			$universal_analytics = @$ga_adv_options['universal_analytics'];
+		if (array_key_exists('universal_analytics', $ga_adv_options)) {
+			$universal_analytics = @$ga_adv_options[ 'universal_analytics' ];
 		}
 	}
 	// get the base of the site domain (removing any subdomains, etc)
@@ -1335,19 +1335,19 @@ function mapi_analytics($ga_id = NULL, $allow_multiple_domains = NULL, $enhanced
 
 	$ga_code = "<script type=\"text/javascript\">";
 
-	if(mapi_is_true($universal_analytics)) {
+	if (mapi_is_true($universal_analytics)) {
 		$ga_code .= "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');";
 		$ga_code .= "ga('create', '" . $ga_id . "', '" . $domain . "');";
 		$ga_code .= "ga('send', 'pageview');";
 	} else {
 
 		$ga_code .= "var _gaq = _gaq || [];\n";
-		if(mapi_is_true($enhanced_link_attribution)) {
+		if (mapi_is_true($enhanced_link_attribution)) {
 			$ga_code .= "var pluginUrl = '//www.google-analytics.com/plugins/ga/inpage_linkid.js';\n";
 			$ga_code .= "_gaq.push(['_require', 'inpage_linkid', pluginUrl]);\n";
 		}
 		$ga_code .= "\t_gaq.push(['_setAccount', '" . $ga_id . "']);\n\t_gaq.push(['_setDomainName', '" . $domain . "']);\n";
-		if(mapi_is_true($allow_multiple_domains)) {
+		if (mapi_is_true($allow_multiple_domains)) {
 			$ga_code .= "\t_gaq.push(['_setAllowLinker', true]);\n";
 		}
 		$ga_code .= "\t_gaq.push(['_trackPageview']);
@@ -1377,10 +1377,10 @@ function mapi_analytics($ga_id = NULL, $allow_multiple_domains = NULL, $enhanced
  */
 function mapi_extract_domain($url) {
 	$domain = parse_url($url);
-	$domain = $domain['host'];
+	$domain = $domain[ 'host' ];
 	require_once(MAPI_DIR_PATH . 'lib/regdom-php/effectiveTLDs.inc.php');
 	$tldTree = require_once(MAPI_DIR_PATH . 'lib/regdom-php/regDomain.inc.php');
-	$domain  = getRegisteredDomain($domain, $tldTree);
+	$domain = getRegisteredDomain($domain, $tldTree);
 
 	return $domain;
 }
@@ -1430,12 +1430,26 @@ function mapi_phone_format($tel) {
  *
  * Turns a number into a USD formatted string. Example: 1200.25 becomes $1,200.25.
  *
+ * @param $number
+ *
+ * @return mixed|string
  */
-
 function mapi_money_format($number) {
+
 	setlocale(LC_MONETARY, 'en_US');
 
-	return money_format('%(#10n', $number);
+	if ($number == 0) {
+		return '';
+	} else {
+
+		$number = money_format('%(#1n', $number);
+
+		if ($trim_zeros) {
+			$number = str_ireplace(".00", "", $number);
+		}
+
+		return $number;
+	}
 }
 
 /**
@@ -1449,7 +1463,7 @@ function mapi_money_format($number) {
  * @return mixed
  */
 function mapi_remove_quick_edit($actions) {
-	unset($actions['inline hide-if-no-js']);
+	unset($actions[ 'inline hide-if-no-js' ]);
 
 	return $actions;
 }
@@ -1465,9 +1479,9 @@ function mapi_remove_quick_edit($actions) {
  */
 function mapi_list_hooked_functions($tag = FALSE) {
 	global $wp_filter;
-	if($tag) {
+	if ($tag) {
 		$hook[ $tag ] = $wp_filter[ $tag ];
-		if(!is_array($hook[ $tag ])) {
+		if (!is_array($hook[ $tag ])) {
 			return mapi_error(array('msg' => "Nothing found for '$tag' hook", 'echo' => TRUE));
 		}
 	} else {
@@ -1496,13 +1510,13 @@ function mapi_list_hooked_functions($tag = FALSE) {
  * @return array|bool Array of RGB value with keys 'red', 'green', and 'blue'. FALSE if no valid hexadecimal value was passed.
  */
 function mapi_hex_to_rgb($hex_color) {
-	if($hex_color[0] == '#') {
+	if ($hex_color[ 0 ] == '#') {
 		$hex_color = substr($hex_color, 1);
 	}
-	if(strlen($hex_color) == 6) {
-		list($r, $g, $b) = array($hex_color[0] . $hex_color[1], $hex_color[2] . $hex_color[3], $hex_color[4] . $hex_color[5]);
-	} elseif(strlen($hex_color) == 3) {
-		list($r, $g, $b) = array($hex_color[0] . $hex_color[0], $hex_color[1] . $hex_color[1], $hex_color[2] . $hex_color[2]);
+	if (strlen($hex_color) == 6) {
+		list($r, $g, $b) = array($hex_color[ 0 ] . $hex_color[ 1 ], $hex_color[ 2 ] . $hex_color[ 3 ], $hex_color[ 4 ] . $hex_color[ 5 ]);
+	} elseif (strlen($hex_color) == 3) {
+		list($r, $g, $b) = array($hex_color[ 0 ] . $hex_color[ 0 ], $hex_color[ 1 ] . $hex_color[ 1 ], $hex_color[ 2 ] . $hex_color[ 2 ]);
 	} else {
 		return FALSE;
 	}
@@ -1523,7 +1537,7 @@ function mapi_hex_to_rgb($hex_color) {
  * @return string
  */
 function mapi_data_uri($file, $mime = '') {
-	if(function_exists('mime_content_type')) {
+	if (function_exists('mime_content_type')) {
 		return 'data: ' . mime_content_type($file) . ';base64,' . base64_encode(file_get_contents($file));
 	} else {
 		return 'data: ' . $mime . ';base64,' . base64_encode(file_get_contents($file));
@@ -1539,11 +1553,11 @@ function mapi_data_uri($file, $mime = '') {
  * @return string
  */
 function mapi_random_string($length = 16) {
-	$salt          = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-	$len           = strlen($salt);
+	$salt = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	$len = strlen($salt);
 	$random_string = '';
-	mt_srand(10000000 * (double)microtime());
-	for ($i = 0; $i < $length; $i ++) {
+	mt_srand(10000000 * (double) microtime());
+	for ($i = 0; $i < $length; $i++) {
 		$random_string .= $salt[ mt_rand(0, $len - 1) ];
 	}
 
@@ -1556,12 +1570,12 @@ function mapi_random_string($length = 16) {
  * @return mixed
  */
 function mapi_get_ip() {
-	if(!empty($_SERVER['HTTP_CLIENT_IP'])) {
-		$ip = $_SERVER['HTTP_CLIENT_IP'];
-	} elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-		$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	if (!empty($_SERVER[ 'HTTP_CLIENT_IP' ])) {
+		$ip = $_SERVER[ 'HTTP_CLIENT_IP' ];
+	} elseif (!empty($_SERVER[ 'HTTP_X_FORWARDED_FOR' ])) {
+		$ip = $_SERVER[ 'HTTP_X_FORWARDED_FOR' ];
 	} else {
-		$ip = $_SERVER['REMOTE_ADDR'];
+		$ip = $_SERVER[ 'REMOTE_ADDR' ];
 	}
 
 	return $ip;
@@ -1575,7 +1589,7 @@ function mapi_get_ip() {
  * @return string
  */
 function mapi_get_host_by_ip($ip) {
-	if(function_exists('gethostbyaddr')) {
+	if (function_exists('gethostbyaddr')) {
 		return gethostbyaddr($ip);
 	} else {
 		return mapi_error(array('msg' => 'gethostbyaddr() not available.'));
@@ -1590,7 +1604,7 @@ function mapi_get_host_by_ip($ip) {
  * @return string
  */
 function mapi_get_ip_by_host($host) {
-	if(function_exists('gethostbyname')) {
+	if (function_exists('gethostbyname')) {
 		return gethostbyname($host);
 	} else {
 		return mapi_error(array('msg' => 'gethostbyname() not available.'));
@@ -1604,11 +1618,11 @@ function mapi_get_ip_by_host($host) {
  * @return string
  */
 function mapi_check_server() {
-	if(array_key_exists('SERVER_SOFTWARE', $_SERVER)) {
-		$server = $_SERVER['SERVER_SOFTWARE'];
-		if(stripos($server, 'nginx') !== FALSE) {
+	if (array_key_exists('SERVER_SOFTWARE', $_SERVER)) {
+		$server = $_SERVER[ 'SERVER_SOFTWARE' ];
+		if (stripos($server, 'nginx') !== FALSE) {
 			$server = 'nginx';
-		} elseif(stripos($server, 'apache') !== FALSE) {
+		} elseif (stripos($server, 'apache') !== FALSE) {
 			$server = 'apache';
 		} else {
 			$server = 'other';
@@ -1635,9 +1649,9 @@ function mapi_is_reserved_ipv4($ip) {
 		'2886729728' => 2887778303, // 172.16.0.0 - 172.31.255.255 
 		'3758096384' => 4026531839, // 224.0.0.0 - 239.255.255.255 
 	);
-	$ip_long      = sprintf('%u', ip2long($ip));
+	$ip_long = sprintf('%u', ip2long($ip));
 	foreach ($reserved_ips as $ip_start => $ip_end) {
-		if(($ip_long >= $ip_start) && ($ip_long <= $ip_end)) {
+		if (($ip_long >= $ip_start) && ($ip_long <= $ip_end)) {
 			return TRUE;
 		}
 	}

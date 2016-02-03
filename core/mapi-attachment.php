@@ -38,13 +38,33 @@ function mapi_featured_img($args = array()) {
 		'alt'   => apply_filters('mapi_featured_img_alt', mapi_get_attachment_image_title()),
 		'title' => apply_filters('mapi_featured_img_title', mapi_get_attachment_image_title()),
 		'class' => apply_filters('mapi_featured_img_class', 'mapi-featured-img'),
+		'q'     => apply_filters('mapi_thumb_q', 90), // quality 0-100
+		'a'     => apply_filters('mapi_thumb_a', 'c'), // crop alignment c, t, l, r, b, tl, tr, bl, br	(c = center, t = top, b = bottom, r = right, l = left)
+		'zc'    => apply_filters('mapi_thumb_zc', 1), // zoom/crop
+		'f'     => apply_filters('mapi_thumb_f', NULL),
+		's'     => apply_filters('mapi_thumb_s', 0), // sharpen 1 or 0
+		'cc'    => apply_filters('mapi_thumb_cc', NULL), // canvas color ffffff
+		'ct'    => apply_filters('mapi_thumb_ct', 1), // canvas transparency (overrides cc) 1 or 0
 	);
 	$args = wp_parse_args($args, $defaults);
 
 	if (has_post_thumbnail($args[ 'id' ])) {
 		$featured_img = wp_get_attachment_image_src(mapi_get_attachment_id($args[ 'id' ]), 'full');
 		$args[ 'src' ] = $featured_img[ 0 ];
-		$args[ 'img' ] = mapi_thumb(array( 'src' => $args[ 'src' ], 'w' => $args[ 'w' ], 'h' => $args[ 'h' ], 'id' => $args[ 'id' ] ));
+		$args[ 'img' ] = mapi_thumb(
+			array(
+				'src' => $args[ 'src' ],
+				'w'   => $args[ 'w' ],
+				'h'   => $args[ 'h' ],
+				'id'  => $args[ 'id' ],
+				'a'  => $args[ 'a' ],
+				'zc'  => $args[ 'zc' ],
+				'f'  => $args[ 'f' ],
+				's'  => $args[ 's' ],
+				'cc'  => $args[ 'cc' ],
+				'ct'  => $args[ 'ct' ],
+			)
+		);
 		if ($args[ 'echo' ] === TRUE) {
 			echo apply_filters('mapi_featured_image_before', '<div class="' . $args[ 'class' ] . '">');
 			?>

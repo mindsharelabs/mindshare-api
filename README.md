@@ -10,8 +10,14 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
-## 0.9.1
+## 1.0
+- Add extra mThumb params to `mapi_featured_img()`
 - Add class filter to `mapi_featured_img()`
+- Updated TGM-Plugin-Activation to 2.5.2
+- Updated HTMLawed to beta9
+- Updated all JSDelivr scripts
+- Remove Yoast Dashboard widget
+- Remove customizer from Admin bar
 
 ## 0.9
 - Bug fix for moving nav menus to top
