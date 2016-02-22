@@ -4,7 +4,7 @@ Plugin Name: Mindshare Theme API
 Plugin URI: https://mindsharelabs.com/downloads/mindshare-theme-api/
 Description: Provides a library of additional template tags, 3rd-party libraries, and functions for WordPress themes and additional features for WordPress CMS websites.
 Author: Mindshare Studios, Inc
-Version: 1.0
+Version: 1.0.1
 Author URI: https://mind.sh/are/
 Network: false
 */
@@ -17,64 +17,64 @@ Network: false
 $MAPI_ERRORS = array();
 $MAPI_TLD = ''; // global variable for grabbing the base URL w/o subdomains in mapi_external_links() to reduce processor/memory usage
 
-if(!defined('MAPI_MIN_WP_VERSION')) {
+if (!defined('MAPI_MIN_WP_VERSION')) {
 	define('MAPI_MIN_WP_VERSION', '4.0');
 }
 
-if(!defined('MAPI_PLUGIN_NAME')) {
+if (!defined('MAPI_PLUGIN_NAME')) {
 	define('MAPI_PLUGIN_NAME', 'Mindshare Theme API');
 }
 
-if(!defined('MAPI_UPDATE_URL')) {
+if (!defined('MAPI_UPDATE_URL')) {
 	define('MAPI_UPDATE_URL', 'https://mindsharelabs.com');
 }
 
-if(!defined('MAPI_PLUGIN_SLUG')) {
+if (!defined('MAPI_PLUGIN_SLUG')) {
 	define('MAPI_PLUGIN_SLUG', dirname(plugin_basename(__FILE__))); // mindshare-api-master
 }
 
-if(!defined('MAPI_DIR_PATH')) {
+if (!defined('MAPI_DIR_PATH')) {
 	define('MAPI_DIR_PATH', plugin_dir_path(__FILE__)); // /.../wp-content/plugins/mindshare-api-master/
 }
 
-if(!defined('MAPI_DIR_URL')) {
+if (!defined('MAPI_DIR_URL')) {
 	define('MAPI_DIR_URL', trailingslashit(plugins_url(NULL, __FILE__)));
 }
 
-if(!defined('MAPI_OPTIONS')) {
+if (!defined('MAPI_OPTIONS')) {
 	define('MAPI_OPTIONS', 'mapi_options');
 }
 
 // cache folder for mapi_thumb within wp-content/uploads
-if(!defined('BFITHUMB_UPLOAD_DIR')) {
+if (!defined('BFITHUMB_UPLOAD_DIR')) {
 	define('BFITHUMB_UPLOAD_DIR', 'cache');
 }
 
 // pre-0.7 version folder/file naming convention
-if(!defined('MAPI_LEGACY_NAME')) {
+if (!defined('MAPI_LEGACY_NAME')) {
 	define('MAPI_LEGACY_NAME', 'mcms-api/mcms-api.php');
 }
 
 // check WordPress version
 global $wp_version;
-if(version_compare($wp_version, MAPI_MIN_WP_VERSION, "<")) {
+if (version_compare($wp_version, MAPI_MIN_WP_VERSION, "<")) {
 	exit(MAPI_PLUGIN_NAME . ' requires WordPress ' . MAPI_MIN_WP_VERSION . ' or newer.');
 }
 
 // deny direct access
-if(!function_exists('add_action')) {
+if (!function_exists('add_action')) {
 	header('Status: 403 Forbidden');
 	header('HTTP/1.1 403 Forbidden');
 	exit();
 }
 
 // make sure a few WP functions are available
-if(!function_exists('is_plugin_active')) {
+if (!function_exists('is_plugin_active')) {
 	include_once(ABSPATH . 'wp-admin/includes/plugin.php');
 }
 
 // EDD updater
-if(!class_exists('Mindshare_API_Plugin_Updater')) {
+if (!class_exists('Mindshare_API_Plugin_Updater')) {
 	// load our custom updater
 	include_once(MAPI_DIR_PATH . 'lib/Mindshare_API_Plugin_Updater.php');
 }
@@ -89,7 +89,7 @@ if(!class_exists('Mindshare_API_Plugin_Updater')) {
  * @link      https://mindsharelabs.com/downloads/mindshare-theme-api/
  *
  */
-if(!class_exists("Mindshare_API")) :
+if (!class_exists("Mindshare_API")) :
 	class Mindshare_API {
 
 		/**
@@ -106,7 +106,7 @@ if(!class_exists("Mindshare_API")) :
 		 *
 		 * @var string
 		 */
-		private $class_version = '1.0';
+		private $class_version = '1.0.1';
 
 		/**
 		 * Used for automatic updates
@@ -121,7 +121,7 @@ if(!class_exists("Mindshare_API")) :
 		 */
 		function __construct() {
 
-			if(is_multisite()) {
+			if (is_multisite()) {
 				register_activation_hook(__FILE__, array($this, '_check_network_activation'));
 			}
 
@@ -162,7 +162,7 @@ if(!class_exists("Mindshare_API")) :
 		 * @param $network_wide
 		 */
 		public function _check_network_activation($network_wide) {
-			if(!$network_wide) {
+			if (!$network_wide) {
 				return;
 			}
 			deactivate_plugins(plugin_basename(__FILE__), TRUE, TRUE);
@@ -184,7 +184,7 @@ if(!class_exists("Mindshare_API")) :
 						'name'     => 'PHP Browser Detection',
 						'slug'     => 'php-browser-detection',
 						'required' => FALSE,
-					)
+					),
 				)
 			);
 
@@ -227,7 +227,7 @@ if(!class_exists("Mindshare_API")) :
 					// %1$s = dashboard link
 					'nag_type'                        => 'updated'
 					// Determines admin notice type - can only be 'updated' or 'error'
-				)
+				),
 			);
 			tgmpa($plugins, $config);
 		}
@@ -242,7 +242,7 @@ if(!class_exists("Mindshare_API")) :
 			$edd_active = get_option('mapi_license_status');
 
 			// EDD updates are already activated for this site, so exit
-			if($edd_active != 'valid') {
+			if ($edd_active != 'valid') {
 
 				$response = wp_remote_get(
 					add_query_arg(
@@ -250,18 +250,18 @@ if(!class_exists("Mindshare_API")) :
 							'edd_action' => 'activate_license',
 							'license'    => $this->license_key,
 							'item_name'  => urlencode(MAPI_PLUGIN_NAME), // the name of our product in EDD
-							'url'        => home_url()
+							'url'        => home_url(),
 						),
 						MAPI_UPDATE_URL
 					),
 					array(
 						'timeout'   => 15,
-						'sslverify' => FALSE
+						'sslverify' => FALSE,
 					)
 				);
 
 				// make sure the response came back okay
-				if(is_wp_error($response)) {
+				if (is_wp_error($response)) {
 					return FALSE;
 				}
 
@@ -269,7 +269,7 @@ if(!class_exists("Mindshare_API")) :
 				$license_data = json_decode(wp_remote_retrieve_body($response));
 
 				// $license_data->license will be either "valid" or "invalid"
-				if(is_object($license_data)) {
+				if (is_object($license_data)) {
 					update_option('mapi_license_status', $license_data->license);
 				}
 			}
@@ -281,7 +281,7 @@ if(!class_exists("Mindshare_API")) :
 					'version'   => $this->class_version, // current version number
 					'license'   => $this->license_key,
 					'item_name' => MAPI_PLUGIN_NAME, // name of this plugin
-					'author'    => 'Mindshare Studios, Inc.'
+					'author'    => 'Mindshare Studios, Inc.',
 				)
 			);
 		}
@@ -296,7 +296,7 @@ if(!class_exists("Mindshare_API")) :
 		 * @return array
 		 */
 		public function plugin_action_links($links, $file) {
-			if($file == plugin_basename(__FILE__)) {
+			if ($file == plugin_basename(__FILE__)) {
 				$settingslink = '<a href="themes.php?page=' . MAPI_PLUGIN_SLUG . '-settings" title="Theme Settings">Theme</a> | <a href="options-general.php?page=' . MAPI_PLUGIN_SLUG . '-admin-settings" title="Developer Settings">Developer</a>';
 				array_unshift($links, $settingslink);
 			}
@@ -314,7 +314,7 @@ if(!class_exists("Mindshare_API")) :
 		 * @return array
 		 */
 		public function plugin_row_meta($links, $file) {
-			if($file == plugin_basename(__FILE__)) {
+			if ($file == plugin_basename(__FILE__)) {
 				$links = array_merge(
 					$links,
 					array(
@@ -329,7 +329,7 @@ if(!class_exists("Mindshare_API")) :
 						sprintf(
 							'<a href="http://mind.sh/are/donate/" title="%1$s" target="_blank">%1$s</a>',
 							esc_html__('Donate', 'mapi')
-						)
+						),
 					)
 				);
 			}
@@ -406,10 +406,10 @@ if(!class_exists("Mindshare_API")) :
 			include_once('core/deprecated.php');
 
 			// check the minify cache
-			if(isset($mapi_minify) && is_a($mapi_minify, 'mapi_minify')) {
+			if (isset($mapi_minify) && is_a($mapi_minify, 'mapi_minify')) {
 				$config_set = get_option('mapi_minify_config_set');
-				if($config_set != 1) {
-					if(is_writable($mapi_minify->minify_config_location)) {
+				if ($config_set != 1) {
+					if (is_writable($mapi_minify->minify_config_location)) {
 						$mapi_minify->check_minify_config();
 					}
 				}
@@ -423,7 +423,7 @@ if(!class_exists("Mindshare_API")) :
 endif;
 
 // check to make sure old version is not going to cause conflicts
-if(!is_plugin_active(MAPI_LEGACY_NAME)) {
+if (!is_plugin_active(MAPI_LEGACY_NAME)) {
 	$mapi = new Mindshare_API();
 } else {
 	deactivate_plugins(array(MAPI_LEGACY_NAME));

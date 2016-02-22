@@ -10,6 +10,9 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 1.0.1
+- Premissions fix for mThumb
+
 ## 1.0
 - Add extra mThumb params to `mapi_featured_img()`
 - Add class filter to `mapi_featured_img()`
