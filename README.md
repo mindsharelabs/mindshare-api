@@ -10,6 +10,9 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 1.0.2
+- Remove deprecated params from TGMPA
+
 ## 1.0.1
 - Premissions fix for mThumb
 

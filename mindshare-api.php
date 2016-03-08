@@ -191,8 +191,6 @@ if (!class_exists("Mindshare_API")) :
 			$config = array(
 				'domain'           => 'mapi', // Text domain
 				'default_path'     => '', // Default absolute path to pre-packaged plugins
-				'parent_menu_slug' => 'themes.php', // Default parent menu slug
-				'parent_url_slug'  => 'themes.php', // Default parent URL slug
 				'menu'             => 'install-required-plugins', // Menu slug
 				'has_notices'      => TRUE, // Show admin notices or not
 				'is_automatic'     => TRUE, // Automatically activate plugins after installation or not
