@@ -36,7 +36,7 @@ $mapi_options->TabsListing(
  * contact tab start
  */
 global $current_user;
-get_currentuserinfo();
+wp_get_current_user();
 
 $mapi_options->OpenTab(sanitize_title($contact_options_label));
 $mapi_options->Title($contact_options_label);
