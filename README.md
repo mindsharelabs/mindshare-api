@@ -11,7 +11,8 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 # Changelog:
 
 ## 1.0.2
-- Remove depcrecated get_currentuserinfo calls
+- Add function for responsive video embeds
+- Remove deprecated `get_currentuserinfo()` calls
 - Remove deprecated params from TGMPA
 
 ## 1.0.1

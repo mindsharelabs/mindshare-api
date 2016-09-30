@@ -1,0 +1,14 @@
+.mapi-video-container {
+	position:       relative;
+	padding-bottom: 56.25%;
+	height:         0;
+	overflow:       hidden;
+}
+
+.mapi-video-container iframe, .mapi-video-container object, .mapi-video-container embed, .mapi-video-container video {
+	position: absolute;
+	top:      0;
+	left:     0;
+	width:    100%;
+	height:   100%;
+}

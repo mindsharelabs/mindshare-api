@@ -119,7 +119,7 @@ function mapi_facebook_rss($args = array()) {
 		'rss_uri'   => NULL,
 		'num_items' => 4,
 		'num_words' => 7,
-		'echo'      => TRUE
+		'echo'      => TRUE,
 	);
 	$args = wp_parse_args($args, $defaults);
 
@@ -129,7 +129,7 @@ function mapi_facebook_rss($args = array()) {
 		if ($facebook_id) {
 			$args[ 'rss_uri' ] = 'https://www.facebook.com/feeds/page.php?id=' . $facebook_id . '&format=rss20';
 		} else {
-			return mapi_error(array( 'msg' => 'Facebook RSS URI is required' ));
+			return mapi_error(array('msg' => 'Facebook RSS URI is required'));
 		}
 	}
 
@@ -165,7 +165,7 @@ function mapi_facebook_rss($args = array()) {
 			return $rss_items;
 		}
 	} else {
-		return mapi_error(array( 'msg' => 'No Facebook status updates were found in the feed at ' . $args[ 'rss_uri' ], 'echo' => TRUE, 'die' => FALSE ));
+		return mapi_error(array('msg' => 'No Facebook status updates were found in the feed at ' . $args[ 'rss_uri' ], 'echo' => TRUE, 'die' => FALSE));
 	}
 }
 
@@ -388,7 +388,7 @@ function mapi_social_links($networks = array(), $share_or_follow = 'share', $ech
 			'tumblr',
 			'youtube',
 			'rss',
-			'email'
+			'email',
 		);
 	}
 	//mapi_var_dump($networks);
@@ -406,9 +406,9 @@ function mapi_social_links($networks = array(), $share_or_follow = 'share', $ech
 
 		foreach ($networks as $network) {
 			if ($js == TRUE) {
-				mapi_social_link_js(array( 'network' => $network, 'share' => $share, 'class' => $mapi_social_links_class ));
+				mapi_social_link_js(array('network' => $network, 'share' => $share, 'class' => $mapi_social_links_class));
 			} else {
-				mapi_social_link(array( 'network' => $network, 'share' => $share, 'class' => $mapi_social_links_class ));
+				mapi_social_link(array('network' => $network, 'share' => $share, 'class' => $mapi_social_links_class));
 			}
 		}
 
@@ -417,7 +417,7 @@ function mapi_social_links($networks = array(), $share_or_follow = 'share', $ech
 		echo apply_filters('mapi_social_links_after', '</div>');
 	} else {
 		foreach ($networks as $network) {
-			mapi_social_link(array( 'network' => $network, 'share' => $share, 'echo' => FALSE, 'class' => $mapi_social_links_class ));
+			mapi_social_link(array('network' => $network, 'share' => $share, 'echo' => FALSE, 'class' => $mapi_social_links_class));
 		}
 	}
 }
@@ -438,7 +438,7 @@ function mapi_social_links($networks = array(), $share_or_follow = 'share', $ech
  */
 function mapi_social_link($args) {
 	if (!is_array($args)) {
-		return mapi_error(array( 'msg' => 'Fatal error: ' . __FUNCTION__ . ' must be passed an array.' ));
+		return mapi_error(array('msg' => 'Fatal error: ' . __FUNCTION__ . ' must be passed an array.'));
 	}
 	$defaults = array(
 		'class'    => apply_filters('mapi_social_link_class', 'mapi-social-link'),
@@ -453,7 +453,7 @@ function mapi_social_link($args) {
 	$args = wp_parse_args($args, $defaults);
 
 	if (empty($args[ 'network' ])) {
-		return mapi_error(array( 'msg' => 'No social network was specified.' ));
+		return mapi_error(array('msg' => 'No social network was specified.'));
 	} else {
 		$args[ 'network' ] = trim(strtolower($args[ 'network' ]));
 	}
@@ -517,7 +517,7 @@ function mapi_social_link($args) {
  */
 function mapi_social_link_js($args) {
 	if (!is_array($args)) {
-		return mapi_error(array( 'msg' => 'Fatal error: ' . __FUNCTION__ . ' must be passed an array.' ));
+		return mapi_error(array('msg' => 'Fatal error: ' . __FUNCTION__ . ' must be passed an array.'));
 	}
 	$defaults = array(
 		'class'    => apply_filters('mapi_social_link_class', 'mapi-social-link'),
@@ -540,7 +540,7 @@ function mapi_social_link_js($args) {
 	$win_h = apply_filters('mapi_social_link_js_height', 436);
 
 	if (empty($args[ 'network' ])) {
-		return mapi_error(array( 'msg' => 'No social network was specified.' ));
+		return mapi_error(array('msg' => 'No social network was specified.'));
 	} else {
 		$args[ 'network' ] = trim(strtolower($args[ 'network' ]));
 	}
@@ -752,19 +752,19 @@ function mapi_tweets_oauth($args) {
 		'consumer_key'              =>
 			apply_filters('mapi_twitter_consumer_key', "wOgvxmU8JYXjfXGnolhXsNtPV"),
 		'consumer_secret'           =>
-			apply_filters('mapi_twitter_consumer_secret', "26l1pgAgmblBb8l5Vi6JD2ybmrTVHc5X5arBwiZAhskqzZI5ff")
+			apply_filters('mapi_twitter_consumer_secret', "26l1pgAgmblBb8l5Vi6JD2ybmrTVHc5X5arBwiZAhskqzZI5ff"),
 	);
 
 	$defaults = array(
 		'screen_name' => NULL,
 		'num_tweets'  => 4,
 		'echo'        => TRUE,
-		'oauth'       => $settings
+		'oauth'       => $settings,
 	);
 	$args = wp_parse_args($args, $defaults);
 
 	if (empty($args[ 'screen_name' ])) {
-		return mapi_error(array( 'msg' => 'A valid Twitter screen name is required.' ));
+		return mapi_error(array('msg' => 'A valid Twitter screen name is required.'));
 	}
 
 	//  Perform a GET request and echo the response, note: Set the GET field BEFORE calling buildOauth();
@@ -781,8 +781,8 @@ function mapi_tweets_oauth($args) {
 			foreach ($tweets as $tweet) : ?>
 				<li>
 					<span class="mapi-tweet-link"><?php echo $tweet->text; ?></span><br />
-						<span class="mapi-tweet-meta">Posted to <a class="mapi-tweet-link" href='https://twitter.com/<?php echo $args[ 'screen_name' ]; ?>/status/<?php echo $tweet->id; ?>' title='<?php echo 'Posted ' . $tweet->created_at; ?>'>Twitter</a> on <?php echo $tweet->created_at; ?>
-													  by <a href="https://twitter.com/<?php echo $args[ 'screen_name' ]; ?>" title="Connect with <?php bloginfo('name'); ?> on Twitter" target="_blank"><?php echo $args[ 'screen_name' ]; ?></a></span>
+					<span class="mapi-tweet-meta">Posted to <a class="mapi-tweet-link" href='https://twitter.com/<?php echo $args[ 'screen_name' ]; ?>/status/<?php echo $tweet->id; ?>' title='<?php echo 'Posted ' . $tweet->created_at; ?>'>Twitter</a> on <?php echo $tweet->created_at; ?>
+												  by <a href="https://twitter.com/<?php echo $args[ 'screen_name' ]; ?>" title="Connect with <?php bloginfo('name'); ?> on Twitter" target="_blank"><?php echo $args[ 'screen_name' ]; ?></a></span>
 				</li>
 				<?php
 			endforeach;
@@ -791,7 +791,7 @@ function mapi_tweets_oauth($args) {
 			return $tweets;
 		}
 	} else {
-		mapi_error(array( 'msg' => 'Could not retrieve Twitter timeline: ' . $url, 'die' => FALSE, 'echo' => FALSE ));
+		mapi_error(array('msg' => 'Could not retrieve Twitter timeline: ' . $url, 'die' => FALSE, 'echo' => FALSE));
 	}
 }
 
@@ -804,6 +804,18 @@ function mapi_social_css() {
 		wp_deregister_style('mapi-social');
 		wp_register_style('mapi-social', MAPI_DIR_URL . 'css/social.css');
 		wp_enqueue_style('mapi-social');
+	}
+}
+
+/**
+ * Loads MAPI Embed CSS
+ * <code>add_action('wp_enqueue_scripts', 'mapi_embed_css');</code>
+ */
+function mapi_embed_css() {
+	if (!is_admin()) {
+		wp_deregister_style('mapi-embed');
+		wp_register_style('mapi-embed', MAPI_DIR_URL . 'css/embed.css');
+		wp_enqueue_style('mapi-embed');
 	}
 }
 

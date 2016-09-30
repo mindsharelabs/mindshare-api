@@ -1,13 +1,11 @@
 <?php
 /**
  * mapi_options
- *
  * Initialize options
  *
  * @author    Mindshare Studios, Inc.
  * @copyright Copyright (c) 2006-2015
  * @link      https://mindsharelabs.com/downloads/mindshare-theme-api/
- *
  */
 
 if (!class_exists('mapi_options')) :
@@ -15,7 +13,6 @@ if (!class_exists('mapi_options')) :
 
 		/**
 		 * @var        $options - holds all plugin options
-		 *
 		 */
 		protected $options;
 
@@ -35,7 +32,6 @@ if (!class_exists('mapi_options')) :
 
 		/**
 		 * set_error_display_options
-		 *
 		 */
 		public function set_error_display_options() {
 
@@ -60,10 +56,7 @@ if (!class_exists('mapi_options')) :
 		}
 
 		/**
-		 *
-		 *
 		 * load requested JavaScript
-		 *
 		 */
 		public function set_script_options() {
 
@@ -187,9 +180,7 @@ if (!class_exists('mapi_options')) :
 		}
 
 		/**
-		 *
 		 * Enable/disable shortcodes for inline posts
-		 *
 		 */
 		public function set_inline_post_options() {
 			if (@$this->options[ 'enable_inline_post_functions' ]) {
@@ -198,9 +189,7 @@ if (!class_exists('mapi_options')) :
 		}
 
 		/**
-		 *
 		 * Enable/disable shortcodes for members-only content
-		 *
 		 */
 		public function set_member_options() {
 			if (@$this->options[ 'enable_member_functions' ]) {
@@ -209,10 +198,7 @@ if (!class_exists('mapi_options')) :
 		}
 
 		/**
-		 *
-		 *
 		 * load any requested CSS
-		 *
 		 */
 		public function set_style_options() {
 			if (!empty($this->options[ 'enable_adv_speed_options' ]) && !is_admin()) {
@@ -228,17 +214,13 @@ if (!class_exists('mapi_options')) :
 		}
 
 		/**
-		 *
-		 *
 		 * Setup various additional options
-		 *
 		 */
 		public function set_misc_options() {
 
 			/**
 			 * Register filters to encode exposed email addresses in
 			 * posts, pages, excerpts, comments and widgets.
-			 *
 			 */
 			if (@$this->options[ 'encode_email_addresses' ]) {
 				$filters = apply_filters('mapi_email_encode_filters', array('the_content', 'the_excerpt', 'widget_text', 'comment_text', 'comment_excerpt'));
@@ -332,6 +314,11 @@ if (!class_exists('mapi_options')) :
 			add_action('wp_print_footer_scripts', 'mapi_remove_version_scripts', 100);
 			add_action('admin_print_styles', 'mapi_remove_version_styles', 100);
 			add_action('wp_print_styles', 'mapi_remove_version_styles', 100);
+
+			// embed actions and filters
+			add_action('wp_enqueue_scripts', 'mapi_embed_css', 10);
+			add_filter('embed_oembed_html', 'mapi_embed_html', 10, 3);
+			add_filter('video_embed_html', 'mapi_embed_html'); // Jetpack
 
 			remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 			remove_action('wp_head', 'feed_links', 2);
