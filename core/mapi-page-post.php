@@ -2,16 +2,13 @@
 /**
  * Mindshare Theme API PAGE & POST FUNCTIONS
  *
- *
  * @author     Mindshare Studios, Inc.
  * @copyright  Copyright (c) 2006-2015
  * @link       https://mindsharelabs.com/downloads/mindshare-theme-api/
  * @filename   mapi-page-post.php
- *
  */
 
 /**
- *
  * Gets a post's slug by ID.
  *
  * @param int $id The post ID, optional. Defaults to the current post.
@@ -19,11 +16,11 @@
  * @return string|bool Returns the the slug or FALSE if no post is found.
  */
 function mapi_get_slug($id = NULL) {
-	if(empty($id)) {
+	if (empty($id)) {
 		$id = get_the_ID();
 	}
 	$post = get_post($id);
-	if($post) {
+	if ($post) {
 		return $post->post_name;
 	} else {
 		return FALSE;
@@ -31,7 +28,6 @@ function mapi_get_slug($id = NULL) {
 }
 
 /**
- *
  * Alias of mapi_slug_to_id. Retrieves the ID for a given slug.
  *
  * @param $slug string Required. The post slug.*
@@ -43,7 +39,6 @@ function mapi_get_id($slug) {
 }
 
 /**
- *
  * Retrieves the post ID for a given slug.
  *
  * @param $slug string Required. The post slug.*
@@ -52,7 +47,7 @@ function mapi_get_id($slug) {
  */
 function mapi_slug_to_id($slug, $post_type = 'page') {
 	$page = get_page_by_path($slug, $output = OBJECT, $post_type);
-	if($page) {
+	if ($page) {
 		return $page->ID;
 	} else {
 		return FALSE;
@@ -60,7 +55,6 @@ function mapi_slug_to_id($slug, $post_type = 'page') {
 }
 
 /**
- *
  * Recursively tests whether a page (or custom post type) is a child of a specific parent.
  *
  * @param int $parent_id ID of the parent.
@@ -70,16 +64,16 @@ function mapi_slug_to_id($slug, $post_type = 'page') {
  */
 function mapi_is_child_of($parent_id, $check_id = NULL) {
 	global $post;
-	if(is_object($post)) {
-		if(!is_post_type_hierarchical($post->post_type)) {
+	if (is_object($post)) {
+		if (!is_post_type_hierarchical($post->post_type)) {
 			return FALSE;
 		} else {
-			if($check_id == NULL) {
+			if ($check_id == NULL) {
 				$check_id = $post->ID;
 			}
 			$current = get_post($check_id);
-			if($current->post_parent != 0) {
-				if($current->post_parent != $parent_id) {
+			if ($current->post_parent != 0) {
+				if ($current->post_parent != $parent_id) {
 					return mapi_is_child_of($parent_id, $current->post_parent); // not that page, run again
 				} else {
 					return TRUE;
@@ -94,7 +88,6 @@ function mapi_is_child_of($parent_id, $check_id = NULL) {
 }
 
 /**
- *
  * Tests if the current post (or the post specified by $id) is a child.
  *
  * @param null|int $id
@@ -104,13 +97,13 @@ function mapi_is_child_of($parent_id, $check_id = NULL) {
 function mapi_is_child($id = NULL) {
 	global $post;
 
-	if(!empty($id)) {
+	if (!empty($id)) {
 		$test_post = get_post($id);
 	} else {
 		$test_post = $post;
 	}
 
-	if($test_post->post_parent) {
+	if ($test_post->post_parent) {
 		return TRUE;
 	} else {
 		return FALSE;
@@ -123,16 +116,15 @@ function mapi_is_child($id = NULL) {
  * @param $id
  *
  * @internal param $post
- *
  * @return int The post ID, if no parents are found returns the ID of the given post.
  */
 function mapi_get_top_parent_id($id) {
-	if(mapi_is_child($id)) {
+	if (mapi_is_child($id)) {
 		$test_post = get_post($id);
 		$ancestors = get_post_ancestors($test_post);
 		$root = count($ancestors) - 1;
 
-		return $ancestors[$root];
+		return $ancestors[ $root ];
 	} else {
 		return $id;
 	}
@@ -154,18 +146,16 @@ function mapi_remove_title_prefix($content) {
 }
 
 /**
- *
  * @todo this function needs an overhaul.
- *
  */
 function mapi_list_children() {
 	global $post;
-	if($post->post_parent) {
+	if ($post->post_parent) {
 		$children = wp_list_pages("sort_column=menu_order&title_li=&child_of=" . $post->post_parent . "&echo=0");
 	} else {
 		$children = wp_list_pages("sort_column=menu_order&title_li=&child_of=" . $post->ID . "&echo=0");
 	}
-	if($children) {
+	if ($children) {
 		echo '<ul class="list-children">';
 		echo $children;
 		echo '</ul>';
@@ -175,7 +165,6 @@ function mapi_list_children() {
 }
 
 /**
- *
  * Checks for an excerpt or generates one, can be used outside the loop. Allows limiting excerpt length to a specific
  * word-count automatically.
  *
@@ -185,14 +174,14 @@ function mapi_list_children() {
  * @return mixed|string
  */
 function mapi_excerpt($excerpt_words = 55, $id = NULL) {
-	if(empty($id)) {
+	if (empty($id)) {
 		global $post;
 		$x = $post->post_excerpt;
 	} else {
 		$post = get_post($id);
 		$x = $post->post_excerpt;
 	}
-	if($x == '') {
+	if ($x == '') {
 		$x = $post->post_content;
 		$x = strip_shortcodes($x);
 		$x = str_replace("\n", ' ', $x);
@@ -205,7 +194,6 @@ function mapi_excerpt($excerpt_words = 55, $id = NULL) {
 }
 
 /**
- *
  * Returns an HTML unordered list tag (with the CSS class "list-posts") of the selected posts. Accepts either an array
  * of options of individual parameters. Passing in an array is the preferred method, please use an array for better forward
  * compatibility. All arguments are optional.
@@ -227,7 +215,7 @@ function mapi_excerpt($excerpt_words = 55, $id = NULL) {
  * @param null   $slug               Allows retrieval of a single specific page by it's slug. Default is NULL.
  */
 function mapi_list_posts($num = 2, $cat = 1, $type = 'post', $show_excerpt = FALSE, $excerpt_length = 10, $show_more_link = FALSE, $more_text = 'Read more', $more_before = '&hellip;', $more_after = '&raquo;', $content_or_excerpt = 'excerpt', $echo = FALSE, $slug = NULL) {
-	if(is_array($num)) {
+	if (is_array($num)) {
 		mapi_list_posts_array($num);
 	} else {
 		$args = array(
@@ -242,14 +230,13 @@ function mapi_list_posts($num = 2, $cat = 1, $type = 'post', $show_excerpt = FAL
 			'more_after'         => $more_after,
 			'content_or_excerpt' => $content_or_excerpt,
 			'echo'               => $echo,
-			'slug'               => $slug
+			'slug'               => $slug,
 		);
 		mapi_list_posts_array($args);
 	}
 }
 
 /**
- *
  * Provides the core functionality for mapi_list_posts. Use mapi_list_posts instead.
  *
  * @param $args
@@ -269,42 +256,53 @@ function mapi_list_posts_array($args) {
 		'more_after'         => '&raquo;',
 		'content_or_excerpt' => 'excerpt',
 		'echo'               => FALSE,
-		'slug'               => NULL
+		'slug'               => NULL,
 	);
 	$args = wp_parse_args($args, $defaults);
 
-	if($args['type'] == 'page') {
+	if ($args[ 'type' ] == 'page') {
 		// get a single page by its slug
-		if(!isset($args['slug'])) {
+		if (!isset($args[ 'slug' ])) {
 			mapi_error(array('msg' => 'no page slug was defined'));
 		} else {
-			$posts = get_posts("post_type=" . $args['type'] . "&name=" . $args['slug']);
+			$posts = get_posts("post_type=" . $args[ 'type' ] . "&name=" . $args[ 'slug' ]);
 		}
 	} else {
-		$posts = get_posts("post_type=" . $args['type'] . "&numberposts=" . $args['num'] . "&cat=" . $args['cat']);
+		$posts = get_posts("post_type=" . $args[ 'type' ] . "&numberposts=" . $args[ 'num' ] . "&cat=" . $args[ 'cat' ]);
 	}
 	$str = '<ul class="mapi list-posts">';
-	foreach($posts as $post) {
+	foreach ($posts as $post) {
 		$str .= '<li><span class="link"><a href="' . get_permalink($post->ID) . '" title="' . $post->post_title . '">' . $post->post_title . '</a></span>';
-		if($args['show_excerpt']) {
-			if($args['content_or_excerpt'] == 'excerpt') {
+		if ($args[ 'show_excerpt' ]) {
+			if ($args[ 'content_or_excerpt' ] == 'excerpt') {
 				$str .= '<span class="excerpt">' . mapi_excerpt($excerpt_length, $post->ID) . '</span>';
 			}
-			if($args['content_or_excerpt'] == 'content') {
+			if ($args[ 'content_or_excerpt' ] == 'content') {
 				$content = apply_filters('the_content', $post->post_content);
 				$content = str_replace(']]>', ']]&gt;', $content);
 				$str .= '<span class="excerpt">' . $content . '</span>';
 			}
 		}
-		if($args['show_more_link']) {
-			$str .= '<span class="more">' . $args['more_before'] . '<a class="more" href="' . get_permalink($post->ID) . '" title="' . the_title_attribute(array('echo' => 0)) . '">' . $args['more_text'] . '</a>' . $args['more_after'] . '</span>';
+		if ($args[ 'show_more_link' ]) {
+			$str .= '<span class="more">' . $args[ 'more_before' ] . '<a class="more" href="' . get_permalink($post->ID) . '" title="' . the_title_attribute(array('echo' => 0)) . '">' . $args[ 'more_text' ] . '</a>' . $args[ 'more_after' ] . '</span>';
 		}
 	}
 	$str .= '</li></ul>';
-	if($args['echo']) {
+	if ($args[ 'echo' ]) {
 		echo $str;
 	} else {
 		return $str;
 	}
 }
 
+/**
+ * Test if a post exists for a given post ID.
+ *
+ * @param        $id
+ * @param string $post_type
+ *
+ * @return bool
+ */
+function mapi_post_exists($id, $post_type = 'post') {
+	return $post_type === get_post_type($id) ? TRUE : FALSE;
+}

@@ -11,7 +11,8 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 # Changelog:
 
 ## 1.0.2
-- Add function for responsive video embeds
+- Add `mapi_post_exists()` function
+- Add function for responsive video embeds, `mapi_embed_html()`
 - Remove deprecated `get_currentuserinfo()` calls
 - Remove deprecated params from TGMPA
 
