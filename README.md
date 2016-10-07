@@ -1,16 +1,21 @@
 Mindshare Theme API
 =============
 
-- Author: Mindshare Studios, Inc.
+- Author: Mindshare Labs, Inc.
 - License: GPL v3
-- Copyright: 2006-2015
+- Copyright: 2006-2016
 - Link: https://mindsharelabs.com/downloads/mindshare-theme-api/
 
 Provides a library of additional template tags, 3rd-party libraries, and functions for WordPress themes and additional features for WordPress CMS websites.
 
 # Changelog:
 
-## 1.0.2
+## 1.1
+- Update copyright date and name
+- Updated `mapi_facebook_lookup()` to use an Open Graph access token
+- Migrated TGM Plugin activation and Twitter PHP API SDK to Composer
+- Add `mapi_facebook_posts()` function
+- Deprecate `mapi_facebook_rss()` function
 - Add `mapi_post_exists()` function
 - Add function for responsive video embeds, `mapi_embed_html()`
 - Remove deprecated `get_currentuserinfo()` calls

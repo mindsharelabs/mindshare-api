@@ -3,8 +3,8 @@
  * The Mindshare Options Framework is a flexible, lightweight framework for creating WordPress theme and plugin options screens.
  *
  * @version        0.3.5
- * @author         Mindshare Studios, Inc.
- * @copyright      Copyright (c) 2006-2015
+ * @author         Mindshare Labs, Inc.
+ * @copyright      Copyright (c) 2006-2016
  * @link           https://mindsharelabs.com/downloads/mindshare-theme-api/
  *
  * @credits        Forked from: Admin Page Class 0.9.9 by Ohad Raz http://bainternet.info

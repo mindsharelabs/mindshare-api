@@ -3,16 +3,14 @@
 Plugin Name: Mindshare Theme API
 Plugin URI: https://mindsharelabs.com/downloads/mindshare-theme-api/
 Description: Provides a library of additional template tags, 3rd-party libraries, and functions for WordPress themes and additional features for WordPress CMS websites.
-Author: Mindshare Studios, Inc
+Author: Mindshare Labs, Inc
 Version: 1.0.2
 Author URI: https://mind.sh/are/
 Network: false
 */
 
 /**
- *
  * define constants & globals
- *
  */
 $MAPI_ERRORS = array();
 $MAPI_TLD = ''; // global variable for grabbing the base URL w/o subdomains in mapi_external_links() to reduce processor/memory usage
@@ -81,13 +79,11 @@ if (!class_exists('Mindshare_API_Plugin_Updater')) {
 
 /**
  * Mindshare_API class
- *
  * wrapper class for the API
  *
- * @author    Mindshare Studios, Inc.
- * @copyright Copyright (c) 2006-2015
+ * @author    Mindshare Labs, Inc.
+ * @copyright Copyright (c) 2006-2016
  * @link      https://mindsharelabs.com/downloads/mindshare-theme-api/
- *
  */
 if (!class_exists("Mindshare_API")) :
 	class Mindshare_API {
@@ -117,7 +113,6 @@ if (!class_exists("Mindshare_API")) :
 
 		/**
 		 * Instantiate the API
-		 *
 		 */
 		function __construct() {
 
@@ -134,12 +129,11 @@ if (!class_exists("Mindshare_API")) :
 			add_filter('auto_update_plugin', '__return_true'); // WP 3.8+ auto updates
 
 			// include the TGM_Plugin_Activation class
-			require_once(MAPI_DIR_PATH . 'lib/tgm-plugin-activation/class-tgm-plugin-activation.php');
+			require_once(MAPI_DIR_PATH . 'vendor/tgm/plugin-activation/class-tgm-plugin-activation.php');
 			add_action('tgmpa_register', array($this, 'register_required_plugins'));
 		}
 
 		/**
-		 *
 		 * The version number for this class (Mindshare Auto Update)
 		 *
 		 * @return string
@@ -150,7 +144,6 @@ if (!class_exists("Mindshare_API")) :
 
 		/**
 		 * Register the plugin text domain for translation
-		 *
 		 */
 		public function load_textdomain() {
 			load_plugin_textdomain('mapi', FALSE, MAPI_PLUGIN_SLUG);
@@ -172,7 +165,6 @@ if (!class_exists("Mindshare_API")) :
 
 		/**
 		 * Configure auto install routine for any additional plugins
-		 *
 		 */
 		public function register_required_plugins() {
 
@@ -189,13 +181,13 @@ if (!class_exists("Mindshare_API")) :
 			);
 
 			$config = array(
-				'domain'           => 'mapi', // Text domain
-				'default_path'     => '', // Default absolute path to pre-packaged plugins
-				'menu'             => 'install-required-plugins', // Menu slug
-				'has_notices'      => TRUE, // Show admin notices or not
-				'is_automatic'     => TRUE, // Automatically activate plugins after installation or not
-				'message'          => '', // Message to output right before the plugins table
-				'strings'          => array(
+				'domain'       => 'mapi', // Text domain
+				'default_path' => '', // Default absolute path to pre-packaged plugins
+				'menu'         => 'install-required-plugins', // Menu slug
+				'has_notices'  => TRUE, // Show admin notices or not
+				'is_automatic' => TRUE, // Automatically activate plugins after installation or not
+				'message'      => '', // Message to output right before the plugins table
+				'strings'      => array(
 					'page_title'                      => __('Install Required Plugins', 'mapi'),
 					'menu_title'                      => __('Install Plugins', 'mapi'),
 					'installing'                      => __('Installing Plugin: %s', 'mapi'),
@@ -232,7 +224,6 @@ if (!class_exists("Mindshare_API")) :
 
 		/**
 		 * Check for available updates
-		 *
 		 */
 
 		public function check_update() {
@@ -279,13 +270,12 @@ if (!class_exists("Mindshare_API")) :
 					'version'   => $this->class_version, // current version number
 					'license'   => $this->license_key,
 					'item_name' => MAPI_PLUGIN_NAME, // name of this plugin
-					'author'    => 'Mindshare Studios, Inc.',
+					'author'    => 'Mindshare Labs, Inc.',
 				)
 			);
 		}
 
 		/**
-		 *
 		 * Add settings link to plugins page
 		 *
 		 * @param $links
@@ -303,7 +293,6 @@ if (!class_exists("Mindshare_API")) :
 		}
 
 		/**
-		 *
 		 * Add meta links to plugins page
 		 *
 		 * @param $links
@@ -337,7 +326,6 @@ if (!class_exists("Mindshare_API")) :
 
 		/**
 		 * Check saved options, perform related actions
-		 *
 		 */
 		public function options_init() {
 			// load existing options
@@ -353,7 +341,6 @@ if (!class_exists("Mindshare_API")) :
 		}
 
 		/**
-		 *
 		 * Initialize Advanced Custom Fields options
 		 *
 		 * @param $options
@@ -375,9 +362,7 @@ if (!class_exists("Mindshare_API")) :
 
 		/**
 		 * All systems go, load the API.
-		 *
 		 * Runs on 'init' action.
-		 *
 		 */
 		public function load_api() {
 
@@ -395,6 +380,7 @@ if (!class_exists("Mindshare_API")) :
 			include_once('core/mapi-security.php');
 			include_once('core/mapi-shortcodes.php');
 			include_once('core/mapi-social.php');
+			include_once('core/mapi-facebook.php');
 			include_once('core/mapi-embed.php');
 			include_once('core/mapi-taxonomy.php');
 			include_once('core/mapi-theme.php');

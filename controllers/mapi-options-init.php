@@ -3,8 +3,8 @@
  * mapi_options
  * Initialize options
  *
- * @author    Mindshare Studios, Inc.
- * @copyright Copyright (c) 2006-2015
+ * @author    Mindshare Labs, Inc.
+ * @copyright Copyright (c) 2006-2016
  * @link      https://mindsharelabs.com/downloads/mindshare-theme-api/
  */
 

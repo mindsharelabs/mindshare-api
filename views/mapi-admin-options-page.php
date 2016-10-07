@@ -37,7 +37,7 @@ $mapi_options->TabsListing(
 				sanitize_title($sysinfo_options_label) => __($sysinfo_options_label),
 				sanitize_title($import_options_label)  => __($import_options_label),
 
-			)
+			),
 	)
 );
 
@@ -59,14 +59,14 @@ $maintenance_mode[] = $mapi_options->addRoles(
 	TRUE
 );
 
-if(locate_template('503.php')) {
+if (locate_template('503.php')) {
 	$maintenance_mode[] = $mapi_options->addCheckbox(
 		'maintenance_mode_503',
 		array(
 			'name'  => 'Use <code>503.php</code> template',
 			'std'   => FALSE,
 			'style' => 'simple',
-			'desc'  => 'If checked, the <strong>Offline Message</strong> below will be ignored and the contents of <code>503.php</code> (from current theme folder) will be displayed in its place.'
+			'desc'  => 'If checked, the <strong>Offline Message</strong> below will be ignored and the contents of <code>503.php</code> (from current theme folder) will be displayed in its place.',
 		),
 		TRUE
 	);
@@ -77,7 +77,7 @@ if(locate_template('503.php')) {
 			'name'  => 'Use <code>503.php</code> Template',
 			'desc'  => 'Create a file named <code>503.php</code> in your current theme folder in order to use this option.',
 			'std'   => FALSE,
-			'style' => 'simple'
+			'style' => 'simple',
 		),
 		TRUE
 	);
@@ -89,12 +89,12 @@ $maintenance_mode[] = $mapi_options->addWysiwyg(
 		'std'   => '',
 		'desc'  => 'Enter a message to display to logged out users while Maintenance Mode is active. Leave blank for default.',
 		'style' => 'width:500px; height:400px',
-		'name'  => 'Offline Message'
+		'name'  => 'Offline Message',
 	),
 	TRUE
 );
 
-require_once(MAPI_DIR_PATH . '/views/mapi-maintenance-mode-css.php'); // default CSS for offline mode
+require_once(MAPI_DIR_PATH . 'views/mapi-maintenance-mode-css.php'); // default CSS for offline mode
 $maintenance_mode[] = $mapi_options->addCode(
 	'maintenance_mode_css',
 	array(
@@ -102,7 +102,7 @@ $maintenance_mode[] = $mapi_options->addCode(
 		'desc'   => 'Enter custom CSS for Maintenance Mode screen.',
 		//'style' => 'width:500px; height:400px',
 		'syntax' => 'css',
-		'name'   => 'Offline CSS'
+		'name'   => 'Offline CSS',
 	),
 	TRUE
 );
@@ -113,7 +113,7 @@ $mapi_options->addCondition(
 		'name'   => 'Enable maintenance mode',
 		'std'    => FALSE,
 		'fields' => $maintenance_mode,
-		'desc'   => 'Temporarily takes the site offline.'
+		'desc'   => 'Temporarily takes the site offline.',
 	)
 );
 $mapi_options->addSubtitle('Debugging Options');
@@ -122,7 +122,7 @@ $error_options[] = $mapi_options->addCheckbox(
 	array(
 		'name'  => 'Also display PHP notices',
 		'std'   => FALSE,
-		'style' => 'simple'
+		'style' => 'simple',
 	),
 	TRUE
 );
@@ -131,7 +131,7 @@ $error_options[] = $mapi_options->addCheckbox(
 	array(
 		'name'  => 'Also log error messages to <code><a title="View source in new tab" href="' . get_bloginfo('template_url') . '/mapi_error_log.txt" target="_blank">mapi_error_log.txt</a></code> in current theme directory',
 		'std'   => FALSE,
-		'style' => 'simple'
+		'style' => 'simple',
 	),
 	TRUE
 );
@@ -141,7 +141,7 @@ $mapi_options->addCondition(
 
 		'name'   => 'Display PHP error messages to logged in Administrators',
 		'std'    => FALSE,
-		'fields' => $error_options
+		'fields' => $error_options,
 	)
 );
 
@@ -157,7 +157,7 @@ $mapi_options->addText(
 	array(
 		'name' => 'Google Analytics Web Property ID',
 		'std'  => NULL,
-		'desc' => '<strong>Format:</strong> <code>UA-XXXXX-Y</code><br /><strong>Template tag:</strong> <code>&lt;?php mapi_option("ga_acct_txt"); ?&gt;</code>'
+		'desc' => '<strong>Format:</strong> <code>UA-XXXXX-Y</code><br /><strong>Template tag:</strong> <code>&lt;?php mapi_option("ga_acct_txt"); ?&gt;</code>',
 	)
 );
 $adv_ga_options[] = $mapi_options->addCheckbox(
@@ -165,7 +165,7 @@ $adv_ga_options[] = $mapi_options->addCheckbox(
 	array(
 		'name'  => 'Use  <a href="https://support.google.com/analytics/answer/2790010?hl=en&ref_topic=2790009" target="_blank" title="View documentation">Universal Analytics</a>. Uncheck for legacy asynchronous code.',
 		'style' => 'simple',
-		'std'   => TRUE
+		'std'   => TRUE,
 	),
 	TRUE
 );
@@ -174,7 +174,7 @@ $adv_ga_options[] = $mapi_options->addCheckbox(
 	array(
 		'name'  => 'Allow tracking of <a href="https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingSite" target="_blank" title="View documentation">multiple top-level domains</a>?',
 		'style' => 'simple',
-		'std'   => FALSE
+		'std'   => FALSE,
 	),
 	TRUE
 );
@@ -183,7 +183,7 @@ $adv_ga_options[] = $mapi_options->addCheckbox(
 	array(
 		'name'  => 'Enable <a href="https://support.google.com/analytics/answer/2558867" target="_blank" title="View documentation">Enhanced Link Attribution</a> sitewide?',
 		'style' => 'simple',
-		'std'   => FALSE
+		'std'   => FALSE,
 	),
 	TRUE
 );
@@ -194,7 +194,7 @@ $mapi_options->addCondition(
 		'name'   => 'Automatically add Google Analytics tracking code',
 		'std'    => FALSE,
 		'fields' => $adv_ga_options,
-		'desc'   => '<strong>Note:</strong> <a href="https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingSite#domainSubDomains" title="View documentation" target="_blank">Tracking multiple subdomains</a> is supported by default.<br /><strong>Template tag:</strong> <code>&lt;?php mapi_analytics(); ?&gt;</code>'
+		'desc'   => '<strong>Note:</strong> <a href="https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingSite#domainSubDomains" title="View documentation" target="_blank">Tracking multiple subdomains</a> is supported by default.<br /><strong>Template tag:</strong> <code>&lt;?php mapi_analytics(); ?&gt;</code>',
 	)
 );
 $mapi_options->CloseTab();
@@ -209,7 +209,7 @@ $condition_load_ie[] = $mapi_options->addText(
 	'load_ieupdate_version_txt',
 	array(
 		'name' => 'Minimum supported version of Internet Explorer',
-		'std'  => 10
+		'std'  => 10,
 	),
 	TRUE
 );
@@ -220,7 +220,7 @@ $mapi_options->addCondition(
 		'name'   => 'Show Internet Explorer update nag',
 		'desc'   => '(visitors with IE versions lower than number above will be politely alerted to update)',
 		'fields' => $condition_load_ie,
-		'std'    => TRUE
+		'std'    => TRUE,
 	)
 );
 
@@ -228,7 +228,7 @@ $mapi_options->addCheckbox(
 	'break_frames',
 	array(
 		'name' => 'Break out of HTML frames',
-		'std'  => FALSE
+		'std'  => FALSE,
 	)
 );
 $mapi_options->addCheckbox(
@@ -236,7 +236,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Enable members-only TinyMCE shortcodes',
 		'desc' => 'This adds three new buttons to the WYSIWYG editor that insert shortcodes to create "members-only" or "visitors-only" content.',
-		'std'  => FALSE
+		'std'  => FALSE,
 	)
 );
 
@@ -245,7 +245,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Enable TinyMCE shortcodes for inserting the contents of other posts',
 		'desc' => 'This adds two new shortcodes buttons to the WYSIWYG editor that allow you to insert the content of another post or WP_Query into any other post.',
-		'std'  => FALSE
+		'std'  => FALSE,
 	)
 );
 
@@ -254,7 +254,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Automatically open external links in a new window/tab',
 		'desc' => 'Inserts a jQuery snippet that will open all external links in a new window or tab.',
-		'std'  => TRUE
+		'std'  => TRUE,
 	)
 );
 $mapi_options->addCheckbox(
@@ -262,15 +262,15 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Automatically delete full size images on upload',
 		'std'  => FALSE,
-		'desc' => 'This replaces uploaded fullsize images according to the largest size specified by your <a href="options-media.php">Media settings</a>. In other words, high resolution uploads in the Media Library are replaced with WordPress\' "large" size images. Enabling this does not effect images that have already been uploaded.'
+		'desc' => 'This replaces uploaded fullsize images according to the largest size specified by your <a href="options-media.php">Media settings</a>. In other words, high resolution uploads in the Media Library are replaced with WordPress\' "large" size images. Enabling this does not effect images that have already been uploaded.',
 	)
 );
 
 $mapi_options->addCheckbox(
 	'show_credit',
 	array(
-		'name' => 'Show Mindshare Studios credit as an HTML comment',
-		'std'  => TRUE
+		'name' => 'Show Mindshare Labs credit as an HTML comment',
+		'std'  => TRUE,
 	)
 );
 $mapi_options->CloseTab();
@@ -290,7 +290,7 @@ $custom_branding[] = $mapi_options->addText(
 	array(
 		'std'  => 'Powered by ' . get_bloginfo('name'),
 		'desc' => 'Enter a custom title for the login screen. <strong>Default:</strong> Powered by WordPress',
-		'name' => 'WordPress Login Title'
+		'name' => 'WordPress Login Title',
 	),
 	TRUE
 );
@@ -300,7 +300,7 @@ $custom_branding[] = $mapi_options->addText(
 	array(
 		'std'  => home_url('/'),
 		'desc' => 'Enter a custom URL for the login screen. <strong>Default:</strong> http://wordpress.org',
-		'name' => 'WordPress Login Title'
+		'name' => 'WordPress Login Title',
 	),
 	TRUE
 );
@@ -310,7 +310,7 @@ $custom_branding[] = $mapi_options->addImage(
 	array(
 		'std'  => '',
 		'desc' => 'Upload a custom logo image for the login screen.<br /><strong>Standard dimensions:</strong> 300px x 72px',
-		'name' => 'WordPress Login Image'
+		'name' => 'WordPress Login Image',
 	),
 	TRUE
 );
@@ -319,7 +319,7 @@ $custom_branding[] = $mapi_options->addImage(
 	array(
 		'std'  => '',
 		'desc' => 'Upload a custom favicon image. Use a transparent PNG for best results.<br /><strong>Standard dimensions:</strong> 96px x 96px<br /><br />',
-		'name' => 'Favicon Image'
+		'name' => 'Favicon Image',
 	),
 	TRUE
 );
@@ -330,7 +330,7 @@ $mapi_options->addCondition(
 		'name'   => 'Enable custom branding',
 		'std'    => FALSE,
 		'fields' => $custom_branding,
-		'desc'   => 'Replaces the default WordPress branding on the login screen.'
+		'desc'   => 'Replaces the default WordPress branding on the login screen.',
 	)
 );
 
@@ -341,7 +341,7 @@ $mapi_options->addText(
 	array(
 		'name' => 'Excerpt "more" text',
 		'desc' => 'Customize the text displayed at the end of <code>the_excerpt</code> and add a link to the full post. Leave blank to disable. WordPress default: <code>[...]</code>',
-		'std'  => apply_filters('mapi_excerpt_more_text', 'Read more &rsaquo;')
+		'std'  => apply_filters('mapi_excerpt_more_text', 'Read more &rsaquo;'),
 	)
 );
 
@@ -350,7 +350,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Obfuscate email addresses',
 		'std'  => TRUE,
-		'desc' => 'Encodes email addresses in HTML output to hide them from most spam harvesters. By default this will be applied to the following filters: the_content, the_excerpt, widget_text, comment_text, comment_excerpt. Set different filters using the mapi_email_encode_filters filter.'
+		'desc' => 'Encodes email addresses in HTML output to hide them from most spam harvesters. By default this will be applied to the following filters: the_content, the_excerpt, widget_text, comment_text, comment_excerpt. Set different filters using the mapi_email_encode_filters filter.',
 	)
 );
 
@@ -359,7 +359,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Cleanup HTML tags in the_content before output',
 		'std'  => FALSE,
-		'desc' => 'This enables <a href="http://goo.gl/OHgmij" title="View documentation" target="_blank">htmLawed</a> to purify HTML entered by users. By default this strips DIV tags, inline styles, and empty tags. You can override and change any settings by creating a PHP file in the current theme folder called <code>htmlawed-config.php</code>'
+		'desc' => 'This enables <a href="http://goo.gl/OHgmij" title="View documentation" target="_blank">htmLawed</a> to purify HTML entered by users. By default this strips DIV tags, inline styles, and empty tags. You can override and change any settings by creating a PHP file in the current theme folder called <code>htmlawed-config.php</code>',
 	)
 );
 
@@ -370,7 +370,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Override WordPress admin color scheme',
 		'std'  => FALSE,
-		'desc' => 'This sets the admin colorl scheme to "midnight" by default for users. The default scheme can be changed using the <code>mapi_admin_color_scheme</code> filter.'
+		'desc' => 'This sets the admin colorl scheme to "midnight" by default for users. The default scheme can be changed using the <code>mapi_admin_color_scheme</code> filter.',
 	)
 );
 
@@ -379,7 +379,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Hide Login Errors',
 		'std'  => FALSE,
-		'desc' => 'This suppresses error messages on the WordPress login screen.'
+		'desc' => 'This suppresses error messages on the WordPress login screen.',
 	)
 );
 
@@ -388,7 +388,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Allow Editors to access Menus',
 		'std'  => TRUE,
-		'desc' => 'Enables editing of WordPress menus for users with the Editor role.'
+		'desc' => 'Enables editing of WordPress menus for users with the Editor role.',
 	)
 );
 
@@ -397,7 +397,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Move Menus to top level',
 		'std'  => FALSE,
-		'desc' => 'Moves the Menus link out from under Appearance to the top level of the WordPress Admin Menu.'
+		'desc' => 'Moves the Menus link out from under Appearance to the top level of the WordPress Admin Menu.',
 	)
 );
 
@@ -406,7 +406,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Disable WordPress Toolbar',
 		'std'  => FALSE,
-		'desc' => 'Turns off the WordPress Toolbar sitewide and removes the option from the user profile page.'
+		'desc' => 'Turns off the WordPress Toolbar sitewide and removes the option from the user profile page.',
 	)
 );
 
@@ -415,7 +415,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Reverse sort order for <code>wp_nav_menu</code>',
 		'std'  => FALSE,
-		'desc' => 'Useful only when CSS floated menu items appear in reverse order.'
+		'desc' => 'Useful only when CSS floated menu items appear in reverse order.',
 	)
 );
 
@@ -424,7 +424,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Remove inline recent comments CSS from header',
 		'desc' => 'This removes some (typically) unneeded inline CSS from your HEAD added by WordPress.',
-		'std'  => TRUE
+		'std'  => TRUE,
 	)
 );
 
@@ -449,7 +449,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load jQuery <code><a title="View source in new tab" href="view-source:' . includes_url('js/jquery/jquery.js') . '" target="_blank">jquery.js</a></code>',
 		'std'  => TRUE,
-		'desc' => 'Enqueues the jQuery library bundled with WordPress. View <a href="http://api.jquery.com/" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'Enqueues the jQuery library bundled with WordPress. View <a href="http://api.jquery.com/" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -458,7 +458,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load Bootstrap JS <code>bootstrap.min.js</code>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the Twitter Bootstrap library (JS only). View <a href="http://twbs.github.io/bootstrap/" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'Enqueues the Twitter Bootstrap library (JS only). View <a href="http://twbs.github.io/bootstrap/" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -467,7 +467,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load Bootstrap CSS <code>bootstrap.min.css</code>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the Twitter Bootstrap library (CSS only). View <a href="http://twbs.github.io/bootstrap/" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'Enqueues the Twitter Bootstrap library (CSS only). View <a href="http://twbs.github.io/bootstrap/" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -476,7 +476,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load Modernizr <code>modernizr.js</code>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="http://modernizr.com/docs/" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'View <a href="http://modernizr.com/docs/" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -485,7 +485,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load Backbone <code><a title="View source in new tab" href="view-source:' . includes_url('js/backbone.min.js') . '" target="_blank">backbone.min.js</a></code>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the Backbone library bundled with WordPress. View <a href="http://backbonejs.org/" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'Enqueues the Backbone library bundled with WordPress. View <a href="http://backbonejs.org/" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -494,7 +494,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load Underscore <code><a title="View source in new tab" href="view-source:' . includes_url('js/underscore.min.js') . '" target="_blank">underscore.min.js</a></code>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the Underscore library bundled with WordPress. View <a href="http://underscorejs.org/" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'Enqueues the Underscore library bundled with WordPress. View <a href="http://underscorejs.org/" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -503,7 +503,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load Mapbox <code>mapbox.min.js</code> and <code>mapbox.min.css</code>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the Mapbox mapping library. View <a href="https://www.mapbox.com/" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'Enqueues the Mapbox mapping library. View <a href="https://www.mapbox.com/" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -512,7 +512,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load Retina <code>retina.js</code>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the Retina library. View <a href="http://retinajs.com/" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'Enqueues the Retina library. View <a href="http://retinajs.com/" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -523,7 +523,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load jQuery BBQ plugin <code>jquery.ba-bbq.min.js</code>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/cowboy/jquery-bbq/" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'View <a href="https://github.com/cowboy/jquery-bbq/" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -532,7 +532,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load jQuery easyListSplitter plugin <code>jquery.easyListSplitter.js</code>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="http://www.madeincima.it/en/articles/resources-and-tools/easy-list-splitter-plugin/" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'View <a href="http://www.madeincima.it/en/articles/resources-and-tools/easy-list-splitter-plugin/" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -541,7 +541,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load jQuery FitText plugin <code>jquery.fittext.js</code>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/davatron5000/FitText.js" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'View <a href="https://github.com/davatron5000/FitText.js" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -550,7 +550,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load jQuery FitVids plugin <code>jquery.fitvids.js</code>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/davatron5000/FitVids.js" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'View <a href="https://github.com/davatron5000/FitVids.js" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -559,7 +559,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load jQuery FlexSlider plugin <code>jquery.flexslider-min.js</code>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/woothemes/FlexSlider" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'View <a href="https://github.com/woothemes/FlexSlider" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -568,7 +568,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load jQuery Isotope plugin <code>jquery.isotope.min.js</code>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="http://isotope.metafizzy.co/" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'View <a href="http://isotope.metafizzy.co/" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -577,7 +577,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load jQuery Lettering plugin <code>jquery.lettering.js</code>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/davatron5000/Lettering.js" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'View <a href="https://github.com/davatron5000/Lettering.js" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -586,7 +586,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load jQuery Masonry plugin <code><a title="View source in new tab" href="view-source:' . includes_url('js/jquery/jquery.masonry.min.js') . '" target="_blank">jquery.masonry.min.js</a></code>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the Masonry jQuery plugin bundled with WordPress. View <a href="http://masonry.desandro.com/" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'Enqueues the Masonry jQuery plugin bundled with WordPress. View <a href="http://masonry.desandro.com/" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -595,7 +595,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load jQuery pickadate plugin <code>pickadate.js</code>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/amsul/pickadate.js" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'View <a href="https://github.com/amsul/pickadate.js" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -604,7 +604,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load jQuery ReplaceText plugin <code>jquery.replacetext.js</code>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/cowboy/jquery-replacetext" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'View <a href="https://github.com/cowboy/jquery-replacetext" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -613,7 +613,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load jQuery Search Highligther plugin <code><a title="View source in new tab" href="view-source:' . plugins_url('js/search-highlighter.js', MAPI_DIR_PATH . '/' . MAPI_PLUGIN_SLUG . '.php') . '" target="_blank">search-highlighter.js</a></code>',
 		'std'  => FALSE,
-		'desc' => 'Automatically highlights search terms on WordPress search results pages.'
+		'desc' => 'Automatically highlights search terms on WordPress search results pages.',
 	)
 );
 
@@ -622,7 +622,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load jQuery TinySort plugin <code>jquery.tinysort.min.js</code>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/Sjeiti/TinySort" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'View <a href="https://github.com/Sjeiti/TinySort" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 $mapi_options->addCheckbox(
@@ -630,7 +630,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load jQuery TipTip plugin <code>jquery.tipTip.minified.js</code>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/drewwilson/TipTip" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'View <a href="https://github.com/drewwilson/TipTip" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -641,7 +641,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load Font Awesome <code>font-awesome.min.css</code>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the CSS and font files for Font Awesome. View <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'Enqueues the CSS and font files for Font Awesome. View <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -650,7 +650,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load Superfish <code>superfish.js</code>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the Superfish drop down menu JavaScript. View <a href="https://github.com/joeldbirch/superfish/" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'Enqueues the Superfish drop down menu JavaScript. View <a href="https://github.com/joeldbirch/superfish/" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -659,7 +659,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load SWFObject <code><a title="View source in new tab" href="view-source:' . includes_url('js/swfobject.js') . '" target="_blank">swfobject.js</a></code>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the SWFObject library bundled with WordPress. View <a href="https://code.google.com/p/swfobject/" target="_blank">documentation &rsaquo;</a>'
+		'desc' => 'Enqueues the SWFObject library bundled with WordPress. View <a href="https://code.google.com/p/swfobject/" target="_blank">documentation &rsaquo;</a>',
 	)
 );
 
@@ -668,7 +668,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Load <code><a title="View source in new tab" href="view-source:' . plugins_url('js/mapi-fix-console.js', MAPI_DIR_PATH . '/' . MAPI_PLUGIN_SLUG . '.php') . '" target="_blank">mapi-fix-console.js</a></code>',
 		'std'  => FALSE,
-		'desc' => 'Adds JavaScript to prevent any errors from calls to <code>console.log</code> in production environments (recommended).'
+		'desc' => 'Adds JavaScript to prevent any errors from calls to <code>console.log</code> in production environments (recommended).',
 	)
 );
 
@@ -685,14 +685,14 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Minify JavaScript',
 		'desc' => 'This option automatically combines and compresses all registered JS files from your theme and all other WordPress plugins.',
-		'std'  => FALSE
+		'std'  => FALSE,
 	));
 $mapi_options->addCheckbox(
 	'minify_css',
 	array(
 		'name' => 'Minify CSS',
 		'desc' => 'This option automatically combines and compresses all properly registered CSS files.',
-		'std'  => FALSE
+		'std'  => FALSE,
 	));
 
 $mapi_options->addCheckbox(
@@ -700,7 +700,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Minify HTML',
 		'std'  => FALSE,
-		'desc' => 'This option reduces page size by stripping whitespace and HTML comments, excluding IE conditional comments. Wrap content you don\'t want compressed in your theme files with: <code>mapi_stop_compression()</code> and <code>mapi_start_compression()</code>'
+		'desc' => 'This option reduces page size by stripping whitespace and HTML comments, excluding IE conditional comments. Wrap content you don\'t want compressed in your theme files with: <code>mapi_stop_compression()</code> and <code>mapi_start_compression()</code>',
 	)
 );
 $mapi_options->addText(
@@ -708,7 +708,7 @@ $mapi_options->addText(
 	array(
 		'name' => 'Minify cache expiration (in seconds)',
 		'std'  => 432000,
-		'desc' => 'The default is 432000 (120 hours).'
+		'desc' => 'The default is 432000 (120 hours).',
 	)
 );
 $mapi_options->addParagraph(
@@ -721,19 +721,19 @@ $speed_adv_options[] = $mapi_options->addTextarea(
 	'dequeue_scripts_txt',
 	array(
 		'name' => 'Dequeue JS',
-		'desc' => 'Enter a list of JS handles to send to <code>wp_dequeue_script</code> (one per line). Note that this setting is not related to JS minification and will take effect whether minification is used or not.'
+		'desc' => 'Enter a list of JS handles to send to <code>wp_dequeue_script</code> (one per line). Note that this setting is not related to JS minification and will take effect whether minification is used or not.',
 	), TRUE);
 $speed_adv_options[] = $mapi_options->addTextarea(
 	'deregister_scripts_txt',
 	array(
 		'name' => 'Deregister JS',
-		'desc' => 'Enter a list of JS handles to send to <code>wp_deregister_script</code> (one per line). Note that this setting is not related to JS minification and will take effect whether minification is used or not.'
+		'desc' => 'Enter a list of JS handles to send to <code>wp_deregister_script</code> (one per line). Note that this setting is not related to JS minification and will take effect whether minification is used or not.',
 	), TRUE);
 $speed_adv_options[] = $mapi_options->addTextarea(
 	'enqueue_scripts_txt',
 	array(
 		'name' => 'Enqueue JS',
-		'desc' => 'Enter a list of JS handles to send to <code>wp_enqueue_script</code> (one per line). Note that this setting is not related to JS minification and will take effect whether minification is used or not.'
+		'desc' => 'Enter a list of JS handles to send to <code>wp_enqueue_script</code> (one per line). Note that this setting is not related to JS minification and will take effect whether minification is used or not.',
 	), TRUE);
 /*$speed_adv_options[] = $mapi_options->addTextarea(
 	'register_scripts_txt',
@@ -746,14 +746,14 @@ $speed_adv_options[] = $mapi_options->addTextarea(
 	'dequeue_styles_txt',
 	array(
 		'name' => 'Dequeue CSS',
-		'desc' => 'Enter a list of CSS handles to send to <code>wp_dequeue_style</code> (one per line). Note that this setting is not related to CSS minification and will take effect whether minification is used or not.<br /><strong>Examples:</strong> gforms_css,shadowbox-css,shadowbox-extras,shopp.catalog,shopp,shopp.colorbox'
+		'desc' => 'Enter a list of CSS handles to send to <code>wp_dequeue_style</code> (one per line). Note that this setting is not related to CSS minification and will take effect whether minification is used or not.<br /><strong>Examples:</strong> gforms_css,shadowbox-css,shadowbox-extras,shopp.catalog,shopp,shopp.colorbox',
 	),
 	TRUE);
 $speed_adv_options[] = $mapi_options->addTextarea(
 	'deregister_styles_txt',
 	array(
 		'name' => 'Deregister CSS',
-		'desc' => 'Enter a list of CSS handles to send to <code>wp_deregister_style</code> (one per line). Note that this setting is not related to CSS minification and will take effect whether minification is used or not.'
+		'desc' => 'Enter a list of CSS handles to send to <code>wp_deregister_style</code> (one per line). Note that this setting is not related to CSS minification and will take effect whether minification is used or not.',
 	),
 	TRUE);
 
@@ -764,7 +764,7 @@ $speed_adv_options[] = $mapi_options->addCheckbox(
 		'name'  => 'Combine JS only - no minification (safe mode)',
 		'std'   => FALSE,
 		'style' => 'simple',
-		'desc'  => 'If checked, files are not compressed. Useful for debugging JS issues, not recommended for production.'
+		'desc'  => 'If checked, files are not compressed. Useful for debugging JS issues, not recommended for production.',
 	),
 	TRUE
 );
@@ -772,14 +772,14 @@ $speed_adv_options[] = $mapi_options->addTextarea(
 	'js_exclude',
 	array(
 		'name' => 'Exclude JS from minification (by URI pattern)',
-		'desc' => 'JavaScript URI patterns to exclude from minify (one per line). Example: \'jquery\' matches all JS files with \'jquery\' in the filename.'
+		'desc' => 'JavaScript URI patterns to exclude from minify (one per line). Example: \'jquery\' matches all JS files with \'jquery\' in the filename.',
 	), TRUE);
 
 $speed_adv_options[] = $mapi_options->addTextarea(
 	'css_exclude',
 	array(
 		'name' => 'Exclude CSS from minification (by URI pattern)',
-		'desc' => 'CSS URI patterns to exclude from minify (one per line). Example: \'style\' matches all JS files with \'style\' in the filename.'
+		'desc' => 'CSS URI patterns to exclude from minify (one per line). Example: \'style\' matches all JS files with \'style\' in the filename.',
 	),
 	TRUE);
 /*$speed_adv_options[] = $mapi_options->addTextarea(
@@ -797,7 +797,7 @@ $speed_adv_options[] = $mapi_options->addText(
 	array(
 		'name' => 'Minify Engine Tweaking/Tuning',
 		'std'  => '',
-		'desc' => 'Extra arguments to pass to the minify engine. This value will get appended to the minify URL "<em>/min/?f=file1.js,file2.js</em>"'
+		'desc' => 'Extra arguments to pass to the minify engine. This value will get appended to the minify URL "<em>/min/?f=file1.js,file2.js</em>"',
 	),
 	TRUE
 );
@@ -807,7 +807,7 @@ $mapi_options->addCondition(
 
 		'name'   => 'Enable Advanced ' . $speed_options_label . ' options',
 		'std'    => FALSE,
-		'fields' => $speed_adv_options
+		'fields' => $speed_adv_options,
 	)
 );
 
@@ -830,7 +830,7 @@ $mapi_options->addTextarea(
 	array(
 		'name' => $sysinfo_options_label,
 		'desc' => 'This information can be useful when you are debugging problems with you WordPress installation.',
-		'std'  => mapi_system_info()
+		'std'  => mapi_system_info(),
 	)
 );
 $mapi_options->CloseTab();
@@ -850,27 +850,27 @@ $mapi_options->HelpTab(
 	array(
 		'id'      => 'mapi-help-tab',
 		'title'   => 'API Documentation',
-		'content' => '<p>API documentation is available online at <a href="https://mindsharelabs.com/topics/mindshare-theme-api/" target="_blank">https://mindsharelabs.com/topics/mindshare-theme-api/</a></p>'
+		'content' => '<p>API documentation is available online at <a href="https://mindsharelabs.com/topics/mindshare-theme-api/" target="_blank">https://mindsharelabs.com/topics/mindshare-theme-api/</a></p>',
 	)
 );
 $mapi_options->HelpTab(
 	array(
 		'id'      => 'mapi-support-tab',
 		'title'   => 'API Support',
-		'content' => '<p>Get support on the Mindshare Labs forums: <a href="https://mindsharelabs.com/forums/" target="_blank">https://mindsharelabs.com/forums/</a></p><p>To get premium one-on-one support, contact us: <a href="http://mind.sh/are/contact/">http://mind.sh/are/contact/</a></p>'
+		'content' => '<p>Get support on the Mindshare Labs forums: <a href="https://mindsharelabs.com/forums/" target="_blank">https://mindsharelabs.com/forums/</a></p><p>To get premium one-on-one support, contact us: <a href="http://mind.sh/are/contact/">http://mind.sh/are/contact/</a></p>',
 	)
 );
 $mapi_options->HelpTab(
 	array(
 		'id'      => 'mapi-themes-tab',
 		'title'   => 'Get More Themes',
-		'content' => '<p>Download compatible free and premium themes from the Mindshare Labs: <a href="https://mindsharelabs.com/" target="_blank">https://mindsharelabs.com/</a></p>'
+		'content' => '<p>Download compatible free and premium themes from the Mindshare Labs: <a href="https://mindsharelabs.com/" target="_blank">https://mindsharelabs.com/</a></p>',
 	)
 );
 $secure_tab_content = "<p>Get the Mindshare Team to secure and protect your WordPress site for $9.95/month: <a href='http://mind.sh/are/wordpress-security-and-backup-service/check/?url=" . get_bloginfo("url") . "&amp;active=0&amp;sale=1&amp;d=" . str_replace(
 		array(
 			"http://",
-			"https://"
+			"https://",
 		),
 		"",
 		get_home_url()) . "' target='_blank'>http://mind.sh/are/wordpress-security-and-backup-service/</a></p>";
@@ -878,6 +878,6 @@ $mapi_options->HelpTab(
 	array(
 		'id'      => 'mapi-security-tab',
 		'title'   => 'Protect Your Site',
-		'content' => $secure_tab_content
+		'content' => $secure_tab_content,
 	)
 );

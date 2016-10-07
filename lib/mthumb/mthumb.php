@@ -4,7 +4,7 @@ mThumb
 URI: https://github.com/mindsharestudios/mthumb
 Description: A secure PHP image resize script.
 Version: 3.0.1
-Author: Mindshare Studios, Inc.
+Author: Mindshare Labs, Inc.
 Author URI: https://mind.sh/are/
 License: GNU General Public License
 License URI: LICENSE
@@ -13,11 +13,11 @@ License URI: LICENSE
 /**
  *
  * @created   12/21/13 2:02 PM
- * @author    Mindshare Studios, Inc.
+ * @author    Mindshare Labs, Inc.
  * @copyright Copyright (c) 2013-2015
  * @link      https://mindsharelabs.com/
  *
- * Copyright 2013-2016  Mindshare Studios, Inc. (https://mind.sh/are/)
+ * Copyright 2013-2016  Mindshare Labs, Inc. (https://mind.sh/are/)
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License, version 3, as

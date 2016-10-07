@@ -3,7 +3,7 @@
  * mapi-embed.php
  *
  * @created   9/30/16 2:08 PM
- * @author    Mindshare Studios, Inc.
+ * @author    Mindshare Labs, Inc.
  * @copyright Copyright (c) 2006-2016
  * @link      https://mindsharelabs.com/
  */

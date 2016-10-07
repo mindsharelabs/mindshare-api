@@ -5,8 +5,8 @@
  * Example mThumb configuration file.
  *
  * @created   4/2/14 11:52 AM
- * @author    Mindshare Studios, Inc.
- * @copyright Copyright (c) 2006-2015
+ * @author    Mindshare Labs, Inc.
+ * @copyright Copyright (c) 2006-2016
  * @link      http://www.mindsharelabs.com/
  *
  */

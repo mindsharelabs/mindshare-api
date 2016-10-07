@@ -1,0 +1,6 @@
+{
+    "require": {
+        "tgm/plugin-activation": "^2.6",
+        "j7mbo/twitter-api-php": "^1.0"
+    }
+}
