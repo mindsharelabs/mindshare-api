@@ -52,7 +52,7 @@ function mapi_maintenance_mode($enabled = FALSE, $role = 'Subscriber', $reason =
 				<head>
 					<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 					<title><?php bloginfo('name') ?> is temporarily offline for scheduled maintenance</title>
-					<link href="http://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet" type="text/css" />
+					<link href="https://fonts.googleapis.com/css?family=Open+Sans:700" rel="stylesheet" type="text/css" />
 					<style type="text/css">
 						<?php echo stripslashes_deep($css); ?>
 					</style>

@@ -370,6 +370,7 @@ if (!class_exists("Mindshare_API")) :
 
 			include_once('core/mapi-admin.php');
 			include_once('core/mapi-utility.php');
+			include_once('core/mapi-query.php');
 			include_once('core/mapi-attachment.php');
 			include_once('core/mapi-category.php');
 			include_once('core/mapi-compression.php');

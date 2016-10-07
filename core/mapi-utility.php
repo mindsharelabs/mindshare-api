@@ -6,13 +6,11 @@
  * @copyright  Copyright (c) 2006-2016
  * @link       https://mindsharelabs.com/downloads/mindshare-theme-api/
  * @filename   mcms-utility.php
- *
- * Gotta love utility functions!
+ *             Gotta love utility functions!
  */
 
 /**
  * Evaluates natural language strings to boolean equivalent
- *
  * All values defined as TRUE will return TRUE, anything else is FALSE.
  * Boolean values will be passed through.
  *
@@ -35,7 +33,6 @@ function mapi_is_true($string, $true_synonyms = array('yes', 'y', 'true', '1', '
 }
 
 /**
- *
  * Override the default [...] in the_excerpt.
  *
  * @param string $more
@@ -55,7 +52,6 @@ function mapi_excerpt_more($more = NULL) {
 }
 
 /**
- *
  * Cleanly limit a string to a set number of words.
  *
  * @param $string
@@ -69,7 +65,6 @@ function mapi_word_limit($string, $length) {
 }
 
 /**
- *
  * Gets the current URL.
  *
  * @return string
@@ -83,7 +78,6 @@ function mapi_get_url() {
 }
 
 /**
- *
  * Checks to see if $text is in the current URL.
  *
  * @param $text
@@ -99,7 +93,6 @@ function mapi_in_url($text) {
 }
 
 /**
- *
  * Converts a server path to a URL.
  *
  * @param $file
@@ -114,7 +107,6 @@ function mapi_path_to_url($file) {
  * Detects the users browser using the User Agent string.
  *
  * @return array    Returns an associative array containing the 'user_agent' string, browser 'name', browser 'version', OS 'platform'
- *
  */
 
 function mapi_browser_from_ua() {
@@ -197,7 +189,6 @@ function mapi_browser_from_ua() {
 }
 
 /**
- *
  * Generates a CSS class name based on detected browser, depends on PHP Browser Detection plugin. Gracefully degrades
  * if the plugin isn't available. Also adds a class for post-type and slug (since 0.7.1).
  *
@@ -229,7 +220,6 @@ function mapi_broswer_class($show_major_version = FALSE, $show_minor_version = F
 }
 
 /**
- *
  * Uses builtin WP global variables by pushing them into the body_class array of CSS classes.
  *
  * @param array $classes
@@ -299,7 +289,6 @@ function mapi_add_os_body_class($classes) {
 }
 
 /**
- *
  * Provides an additional mechanism for outputting errors to the browser or the JavaScript console.
  *
  * @param $args array [string]msg    An error message to output to the user.
@@ -307,7 +296,6 @@ function mapi_add_os_body_class($classes) {
  * @param $args array [bool]die      TRUE stops script execution, FALSE allows execution to continue. Default FALSE.
  *
  * @return string
- *
  */
 function mapi_error($args) {
 	global $MAPI_ERRORS;
@@ -398,9 +386,7 @@ function mapi_kirts($msg = NULL) {
 }
 
 /**
- *
  * Outputs registered error message to the JavaScript console in wp_footer.
- *
  */
 function mapi_error_console() {
 	global $MAPI_ERRORS;
@@ -436,14 +422,12 @@ function mapi_var_dump($var = NULL, $die = FALSE, $capability = 'manage_options'
 
 /**
  * Useful for debugging.
- *
  */
 function mapi_poop() {
 	mapi_var_dump('Poop', TRUE);
 }
 
 /**
- *
  * Returns an array of file URLs for a given directory filterable by file extension(s).
  *
  * @todo use SPL
@@ -480,7 +464,6 @@ function mapi_file_array_dir($dir = NULL, $exts = 'jpg,jpeg,png,gif') {
 }
 
 /**
- *
  * Outputs a file extension for a given string filename.
  *
  * @param $file_name
@@ -492,7 +475,6 @@ function mapi_get_file_extension($file_name) {
 }
 
 /**
- *
  * Converts all numeric values in an associative array into integers.
  *
  * @param $value
@@ -508,7 +490,6 @@ function mapi_intval_array($value) {
 }
 
 /**
- *
  * Search a multidimensional array for a value.
  *
  * @param mixed $needle   What to search for.
@@ -528,7 +509,6 @@ function mapi_in_array_r($needle, $haystack, $strict = FALSE) {
 }
 
 /**
- *
  * Sanitizes an associative array removes keys with empty values and converts all numeric string values into integers.
  *
  * @param array $array The input array.
@@ -542,7 +522,6 @@ function mapi_sanitize_array($array) {
 }
 
 /**
- *
  * Preloads given assets in the background.
  *
  * @param null   $dir
@@ -565,10 +544,7 @@ function mapi_preload($dir = NULL, $exts = 'jpg,jpeg,png,gif') {
 }
 
 /**
- *
  * Loads JavaScript to automatically highlight search terms on WordPress search results pages.
- *
- *
  */
 function mapi_search_highlighter_js() {
 	wp_deregister_script('mapi_search_highlighter_js');
@@ -577,9 +553,7 @@ function mapi_search_highlighter_js() {
 }
 
 /**
- *
  *  Loads jQuery ReplaceText plguin.
- *
  */
 function mapi_replacetext_js() {
 	wp_deregister_script('mapi_replacetext_js');
@@ -588,11 +562,8 @@ function mapi_replacetext_js() {
 }
 
 /**
- *
  * Prevents JavaScript errors if the console object is not defined.
- *
  * Based on code from Twitter.
- *
  */
 function mapi_fix_console() {
 	wp_deregister_script('mapi_fix_console_js');
@@ -601,9 +572,7 @@ function mapi_fix_console() {
 }
 
 /**
- *
  * Helper function to get rid of inline CSS styling WordPress outputs for the recent comments widget.
- *
  */
 function mapi_remove_recent_comments_style() {
 	global $wp_widget_factory;
@@ -611,9 +580,7 @@ function mapi_remove_recent_comments_style() {
 }
 
 /**
- *
  * Gives an alert to users of older version of IE that they should update their browser.
- *
  */
 function mapi_ie_warning() {
 	$load_ieupdate = mapi_get_option('load_ieupdate');
@@ -635,7 +602,6 @@ function mapi_ie_warning() {
 }
 
 /**
- *
  * Retrieve an option from the Theme API options array.
  *
  * @param null $name
@@ -717,7 +683,6 @@ function mapi_delete_option($name) {
 }
 
 /**
- *
  * Echoes a given option from the Theme API options array.
  *
  * @param string $name
@@ -727,9 +692,7 @@ function mapi_option($name = NULL) {
 }
 
 /**
- *
  * Unloads jQuery obviously.
- *
  */
 function mapi_unload_jquery() {
 	if (!is_admin()) {
@@ -739,9 +702,7 @@ function mapi_unload_jquery() {
 }
 
 /**
- *
  * Loads the version of jquery registered with WordPress.
- *
  */
 function mapi_load_jquery() {
 	if (!is_admin()) {
@@ -750,9 +711,7 @@ function mapi_load_jquery() {
 }
 
 /**
- *
  * Loads Bootstrap JS
- *
  */
 function mapi_load_bootstrap() {
 	if (!is_admin()) {
@@ -763,9 +722,7 @@ function mapi_load_bootstrap() {
 }
 
 /**
- *
  * Loads Bootstrap CSS
- *
  */
 function mapi_load_bootstrap_css() {
 	if (!is_admin()) {
@@ -776,9 +733,7 @@ function mapi_load_bootstrap_css() {
 }
 
 /**
- *
  * Loads Font Awesome
- *
  */
 function mapi_load_font_awesome() {
 	if (!is_admin()) {
@@ -789,9 +744,7 @@ function mapi_load_font_awesome() {
 }
 
 /**
- *
  * Loads Modernizr
- *
  */
 function mapi_load_modernizr() {
 	if (!is_admin()) {
@@ -802,9 +755,7 @@ function mapi_load_modernizr() {
 }
 
 /**
- *
  * Loads Backbone
- *
  */
 function mapi_load_backbone() {
 	if (!is_admin()) {
@@ -813,9 +764,7 @@ function mapi_load_backbone() {
 }
 
 /**
- *
  * Loads Underscore
- *
  */
 function mapi_load_underscore() {
 	if (!is_admin()) {
@@ -824,9 +773,7 @@ function mapi_load_underscore() {
 }
 
 /**
- *
  * Loads Mapbox
- *
  */
 function mapi_load_mapbox() {
 	if (!is_admin()) {
@@ -841,9 +788,7 @@ function mapi_load_mapbox() {
 }
 
 /**
- *
  * Loads Retina
- *
  */
 function mapi_load_retina() {
 	if (!is_admin()) {
@@ -854,9 +799,7 @@ function mapi_load_retina() {
 }
 
 /**
- *
  * Loads SWFObject
- *
  */
 function mapi_load_swfobject() {
 	if (!is_admin()) {
@@ -865,9 +808,7 @@ function mapi_load_swfobject() {
 }
 
 /**
- *
  * Loads Masonry
- *
  */
 function mapi_load_masonry() {
 	if (!is_admin()) {
@@ -876,9 +817,7 @@ function mapi_load_masonry() {
 }
 
 /**
- *
  * Loads Isotope
- *
  */
 function mapi_load_isotope() {
 	if (!is_admin()) {
@@ -889,9 +828,7 @@ function mapi_load_isotope() {
 }
 
 /**
- *
  * Loads Superfish
- *
  */
 function mapi_load_superfish() {
 	if (!is_admin()) {
@@ -902,9 +839,7 @@ function mapi_load_superfish() {
 }
 
 /**
- *
  * Loads pickadate
- *
  */
 function mapi_load_pickadate() {
 	if (!is_admin()) {
@@ -927,9 +862,7 @@ function mapi_load_pickadate() {
 }
 
 /**
- *
  * Loads Lettering
- *
  */
 function mapi_load_lettering() {
 	if (!is_admin()) {
@@ -940,9 +873,7 @@ function mapi_load_lettering() {
 }
 
 /**
- *
  * Loads FitVids
- *
  */
 function mapi_load_fitvids() {
 	if (!is_admin()) {
@@ -953,9 +884,7 @@ function mapi_load_fitvids() {
 }
 
 /**
- *
  * Loads FlexSlider
- *
  */
 function mapi_load_flexslider() {
 	if (!is_admin()) {
@@ -968,9 +897,7 @@ function mapi_load_flexslider() {
 }
 
 /**
- *
  * Loads FitText
- *
  */
 function mapi_load_fittext() {
 	if (!is_admin()) {
@@ -981,9 +908,7 @@ function mapi_load_fittext() {
 }
 
 /**
- *
  * Loads easyListSplitter
- *
  */
 function mapi_load_easylistsplitter() {
 	if (!is_admin()) {
@@ -994,9 +919,7 @@ function mapi_load_easylistsplitter() {
 }
 
 /**
- *
  * Loads TinySort
- *
  */
 function mapi_load_tinysort() {
 	if (!is_admin()) {
@@ -1010,9 +933,7 @@ function mapi_load_tinysort() {
 }
 
 /**
- *
  * Loads jQuery BBQ
- *
  */
 function mapi_load_bbq() {
 	if (!is_admin()) {
@@ -1023,9 +944,7 @@ function mapi_load_bbq() {
 }
 
 /**
- *
  * Loads jQuery TipTip
- *
  */
 function mapi_load_tiptip() {
 	if (!is_admin()) {
@@ -1037,9 +956,7 @@ function mapi_load_tiptip() {
 
 /**
  * Quickly dequeue all styles that are currently enqueued by WordPress.
- *
  * Usage: add_action('wp_print_scripts', 'mapi_remove_all_scripts', 100);
- *
  */
 function mapi_remove_all_scripts() {
 	global $wp_scripts;
@@ -1048,9 +965,7 @@ function mapi_remove_all_scripts() {
 
 /**
  * Quickly dequeue all styles that are currently enqueued by WordPress.
- *
  * Usage: add_action('wp_print_styles', 'mapi_remove_all_styles', 100);
- *
  */
 function mapi_remove_all_styles() {
 	global $wp_styles;
@@ -1059,7 +974,6 @@ function mapi_remove_all_styles() {
 
 /**
  * Add JavaScript to break out of any HTML frames.
- *
  */
 function mapi_break_frames() {
 	?>
@@ -1077,7 +991,6 @@ function mapi_break_frames() {
 
 /**
  * Outputs an edit post link with built in support for custom post types. Used in place of the standard WordPress function edit_post_link()
- *
  */
 function mapi_edit_link() {
 	global $post;
@@ -1097,10 +1010,8 @@ function mapi_edit_link() {
 }
 
 /**
- *
  * Automatically sets external (offsite) links to open in a new window or tab. Updated to allow subdomains from the same TLD.
  * Manually override the target by setting the data-target attribute to any valid frame/window target.
- *
  */
 function mapi_external_links() {
 	global $MAPI_TLD;
@@ -1120,9 +1031,7 @@ function mapi_external_links() {
 }
 
 /**
- *
  * Helper function to set make some WordPress config options available in JavaScript.
- *
  */
 function mapi_set_contstants_js() {
 	?>
@@ -1132,9 +1041,7 @@ function mapi_set_contstants_js() {
 }
 
 /**
- *
  * Removes version numbers from script requests.
- *
  */
 function mapi_remove_version_scripts() {
 	global $wp_scripts;
@@ -1147,7 +1054,6 @@ function mapi_remove_version_scripts() {
 }
 
 /**
- *
  * Removes version numbers from style requests.
  */
 function mapi_remove_version_styles() {
@@ -1161,7 +1067,6 @@ function mapi_remove_version_styles() {
 }
 
 /**
- *
  * Remove nearly all URLs from a given string.
  *
  * @param string $string
@@ -1173,9 +1078,7 @@ function mapi_strip_url($string) {
 }
 
 /**
- *
  * Dequeues CSS from WordPress.
- *
  */
 function mapi_dequeue_css() {
 	$enable_adv_speed_options = mapi_get_option('enable_adv_speed_options');
@@ -1192,9 +1095,7 @@ function mapi_dequeue_css() {
 }
 
 /**
- *
  * Deregisters CSS from WordPress.
- *
  */
 function mapi_deregister_css() {
 	$enable_adv_speed_options = mapi_get_option('enable_adv_speed_options');
@@ -1211,9 +1112,7 @@ function mapi_deregister_css() {
 }
 
 /**
- *
  * Dequeues JS from WordPress.
- *
  */
 function mapi_dequeue_scripts() {
 	$enable_adv_speed_options = mapi_get_option('enable_adv_speed_options');
@@ -1230,9 +1129,7 @@ function mapi_dequeue_scripts() {
 }
 
 /**
- *
  * Deregisters JS from WordPress.
- *
  */
 function mapi_deregister_scripts() {
 	$enable_adv_speed_options = mapi_get_option('enable_adv_speed_options');
@@ -1249,9 +1146,7 @@ function mapi_deregister_scripts() {
 }
 
 /**
- *
  * Enqueues JS to WordPress.
- *
  */
 function mapi_enqueue_scripts() {
 	$enable_adv_speed_options = mapi_get_option('enable_adv_speed_options');
@@ -1268,11 +1163,8 @@ function mapi_enqueue_scripts() {
 }
 
 /**
- *
  * Registers JS to WordPress.
- *
  * (not currently implemented)
- *
  */
 /*function mapi_register_scripts() {
 	$enable_adv_speed_options = mapi_get_option('enable_adv_speed_options');
@@ -1289,7 +1181,6 @@ function mapi_enqueue_scripts() {
 }*/
 
 /**
- *
  * Outputs Google Analytics code.
  *
  * @param null $ga_id                  (string)
@@ -1365,7 +1256,6 @@ function mapi_analytics($ga_id = NULL, $allow_multiple_domains = NULL, $enhanced
 }
 
 /**
- *
  * Get the base TLD of a given domain (removing any subdomains, etc.)
  * Uses the Public Suffixes List
  *
@@ -1400,7 +1290,6 @@ function mapi_tel_uri($tel, $prefix = "+1") {
 }
 
 /**
- *
  * Removes all non-numeric characters from a string.
  *
  * @param $str
@@ -1412,7 +1301,6 @@ function mapi_strip_nonnumeric($str) {
 }
 
 /**
- *
  * Returns a nicely formatted US phone number e.g. (555) 555-5555
  *
  * @param $tel
@@ -1427,14 +1315,14 @@ function mapi_phone_format($tel) {
 
 /**
  * Money formatter
- *
  * Turns a number into a USD formatted string. Example: 1200.25 becomes $1,200.25.
  *
- * @param $number
+ * @param      $number
+ * @param bool $trim_zeros
  *
  * @return mixed|string
  */
-function mapi_money_format($number) {
+function mapi_money_format($number, $trim_zeros = FALSE) {
 
 	setlocale(LC_MONETARY, 'en_US');
 
@@ -1528,7 +1416,6 @@ function mapi_hex_to_rgb($hex_color) {
 }
 
 /**
- *
  * Converts a given file (and MIME type) to data URI.
  *
  * @param        $file
@@ -1545,7 +1432,6 @@ function mapi_data_uri($file, $mime = '') {
 }
 
 /**
- *
  * Generates a random alphanumeric string of the given length.
  *
  * @param int $length int Default is 16.
@@ -1657,4 +1543,26 @@ function mapi_is_reserved_ipv4($ip) {
 	}
 
 	return FALSE;
+}
+
+/**
+ * Outputs the active PHP template being used by the current query if the logged in user has a given capability.
+ *
+ * @param string $capability
+ * @param bool   $echo
+ *
+ * @return string
+ */
+function mapi_get_active_template($capability = 'manage_options', $echo = TRUE) {
+	global $template;
+	if (current_user_can($capability)) {
+
+		if ($echo) {
+			echo '<code>';
+			basename($template);
+			echo '</code>';
+		} else {
+			return basename($template);
+		}
+	}
 }

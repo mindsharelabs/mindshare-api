@@ -11,6 +11,12 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 # Changelog:
 
 ## 1.1
+- Add PHP.ini file to sysinfo
+- Add fn `mapi_query_related()`
+- Add fn `mapi_get_active_template()`
+- Rewrite `mapi_money_format()` with trim zeros
+- Rewrite `mapi_excerpt()` with improved CPT/ACF support
+- Fix 'http' google font link on maintenance mode screen
 - Update copyright date and name
 - Updated `mapi_facebook_lookup()` to use an Open Graph access token
 - Migrated TGM Plugin activation and Twitter PHP API SDK to Composer

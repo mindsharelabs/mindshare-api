@@ -26,6 +26,9 @@ function mapi_system_info() {
 
 	$sysinfo = "WordPress Version:      " . get_bloginfo('version') . "\n";
 	$sysinfo .= "PHP Version:            " . PHP_VERSION . "\n";
+	if (function_exists('php_ini_loaded_file')) {
+		$sysinfo .= "PHP.ini file:           " . php_ini_loaded_file() . "\n";
+	}
 	$sysinfo .= "API Version:            " . $mapi . "\n";
 
 	if (class_exists('mysqli')) {

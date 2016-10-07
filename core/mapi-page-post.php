@@ -174,23 +174,45 @@ function mapi_list_children() {
  * @return mixed|string
  */
 function mapi_excerpt($excerpt_words = 55, $id = NULL) {
+	// if ID is empty grab the global ID
 	if (empty($id)) {
-		global $post;
-		$x = $post->post_excerpt;
-	} else {
-		$post = get_post($id);
-		$x = $post->post_excerpt;
+		$id = get_the_ID();
 	}
-	if ($x == '') {
-		$x = $post->post_content;
-		$x = strip_shortcodes($x);
-		$x = str_replace("\n", ' ', $x);
-		$x = str_replace(']]>', ']]&gt;', $x);
-		$x = strip_tags($x);
-	}
-	$x = mapi_word_limit($x, $excerpt_words);
+	$post = get_post($id);
+	$excerpt = $post->post_excerpt;
 
-	return $x;
+	// if no excerpt is specified, use the_content
+	if (empty($excerpt)) {
+		$excerpt = $post->post_content;
+	}
+
+	/**
+	 * For post types other than "posts" that don't have the_content,
+	 * generate excerpts from the first available 'wysiwyg' field from
+	 * ACF if available.
+	 */
+	if (function_exists('get_field_objects')) {
+		if (empty($excerpt) && $post->post_type != 'post') {
+			$fields = get_field_objects();
+			foreach ($fields as $field) {
+				if ($field[ 'type' ] == 'wysiwyg') {
+					$excerpt = $field[ 'value' ];
+					break;
+				}
+			}
+		}
+	}
+
+	// sanitize output
+	$excerpt = strip_shortcodes($excerpt);
+	$excerpt = str_replace("\n", ' ', $excerpt);
+	$excerpt = str_replace(']]>', ']]&gt;', $excerpt);
+	$excerpt = strip_tags($excerpt);
+
+	// trim length by words
+	$excerpt = mapi_word_limit($excerpt, $excerpt_words);
+
+	return $excerpt;
 }
 
 /**
