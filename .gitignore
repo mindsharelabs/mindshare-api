@@ -273,3 +273,4 @@ sftp-config.json
 *.docx
 *.rtf
 *.odt
+/vendor/tgm/plugin-activation/plugins/
