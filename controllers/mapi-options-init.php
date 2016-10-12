@@ -121,9 +121,6 @@ if (!class_exists('mapi_options')) :
 			if (@$this->options[ 'load_tiptip_js' ]) {
 				add_action('wp_enqueue_scripts', 'mapi_load_tiptip', 100);
 			}
-			if (@$this->options[ 'load_pickadate_js' ]) {
-				add_action('wp_enqueue_scripts', 'mapi_load_pickadate', 100);
-			}
 			if (@$this->options[ 'load_lettering_js' ]) {
 				add_action('wp_enqueue_scripts', 'mapi_load_lettering', 100);
 			}
@@ -176,6 +173,11 @@ if (!class_exists('mapi_options')) :
 
 			if (@$this->options[ 'load_mapi_js' ]) {
 				add_action('wp_enqueue_scripts', 'mapi_js', 100);
+			}
+
+			// DEPRECATED LIBRARIES AND SETTINGS
+			if (@$this->options[ 'load_pickadate_js' ]) {
+				add_action('wp_enqueue_scripts', 'mapi_load_pickadate', 100);
 			}
 		}
 

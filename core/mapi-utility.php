@@ -838,28 +838,6 @@ function mapi_load_superfish() {
 	}
 }
 
-/**
- * Loads pickadate
- */
-function mapi_load_pickadate() {
-	if (!is_admin()) {
-		wp_deregister_script('pickadate');
-		wp_register_script('pickadate', '//cdn.jsdelivr.net/jquery.pickadate.js/4.0.0-0/ui-pickadate.min.js', array('jquery'));
-		wp_enqueue_script('pickadate');
-
-		wp_deregister_script('pickadate-shadow');
-		wp_register_script('pickadate-shadow', '//cdn.jsdelivr.net/jquery.pickadate.js/4.0.0-0/shadow.min.js', array('jquery'));
-		wp_enqueue_script('pickadate-shadow');
-
-		wp_deregister_script('pickadate-picker');
-		wp_register_script('pickadate-picker', '//cdn.jsdelivr.net/jquery.pickadate.js/4.0.0-0/ui-picker.min.js', array('jquery'));
-		wp_enqueue_script('pickadate-picker');
-
-		wp_deregister_style('pickadate-css');
-		wp_register_style('pickadate-css', '//cdn.jsdelivr.net/jquery.pickadate.js/4.0.0-0/css/styles.css');
-		wp_enqueue_style('pickadate-css');
-	}
-}
 
 /**
  * Loads Lettering

@@ -11,6 +11,7 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 # Changelog:
 
 ## 1.1
+- Deprecated pickadate.js library
 - Add PHP.ini file to sysinfo
 - Add fn `mapi_query_related()`
 - Add fn `mapi_get_active_template()`

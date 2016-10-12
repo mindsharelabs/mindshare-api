@@ -591,15 +591,6 @@ $mapi_options->addCheckbox(
 );
 
 $mapi_options->addCheckbox(
-	'load_pickadate_js',
-	array(
-		'name' => 'Load jQuery pickadate plugin <code>pickadate.js</code>',
-		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/amsul/pickadate.js" target="_blank">documentation &rsaquo;</a>',
-	)
-);
-
-$mapi_options->addCheckbox(
 	'load_replacetext_js',
 	array(
 		'name' => 'Load jQuery ReplaceText plugin <code>jquery.replacetext.js</code>',

@@ -11,7 +11,7 @@
 /**
  * Retrieves public Facebook wall posts from a Page's timeline using the Facebook API. Replaces the deprecated mapi_facebook_rss() function.
  *
- * @todo add caching?
+ * @todo add caching for remote requests?
  *
  * @param $args array [string]fb_app_id A Facebook app id, default: Mindshare's shared app
  * @param $args array [string]fb_app_secret A Facebook app secret, default: Mindshare's shared app secret
@@ -54,10 +54,15 @@ function mapi_facebook_posts($args = array()) {
 		return FALSE;
 	}
 
+	// if echo is false return raw data
 	if ($args[ 'echo' ] === FALSE) {
 		return $post_result;
-	} else {
-		echo '<ul class="mapi-fb-posts">';
+	}
+
+	// else echo the HTML
+	?>
+	<ul class="mapi-fb-posts">
+		<?php
 		$fb_posts = array_slice($result[ 'data' ], 0, $args[ 'num_posts' ]);
 		foreach ($fb_posts as $fb_post) {
 
@@ -73,10 +78,13 @@ function mapi_facebook_posts($args = array()) {
 			} elseif (!empty($post_result[ 'picture' ])) {
 				$photo_url = urldecode(preg_replace('/&cfs.*/', '', preg_replace('/.*url=/', '', $post_result[ 'picture' ]))); // @link http://stackoverflow.com/a/34741422
 			}
+			// if the current site uses SSL, we don't want to display insecure images
+			if (is_ssl() && stristr($photo_url, 'http://')) {
+				$photo_url = NULL;
+			}
 
 			// Parse the feed
 			?>
-
 			<li class="mapi-fb-post">
 
 				<?php if ($post_result[ 'type' ] == 'video') : ?>
@@ -114,10 +122,9 @@ function mapi_facebook_posts($args = array()) {
 			</li>
 
 		<?php } // endforeach;
-		echo '</ul>';
-	};
-
-	return FALSE;
+		?>
+	</ul>
+	<?php
 }
 
 /**
