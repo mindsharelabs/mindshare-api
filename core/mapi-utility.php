@@ -544,39 +544,18 @@ function mapi_preload($dir = NULL, $exts = 'jpg,jpeg,png,gif') {
 }
 
 /**
- * Loads JavaScript to automatically highlight search terms on WordPress search results pages.
- */
-function mapi_search_highlighter_js() {
-	wp_deregister_script('mapi_search_highlighter_js');
-	wp_register_script('mapi_search_highlighter_js', plugins_url('js/search-highlighter.js', dirname(__FILE__)));
-	wp_enqueue_script('mapi_search_highlighter_js');
-}
-
-/**
- *  Loads jQuery ReplaceText plguin.
- */
-function mapi_replacetext_js() {
-	wp_deregister_script('mapi_replacetext_js');
-	wp_register_script('mapi_replacetext_js', plugins_url('js/jquery.replacetext.js', dirname(__FILE__)));
-	wp_enqueue_script('mapi_replacetext_js');
-}
-
-/**
- * Prevents JavaScript errors if the console object is not defined.
- * Based on code from Twitter.
- */
-function mapi_fix_console() {
-	wp_deregister_script('mapi_fix_console_js');
-	wp_register_script('mapi_fix_console_js', plugins_url('js/mapi-fix-console.js', dirname(__FILE__)));
-	wp_enqueue_script('mapi_fix_console_js');
-}
-
-/**
- * Helper function to get rid of inline CSS styling WordPress outputs for the recent comments widget.
+ * Helper function to get rid of inline CSS styling WordPress outputs for the recent comments widget. Updated to also remove WP 4.2+ inline Emoji code.
  */
 function mapi_remove_recent_comments_style() {
 	global $wp_widget_factory;
 	remove_action('wp_head', array($wp_widget_factory->widgets[ 'WP_Widget_Recent_Comments' ], 'recent_comments_style'));
+
+	// REMOVE WP EMOJI
+	remove_action('wp_head', 'print_emoji_detection_script', 7);
+	remove_action('wp_print_styles', 'print_emoji_styles');
+
+	remove_action('admin_print_scripts', 'print_emoji_detection_script');
+	remove_action('admin_print_styles', 'print_emoji_styles');
 }
 
 /**
@@ -788,26 +767,6 @@ function mapi_load_mapbox() {
 }
 
 /**
- * Loads Retina
- */
-function mapi_load_retina() {
-	if (!is_admin()) {
-		wp_deregister_script('retina');
-		wp_register_script('retina', '//cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js');
-		wp_enqueue_script('retina');
-	}
-}
-
-/**
- * Loads SWFObject
- */
-function mapi_load_swfobject() {
-	if (!is_admin()) {
-		wp_enqueue_script('swfobject');
-	}
-}
-
-/**
  * Loads Masonry
  */
 function mapi_load_masonry() {
@@ -835,18 +794,6 @@ function mapi_load_superfish() {
 		wp_deregister_script('superfish');
 		wp_register_script('superfish', '//cdn.jsdelivr.net/superfish/1.7.7/js/superfish.min.js');
 		wp_enqueue_script('superfish');
-	}
-}
-
-
-/**
- * Loads Lettering
- */
-function mapi_load_lettering() {
-	if (!is_admin()) {
-		wp_deregister_script('lettering');
-		wp_register_script('lettering', '//cdn.jsdelivr.net/lettering/0.7.0/jquery.lettering.min.js', array('jquery'));
-		wp_enqueue_script('lettering');
 	}
 }
 
@@ -886,17 +833,6 @@ function mapi_load_fittext() {
 }
 
 /**
- * Loads easyListSplitter
- */
-function mapi_load_easylistsplitter() {
-	if (!is_admin()) {
-		wp_deregister_script('easylistsplitter');
-		wp_register_script('easylistsplitter', '//cdn.jsdelivr.net/easylistsplitter/1.0.2/jquery.easyListSplitter.js', array('jquery'));
-		wp_enqueue_script('easylistsplitter');
-	}
-}
-
-/**
  * Loads TinySort
  */
 function mapi_load_tinysort() {
@@ -907,17 +843,6 @@ function mapi_load_tinysort() {
 		wp_deregister_script('tinysort-char');
 		wp_register_script('tinysort-char', '//cdnjs.cloudflare.com/ajax/libs/tinysort/2.2.4/tinysort.charorder.min.js', array('jquery, tinysort'));
 		wp_enqueue_script('tinysort-char');
-	}
-}
-
-/**
- * Loads jQuery BBQ
- */
-function mapi_load_bbq() {
-	if (!is_admin()) {
-		wp_deregister_script('bbq');
-		wp_register_script('bbq', '//cdn.jsdelivr.net/jquery.ba-bbq/1.3pre/jquery.ba-bbq.min.js', array('jquery'));
-		wp_enqueue_script('bbq');
 	}
 }
 

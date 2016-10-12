@@ -209,9 +209,9 @@ $condition_load_ie[] = $mapi_options->addText(
 	'load_ieupdate_version_txt',
 	array(
 		'name' => 'Minimum supported version of Internet Explorer',
-		'std'  => 10,
+		'std'  => 11,
 	),
-	TRUE
+	FALSE
 );
 $mapi_options->addCondition(
 	'load_ieupdate',
@@ -369,7 +369,7 @@ $mapi_options->addCheckbox(
 	'set_admin_color_scheme',
 	array(
 		'name' => 'Override WordPress admin color scheme',
-		'std'  => FALSE,
+		'std'  => TRUE,
 		'desc' => 'This sets the admin colorl scheme to "midnight" by default for users. The default scheme can be changed using the <code>mapi_admin_color_scheme</code> filter.',
 	)
 );
@@ -387,7 +387,7 @@ $mapi_options->addCheckbox(
 	'allow_editors_edit_menus',
 	array(
 		'name' => 'Allow Editors to access Menus',
-		'std'  => TRUE,
+		'std'  => FALSE,
 		'desc' => 'Enables editing of WordPress menus for users with the Editor role.',
 	)
 );
@@ -411,19 +411,10 @@ $mapi_options->addCheckbox(
 );
 
 $mapi_options->addCheckbox(
-	'menu_sort_reverse',
-	array(
-		'name' => 'Reverse sort order for <code>wp_nav_menu</code>',
-		'std'  => FALSE,
-		'desc' => 'Useful only when CSS floated menu items appear in reverse order.',
-	)
-);
-
-$mapi_options->addCheckbox(
 	'remove_recent_comments_style',
 	array(
-		'name' => 'Remove inline recent comments CSS from header',
-		'desc' => 'This removes some (typically) unneeded inline CSS from your HEAD added by WordPress.',
+		'name' => 'Remove inline recent comments CSS and WP 4.2+ Emoji code from header',
+		'desc' => 'This removes some (typically) unneeded inline JS/CSS from your HEAD added by WordPress.',
 		'std'  => TRUE,
 	)
 );
@@ -442,224 +433,144 @@ $mapi_options->addParagraph(
 	about bundling old third-party code into your custom themes. Just turn a feature on and it will be
 	automatically inlcuded in your theme.'
 );
+$mapi_options->addParagraph(
+	'<span title="Bundled with WordPress" class="dashicons dashicons-wordpress" style="margin-bottom: 3px;"></span> = Bundled with WordPress<br /><span title="Loaded via CDN" class="dashicons dashicons-cloud" style="margin-bottom: 3px;"></span> = Loaded via CDN'
+);
 
 $mapi_options->addSubtitle('Libraries');
 $mapi_options->addCheckbox(
 	'load_jquery',
 	array(
-		'name' => 'Load jQuery <code><a title="View source in new tab" href="view-source:' . includes_url('js/jquery/jquery.js') . '" target="_blank">jquery.js</a></code>',
+		'name' => 'jQuery <span title="Bundled with WordPress" class="dashicons dashicons-wordpress" style="margin-bottom: 3px;"></span>',
 		'std'  => TRUE,
-		'desc' => 'Enqueues the jQuery library bundled with WordPress. View <a href="http://api.jquery.com/" target="_blank">documentation &rsaquo;</a>',
+		'desc' => '',
 	)
 );
 
 $mapi_options->addCheckbox(
 	'load_bootstrap',
 	array(
-		'name' => 'Load Bootstrap JS <code>bootstrap.min.js</code>',
+		'name' => 'Bootstrap (JS only) <span title="Loaded via CDN" class="dashicons dashicons-cloud" style="margin-bottom: 3px;"></span>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the Twitter Bootstrap library (JS only). View <a href="http://twbs.github.io/bootstrap/" target="_blank">documentation &rsaquo;</a>',
+		'desc' => '',
 	)
 );
 
 $mapi_options->addCheckbox(
 	'load_bootstrap_css',
 	array(
-		'name' => 'Load Bootstrap CSS <code>bootstrap.min.css</code>',
+		'name' => 'Bootstrap (CSS only) <span title="Loaded via CDN" class="dashicons dashicons-cloud" style="margin-bottom: 3px;"></span>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the Twitter Bootstrap library (CSS only). View <a href="http://twbs.github.io/bootstrap/" target="_blank">documentation &rsaquo;</a>',
+		'desc' => '',
+	)
+);
+
+$mapi_options->addCheckbox(
+	'load_font_awesome',
+	array(
+		'name' => 'Font Awesome <span title="Loaded via CDN" class="dashicons dashicons-cloud" style="margin-bottom: 3px;"></span>',
+		'std'  => FALSE,
+		'desc' => '',
 	)
 );
 
 $mapi_options->addCheckbox(
 	'load_modernizr_js',
 	array(
-		'name' => 'Load Modernizr <code>modernizr.js</code>',
+		'name' => 'Modernizr <span title="Loaded via CDN" class="dashicons dashicons-cloud" style="margin-bottom: 3px;"></span>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="http://modernizr.com/docs/" target="_blank">documentation &rsaquo;</a>',
+		'desc' => '',
 	)
 );
 
 $mapi_options->addCheckbox(
 	'load_backbone_js',
 	array(
-		'name' => 'Load Backbone <code><a title="View source in new tab" href="view-source:' . includes_url('js/backbone.min.js') . '" target="_blank">backbone.min.js</a></code>',
+		'name' => 'Backbone <span title="Bundled with WordPress" class="dashicons dashicons-wordpress" style="margin-bottom: 3px;"></span>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the Backbone library bundled with WordPress. View <a href="http://backbonejs.org/" target="_blank">documentation &rsaquo;</a>',
+		'desc' => '',
 	)
 );
 
 $mapi_options->addCheckbox(
 	'load_underscore_js',
 	array(
-		'name' => 'Load Underscore <code><a title="View source in new tab" href="view-source:' . includes_url('js/underscore.min.js') . '" target="_blank">underscore.min.js</a></code>',
+		'name' => 'Underscore <span title="Bundled with WordPress" class="dashicons dashicons-wordpress" style="margin-bottom: 3px;"></span>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the Underscore library bundled with WordPress. View <a href="http://underscorejs.org/" target="_blank">documentation &rsaquo;</a>',
+		'desc' => '',
 	)
 );
 
 $mapi_options->addCheckbox(
 	'load_mapbox_js',
 	array(
-		'name' => 'Load Mapbox <code>mapbox.min.js</code> and <code>mapbox.min.css</code>',
+		'name' => 'Mapbox <span title="Loaded via CDN" class="dashicons dashicons-cloud" style="margin-bottom: 3px;"></span>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the Mapbox mapping library. View <a href="https://www.mapbox.com/" target="_blank">documentation &rsaquo;</a>',
-	)
-);
-
-$mapi_options->addCheckbox(
-	'load_retina_js',
-	array(
-		'name' => 'Load Retina <code>retina.js</code>',
-		'std'  => FALSE,
-		'desc' => 'Enqueues the Retina library. View <a href="http://retinajs.com/" target="_blank">documentation &rsaquo;</a>',
+		'desc' => '',
 	)
 );
 
 $mapi_options->addSubtitle('jQuery Plugins');
 
 $mapi_options->addCheckbox(
-	'load_bbq',
-	array(
-		'name' => 'Load jQuery BBQ plugin <code>jquery.ba-bbq.min.js</code>',
-		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/cowboy/jquery-bbq/" target="_blank">documentation &rsaquo;</a>',
-	)
-);
-
-$mapi_options->addCheckbox(
-	'load_easylistsplitter_js',
-	array(
-		'name' => 'Load jQuery easyListSplitter plugin <code>jquery.easyListSplitter.js</code>',
-		'std'  => FALSE,
-		'desc' => 'View <a href="http://www.madeincima.it/en/articles/resources-and-tools/easy-list-splitter-plugin/" target="_blank">documentation &rsaquo;</a>',
-	)
-);
-
-$mapi_options->addCheckbox(
 	'load_fittext_js',
 	array(
-		'name' => 'Load jQuery FitText plugin <code>jquery.fittext.js</code>',
+		'name' => 'jQuery FitText plugin <span title="Loaded via CDN" class="dashicons dashicons-cloud" style="margin-bottom: 3px;"></span>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/davatron5000/FitText.js" target="_blank">documentation &rsaquo;</a>',
+		'desc' => '',
 	)
 );
 
 $mapi_options->addCheckbox(
 	'load_fitvids_js',
 	array(
-		'name' => 'Load jQuery FitVids plugin <code>jquery.fitvids.js</code>',
+		'name' => 'jQuery FitVids plugin <span title="Loaded via CDN" class="dashicons dashicons-cloud" style="margin-bottom: 3px;"></span>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/davatron5000/FitVids.js" target="_blank">documentation &rsaquo;</a>',
+		'desc' => '',
 	)
 );
 
 $mapi_options->addCheckbox(
 	'load_flexslider',
 	array(
-		'name' => 'Load jQuery FlexSlider plugin <code>jquery.flexslider-min.js</code>',
+		'name' => 'jQuery FlexSlider plugin <span title="Loaded via CDN" class="dashicons dashicons-cloud" style="margin-bottom: 3px;"></span>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/woothemes/FlexSlider" target="_blank">documentation &rsaquo;</a>',
+		'desc' => '',
 	)
 );
 
 $mapi_options->addCheckbox(
 	'load_isotope_js',
 	array(
-		'name' => 'Load jQuery Isotope plugin <code>jquery.isotope.min.js</code>',
+		'name' => 'jQuery Isotope plugin <span title="Loaded via CDN" class="dashicons dashicons-cloud" style="margin-bottom: 3px;"></span>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="http://isotope.metafizzy.co/" target="_blank">documentation &rsaquo;</a>',
-	)
-);
-
-$mapi_options->addCheckbox(
-	'load_lettering_js',
-	array(
-		'name' => 'Load jQuery Lettering plugin <code>jquery.lettering.js</code>',
-		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/davatron5000/Lettering.js" target="_blank">documentation &rsaquo;</a>',
+		'desc' => '',
 	)
 );
 
 $mapi_options->addCheckbox(
 	'load_masonry_js',
 	array(
-		'name' => 'Load jQuery Masonry plugin <code><a title="View source in new tab" href="view-source:' . includes_url('js/jquery/jquery.masonry.min.js') . '" target="_blank">jquery.masonry.min.js</a></code>',
+		'name' => 'jQuery Masonry plugin <span title="Bundled with WordPress" class="dashicons dashicons-wordpress" style="margin-bottom: 3px;"></span>',
 		'std'  => FALSE,
-		'desc' => 'Enqueues the Masonry jQuery plugin bundled with WordPress. View <a href="http://masonry.desandro.com/" target="_blank">documentation &rsaquo;</a>',
-	)
-);
-
-$mapi_options->addCheckbox(
-	'load_replacetext_js',
-	array(
-		'name' => 'Load jQuery ReplaceText plugin <code>jquery.replacetext.js</code>',
-		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/cowboy/jquery-replacetext" target="_blank">documentation &rsaquo;</a>',
-	)
-);
-
-$mapi_options->addCheckbox(
-	'load_search_highlighter_js',
-	array(
-		'name' => 'Load jQuery Search Highligther plugin <code><a title="View source in new tab" href="view-source:' . plugins_url('js/search-highlighter.js', MAPI_DIR_PATH . '/' . MAPI_PLUGIN_SLUG . '.php') . '" target="_blank">search-highlighter.js</a></code>',
-		'std'  => FALSE,
-		'desc' => 'Automatically highlights search terms on WordPress search results pages.',
+		'desc' => '',
 	)
 );
 
 $mapi_options->addCheckbox(
 	'load_tinysort_js',
 	array(
-		'name' => 'Load jQuery TinySort plugin <code>jquery.tinysort.min.js</code>',
+		'name' => 'jQuery TinySort plugin <span title="Loaded via CDN" class="dashicons dashicons-cloud" style="margin-bottom: 3px;"></span>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/Sjeiti/TinySort" target="_blank">documentation &rsaquo;</a>',
+		'desc' => '',
 	)
 );
 $mapi_options->addCheckbox(
 	'load_tiptip_js',
 	array(
-		'name' => 'Load jQuery TipTip plugin <code>jquery.tipTip.minified.js</code>',
+		'name' => 'jQuery TipTip plugin <span title="Loaded via CDN" class="dashicons dashicons-cloud" style="margin-bottom: 3px;"></span>',
 		'std'  => FALSE,
-		'desc' => 'View <a href="https://github.com/drewwilson/TipTip" target="_blank">documentation &rsaquo;</a>',
-	)
-);
-
-$mapi_options->addSubtitle('Utilities');
-
-$mapi_options->addCheckbox(
-	'load_font_awesome',
-	array(
-		'name' => 'Load Font Awesome <code>font-awesome.min.css</code>',
-		'std'  => FALSE,
-		'desc' => 'Enqueues the CSS and font files for Font Awesome. View <a href="http://fortawesome.github.io/Font-Awesome/" target="_blank">documentation &rsaquo;</a>',
-	)
-);
-
-$mapi_options->addCheckbox(
-	'load_superfish_js',
-	array(
-		'name' => 'Load Superfish <code>superfish.js</code>',
-		'std'  => FALSE,
-		'desc' => 'Enqueues the Superfish drop down menu JavaScript. View <a href="https://github.com/joeldbirch/superfish/" target="_blank">documentation &rsaquo;</a>',
-	)
-);
-
-$mapi_options->addCheckbox(
-	'load_swfobject_js',
-	array(
-		'name' => 'Load SWFObject <code><a title="View source in new tab" href="view-source:' . includes_url('js/swfobject.js') . '" target="_blank">swfobject.js</a></code>',
-		'std'  => FALSE,
-		'desc' => 'Enqueues the SWFObject library bundled with WordPress. View <a href="https://code.google.com/p/swfobject/" target="_blank">documentation &rsaquo;</a>',
-	)
-);
-
-$mapi_options->addCheckbox(
-	'fix_console',
-	array(
-		'name' => 'Load <code><a title="View source in new tab" href="view-source:' . plugins_url('js/mapi-fix-console.js', MAPI_DIR_PATH . '/' . MAPI_PLUGIN_SLUG . '.php') . '" target="_blank">mapi-fix-console.js</a></code>',
-		'std'  => FALSE,
-		'desc' => 'Adds JavaScript to prevent any errors from calls to <code>console.log</code> in production environments (recommended).',
+		'desc' => '',
 	)
 );
 
@@ -669,20 +580,20 @@ $mapi_options->CloseTab();
  * speed tab start
  */
 $mapi_options->OpenTab(sanitize_title($speed_options_label));
-$mapi_options->Title($speed_options_label);
+$mapi_options->Title($speed_options_label . ' <small>(disable during dev/testing!)</small>');
 
 $mapi_options->addCheckbox(
 	'minify_js',
 	array(
 		'name' => 'Minify JavaScript',
-		'desc' => 'This option automatically combines and compresses all registered JS files from your theme and all other WordPress plugins.',
+		'desc' => 'Automatically combine and compress all registered JS files (from theme and WordPress plugins.)',
 		'std'  => FALSE,
 	));
 $mapi_options->addCheckbox(
 	'minify_css',
 	array(
 		'name' => 'Minify CSS',
-		'desc' => 'This option automatically combines and compresses all properly registered CSS files.',
+		'desc' => 'Automatically combine and compress all registered CSS files.',
 		'std'  => FALSE,
 	));
 
@@ -691,7 +602,7 @@ $mapi_options->addCheckbox(
 	array(
 		'name' => 'Minify HTML',
 		'std'  => FALSE,
-		'desc' => 'This option reduces page size by stripping whitespace and HTML comments, excluding IE conditional comments. Wrap content you don\'t want compressed in your theme files with: <code>mapi_stop_compression()</code> and <code>mapi_start_compression()</code>',
+		'desc' => 'Strip whitespace and HTML comments, excluding IE conditional comments. Enable for production. Wrap content you don\'t want compressed in your theme files with: <code>mapi_stop_compression()</code> and <code>mapi_start_compression()</code>',
 	)
 );
 $mapi_options->addText(
@@ -699,7 +610,7 @@ $mapi_options->addText(
 	array(
 		'name' => 'Minify cache expiration (in seconds)',
 		'std'  => 432000,
-		'desc' => 'The default is 432000 (120 hours).',
+		'desc' => 'Default is 432000 seconds (120 hours).',
 	)
 );
 $mapi_options->addParagraph(
@@ -764,25 +675,20 @@ $speed_adv_options[] = $mapi_options->addTextarea(
 	array(
 		'name' => 'Exclude JS from minification (by URI pattern)',
 		'desc' => 'JavaScript URI patterns to exclude from minify (one per line). Example: \'jquery\' matches all JS files with \'jquery\' in the filename.',
-	), TRUE);
+		'std'  => "google\ngravity\ntribe",
+	),
+	TRUE
+);
 
 $speed_adv_options[] = $mapi_options->addTextarea(
 	'css_exclude',
 	array(
 		'name' => 'Exclude CSS from minification (by URI pattern)',
 		'desc' => 'CSS URI patterns to exclude from minify (one per line). Example: \'style\' matches all JS files with \'style\' in the filename.',
+		'std'  => "google\ngravity\ntribe",
 	),
 	TRUE);
-/*$speed_adv_options[] = $mapi_options->addTextarea(
-	'uri_exclude',
-	array(
-		 'name' => 'Exclude URI patterns from minification',
-		 'desc' => 'URI patterns to exclude from minify parsing (one per line).'
-	),
-	TRUE);*/
-//$speed_adv_options[] = $mapi_options->addTextarea('js_include', array('name' => 'Minify External JS','desc' => 'Minify and cache JavaScript files from an external domain. The external files must already be present within a script tag in your HTML (one per line).'), TRUE);
 
-//$speed_adv_options[] = $mapi_options->addTextarea('css_include', array('name' => 'Minify External CSS','desc' => 'Minify and cache CSS files from an external domain. The external files must already be present within a CSS link tag in your HTML (one per line).'), TRUE);
 $speed_adv_options[] = $mapi_options->addText(
 	'extra_minify_options',
 	array(
@@ -797,13 +703,13 @@ $mapi_options->addCondition(
 	array(
 
 		'name'   => 'Enable Advanced ' . $speed_options_label . ' options',
-		'std'    => FALSE,
+		'std'    => TRUE,
 		'fields' => $speed_adv_options,
 	)
 );
 
-$mapi_options->addSubtitle('Troubleshooting Minify Errors');
-$mapi_options->addParagraph('Combining and compressing all JS and CSS files can be a huge performance boost! <strong>IMPORTANT: Test your site after you turn this on - not all JavaScript and CSS files can be automatically minified</strong> (if they contain errors or seriously hackish code).');
+$mapi_options->addSubtitle('Troubleshooting Minify Errors <span class="dashicons dashicons-sos"></span>');
+$mapi_options->addParagraph('Combining and compressing all JS and CSS files can be a huge performance boost! Enable for production, disable during development, troubleshooting and testing. <strong>IMPORTANT: Test your site after you turn this on - not all JavaScript and CSS files can be automatically minified</strong> (if they contain errors or poorly formatted code).');
 $mapi_options->addParagraph('If you encounter problems after enabling one of the options above try narrowing down which JS or CSS file(s) are causing trouble using the <strong>Advanced Minify Options</strong> above. Also keep in mind that if you have a lot of JS and CSS files to compress, the minify processor may run out of memory on depending on your PHP configuration. Running out of memory may result in a minify builder login prompt being displayed when viewing the site. To fix this you can either increase the memory available to PHP or exclude one or more files from minification.');
 $mapi_options->addParagraph('While logged in to WordPress you can temporarily disable minification of JS and CSS files by appending this $_GET variable to any URL: <code>?minify-off=1</code> you can also add this bookmarklet to your browser to assist in debugging: <br /><a class="bookmarklet button button-primary button-large" href="javascript:(function()%7Bjavascript%3Avoid((function()%7Bvar%20loc%20%3D%20location.href%3B%20loc.indexOf(%22%3F%22)%20%3D%3D%20-1%20%3F%20(location.href%20%3D%20loc%2B%22%3Fminify-off%3D1%22)%20%3A%20(location.href%20%3D%20loc%2B%22%26minify-off%3D1%22)%3B%7D)())%7D)()">JS/CSS Minify Off</a>');
 $mapi_options->addParagraph('If you have errors after enabling HTML compression you can partially disable HTML compression by wrapping content you don\'t want compressed in your theme files within two PHP functions like so:<br /> <code>&lt;?php mapi_stop_compression(); ?&gt;<br />this won\'t get compressed<br />&lt;?php mapi_start_compression(); ?&gt;</code>');

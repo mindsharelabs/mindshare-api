@@ -11,22 +11,25 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 # Changelog:
 
 ## 1.1
-- Deprecated pickadate.js library
-- Add PHP.ini file to sysinfo
-- Add fn `mapi_query_related()`
-- Add fn `mapi_get_active_template()`
-- Rewrite `mapi_money_format()` with trim zeros
-- Rewrite `mapi_excerpt()` with improved CPT/ACF support
-- Fix 'http' google font link on maintenance mode screen
-- Update copyright date and name
-- Updated `mapi_facebook_lookup()` to use an Open Graph access token
-- Migrated TGM Plugin activation and Twitter PHP API SDK to Composer
 - Add `mapi_facebook_posts()` function
-- Deprecate `mapi_facebook_rss()` function
 - Add `mapi_post_exists()` function
+- Add fn `mapi_get_active_template()`
+- Add fn `mapi_query_related()`
 - Add function for responsive video embeds, `mapi_embed_html()`
+- Add PHP.ini file to sysinfo
+- Added Google, Gravity Forms  and Tribe plugins to the default exclusion list for minification",
+- Change IE update nag to version 11 
+- Deprecate `mapi_facebook_rss()` function
+- Deprecated pickadate.js and many older 3rd party libraries
+- Disable WordPress 4.2+ inline support for Emojis (removed inline CSS/JS code from head, toggleable)
+- Fix 'http' google font link on maintenance mode screen
+- Migrated TGM Plugin activation and Twitter PHP API SDK to Composer
 - Remove deprecated `get_currentuserinfo()` calls
 - Remove deprecated params from TGMPA
+- Rewrite `mapi_excerpt()` with improved CPT/ACF support
+- Rewrite `mapi_money_format()` with trim zeros
+- Update copyright date and name
+- Updated `mapi_facebook_lookup()` to use an Open Graph access token
 
 ## 1.0.1
 - Premissions fix for mThumb

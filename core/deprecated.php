@@ -95,9 +95,6 @@ function mapi_less() {
  */
 function mapi_js() {
 	_deprecated_function(__FUNCTION__, '3.8');
-	wp_deregister_script('mapi_js');
-	wp_register_script('mapi_js', plugins_url('js/mapi.js', dirname(__FILE__)));
-	wp_enqueue_script('mapi_js');
 }
 
 /**
@@ -306,6 +303,7 @@ function mapi_list_children_menu() {
  * @deprecated
  */
 function mapi_load_pickadate() {
+	_deprecated_function(__FUNCTION__, '4.6');
 	if (!is_admin()) {
 		wp_deregister_script('pickadate');
 		wp_register_script('pickadate', '//cdn.jsdelivr.net/jquery.pickadate.js/4.0.0-0/ui-pickadate.min.js', array('jquery'));
@@ -323,4 +321,103 @@ function mapi_load_pickadate() {
 		wp_register_style('pickadate-css', '//cdn.jsdelivr.net/jquery.pickadate.js/4.0.0-0/css/styles.css');
 		wp_enqueue_style('pickadate-css');
 	}
+}
+
+/**
+ * Loads Retina
+ *
+ * @deprecated
+ */
+function mapi_load_retina() {
+	_deprecated_function(__FUNCTION__, '4.6');
+	if (!is_admin()) {
+		wp_deregister_script('retina');
+		wp_register_script('retina', '//cdn.jsdelivr.net/retinajs/1.3.0/retina.min.js');
+		wp_enqueue_script('retina');
+	}
+}
+
+/**
+ * Loads jQuery BBQ
+ *
+ * @deprecated
+ */
+function mapi_load_bbq() {
+	_deprecated_function(__FUNCTION__, '4.6');
+}
+
+/**
+ * Loads easyListSplitter
+ *
+ * @deprecated
+ */
+function mapi_load_easylistsplitter() {
+	_deprecated_function(__FUNCTION__, '4.6');
+	if (!is_admin()) {
+		wp_deregister_script('easylistsplitter');
+		wp_register_script('easylistsplitter', '//cdn.jsdelivr.net/easylistsplitter/1.0.2/jquery.easyListSplitter.js', array('jquery'));
+		wp_enqueue_script('easylistsplitter');
+	}
+}
+
+/**
+ * Loads Lettering
+ *
+ * @deprecated
+ */
+function mapi_load_lettering() {
+	_deprecated_function(__FUNCTION__, '4.6');
+	if (!is_admin()) {
+		wp_deregister_script('lettering');
+		wp_register_script('lettering', '//cdn.jsdelivr.net/lettering/0.7.0/jquery.lettering.min.js', array('jquery'));
+		wp_enqueue_script('lettering');
+	}
+}
+
+/**
+ *  Loads jQuery ReplaceText plguin.
+ *
+ * @deprecated
+ */
+function mapi_replacetext_js() {
+	_deprecated_function(__FUNCTION__, '4.6');
+}
+
+/**
+ * Loads JavaScript to automatically highlight search terms on WordPress search results pages.
+ *
+ * @deprecated
+ */
+function mapi_search_highlighter_js() {
+	_deprecated_function(__FUNCTION__, '4.6');
+}
+
+/**
+ * Prevents JavaScript errors if the console object is not defined.
+ *
+ * @deprecated
+ */
+function mapi_fix_console() {
+	_deprecated_function(__FUNCTION__, '4.6');
+}
+
+/**
+ * Loads SWFObject
+ *
+ * @deprecated
+ */
+function mapi_load_swfobject() {
+	_deprecated_function(__FUNCTION__, '4.6');
+	if (!is_admin()) {
+		wp_enqueue_script('swfobject');
+	}
+}
+
+/**
+ * Not intended for general use in themes. Get query variables. Used to highlight search terms via JavaScript.
+ *
+ * @deprecated
+ */
+function mapi_query() {
+	_deprecated_function(__FUNCTION__, '4.6');
 }

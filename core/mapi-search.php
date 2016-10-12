@@ -12,7 +12,7 @@
 
 /**
  *
- * Not intended for general use in themes. Gets the current search term (to be used in JavaScript).
+ * Gets the current search term (to be used in JavaScript).
  *
  * @return mixed
  */
@@ -34,31 +34,6 @@ function mapi_get_search_query() {
 	}
 }
 
-/**
- *
- * Not intended for general use in themes. Get query variables. Used to highlight search terms via JavaScript.
- *
- */
-function mapi_query() {
-	global $mapi_do_extend;
-
-	$areas = apply_filters('mapi_search_highlight_containers', array('div.page', 'div.post', 'article.page', 'article.post')); // Using the tag 'body' is known to cause conflicts
-	// js >> var mapi_ids = new Array("'.$id'","#main","#wrapper");
-	$terms = mapi_get_search_query();
-	$filtered = array();
-	if($terms) {
-		foreach($terms as $term) {
-			$term = esc_attr(trim(str_replace(array('"', '\'', '%22'), '', $term)));
-			if(!empty($term)) {
-				$filtered[] = '"' . $term . '"';
-			}
-		}
-		if(count($filtered) > 0) {
-			$mapi_do_extend = TRUE;
-			echo '<script type="text/javascript">var mapi_query = new Array(' . implode(',', $filtered) . ');var mapi_areas = new Array("' . implode('","', $areas) . '");</script>';
-		}
-	}
-}
 
 /**
  * Replaces the GET variable 's' with a nice URL, like 'search'.
