@@ -49,7 +49,7 @@ ob_start();
 <!DOCTYPE html>
 <title>Minify URI Builder</title>
 <meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
-<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <style>
 body {margin:1em 60px;}
 h1, h2, h3 {margin-left:-25px; position:relative;}

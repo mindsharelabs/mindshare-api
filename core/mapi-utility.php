@@ -695,7 +695,7 @@ function mapi_load_jquery() {
 function mapi_load_bootstrap() {
 	if (!is_admin()) {
 		wp_deregister_script('bootstrap');
-		wp_register_script('bootstrap', '//cdn.jsdelivr.net/bootstrap/3.3.6/js/bootstrap.min.js', array('jquery'));
+		wp_register_script('bootstrap', '//cdn.jsdelivr.net/bootstrap/3.3.7/js/bootstrap.min.js', array('jquery'));
 		wp_enqueue_script('bootstrap');
 	}
 }
@@ -706,7 +706,7 @@ function mapi_load_bootstrap() {
 function mapi_load_bootstrap_css() {
 	if (!is_admin()) {
 		wp_deregister_style('bootstrap');
-		wp_register_style('bootstrap', '//cdn.jsdelivr.net/bootstrap/3.3.6/css/bootstrap.min.css');
+		wp_register_style('bootstrap', '//cdn.jsdelivr.net/bootstrap/3.3.7/css/bootstrap.min.css');
 		wp_enqueue_style('bootstrap');
 	}
 }

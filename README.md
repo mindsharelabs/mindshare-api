@@ -28,6 +28,7 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 - Remove deprecated params from TGMPA
 - Rewrite `mapi_excerpt()` with improved CPT/ACF support
 - Rewrite `mapi_money_format()` with trim zeros
+- Update Bootstrap to 3.3.7
 - Update copyright date and name
 - Updated `mapi_facebook_lookup()` to use an Open Graph access token
 
