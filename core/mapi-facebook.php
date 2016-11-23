@@ -127,6 +127,135 @@ function mapi_facebook_posts($args = array()) {
 	<?php
 }
 
+
+/**
+ * Retrieves public Facebook events from a public Page's ID using the Facebook API.
+ *
+ *
+ * @param $args array [string]fb_app_id A Facebook app id, default: Mindshare's shared app
+ * @param $args array [int]num_posts Number of posts to retrieve, default: 4
+ * @param $args array [int]num_words Number of words per post to allow, default: 55
+ * @param $args array [int]num_days_future Number of days to look in the future for events. default: 365
+ * @param $args array [int]num_days_past Number of days to look in the past for events. 'past_events' must be true. default: 365
+ * @param $args array [bool]past_events Whether to show past events, default: FALSE
+ * @param $args array [bool]loc_info Whether to show location information, default: TRUE
+ * @param $args array [bool]desc Whether to show the event description, default: TRUE
+ * @param $args array [bool]image Whether to show the event image, default: TRUE
+ * @param $args array [bool]list Whether to return an unordered list or div containers. Note: The list only displays the name and date of the event. default: FALSE
+ * @param $args array [bool]echo Whether to echo or return the result, default: TRUE
+ * @param $args array [array]auth Open graph authentication settings: graph_access_token, graph_access_token_secret. Default: Mindshare's FB app.
+ *
+ * @return array|bool|string
+ */
+function mapi_facebook_events($args = array()) {
+
+    $defaults = array(
+        'facebook_id'        => mapi_get_facebook_id(mapi_get_option('facebook_uri')),
+        'num_posts'          => 4,
+        'num_words'          => 55,
+        'num_days_future'    => 365,
+        'num_days_past'      => 365,
+        'past_events'        => FALSE,
+        'loc_info'           => TRUE,
+        'desc'               => TRUE,
+        'image'              => TRUE,
+        'list'               => FALSE,
+        'echo'               => TRUE,
+        'auth'               => $settings = mapi_facebook_access_token(),
+    );
+    $args = wp_parse_args($args, $defaults);
+
+    // unix timestampS
+    $since_unix_timestamp = strtotime(date('Y-m-d', strtotime('-' . $args['num_days_past'] . ' days')));
+    $until_unix_timestamp = strtotime(date('Y-m-d', strtotime('+' . $args['num_days_future'] . ' days')));
+
+    if (!$args[ 'facebook_id' ]) {
+        mapi_error(array('msg' => 'Facebook page id is required'));
+
+        return FALSE;
+    }
+
+    $settings = mapi_facebook_access_token();
+    $access_token = $settings[ 'graph_access_token' ] . '|' . $settings[ 'graph_access_token_secret' ];
+    if( $args['past_events'] === true) :
+        $date_info = "&until=" . $until_unix_timestamp;
+    else :
+        $date_info = "&since=" . $since_unix_timestamp . "&until=" . $until_unix_timestamp;
+    endif;
+    $json_link = "https://graph.facebook.com/" . $args['facebook_id'] . "/events/?access_token=" . $access_token . $date_info;
+    $json = file_get_contents($json_link);
+    $events = json_decode($json, true, 512, JSON_BIGINT_AS_STRING);
+
+    // if echo is false return raw data
+    if ($args[ 'echo' ] === FALSE) {
+        return $events;
+    }
+
+    //else echo the html
+    if($args['list'] === FALSE) :
+        echo "<div class='mapi-fb-events'>";
+    else :
+        echo "<ul class='mapi-fb-events'>";
+    endif;
+
+    $fb_events = array_slice($events[ 'data' ], 0, $args[ 'num_posts' ]);
+
+    foreach ($fb_events as $event) {
+
+
+        $eid = $event['id'];
+        $name = $event['name'];
+        $pic_big = "https://graph.facebook.com/v2.7/" . $eid . "/picture?access_token=" . $access_token . "&type=large";
+
+        $description = isset($event['description']) ? mapi_word_limit(mapi_strip_url($event['description']), $args['num_words']) : "";
+        $place_name = isset($event['place']['name']) ? $event['place']['name'] : "";
+
+        $start_date = date('l, F d, Y', strtotime($event['start_time']));
+
+
+        $city = isset($event['place']['location']['city']) ? $event['place']['location']['city'] : "";
+        $zip = isset($event['place']['location']['zip']) ? $event['place']['location']['zip'] : "";
+
+        $location = "";
+
+        if ($place_name && $city && $zip) {
+            $location = $city . ', ' . $zip;
+        } else {
+            $location = "";
+        }
+
+        if($args['list'] === FALSE) :
+            echo "<div class='mapi-fb-event'>";
+            echo '<h3 class="mapi-event-title"><a href="https://www.facebook.com/events/' . $eid . '/">' . $name . '</a></h3>';
+            echo '<div class="mapi-event-datetime">' . $start_date . '</div>';
+            if ($args['image'] === true) {
+                echo '<div class="mapi-event-image"><a href="https://www.facebook.com/events/' . $eid . '/"><img src="' . $pic_big . '"></a></div>';
+            }
+            if ($args['desc'] === true) {
+                echo '<div class="mapi-event-description">' . $description . '</div>';
+            }
+            if ($args['loc_info'] === true) {
+                echo '<div class="mapi-event-place">' . $place_name . '</div>';
+                echo '<div class="mapi-event-location">' . $location . '</div>';
+            }
+
+            echo '<button class="mapi-event-link"><a href="https://www.facebook.com/events/' . $eid . '/">' . 'View on Facebook' . "</a></button>";
+            echo "</div>";
+        else :
+            echo '<li class="mapi-event-title"><a href="https://www.facebook.com/events/' . $eid . '/">' . $start_date . ' - ' . $name . "</a></li>";
+        endif;
+
+    }
+    if($args['list'] === FALSE) :
+        echo "</div>";
+    else :
+        echo "</ul>";
+    endif;
+
+}
+
+
+
 /**
  * Retrieves a Facebook username from a given URL or Facebook ID.
  *
