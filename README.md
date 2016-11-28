@@ -9,6 +9,12 @@ Mindshare Theme API
 Provides a library of additional template tags, 3rd-party libraries, and functions for WordPress themes and additional features for WordPress CMS websites.
 
 # Changelog:
+## 1.1.1
+- Add 'mapi_facebook_events()' function'
+
+
+## 1.1.1
+- Add 'mapi_facebook_events()' function'
 
 ## 1.1.0
 - Add `mapi_facebook_posts()` function

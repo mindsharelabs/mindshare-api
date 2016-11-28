@@ -141,8 +141,8 @@ function mapi_facebook_posts($args = array()) {
  * @param $args array [bool]loc_info Whether to show location information, default: TRUE
  * @param $args array [bool]desc Whether to show the event description, default: TRUE
  * @param $args array [bool]image Whether to show the event image, default: TRUE
- * @param $args array [bool]list Whether to return an unordered list or div containers. Note: The list only displays the name and date of the event. default: FALSE
- * @param $args array [bool]echo Whether to echo or return the result, default: TRUE
+ * @param $args array [bool]list TRUE to return unordered list, FALSE to return div containers. Note: The list only displays the name and date of the event. default: FALSE
+ * @param $args array [bool]echo TRUE to echo, FALSE to return the result, default: TRUE
  * @param $args array [array]auth Open graph authentication settings: graph_access_token, graph_access_token_secret. Default: Mindshare's FB app.
  *
  * @return array|bool|string
