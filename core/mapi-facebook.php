@@ -168,6 +168,7 @@ function mapi_facebook_events($args = array()) {
     // unix timestampS
     $since_unix_timestamp = strtotime(date('Y-m-d', strtotime('-' . $args['num_days_past'] . ' days')));
     $until_unix_timestamp = strtotime(date('Y-m-d', strtotime('+' . $args['num_days_future'] . ' days')));
+    $today_unix_timestamp = strtotime(date('Y-m-d'));
 
     if (!$args[ 'facebook_id' ]) {
         mapi_error(array('msg' => 'Facebook page id is required'));
@@ -177,8 +178,8 @@ function mapi_facebook_events($args = array()) {
 
     $settings = mapi_facebook_access_token();
     $access_token = $settings[ 'graph_access_token' ] . '|' . $settings[ 'graph_access_token_secret' ];
-    if( $args['past_events'] === true) :
-        $date_info = "&until=" . $until_unix_timestamp;
+    if( $args['past_events'] === FALSE) :
+        $date_info = "&since=" . $today_unix_timestamp . "&until=" . $until_unix_timestamp;
     else :
         $date_info = "&since=" . $since_unix_timestamp . "&until=" . $until_unix_timestamp;
     endif;
