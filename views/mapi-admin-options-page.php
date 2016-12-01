@@ -216,11 +216,10 @@ $condition_load_ie[] = $mapi_options->addText(
 $mapi_options->addCondition(
 	'load_ieupdate',
 	array(
-
 		'name'   => 'Show Internet Explorer update nag',
 		'desc'   => '(visitors with IE versions lower than number above will be politely alerted to update)',
 		'fields' => $condition_load_ie,
-		'std'    => TRUE,
+		'std'    => FALSE,
 	)
 );
 

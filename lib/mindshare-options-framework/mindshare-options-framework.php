@@ -1758,7 +1758,10 @@ if(!class_exists('mindshare_options_framework')) :
 				}
 				//set new id for field in array format
 				$f['id'] = $id;
-				call_user_func(array(&$this, 'show_field_'.$f['type']), $f, $m);
+
+				if (array_key_exists('type', $f) && $f[ 'type' ] != NULL && method_exists($this, 'show_field_' . $f[ 'type' ])) {
+					call_user_func(array(&$this, 'show_field_' . $f[ 'type' ]), $f, $m);
+				}
 			}
 			echo '</div>';
 			$this->show_field_end($field, $meta);

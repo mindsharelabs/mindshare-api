@@ -12,6 +12,7 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 ## 1.1.1
 - Remove `mapi_change_email_defaults()` function because of conflict with Gravity Forms
+- Bugfix for IE update setting 
 
 ## 1.1.0
 - Add `mapi_facebook_posts()` function
