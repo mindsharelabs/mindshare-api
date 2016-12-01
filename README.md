@@ -10,6 +10,9 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 1.1.1
+- Remove `mapi_change_email_defaults()` function because of conflict with Gravity Forms
+
 ## 1.1.0
 - Add `mapi_facebook_posts()` function
 - Add `mapi_post_exists()` function
