@@ -10,9 +10,12 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 1.1.2
+- Updated `Mindshare_API_Plugin_Updater` class to current version of EDD Plugin Updater
+
 ## 1.1.1
 - Remove `mapi_change_email_defaults()` function because of conflict with Gravity Forms
-- Bugfix for IE update setting 
+- Bugfix for IE update setting
 
 ## 1.1.0
 - Add `mapi_facebook_posts()` function
@@ -22,7 +25,7 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 - Add function for responsive video embeds, `mapi_embed_html()`
 - Add PHP.ini file to sysinfo
 - Added Google, Gravity Forms  and Tribe plugins to the default exclusion list for minification",
-- Change IE update nag to version 11 
+- Change IE update nag to version 11
 - Deprecate `mapi_facebook_rss()` function
 - Deprecated pickadate.js and many older 3rd party libraries
 - Disable WordPress 4.2+ inline support for Emojis (removed inline CSS/JS code from head, toggleable)
@@ -55,7 +58,7 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 - Add Instagram to `mapi_social_links()`
 
 ## 0.8.8
-- Minor fix for mapi_html_cleanup() 
+- Minor fix for mapi_html_cleanup()
 - Minor fix for mapi_social email links
 - Add Instagram to supported social networks
 
@@ -70,7 +73,7 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 - Added `mapi_compress_js` filter
 - Added `mapi_compress_info` filter
 - Added new filters to change the default WordPress email and from name for system generated messages
- 
+
 ## 0.8.6
 - Bugfix for automatic updates
 - Speed improvements
