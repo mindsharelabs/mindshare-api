@@ -1,0 +1,23 @@
+{
+  "name": "MindshareLabsBlank",
+  "version": "4.0.1",
+  "description": "A robust, responsive, Bootstrap 4-enabled theme framework for WordPress developed by Mindshare Labs, Inc.\r ========",
+  "main": "index.php",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.mindsharelabs.com:devops/mindblank.git"
+  },
+  "devDependencies": {
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.1.0",
+    "node-sass": "^4.14.1"
+  },
+  "author": "Mindshare Labs, Inc.",
+  "license": "GPL-3.0",
+  "dependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": []
+}
