@@ -33,6 +33,27 @@ add_action('acf/init', function () {
 	// Check function exists.
 	if( function_exists('acf_register_block_type') ) {
 
+		acf_register_block_type(array(
+			'name'              => 'card-repeater-block',
+			'title'             => __('Custom Card Repeater Block'),
+			'description'       => __('A repeater block for a bootstrap card layout.'),
+			'render_template'   => MAPI_ABSPATH . '/inc/block-templates/card-repeater-block.php',
+			'category'          => 'mind-blocks',
+			'icon'              => file_get_contents(MAPI_URL . 'inc/img/mind-icon.svg'),
+			'keywords'          => array( 'cards', 'repeater','mind', 'Mindshare' ),
+			'align'             => 'full',
+			'mode'            	=> 'edit',
+			'supports'					=> array(
+				'align' => false,
+			),
+			'enqueue_assets' => function(){
+				// We're just registering it here and then with the action get_footer we'll enqueue it.
+				wp_register_style( 'block-styles', MAPI_URL . '/inc/css/block-styles.css' );
+				add_action( 'get_footer', function () {wp_enqueue_style('block-styles');});
+
+				},
+			)
+		);
 
 		acf_register_block_type(array(
 			'name'              => 'post-list-block',
@@ -261,6 +282,7 @@ if( function_exists('acf_add_local_field_group') ):
 		'active' => true,
 		'description' => '',
 	));
+
 
 	//ACF Block Fields: Post List *
 	acf_add_local_field_group(array(
@@ -754,6 +776,144 @@ if( function_exists('acf_add_local_field_group') ):
 	));
 
 
-
+	//ACF Block Fields: Card Repeater Block
+	acf_add_local_field_group(array(
+		'key' => 'group_601235336f5c3',
+		'title' => 'Block: Card Repeater',
+		'fields' => array(
+			array(
+				'key' => 'field_6012353a4f7d9',
+				'label' => 'Block Card Repeater',
+				'name' => 'block_card_repeater',
+				'type' => 'group',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'layout' => 'block',
+				'sub_fields' => array(
+					array(
+						'key' => 'field_601235414f7da',
+						'label' => 'Cards',
+						'name' => 'cards',
+						'type' => 'repeater',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => '',
+						),
+						'collapsed' => '',
+						'min' => 0,
+						'max' => 0,
+						'layout' => 'block',
+						'button_label' => 'Add Card',
+						'sub_fields' => array(
+							array(
+								'key' => 'field_601235464f7db',
+								'label' => 'Card Image',
+								'name' => 'card_image',
+								'type' => 'image',
+								'instructions' => '',
+								'required' => 0,
+								'conditional_logic' => 0,
+								'wrapper' => array(
+									'width' => '',
+									'class' => '',
+									'id' => '',
+								),
+								'return_format' => 'array',
+								'preview_size' => 'medium',
+								'library' => 'all',
+								'min_width' => '',
+								'min_height' => '',
+								'min_size' => '',
+								'max_width' => '',
+								'max_height' => '',
+								'max_size' => '',
+								'mime_types' => '',
+							),
+							array(
+								'key' => 'field_6012356sfqf7dc',
+								'label' => 'Card Header',
+								'name' => 'card_header',
+								'type' => 'text',
+								'instructions' => '',
+								'required' => 0,
+								'conditional_logic' => 0,
+								'wrapper' => array(
+									'width' => '',
+									'class' => '',
+									'id' => '',
+								),
+								'default_value' => '',
+								'placeholder' => '',
+								'maxlength' => '',
+								'rows' => '',
+								'new_lines' => '',
+							),
+							array(
+								'key' => 'field_6012354b4f7dc',
+								'label' => 'Card Body',
+								'name' => 'card_body',
+								'type' => 'textarea',
+								'instructions' => '',
+								'required' => 0,
+								'conditional_logic' => 0,
+								'wrapper' => array(
+									'width' => '',
+									'class' => '',
+									'id' => '',
+								),
+								'default_value' => '',
+								'placeholder' => '',
+								'maxlength' => '',
+								'rows' => '',
+								'new_lines' => '',
+							),
+							array(
+								'key' => 'field_601235524f7dd',
+								'label' => 'Card Link',
+								'name' => 'card_link',
+								'type' => 'link',
+								'instructions' => '',
+								'required' => 0,
+								'conditional_logic' => 0,
+								'wrapper' => array(
+									'width' => '',
+									'class' => '',
+									'id' => '',
+								),
+								'return_format' => 'array',
+							),
+						),
+					),
+				),
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'block',
+					'operator' => '==',
+					'value' => 'acf/card-repeater-block',
+				),
+			),
+		),
+		'menu_order' => 0,
+		'position' => 'normal',
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => '',
+		'active' => true,
+		'description' => '',
+	));
 
 endif;
