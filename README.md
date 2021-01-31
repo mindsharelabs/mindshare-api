@@ -10,6 +10,10 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 2.1.2
+- Complete re-write to support Gutenberg Editor. We're now focusting on adding additional blocks and a limited number of additional theme fucntions. 
+
+
 ## 1.1.2
 - Updated `Mindshare_API_Plugin_Updater` class to current version of EDD Plugin Updater
 

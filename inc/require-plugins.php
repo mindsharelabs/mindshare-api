@@ -19,14 +19,14 @@ add_action( 'tgmpa_register', function() {
 		// ),
 
 		// // This is an example of how to include a plugin from an arbitrary external source in your theme.
-		array(
-			'name'         => 'Advanced Custom Fields Pro', // The plugin name.
-			'slug'         => 'advanced-custom-fields-pro', // The plugin slug (typically the folder name).
-			'source'       => 'https://connect.advancedcustomfields.com/v2/plugins/download?p=pro&k=b3JkZXJfaWQ9MzI5NTN8dHlwZT1kZXZlbG9wZXJ8ZGF0ZT0yMDE0LTA3LTA3IDE1OjU4OjE5', // The plugin source.
-			'required'     => true, // If false, the plugin is only 'recommended' instead of required.
-      'version'      => '5.9.3'
-			// 'external_url' => 'https://github.com/thomasgriffin/New-Media-Image-Uploader', // If set, overrides default API URL and points to an external URL.
-		),
+		// array(
+		// 	'name'         => '', // The plugin name.
+		// 	'slug'         => '', // The plugin slug (typically the folder name).
+		// 	'source'       => '', // The plugin source.
+		// 	'required'     => true, // If false, the plugin is only 'recommended' instead of required.
+    //   'version'      => ''
+		// 	// 'external_url' => 'https://github.com/thomasgriffin/New-Media-Image-Uploader', // If set, overrides default API URL and points to an external URL.
+		// ),
 
 
 		// // This is an example of how to include a plugin from a GitHub repository in your theme.
@@ -40,11 +40,21 @@ add_action( 'tgmpa_register', function() {
 
 
 		// // This is an example of how to include a plugin from the WordPress Plugin Repository.
-		// array(
-		// 	'name'     => 'BuddyPress',
-		// 	'slug'     => 'buddypress',
-		// 	'required' => false,
-		// ),
+		array(
+			'name'     => 'Simple History',
+			'slug'     => 'simple-history',
+			'required' => true,
+		),
+		array(
+			'name'     => 'What the File',
+			'slug'     => 'what-the-file',
+			'required' => true,
+		),
+		array(
+			'name'     => 'Mailgun',
+			'slug'     => 'mailgun',
+			'required' => true,
+		),
 
 
 		// // This is an example of the use of 'is_callable' functionality. A user could - for instance -
