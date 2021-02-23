@@ -3,7 +3,7 @@ Mindshare Theme API
 
 - Author: Mindshare Labs, Inc.
 - License: GPL v3
-- Copyright: 2006-2017
+- Copyright: 2006-2021
 - Link: https://mindsharelabs.com/downloads/mindshare-theme-api/
 
 Provides a library of additional template tags, 3rd-party libraries, and functions for WordPress themes and additional features for WordPress CMS websites.
@@ -11,7 +11,7 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 # Changelog:
 
 ## 2.1.2
-- Complete re-write to support Gutenberg Editor. We're now focusting on adding additional blocks and a limited number of additional theme fucntions. 
+- Complete re-write to support Gutenberg Editor. We're now focusting on adding additional blocks and a limited number of additional theme fucntions.
 
 
 ## 1.1.2
