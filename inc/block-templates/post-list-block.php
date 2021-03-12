@@ -71,7 +71,7 @@ if($post_list_block) :
             if(has_post_thumbnail()):
               echo '<div class="col-12 col-md-4">';
                 echo '<a href="' . get_permalink() . '" title="' . get_the_title() . '">';
-                  the_post_thumbnail( 'loop-thumbnail', array('class' => 'card-img-top') );
+                  the_post_thumbnail( 'loop-list-thumbnail', array('class' => 'card-img-top') );
                 echo '</a>';
               echo '</div>';
             endif;
