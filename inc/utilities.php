@@ -2,7 +2,7 @@
 
 if (function_exists('add_image_size')) {
   add_image_size( 'loop-square', 350, 350, array('center', 'center'));
-  add_image_size( 'loop-thumbnail', 350, 150, array('center', 'center'));
+  add_image_size( 'loop-thumbnail', 350, 250, array('center', 'center'));
 }
 
 if(!function_exists('mapi_var_dump')) {
