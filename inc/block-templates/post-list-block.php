@@ -79,8 +79,8 @@ if($post_list_block) :
               echo '<div class="col-12 col-md">';
                 echo '<div class="card-body">';
                   echo '<h3><a href="' . get_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h3>';
-                  echo '<p>' . get_the_excerpt() . '</p>';
-                  echo '<a href="' . get_permalink() . '" class="btn btn-primary">Read More</a>';
+                  echo get_the_excerpt();
+                  echo '<a href="' . get_permalink() . '" class="btn btn-primary mt-3">Read More</a>';
                 echo '</div>';
               echo '</div>';
             echo '</div>';
@@ -88,11 +88,11 @@ if($post_list_block) :
             the_post_thumbnail( 'loop-thumbnail', array('class' => 'card-img-top') );
             echo '<div class="card-body">';
               echo '<h3><a href="' . get_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h3>';
-              echo '<p>' . get_the_excerpt() . '</p>';
+              echo get_the_excerpt();
 
             echo '</div>';
             echo '<div class="card-footer text-right">';
-              echo '<a href="' . get_permalink() . '" class="btn btn-primary text-end">Read More</a>';
+              echo '<a href="' . get_permalink() . '" class="btn btn-primary text-end mt-3">Read More</a>';
             echo '</div>';
           endif;
 
