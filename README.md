@@ -10,9 +10,9 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
-## 2.1.2
+## 2.1.3
 - Fixed an issue with multiple accordion blocks triggering each other.
-- Generally usability upgrades to container block. 
+- Generally usability upgrades to container block.
 
 
 ## 2.1.2
