@@ -4,7 +4,7 @@ Plugin Name: Mindshare Theme API
 Plugin URI: https://mind.sh/are
 Description: Provides a library of additional template tags, 3rd-party libraries, Gutenberg BLocks, and functions for WordPress themes and additional features for WordPress CMS websites.
 Author: Mindshare Labs, Inc
-Version: 2.1.2
+Version: 2.1.3
 Author: Mindshare Labs, Inc
 Author URI: https://mind.sh/are
 Network: false
@@ -41,7 +41,7 @@ class mapiPlugin {
   }
   private function includes() {
     include_once MAPI_ABSPATH . 'inc/utilities.php';
-    
+
 		//Required Plugins
 		require_once 'inc/plugin-activation.class.php';
 		require_once 'inc/require-plugins.php';
