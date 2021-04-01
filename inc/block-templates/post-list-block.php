@@ -51,7 +51,7 @@ if($post_list_block) :
       $posts->the_post();
 
 
-      echo '<div class="col-12 my-2 ' . ($type == 'list' ? '' : 'col-md-3') . ' ' . $type . '">';
+      echo '<div class="col-12 my-2 ' . ($type == 'list' ? '' : 'col-md-4') . '">';
         echo '<div class="card d-flex h-100 mb-3">';
 
           if($type == 'gallery') :
@@ -91,8 +91,8 @@ if($post_list_block) :
               echo get_the_excerpt();
 
             echo '</div>';
-            echo '<div class="card-footer text-right">';
-              echo '<a href="' . get_permalink() . '" class="btn btn-primary text-end mt-3">Read More</a>';
+            echo '<div class="card-footer text-center w-100">';
+              echo '<a href="' . get_permalink() . '">Read More</a>';
             echo '</div>';
           endif;
 
