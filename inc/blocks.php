@@ -55,6 +55,7 @@ add_action('acf/init', function () {
 			)
 		);
 
+
 		acf_register_block_type(array(
 			'name'              => 'post-list-block',
 			'title'             => __('Post List Block'),

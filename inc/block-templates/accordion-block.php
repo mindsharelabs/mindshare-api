@@ -27,7 +27,7 @@ if( !empty($block['align']) ) {
 // Load values and assing defaults.
 $accordions = get_field('accordions');
 if($accordions) :
-  echo '<div class="' . $className . '" id="accordion' . $id . '-' . $id . '">';
+  echo '<div class="' . $className . '" id="accordion' . $id . '">';
     foreach ($accordions as $key => $accordion) :
       echo '<div class="accordion-item">';
 
@@ -37,7 +37,7 @@ if($accordions) :
           echo '</button>';
         echo '</div>';
 
-        echo '<div id="collapse' . $key . '-' . $id . '" class="accordion-collapse collapse" aria-labelledby="heading' . $key . '-' . $id . '" data-parent="#accordion' . $id . '-' . $id . '">';
+        echo '<div id="collapse' . $key . '-' . $id . '" class="accordion-collapse collapse ' . ($key == 0 ? 'show' : 'collapsed') . '" aria-labelledby="heading' . $key . '-' . $id . '" data-parent="#accordion' . $id . '">';
           echo '<div class="accordion-body">';
             echo $accordion['content'];
           echo '</div>';
