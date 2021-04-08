@@ -44,16 +44,19 @@ add_action( 'tgmpa_register', function() {
 			'name'     => 'Simple History',
 			'slug'     => 'simple-history',
 			'required' => true,
+			'force_activation' => true,
 		),
 		array(
 			'name'     => 'What the File',
 			'slug'     => 'what-the-file',
 			'required' => true,
+			'force_activation' => true,
 		),
 		array(
 			'name'     => 'Mailgun',
 			'slug'     => 'mailgun',
 			'required' => true,
+			'force_activation' => true,
 		),
 
 
