@@ -34,6 +34,29 @@ add_action('acf/init', function () {
 	if( function_exists('acf_register_block_type') ) {
 
 		acf_register_block_type(array(
+			'name'              => 'image-and-content',
+			'title'             => __('Image and Content'),
+			'description'       => __('A media and image block. The Image aligns to the edge of the screen.'),
+			'render_template'   => MAPI_ABSPATH . '/inc/block-templates/media-and-image.php',
+			'category'          => 'mind-blocks',
+			'icon'              => file_get_contents(MAPI_URL . 'inc/img/mind-icon.svg'),
+			'keywords'          => array( 'media', 'image', 'fill', 'full', 'width', 'mind', 'Mindshare' ),
+			'align'             => 'full',
+			'mode'            	=> 'edit',
+			'supports'					=> array(
+				'align' => false,
+			),
+			'enqueue_assets' => function(){
+				// We're just registering it here and then with the action get_footer we'll enqueue it.
+				wp_register_style( 'block-styles', MAPI_URL . '/inc/css/block-styles.css' );
+				add_action( 'get_footer', function () {wp_enqueue_style('block-styles');});
+
+				},
+			)
+		);
+
+
+		acf_register_block_type(array(
 			'name'              => 'card-repeater-block',
 			'title'             => __('Custom Card Repeater Block'),
 			'description'       => __('A repeater block for a bootstrap card layout.'),
