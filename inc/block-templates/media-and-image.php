@@ -30,11 +30,12 @@ $image_and_content = get_field('image_and_content');
 
 if($image_and_content) :
   echo '<div class="' . $className . '" id=" ' .  $id .'">';
-    echo '<div class="image-edge-grid">';
-      echo '<div class="image-edge-grid__content">';
-        echo $image_and_content['content'];
+    echo '<div class="image-edge-grid" ' . ($is_preview ? 'style="display: flex; flex-direction:row; background-color: #F4F4F4; padding: 10px;"' : '') . '>';
+      echo '<div class="image-edge-grid__content" ' . ($is_preview ? 'style="width: 50%;"' : '') . '>';
+        echo '<InnerBlocks  />';
       echo '</div>';
-      echo '<div class="image-edge-grid__img">';
+
+      echo '<div  class="image-edge-grid__img" ' . ($is_preview ? 'style="width: 50%;"' : '') . '>';
         echo wp_get_attachment_image( $image_and_content['image']['id'], 'vertical-media-image', false, array('class' => 'w-100') );
       echo '</div>';
 
