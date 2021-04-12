@@ -35,7 +35,7 @@ if($image_and_content) :
         echo '<InnerBlocks  />';
       echo '</div>';
 
-      echo '<div  class="image-edge-grid__img" ' . ($is_preview ? 'style="width: 50%;"' : '') . '>';
+      echo '<div  class="image-edge-grid__img" ' . ($is_preview ? 'style="width: 50%; text-align: center; padding: 10px;"' : '') . '>';
         echo wp_get_attachment_image( $image_and_content['image']['id'], 'vertical-media-image', false, array('class' => 'w-100') );
       echo '</div>';
 
