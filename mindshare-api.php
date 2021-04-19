@@ -49,6 +49,7 @@ class mapiPlugin {
 
     include_once MAPI_ABSPATH . 'inc/blocks.php';
     include_once MAPI_ABSPATH . 'inc/scripts-and-styles.php';
+    include_once MAPI_ABSPATH . 'inc/widgets.php';
     include_once MAPI_ABSPATH . 'inc/ajax.php';
   }
 
