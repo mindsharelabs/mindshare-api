@@ -82,6 +82,9 @@ if($post_list_block) :
                   echo get_the_excerpt();
                   echo '<a href="' . get_permalink() . '" class="btn btn-primary mt-3">Read More</a>';
                 echo '</div>';
+                echo '<div class="card-footer background-transparent bg-transparent">';
+                  echo '<a href="' . get_permalink() . '" class="btn btn-primary mt-3">Read More</a>';
+                echo '</div>';
               echo '</div>';
             echo '</div>';
           elseif($type == 'card') :
