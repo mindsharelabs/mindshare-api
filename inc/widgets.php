@@ -1,12 +1,12 @@
 <?php
 // Creating the widget
-class coach_widget extends WP_Widget {
+class mind_widget extends WP_Widget {
 
   function __construct() {
     parent::__construct(
 
       // Base ID of your widget
-      'coach_widget',
+      'mind_widget',
 
       // Widget name will appear in UI
       __('Social Media Icons', 'wpb_widget_domain'),
@@ -72,11 +72,10 @@ class coach_widget extends WP_Widget {
 
 
 // Register and load the widget
-function wpb_load_widget() {
-
-  register_widget( 'coach_widget' );
+function mind_load_widget() {
+  register_widget( 'mind_widget' );
 }
-add_action( 'widgets_init', 'wpb_load_widget' );
+add_action( 'widgets_init', 'mind_load_widget' );
 
 
 
@@ -151,7 +150,7 @@ add_action('acf/init', function() {
     			array(
     				'param' => 'widget',
     				'operator' => '==',
-    				'value' => 'coach_widget',
+    				'value' => 'mind_widget',
     			),
     		),
     	),
