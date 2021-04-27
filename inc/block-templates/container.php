@@ -27,6 +27,10 @@ if( !empty($block['align']) ) {
 // Load values and assing defaults.
 $container_options = get_field('container_options');
 
+if(!$container_options) :
+  $container_options['width'] = 12;
+endif;
+
 if($container_options['width'] != 12) :
   $offset = (12 - $container_options['width']) / 2;
 else :

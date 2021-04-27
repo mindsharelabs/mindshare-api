@@ -50,8 +50,8 @@ add_action('acf/init', function () {
 			),
 			'enqueue_assets' => function(){
 				// We're just registering it here and then with the action get_footer we'll enqueue it.
-				wp_register_style( 'block-styles', MAPI_URL . '/inc/css/block-styles.css' );
-				add_action( 'get_footer', function () {wp_enqueue_style('block-styles');});
+				wp_register_style( 'mapi-block-styles', MAPI_URL . '/inc/css/block-styles.css' );
+				add_action( 'get_footer', function () {wp_enqueue_style('mapi-block-styles');});
 
 				},
 			)
@@ -73,8 +73,8 @@ add_action('acf/init', function () {
 			),
 			'enqueue_assets' => function(){
 				// We're just registering it here and then with the action get_footer we'll enqueue it.
-				wp_register_style( 'block-styles', MAPI_URL . '/inc/css/block-styles.css' );
-				add_action( 'get_footer', function () {wp_enqueue_style('block-styles');});
+				wp_register_style( 'mapi-block-styles', MAPI_URL . '/inc/css/block-styles.css' );
+				add_action( 'get_footer', function () {wp_enqueue_style('mapi-block-styles');});
 
 				},
 			)
@@ -96,8 +96,8 @@ add_action('acf/init', function () {
 			),
 			'enqueue_assets' => function(){
 				// We're just registering it here and then with the action get_footer we'll enqueue it.
-				wp_register_style( 'block-styles', MAPI_URL . '/inc/css/block-styles.css' );
-				add_action( 'get_footer', function () {wp_enqueue_style('block-styles');});
+				wp_register_style( 'mapi-block-styles', MAPI_URL . '/inc/css/block-styles.css' );
+				add_action( 'get_footer', function () {wp_enqueue_style('mapi-block-styles');});
 
 				},
 			)
@@ -119,9 +119,8 @@ add_action('acf/init', function () {
 			),
 			'enqueue_assets' => function(){
 				// We're just registering it here and then with the action get_footer we'll enqueue it.
-				wp_register_style( 'block-styles', get_template_directory_uri() . '/css/block-styles.css' );
-				add_action( 'get_footer', function () {wp_enqueue_style('block-styles');});
-
+				wp_register_style( 'mapi-block-styles', MAPI_URL . 'inc/css/block-styles.css' );
+				add_action( 'get_footer', function () {wp_enqueue_style('mapi-block-styles');});
 
 				wp_register_script('google-maps', 'https://maps.googleapis.com/maps/api/js?key=' . GOOGLE_MAPS_API_KEY, array('jquery'), MAPI_PLUGIN_VERSION, true);
 				wp_enqueue_script('google-maps');
@@ -154,8 +153,8 @@ add_action('acf/init', function () {
 			),
 			'enqueue_assets' => function(){
 				// We're just registering it here and then with the action get_footer we'll enqueue it.
-				wp_register_style( 'block-styles', get_template_directory_uri() . '/css/block-styles.css' );
-				add_action( 'get_footer', function () {wp_enqueue_style('block-styles');});
+				wp_register_style( 'mapi-block-styles', get_template_directory_uri() . '/css/block-styles.css' );
+				add_action( 'get_footer', function () {wp_enqueue_style('mapi-block-styles');});
 
 				wp_register_style( 'slick-styles', get_template_directory_uri() . '/css/slick.css' );
 				add_action( 'get_footer', function () {wp_enqueue_style('slick-styles');});
@@ -188,8 +187,8 @@ add_action('acf/init', function () {
 				),
 				'enqueue_assets' => function(){
 					// We're just registering it here and then with the action get_footer we'll enqueue it.
-					wp_register_style( 'block-styles', get_template_directory_uri() . '/css/block-styles.css' );
-					add_action( 'get_footer', function () {wp_enqueue_style('block-styles');});
+					wp_register_style( 'mapi-block-styles', get_template_directory_uri() . '/css/block-styles.css' );
+					add_action( 'get_footer', function () {wp_enqueue_style('mapi-block-styles');});
 
 					},
 				)
@@ -230,8 +229,8 @@ add_action('acf/init', function () {
 			),
 			'enqueue_assets' => function(){
 				// We're just registering it here and then with the action get_footer we'll enqueue it.
-				wp_register_style( 'block-styles', MAPI_URL . '/inc/css/block-styles.css' );
-				add_action( 'get_footer', function () {wp_enqueue_style('block-styles');});
+				wp_register_style( 'mapi-block-styles', MAPI_URL . '/inc/css/block-styles.css' );
+				add_action( 'get_footer', function () {wp_enqueue_style('mapi-block-styles');});
 
 				},
 			)
