@@ -34,6 +34,30 @@ add_action('acf/init', function () {
 	if( function_exists('acf_register_block_type') ) {
 
 		acf_register_block_type(array(
+			'name'              => 'mind-button',
+			'title'             => __('Theme Specific Button Group'),
+			'description'       => __('One or more buttons that are theme specific and matche theme branding/colors.'),
+			'render_template'   => MAPI_ABSPATH . '/inc/block-templates/mind-button.php',
+			'category'          => 'mind-blocks',
+			'icon'              => file_get_contents(MAPI_URL . 'inc/img/mind-icon.svg'),
+			'keywords'          => array( 'button', 'mind', 'Mindshare' ),
+			'align'             => 'full',
+			'mode'            	=> 'edit',
+			'supports'					=> array(
+				'align' => false,
+				'mode' => false,
+				'jsx' => false
+			),
+			'enqueue_assets' => function(){
+				// We're just registering it here and then with the action get_footer we'll enqueue it.
+				wp_register_style( 'mind-block-styles', MAPI_URL . 'inc/css/block-styles.css' );
+				add_action( 'get_footer', function () {wp_enqueue_style('mind-block-styles');});
+
+				},
+			)
+		);
+
+		acf_register_block_type(array(
 			'name'              => 'image-and-content',
 			'title'             => __('Image and Content'),
 			'description'       => __('A media and image block. The Image aligns to the edge of the screen.'),
@@ -247,6 +271,195 @@ add_action('acf/init', function () {
 
 
 if( function_exists('acf_add_local_field_group') ):
+
+	//Block: Theme Specific Buttons
+
+	acf_add_local_field_group(array(
+		'key' => 'group_607de32bb0b5d',
+		'title' => 'Block: Buttons',
+		'fields' => array(
+			array(
+				'key' => 'field_607de32f51a5d',
+				'label' => 'Theme Specific Buttons',
+				'name' => 'mind_buttons',
+				'type' => 'group',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'layout' => 'block',
+				'sub_fields' => array(
+					array(
+						'key' => 'field_607de39051a62',
+						'label' => 'Buttons',
+						'name' => 'buttons',
+						'type' => 'repeater',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => '',
+						),
+						'collapsed' => '',
+						'min' => 0,
+						'max' => 0,
+						'layout' => 'table',
+						'button_label' => '',
+						'sub_fields' => array(
+							array(
+								'key' => 'field_607de33b51a5f',
+								'label' => 'Button Link',
+								'name' => 'button_link',
+								'type' => 'link',
+								'instructions' => '',
+								'required' => 0,
+								'conditional_logic' => 0,
+								'wrapper' => array(
+									'width' => '',
+									'class' => '',
+									'id' => '',
+								),
+								'return_format' => 'array',
+							),
+							array(
+								'key' => 'field_607de34151a60',
+								'label' => 'Button Type',
+								'name' => 'button_type',
+								'type' => 'select',
+								'instructions' => '',
+								'required' => 0,
+								'conditional_logic' => 0,
+								'wrapper' => array(
+									'width' => '',
+									'class' => '',
+									'id' => '',
+								),
+								'choices' => array(
+									'primary' => 'Primary',
+									'secondary' => 'Secondary',
+									'success' => 'Success',
+									'danger' => 'Danger',
+									'warning' => 'Warning',
+									'info' => 'Info',
+									'light' => 'Light',
+									'dark' => 'Dark',
+								),
+								'default_value' => 'primary',
+								'allow_null' => 0,
+								'multiple' => 0,
+								'ui' => 0,
+								'return_format' => 'value',
+								'ajax' => 0,
+								'placeholder' => '',
+							),
+							array(
+								'key' => 'field_607de38351a61',
+								'label' => 'Button Size',
+								'name' => 'button_size',
+								'type' => 'select',
+								'instructions' => '',
+								'required' => 0,
+								'conditional_logic' => 0,
+								'wrapper' => array(
+									'width' => '',
+									'class' => '',
+									'id' => '',
+								),
+								'choices' => array(
+									'sm' => 'Small',
+									'md' => 'Default',
+									'lg' => 'Large',
+								),
+								'default_value' => false,
+								'allow_null' => 0,
+								'multiple' => 0,
+								'ui' => 0,
+								'return_format' => 'value',
+								'ajax' => 0,
+								'placeholder' => '',
+							),
+						),
+					),
+					array(
+						'key' => 'field_607de3d951a63',
+						'label' => 'Button Layout',
+						'name' => 'button_layout',
+						'type' => 'select',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '50',
+							'class' => '',
+							'id' => '',
+						),
+						'choices' => array(
+							'row' => 'Row',
+							'column' => 'Column',
+							'group' => 'Group',
+						),
+						'default_value' => 'row',
+						'allow_null' => 0,
+						'multiple' => 0,
+						'ui' => 0,
+						'return_format' => 'value',
+						'ajax' => 0,
+						'placeholder' => '',
+					),
+					array(
+						'key' => 'field_607de79c35f0d',
+						'label' => 'Button Alignment',
+						'name' => 'button_alignment',
+						'type' => 'select',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '50',
+							'class' => '',
+							'id' => '',
+						),
+						'choices' => array(
+							'start' => 'Left',
+							'center' => 'Center',
+							'end' => 'Right',
+						),
+						'default_value' => 'middle',
+						'allow_null' => 0,
+						'multiple' => 0,
+						'ui' => 0,
+						'return_format' => 'value',
+						'ajax' => 0,
+						'placeholder' => '',
+					),
+				),
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'block',
+					'operator' => '==',
+					'value' => 'acf/mind-button',
+				),
+			),
+		),
+		'menu_order' => 0,
+		'position' => 'normal',
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => '',
+		'active' => true,
+		'description' => '',
+	));
+
 
 
 	//Block: Media and Image

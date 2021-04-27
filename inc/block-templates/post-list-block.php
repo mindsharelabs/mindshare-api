@@ -80,6 +80,8 @@ if($post_list_block) :
                 echo '<div class="card-body">';
                   echo '<h3><a href="' . get_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h3>';
                   echo get_the_excerpt();
+                echo '</div>';
+                echo '<div class="card-footer border-0 background-transparent bg-transparent">';
                   echo '<a href="' . get_permalink() . '" class="btn btn-primary mt-3">Read More</a>';
                 echo '</div>';
               echo '</div>';
