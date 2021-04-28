@@ -349,6 +349,7 @@ if( function_exists('acf_add_local_field_group') ):
 									'info' => 'Info',
 									'light' => 'Light',
 									'dark' => 'Dark',
+									'blank' => 'No Styling',
 								),
 								'default_value' => 'primary',
 								'allow_null' => 0,
