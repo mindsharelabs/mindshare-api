@@ -20,7 +20,7 @@
 
     @supports (display: grid) {
       display: grid;
-      grid-gap: $gap;
+
       grid-template-columns: minmax(1em, 1fr) repeat($columns, minmax(0, $column-width)) minmax(1em, 1fr);
       max-width: initial; // 2
     }
@@ -29,10 +29,7 @@
       grid-column-end: 16;
       display: flex;
       align-items: center;
-      z-index: -1;
-      img {
-        z-index: -1;
-      }
+
 
       @media (max-width: $breakpoint) {
         grid-column-start: 1;
