@@ -34,6 +34,30 @@ add_action('acf/init', function () {
 	if( function_exists('acf_register_block_type') ) {
 
 		acf_register_block_type(array(
+			'name'              => 'mind-staff-cards',
+			'title'             => __('Staff Cards'),
+			'description'       => __('A block that displays a list of staff cards.'),
+			'render_template'   => MAPI_ABSPATH . '/inc/block-templates/mind-staff-cards.php',
+			'category'          => 'mind-blocks',
+			'icon'              => file_get_contents(MAPI_URL . 'inc/img/mind-icon.svg'),
+			'keywords'          => array( 'staff', 'cards', 'button', 'mind', 'Mindshare' ),
+			'align'             => 'full',
+			'mode'            	=> 'edit',
+			'supports'					=> array(
+				'align' => false,
+				'mode' => false,
+				'jsx' => false
+			),
+			'enqueue_assets' => function(){
+				// We're just registering it here and then with the action get_footer we'll enqueue it.
+				wp_register_style( 'mind-block-styles', MAPI_URL . 'inc/css/block-styles.css' );
+				add_action( 'get_footer', function () {wp_enqueue_style('mind-block-styles');});
+
+				},
+			)
+		);
+
+		acf_register_block_type(array(
 			'name'              => 'mind-button',
 			'title'             => __('Theme Specific Button Group'),
 			'description'       => __('One or more buttons that are theme specific and matche theme branding/colors.'),
