@@ -10,6 +10,11 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+##2.2.5
+- Added a series of Gutenberg blocks that have become widely used across our sites.
+- Fixed some minor disiplay and php notice bugs. 
+
+
 ## 2.1.3
 - Fixed an issue with multiple accordion blocks triggering each other.
 - Generally usability upgrades to container block.
