@@ -37,6 +37,10 @@ else :
   $offset = 0;
 endif;
 
+if(!isset($container_options['background_color'])) :
+  $container_options['background_color'] = '#fff';
+endif;
+
 if($container_options) :
   echo '<div class="container-block w-100" style="' . ($is_preview ? 'padding:10px;' : '') . 'background-color:' . $container_options['background_color'] . ';">';
     echo '<div class="container ' . $className . '" id="' . $id . '">';
