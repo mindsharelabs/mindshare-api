@@ -40,6 +40,21 @@ if($post_list_block) :
     )
   );
 
+  $med_container = 'col-md-4';
+  if($post_list_block['posts_per_page'] % 2 == 0) {
+    $med_container = 'col-md-6';
+  }
+
+  if($post_list_block['posts_per_page'] % 3 == 0) {
+    $med_container = 'col-md-4';
+  }
+
+  if($post_list_block['posts_per_page'] % 12 == 0) {
+    $med_container = 'col-md-3';
+  }
+
+
+
   $posts = new WP_Query($args);
 
   $type = $post_list_block['display_type'];
@@ -51,7 +66,7 @@ if($post_list_block) :
       $posts->the_post();
 
 
-      echo '<div class="col-12 my-2 ' . ($type == 'list' ? '' : 'col-md-4') . '">';
+      echo '<div class="col-12 my-2 ' . ($type == 'list' ? '' : $med_container) . '">';
         echo '<div class="card d-flex h-100 mb-3">';
 
           if($type == 'gallery') :
