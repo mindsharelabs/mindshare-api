@@ -27,18 +27,21 @@ if( !empty($block['align']) ) {
 // Load values and assing defaults.
 $images = get_field('block_image_grid');
 if($images) :
-  echo '<div class="' . $className . ' mb-2 row" id="' . $id . '">';
+  echo '<div class="' . $className . ' row g-0" id="' . $id . '">';
     foreach ($images as $key => $image) :
-      echo '<div class="col-6 col-md-3 mb-3">';
+      echo '<div class="col-6 col-md-3">';
         echo '<div class="card d-flex flex-column h-100">';
           echo wp_get_attachment_image( $image['image']['id'], 'grid-image', array('class' => 'card-image-top') );
-          echo '<div class="card-body p-2">';
 
-            echo ($image['link'] ? '<a href="' . $image['link']['url'] . '">' : '');
-              echo '<h3>' . $image['title'] . '</h3>';
-            echo ($image['link'] ? '</a>' : '');
-            echo $image['desc'];
-          echo '</div>';
+
+          if($image['title'] || $image['desc']) :
+            echo '<div class="card-body p-2">';
+              echo ($image['link'] ? '<a href="' . $image['link']['url'] . '">' : '');
+              echo ($image['title'] ? '<h3>' . $image['title'] . '</h3>' : '');
+              echo ($image['link'] ? '</a>' : '');
+              echo ($image['desc'] ? $image['desc'] : '');
+            echo '</div>';
+          endif;
         echo '</div>';
       echo '</div>';
     endforeach;
