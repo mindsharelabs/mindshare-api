@@ -27,6 +27,7 @@ if( !empty($block['align']) ) {
 // Load values and assing defaults.
 $images = get_field('block_image_slides');
 $slide_image_size = get_field('slide_image_size');
+
 if($images) :
   echo '<div class="' . $className . ' mb-2" id="' . $id . '">';
     foreach ($images as $key => $image) :
@@ -38,5 +39,13 @@ if($images) :
       echo '</div>';
     endforeach;
   echo '</div>';
+
+
+  echo '<script>';
+
+    echo 'var sliderArrows = ' . (get_field('mapi_slider_arrows') ? 'true' : 'false') . ';';
+    echo 'var sliderDots = ' . (get_field('mapi_slider_dots') ? 'true' : 'false') . ';';
+
+  echo '</script>';
 
 endif;

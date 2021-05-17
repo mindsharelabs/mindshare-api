@@ -198,11 +198,16 @@ add_action('acf/init', function () {
 				add_action( 'get_footer', function () {wp_enqueue_style('slick-styles');});
 
 				if(!is_admin()) :
-					wp_register_script('slick-slider', MAPI_URL . 'inc/js/slick.min.js', array(), MAPI_PLUGIN_VERSION);
+					wp_register_script('slick-slider', MAPI_URL . 'inc/js/slick.min.js', array('jquery'), MAPI_PLUGIN_VERSION);
 		      wp_enqueue_script('slick-slider');
 
 					wp_register_script('image-slider-js', MAPI_URL. 'inc/js/image-slider.js', array('jquery', 'slick-slider'), MAPI_PLUGIN_VERSION, true);
 					wp_enqueue_script('image-slider-js');
+
+					// wp_localize_script( 'image-slider-js', 'sliderOptions', array(
+					// 	'arrows' => get_field('mapi_slider_arrows', get_the_id()),
+					// 	'dots' => get_field('mapi_slider_dots', get_the_id())
+					// ));
 				endif;
 
 				},
@@ -278,7 +283,7 @@ add_action('acf/init', function () {
 
 
 	}
-});
+}, 1000000);
 
 
 
@@ -1049,7 +1054,7 @@ global $_wp_additional_image_sizes;
 				'required' => 0,
 				'conditional_logic' => 0,
 				'wrapper' => array(
-					'width' => '',
+					'width' => '33.3333333%',
 					'class' => '',
 					'id' => '',
 				),
@@ -1061,6 +1066,44 @@ global $_wp_additional_image_sizes;
 				'return_format' => 'value',
 				'ajax' => 0,
 				'placeholder' => '',
+			),
+			array(
+				'key' => 'field_6vghjk0a2e977ae9dd',
+				'label' => 'Show Arrows',
+				'name' => 'mapi_slider_arrows',
+				'type' => 'true_false',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '33.3333333%',
+					'class' => '',
+					'id' => '',
+				),
+				'message' => '',
+				'default_value' => 1,
+				'ui' => 1,
+				'ui_on_text' => '',
+				'ui_off_text' => '',
+			),
+			array(
+				'key' => 'field_60a2e1sf977ae9dd',
+				'label' => 'Show Dots',
+				'name' => 'mapi_slider_dots',
+				'type' => 'true_false',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '33.3333333%',
+					'class' => '',
+					'id' => '',
+				),
+				'message' => '',
+				'default_value' => 0,
+				'ui' => 1,
+				'ui_on_text' => '',
+				'ui_off_text' => '',
 			),
 			array(
 				'key' => 'field_5fa994503d2ac',

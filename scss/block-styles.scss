@@ -82,6 +82,21 @@
       width: 100%;
     }
   }
+  ul.slick-dots {
+    bottom: 40px;
+    li {
+      background: #fff;
+      border-radius: 20px;
+      border: 1px solid #aaa;
+      &.slick-active {
+        background: #aaa;
+        border: 1px solid #fff;
+      }
+      button {
+        display: none;
+      }
+    }
+  }
 }
 
 // XS styles - default: x <= 479px
