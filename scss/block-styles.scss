@@ -77,7 +77,11 @@
 }
 
 .image-slider{
-  margin-bottom: 100px;
+  .image-slide {
+    img {
+      width: 100%;
+    }
+  }
 }
 
 // XS styles - default: x <= 479px
