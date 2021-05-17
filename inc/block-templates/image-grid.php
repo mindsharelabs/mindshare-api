@@ -31,8 +31,10 @@ if($images) :
     foreach ($images as $key => $image) :
       echo '<div class="col-6 col-md-3">';
         echo '<div class="card d-flex flex-column h-100">';
-          echo wp_get_attachment_image( $image['image']['id'], 'grid-image', array('class' => 'card-image-top') );
 
+          echo ($image['link'] ? '<a href="' . $image['link']['url'] . '">' : '');
+            echo wp_get_attachment_image( $image['image']['id'], 'grid-image', array('class' => 'card-image-top') );
+          echo ($image['link'] ? '</a>' : '');
 
           if($image['title'] || $image['desc']) :
             echo '<div class="card-body p-2">';
