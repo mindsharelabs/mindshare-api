@@ -11,8 +11,13 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 # Changelog:
 
 ##2.2.5
+- Included ACF as part of the plugin
+- Some design refinements to make the plugin more useful across websites.
+
+
+##2.2.5
 - Added a series of Gutenberg blocks that have become widely used across our sites.
-- Fixed some minor disiplay and php notice bugs. 
+- Fixed some minor display and php notice bugs.
 
 
 ## 2.1.3
