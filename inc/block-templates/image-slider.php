@@ -30,14 +30,25 @@ $slide_image_size = get_field('slide_image_size');
 
 if($images) :
   echo '<div class="' . $className . ' mb-2" id="' . $id . '">';
-    foreach ($images as $key => $image) :
-      echo '<div class="image-slide">';
-        echo wp_get_attachment_image( $image['image']['id'], $slide_image_size, array('class' => 'slide-image w-100') );
-        echo '<div class="caption text-center">';
-          echo $image['caption'];
+    echo '<div class="mapi-slider-container">';
+      foreach ($images as $key => $image) :
+        echo '<div class="image-slide">';
+          echo wp_get_attachment_image( $image['image']['id'], $slide_image_size, array('class' => 'slide-image w-100') );
+          echo '<div class="caption text-center">';
+            echo $image['caption'];
+          echo '</div>';
         echo '</div>';
-      echo '</div>';
-    endforeach;
+      endforeach;
+
+    echo '</div>';
+
+
+    echo '<div class="slide-nav">';
+      echo (get_field('mapi_slider_arrows') ? '<div class="interaction mapi-slide-prev"><i class="fas fa-angle-left"></i></div>' : '');
+      echo (get_field('mapi_slider_dots') ? '<div class="interaction mapi-slide-dots"></div>' : '');
+      echo (get_field('mapi_slider_arrows') ? '<div class="interaction mapi-slide-next"><i class="fas fa-angle-right"></i></div>' : '');
+    echo '</div>';
+
   echo '</div>';
 
 

@@ -7,12 +7,14 @@
 
     $(document).ready(function(){
 			console.log(sliderDots);
-      $('.image-slider').slick({
+      $('.mapi-slider-container').slick({
 				dots : sliderDots,
 				arrows : sliderArrows,
         // setting-name: setting-value
-        prevArrow : '<button type="button" class="slick-prev"><i class="fas fa-angle-left"></i></button>',
-        nextArrow : '<button type="button" class="slick-next"><i class="fas fa-angle-right"></i></button>'
+
+				nextArrow: $('.mapi-slide-next'),
+				prevArrow: $('.mapi-slide-prev'),
+				appendDots: $(".mapi-slide-dots"),
       });
     });
 

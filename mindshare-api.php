@@ -25,6 +25,11 @@ class mapiPlugin {
 		//TODO: Change this to options
     $this->define( 'GOOGLE_MAPS_API_KEY', 'AIzaSyC0Wo2IFDzXPY18ERmsgXjKljUl1wh9Dl8');
 
+    $this->define('MIND_ACF_PATH', MAPI_ABSPATH . '/includes/acf/' );
+    $this->define('MIND_ACF_URL', MAPI_URL . '/includes/acf/' );
+
+
+
     $this->includes();
 
 	}
@@ -40,7 +45,12 @@ class mapiPlugin {
     }
   }
   private function includes() {
+
+    include_once MIND_ACF_PATH . 'acf.php';
+
+
     include_once MAPI_ABSPATH . 'inc/utilities.php';
+    // Include the ACF plugin.
 
 		//Required Plugins
 		require_once 'inc/plugin-activation.class.php';
@@ -51,6 +61,20 @@ class mapiPlugin {
     include_once MAPI_ABSPATH . 'inc/scripts-and-styles.php';
     include_once MAPI_ABSPATH . 'inc/widgets.php';
     include_once MAPI_ABSPATH . 'inc/ajax.php';
+
+
+
+
+    // Customize the url setting to fix incorrect asset URLs.
+    add_filter('acf/settings/url', function ( $url ) {
+      return MIND_ACF_URL;
+    });
+
+    // (Optional) Hide the ACF admin menu item.
+    add_filter('acf/settings/show_admin', function ( $show_admin ) {
+        return true;
+    });
+
   }
 
 
