@@ -49,6 +49,15 @@ class mapiPlugin {
 
     if( ! class_exists('ACF') ) :
       include_once MIND_ACF_PATH . 'acf.php';
+      // Customize the url setting to fix incorrect asset URLs.
+      add_filter('acf/settings/url', function ( $url ) {
+        return MIND_ACF_URL;
+      });
+
+      // (Optional) Hide the ACF admin menu item.
+      add_filter('acf/settings/show_admin', function ( $show_admin ) {
+          return false;
+      });
     endif;
 
 
@@ -67,17 +76,7 @@ class mapiPlugin {
 
 
 
-    if( ! class_exists('ACF') ) :
-      // Customize the url setting to fix incorrect asset URLs.
-      add_filter('acf/settings/url', function ( $url ) {
-        return MIND_ACF_URL;
-      });
 
-      // (Optional) Hide the ACF admin menu item.
-      add_filter('acf/settings/show_admin', function ( $show_admin ) {
-          return false;
-      });
-    endif;
 
   }
 
