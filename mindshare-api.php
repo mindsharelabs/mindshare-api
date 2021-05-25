@@ -62,13 +62,15 @@ class mapiPlugin {
 
 
     include_once MAPI_ABSPATH . 'inc/utilities.php';
+    include_once MAPI_ABSPATH . 'inc/multiple-roles.php';
     // Include the ACF plugin.
 
 		//Required Plugins
 		require_once 'inc/plugin-activation.class.php';
 		require_once 'inc/require-plugins.php';
-    //General
 
+
+    //General
     include_once MAPI_ABSPATH . 'inc/blocks.php';
     include_once MAPI_ABSPATH . 'inc/scripts-and-styles.php';
     include_once MAPI_ABSPATH . 'inc/widgets.php';
