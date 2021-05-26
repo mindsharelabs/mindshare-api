@@ -56,7 +56,7 @@ class mapiPlugin {
 
       // (Optional) Hide the ACF admin menu item.
       add_filter('acf/settings/show_admin', function ( $show_admin ) {
-          return false;
+          return true;
       });
     endif;
 
