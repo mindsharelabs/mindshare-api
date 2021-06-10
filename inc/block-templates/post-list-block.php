@@ -50,7 +50,7 @@ if($post_list_block) :
   }
 
   if($post_list_block['posts_per_page'] % 12 == 0) {
-    $med_container = 'col-md-3';
+    $med_container = 'col-md-4';
   }
 
 

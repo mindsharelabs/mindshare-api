@@ -6,6 +6,8 @@ if (function_exists('add_image_size')) {
   add_image_size( 'loop-list-thumbnail', 350, 250, array('center', 'center'));
   add_image_size( 'vertical-media-image', 400, 490, array('center', 'center'));
   add_image_size( 'horizontal-media-image', 500, 400, array('center', 'center'));
+  add_image_size( 'slide-image', 1100, 400, array('center', 'center'));
+	add_image_size( 'grid-image', 400, 400, array('center', 'center'));
 }
 
 
@@ -32,4 +34,28 @@ if(!function_exists('mapi_write_log')) {
 	        }
 	    }
 	}
+}
+
+add_action('after_setup_theme', function () {
+  if (!current_user_can('administrator') && !is_admin()) {
+    show_admin_bar(false);
+  }
+});
+
+
+
+add_filter( 'mapi_block_wrappers', function($noWrapper) {
+  $noWrapper[] = 'acf/image-slider';
+  return $noWrapper;
+}, 10, 1 );
+
+function mapi_get_regisered_size_options() {
+	$included_sizes = wp_get_registered_image_subsizes();
+  $sizes = array();
+  if($included_sizes) :
+  	foreach ($included_sizes as $key => $size) :
+      $sizes[$key] = ucwords(str_replace ('-', ' ', $key)) . ' ' . $size['width'] . ' x ' . $size['height'];
+    endforeach;
+  endif;
+  return $sizes;
 }

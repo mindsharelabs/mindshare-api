@@ -17,16 +17,6 @@ add_filter('block_categories', function ($categories, $post) {
 	);
 }, 10, 2);
 
-
-
-add_action( 'setup_theme', function() {
-	add_image_size( 'slide-image', 1100, 600, array('center', 'center'));
-	add_image_size( 'grid-image', 400, 400, array('center', 'center'));
-
-}, 10, 1 );
-
-
-
 add_action('acf/init', function () {
 
 
@@ -201,18 +191,23 @@ add_action('acf/init', function () {
 			),
 			'enqueue_assets' => function(){
 				// We're just registering it here and then with the action get_footer we'll enqueue it.
-				wp_register_style( 'mapi-block-styles', get_template_directory_uri() . '/css/block-styles.css' );
+				wp_register_style( 'mapi-block-styles', MAPI_URL . 'inc/css/block-styles.css' );
 				add_action( 'get_footer', function () {wp_enqueue_style('mapi-block-styles');});
 
-				wp_register_style( 'slick-styles', get_template_directory_uri() . '/css/slick.css' );
+				wp_register_style( 'slick-styles', MAPI_URL . 'inc/css/slick.css' );
 				add_action( 'get_footer', function () {wp_enqueue_style('slick-styles');});
 
 				if(!is_admin()) :
-					wp_register_script('slick-slider', MAPI_URL . 'inc/js/slick.min.js', array(), MAPI_PLUGIN_VERSION);
+					wp_register_script('slick-slider', MAPI_URL . 'inc/js/slick.min.js', array('jquery'), MAPI_PLUGIN_VERSION);
 		      wp_enqueue_script('slick-slider');
 
 					wp_register_script('image-slider-js', MAPI_URL. 'inc/js/image-slider.js', array('jquery', 'slick-slider'), MAPI_PLUGIN_VERSION, true);
 					wp_enqueue_script('image-slider-js');
+
+					// wp_localize_script( 'image-slider-js', 'sliderOptions', array(
+					// 	'arrows' => get_field('mapi_slider_arrows', get_the_id()),
+					// 	'dots' => get_field('mapi_slider_dots', get_the_id())
+					// ));
 				endif;
 
 				},
@@ -288,14 +283,14 @@ add_action('acf/init', function () {
 
 
 	}
-});
+}, 1000000);
 
 
 
 
 
 if( function_exists('acf_add_local_field_group') ):
-
+global $_wp_additional_image_sizes;
 	//Block: Staff Cards
 	acf_add_local_field_group(array(
 		'key' => 'group_60908a6e732fb',
@@ -1042,11 +1037,74 @@ if( function_exists('acf_add_local_field_group') ):
 		'description' => '',
 	));
 
+
 	//ACF Block Fields: Slider Image *
+
+
 	acf_add_local_field_group(array(
 		'key' => 'group_5fa9944816d06',
 		'title' => 'Block: Image Slider',
 		'fields' => array(
+			array(
+				'key' => 'field_60a21341asdfb6f29',
+				'label' => 'Slides Image Size',
+				'name' => 'slide_image_size',
+				'type' => 'select',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '33.3333333%',
+					'class' => '',
+					'id' => '',
+				),
+				'choices' => mapi_get_regisered_size_options(),
+				'default_value' => false,
+				'allow_null' => 0,
+				'multiple' => 0,
+				'ui' => 0,
+				'return_format' => 'value',
+				'ajax' => 0,
+				'placeholder' => '',
+			),
+			array(
+				'key' => 'field_6vghjk0a2e977ae9dd',
+				'label' => 'Show Arrows',
+				'name' => 'mapi_slider_arrows',
+				'type' => 'true_false',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '33.3333333%',
+					'class' => '',
+					'id' => '',
+				),
+				'message' => '',
+				'default_value' => 1,
+				'ui' => 1,
+				'ui_on_text' => '',
+				'ui_off_text' => '',
+			),
+			array(
+				'key' => 'field_60a2e1sf977ae9dd',
+				'label' => 'Show Dots',
+				'name' => 'mapi_slider_dots',
+				'type' => 'true_false',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '33.3333333%',
+					'class' => '',
+					'id' => '',
+				),
+				'message' => '',
+				'default_value' => 0,
+				'ui' => 1,
+				'ui_on_text' => '',
+				'ui_off_text' => '',
+			),
 			array(
 				'key' => 'field_5fa994503d2ac',
 				'label' => 'Images',

@@ -34,7 +34,7 @@ if($mind_staff_cards['staff_cards']) :
 
 
             if($card['image']) :
-              echo '<div class="rounded-circle w-75 border border-secondary my-3 mx-auto p-2">';
+              echo '<div class="rounded-circle w-75 border border-light border-3 my-3 mx-auto p-2">';
               if($card['staff_page_link']) :
                 echo '<a href="' . $card['staff_page_link']['url'] . '" target="' . $card['staff_page_link']['target'] . '">';
               endif;
@@ -50,11 +50,11 @@ if($mind_staff_cards['staff_cards']) :
               if($card['staff_page_link']) :
                 echo '<a href="' . $card['staff_page_link']['url'] . '" target="' . $card['staff_page_link']['target'] . '">';
               endif;
-              echo '<h3 class="staff-name text-center">' . $card['name'] . '</h3>';
-              echo '<h4 class="staff-name text-center">' . $card['title'] . '</h4>';
+              echo '<h3 class="staff-name text-center mb-1">' . $card['name'] . '</h3>';
               if($card['staff_page_link']) :
                 echo '</a>';
               endif;
+              echo '<h4 class="staff-name text-center h5">' . $card['title'] . '</h4>';
 
               if($card['staff_links']) :
                 echo '<div class="d-flex flex-row justify-content-center my-1">';
