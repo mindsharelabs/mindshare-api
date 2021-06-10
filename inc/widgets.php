@@ -33,7 +33,7 @@ class mind_widget extends WP_Widget {
     if($icons) :
       echo '<div class="d-flex flex-row flex-wrap">';
       foreach ($icons as $key => $icon) :
-        echo '<a class="d-block me-2" href="' . $icon['link']['url'] . '" title="' . $icon['link']['title'] .'" target="' . $icon['link']['target'] . '"><i class="fa-2x ' . $icon['icon'] . '"></i></a>';
+        echo '<a class="d-block me-2" rel="noreferrer" href="' . $icon['link']['url'] . '" title="' . $icon['link']['title'] .'" target="' . $icon['link']['target'] . '"><i class="fa-2x ' . $icon['icon'] . '"></i></a>';
       endforeach;
       echo '</div>';
     endif;
