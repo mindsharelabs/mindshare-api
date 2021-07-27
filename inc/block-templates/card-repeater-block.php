@@ -36,15 +36,27 @@ if($block_card_repeater) :
           $class = 'col-12 col-md';
         endif;
 
-        echo '<div class="col-12 ' . $class . '">';
+        echo '<div class="col-12 mb-4 ' . $class . '">';
           echo '<div class="card d-flex flex-column h-100 justify-content-between">';
 
             if($card['card_image']) :
+              if($card['card_link']) :
+                echo '<a href="' . $card['card_link']['url'] . '" target="' . $card['card_link']['target'] . '">';
+              endif;
               echo wp_get_attachment_image( $card['card_image']['id'], 'loop-thumbnail', false, array('class'=> 'card-img-top') );
+              if($card['card_link']) :
+                echo '</a>';
+              endif;
             endif;
             if($card['card_header']) :
               echo '<div class="card-header">';
-                echo '<h4>' . $card['card_header'] . '</h4>';
+                if($card['card_link']) :
+                  echo '<a href="' . $card['card_link']['url'] . '" target="' . $card['card_link']['target'] . '">';
+                endif;
+                  echo '<h4>' . $card['card_header'] . '</h4>';
+                if($card['card_link']) :
+                  echo '</a>';
+                endif;
               echo '</div>';
             endif;
             if($card['card_body']) :
