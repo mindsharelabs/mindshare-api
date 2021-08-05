@@ -32,7 +32,7 @@ if($accordions) :
       echo '<div class="accordion-item">';
 
         echo '<h2 class="accordion-header" id="heading- ' . $key . '-' . $id . '">';
-          echo '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse' . $key . '-' . $id . '" aria-expanded="true" aria-controls="collapse' . $key . '-' . $id . '">';
+          echo '<button class="accordion-button ' . ($key == 0 ? '' : 'collapsed') . '" type="button" data-bs-toggle="collapse" data-bs-target="#collapse' . $key . '-' . $id . '" aria-expanded="true" aria-controls="collapse' . $key . '-' . $id . '">';
             echo $accordion['accordion_header'];
           echo '</button>';
         echo '</div>';
