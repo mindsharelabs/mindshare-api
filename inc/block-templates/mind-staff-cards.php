@@ -54,7 +54,7 @@ if($mind_staff_cards['staff_cards']) :
               if($card['staff_page_link']) :
                 echo '</a>';
               endif;
-              echo '<h4 class="staff-name text-center h5">' . $card['title'] . '</h4>';
+              echo '<span class="staff-title text-center">' . $card['title'] . '</span>';
 
               if($card['staff_links']) :
                 echo '<div class="d-flex flex-row justify-content-center my-1">';
