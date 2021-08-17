@@ -28,9 +28,9 @@ if( !empty($block['align']) ) {
 $mind_staff_cards = get_field('mind_staff_cards');
 if($mind_staff_cards['staff_cards']) :
   echo '<div class="' . $className . '" id="accordion' . $id . '">';
-    echo '<div class="row">';
+    echo '<div class="row justify-content-center">';
       foreach ($mind_staff_cards['staff_cards'] as $key => $card) :
-        echo '<div class="col-12 col-md-4 d-flex flex-column h-100 justify-content-between">';
+        echo '<div class="col-12 col-md-6 col-lg-4 d-flex flex-column h-100 justify-content-between">';
 
 
             if($card['image']) :

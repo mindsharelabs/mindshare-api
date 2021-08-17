@@ -20,7 +20,7 @@ class mapiPlugin {
     //Define all the constants
     $this->define( 'MAPI_ABSPATH', dirname( MAPI_PLUGIN_FILE ) . '/' );
     $this->define( 'MAPI_URL', plugin_dir_url( __FILE__ ));
-    $this->define( 'MAPI_PLUGIN_VERSION', '2.3.5');
+    $this->define( 'MAPI_PLUGIN_VERSION', '2.3.6');
     $this->define( 'MAPI_PREPEND', 'mapi_');
 		//TODO: Change this to options
     $this->define( 'GOOGLE_MAPS_API_KEY', 'AIzaSyC0Wo2IFDzXPY18ERmsgXjKljUl1wh9Dl8');
