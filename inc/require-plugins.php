@@ -20,43 +20,48 @@ add_action( 'tgmpa_register', function() {
 
 		// // This is an example of how to include a plugin from an arbitrary external source in your theme.
 		// array(
-		// 	'name'         => '', // The plugin name.
-		// 	'slug'         => '', // The plugin slug (typically the folder name).
+		// 	'name'         => 'ACF Better Address Field', // The plugin name.
+		// 	'slug'         => 'ACF-Better-Address-Field-master', // The plugin slug (typically the folder name).
 		// 	'source'       => '', // The plugin source.
 		// 	'required'     => true, // If false, the plugin is only 'recommended' instead of required.
-    //   'version'      => ''
-		// 	// 'external_url' => 'https://github.com/thomasgriffin/New-Media-Image-Uploader', // If set, overrides default API URL and points to an external URL.
+    //   'version'      => '',
+		// 	'external_url' => 'https://github.com/mindsharelabs/ACF-Better-Address-Field', // If set, overrides default API URL and points to an external URL.
 		// ),
 
 
-		// // This is an example of how to include a plugin from a GitHub repository in your theme.
-		// // This presumes that the plugin code is based in the root of the GitHub repository
-		// // and not in a subdirectory ('/src') of the repository.
-		// array(
-		// 	'name'   => 'Adminbar Link Comments to Pending',
-		// 	'slug'   => 'adminbar-link-comments-to-pending',
-		// 	'source' => 'https://github.com/jrfnl/WP-adminbar-comments-to-pending/archive/master.zip',
-		// ),
-
+		// This is an example of how to include a plugin from a GitHub repository in your theme.
+		// This presumes that the plugin code is based in the root of the GitHub repository
+		// and not in a subdirectory ('/src') of the repository.
+		array(
+			'name'   => 'ACF Better Address Field',
+			'slug'   => 'ACF-Better-Address-Field',
+			'source' => 'https://github.com/mindsharelabs/ACF-Better-Address-Field/releases/latest/download/ACF-Better-Address-Field-master.zip',
+		),
 
 		// // This is an example of how to include a plugin from the WordPress Plugin Repository.
 		array(
 			'name'     => 'Simple History',
 			'slug'     => 'simple-history',
 			'required' => true,
-			'force_activation' => true,
+			'force_activation' => true
 		),
 		array(
 			'name'     => 'What the File',
 			'slug'     => 'what-the-file',
 			'required' => true,
-			'force_activation' => true,
+			'force_activation' => true
 		),
 		array(
 			'name'     => 'Mailgun',
 			'slug'     => 'mailgun',
 			'required' => true,
-			'force_activation' => true,
+			'force_activation' => true
+		),
+		array(
+			'name'     => 'Classic Widgets',
+			'slug'     => 'classic-widgets',
+			'required' => true,
+			'force_activation' => true
 		),
 
 

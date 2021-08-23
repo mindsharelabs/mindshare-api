@@ -27,17 +27,17 @@ if( !empty($block['align']) ) {
 // Load values and assing defaults.
 $accordions = get_field('accordions');
 if($accordions) :
-  echo '<div class="' . $className . '" id="accordion' . $id . '-' . $id . '">';
+  echo '<div class="' . $className . '" id="accordion' . $id . '">';
     foreach ($accordions as $key => $accordion) :
       echo '<div class="accordion-item">';
 
         echo '<h2 class="accordion-header" id="heading- ' . $key . '-' . $id . '">';
-          echo '<button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse' . $key . '-' . $id . '" aria-expanded="true" aria-controls="collapse' . $key . '-' . $id . '">';
+          echo '<button class="accordion-button ' . ($key == 0 ? '' : 'collapsed') . '" type="button" data-bs-toggle="collapse" data-bs-target="#collapse' . $key . '-' . $id . '" aria-expanded="true" aria-controls="collapse' . $key . '-' . $id . '">';
             echo $accordion['accordion_header'];
           echo '</button>';
         echo '</div>';
 
-        echo '<div id="collapse' . $key . '-' . $id . '" class="accordion-collapse collapse" aria-labelledby="heading' . $key . '-' . $id . '" data-parent="#accordion' . $id . '-' . $id . '">';
+        echo '<div id="collapse' . $key . '-' . $id . '" class="accordion-collapse collapse ' . ($key == 0 ? 'show' : 'collapsed') . '" aria-labelledby="heading' . $key . '-' . $id . '" data-parent="#accordion' . $id . '">';
           echo '<div class="accordion-body">';
             echo $accordion['content'];
           echo '</div>';

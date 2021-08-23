@@ -30,13 +30,33 @@ if($block_card_repeater) :
   echo '<div class="' . $className . '" id="accordion' . $id . '">';
     echo '<div class="row">';
       foreach ($block_card_repeater['cards'] as $key => $card) :
-        echo '<div class="col-12 col-md-4">';
+
+        $class = 'col-12 col-md-4';
+        if(count($block_card_repeater['cards']) < 3) :
+          $class = 'col-12 col-md';
+        endif;
+
+        echo '<div class="col-12 mb-4 ' . $class . '">';
           echo '<div class="card d-flex flex-column h-100 justify-content-between">';
 
-            echo wp_get_attachment_image( $card['card_image']['id'], 'loop-thumbnail', false, array('class'=> 'card-img-top') );
+            if($card['card_image']) :
+              if($card['card_link']) :
+                echo '<a href="' . $card['card_link']['url'] . '" target="' . $card['card_link']['target'] . '">';
+              endif;
+              echo wp_get_attachment_image( $card['card_image']['id'], 'loop-thumbnail', false, array('class'=> 'card-img-top') );
+              if($card['card_link']) :
+                echo '</a>';
+              endif;
+            endif;
             if($card['card_header']) :
               echo '<div class="card-header">';
-                echo '<h4>' . $card['card_header'] . '</h4>';
+                if($card['card_link']) :
+                  echo '<a href="' . $card['card_link']['url'] . '" target="' . $card['card_link']['target'] . '">';
+                endif;
+                  echo '<h4>' . $card['card_header'] . '</h4>';
+                if($card['card_link']) :
+                  echo '</a>';
+                endif;
               echo '</div>';
             endif;
             if($card['card_body']) :
@@ -44,7 +64,7 @@ if($block_card_repeater) :
                 echo $card['card_body'];
               echo '</div>';
             endif;
-            if($card['card_link']['url']) :
+            if($card['card_link']) :
               echo '<div class="card-footer">';
                 echo '<a href="' . $card['card_link']['url'] . '" target="' . $card['card_link']['target'] . '">' . $card['card_link']['title'] . '</a>';
               echo '</div>';

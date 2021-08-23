@@ -26,6 +26,7 @@ if( !empty($block['align']) ) {
 
 // Load values and assing defaults.
 $map_w_marker = get_field('map_w_marker');
+
 if($map_w_marker['location']['lat'] && $map_w_marker['location']['lng']) :
   echo '<div class="acf-map ' . $className . '" id="' . $id . '" data-zoom="16">';
     // Load sub field values.

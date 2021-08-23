@@ -40,6 +40,21 @@ if($post_list_block) :
     )
   );
 
+  $med_container = 'col-md-4';
+  if($post_list_block['posts_per_page'] % 2 == 0) {
+    $med_container = 'col-md-6';
+  }
+
+  if($post_list_block['posts_per_page'] % 3 == 0) {
+    $med_container = 'col-md-4';
+  }
+
+  if($post_list_block['posts_per_page'] % 12 == 0) {
+    $med_container = 'col-md-4';
+  }
+
+
+
   $posts = new WP_Query($args);
 
   $type = $post_list_block['display_type'];
@@ -51,7 +66,7 @@ if($post_list_block) :
       $posts->the_post();
 
 
-      echo '<div class="col-12 my-2 ' . ($type == 'list' ? '' : 'col-md-3') . ' ' . $type . '">';
+      echo '<div class="col-12 my-2 ' . ($type == 'list' ? '' : $med_container) . '">';
         echo '<div class="card d-flex h-100 mb-3">';
 
           if($type == 'gallery') :
@@ -80,6 +95,8 @@ if($post_list_block) :
                 echo '<div class="card-body">';
                   echo '<h3><a href="' . get_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h3>';
                   echo get_the_excerpt();
+                echo '</div>';
+                echo '<div class="card-footer border-0 background-transparent bg-transparent">';
                   echo '<a href="' . get_permalink() . '" class="btn btn-primary mt-3">Read More</a>';
                 echo '</div>';
               echo '</div>';
@@ -91,8 +108,8 @@ if($post_list_block) :
               echo get_the_excerpt();
 
             echo '</div>';
-            echo '<div class="card-footer text-right">';
-              echo '<a href="' . get_permalink() . '" class="btn btn-primary text-end mt-3">Read More</a>';
+            echo '<div class="card-footer text-center w-100">';
+              echo '<a href="' . get_permalink() . '">Read More</a>';
             echo '</div>';
           endif;
 
