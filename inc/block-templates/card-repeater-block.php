@@ -26,14 +26,26 @@ if( !empty($block['align']) ) {
 
 // Load values and assing defaults.
 $block_card_repeater = get_field('block_card_repeater');
+$num_columns = $block_card_repeater['num_columns'];
 if($block_card_repeater) :
   echo '<div class="' . $className . '" id="accordion' . $id . '">';
     echo '<div class="row">';
       foreach ($block_card_repeater['cards'] as $key => $card) :
 
-        $class = 'col-12 col-md-4';
-        if(count($block_card_repeater['cards']) < 3) :
-          $class = 'col-12 col-md';
+        if($num_columns == 'one') :
+          $class = 'col-12 col-lg-12';
+        elseif($num_columns == 'two') :
+          $class = 'col-12 col-lg-6';
+        elseif($num_columns == 'three') :
+          $class = 'col-12 col-lg-4';
+        elseif($num_columns == 'four') :
+          $class = 'col-12 col-lg-3';
+        elseif($num_columns == 'six') :
+          $class = 'col-12 col-lg-2';
+        elseif($num_columns == 'twelve') :
+          $class = 'col-12 col-lg-1';
+        else :
+          $class = 'col-12 col-lg';
         endif;
 
         echo '<div class="col-12 mb-4 ' . $class . '">';
