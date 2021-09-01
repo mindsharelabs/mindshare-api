@@ -10,6 +10,11 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 2.4.7
+- Included fields for notice block
+- Added some options for card repeater block.
+
+
 ## 2.2.5
 - Added Mind Notice Block to display BootStrap notices as Gutenberg Blocks
 
@@ -30,7 +35,7 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 
 ## 2.1.2
-- Complete re-write to support Gutenberg Editor. We're now focusting on adding additional blocks and a limited number of additional theme fucntions.
+- Complete re-write to support Gutenberg Editor. We're now focusing on adding additional blocks and a limited number of additional theme functions.
 
 
 ## 1.1.2
