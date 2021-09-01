@@ -5,6 +5,11 @@
   -o-transition: all $speed ease;
   transition: all $speed ease;
 }
+.mind-notice-block {
+  p {
+    margin-bottom: 0; 
+  }
+}
 .media-and-image-edge {
   $container-width: 1500px;
   $columns: 12;
