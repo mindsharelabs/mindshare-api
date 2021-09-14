@@ -1423,6 +1423,121 @@ global $_wp_additional_image_sizes;
 	));
 
 
+
+
+	//ACF Block Fields: Notice Block
+	acf_add_local_field_group(array(
+		'key' => 'group_6123f24c91198',
+		'title' => 'Block: Notice Block',
+		'fields' => array(
+			array(
+				'key' => 'field_6123f25990ccf',
+				'label' => 'Notice Block',
+				'name' => 'mind_notice_block',
+				'type' => 'group',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'layout' => 'block',
+				'sub_fields' => array(
+					array(
+						'key' => 'field_6123f25e90cd0',
+						'label' => 'Notice Type',
+						'name' => 'notice_type',
+						'type' => 'select',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => '',
+						),
+						'choices' => array(
+							'primary' => 'Primary',
+							'secondary' => 'Secondary',
+							'success' => 'Success',
+							'info' => 'Info',
+							'warning' => 'Warning',
+							'danger' => 'Danger',
+							'light' => 'light',
+							'dark' => 'Dark',
+						),
+						'default_value' => 'warning',
+						'allow_null' => 0,
+						'multiple' => 0,
+						'ui' => 0,
+						'return_format' => 'value',
+						'ajax' => 0,
+						'placeholder' => '',
+					),
+					array(
+						'key' => 'field_6123f2e58a2b0',
+						'label' => 'Notice Content',
+						'name' => 'notice_content',
+						'type' => 'wysiwyg',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => '',
+						),
+						'default_value' => '',
+						'tabs' => 'all',
+						'toolbar' => 'full',
+						'media_upload' => 1,
+						'delay' => 0,
+					),
+					array(
+						'key' => 'field_6123f3038a2b1',
+						'label' => 'Notice Icon',
+						'name' => 'notice_icon',
+						'type' => 'text',
+						'instructions' => 'fontawesome.com/icons
+	EX: fas fa-check-circle',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => '',
+						),
+						'default_value' => '',
+						'placeholder' => 'fas fa-check-circle',
+						'prepend' => '',
+						'append' => '',
+						'maxlength' => '',
+					),
+				),
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'block',
+					'operator' => '==',
+					'value' => 'acf/mind-notice-block',
+				),
+			),
+		),
+		'menu_order' => 0,
+		'position' => 'normal',
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => '',
+		'active' => true,
+		'description' => '',
+	));
+
+
 	//ACF Block Fields: Card Repeater Block
 	acf_add_local_field_group(array(
 		'key' => 'group_601235336f5c3',
@@ -1443,6 +1558,34 @@ global $_wp_additional_image_sizes;
 				),
 				'layout' => 'block',
 				'sub_fields' => array(
+					array(
+						'key' => 'field_612fafbads126dcc9',
+						'label' => 'Number of Columns',
+						'name' => 'num_columns',
+						'type' => 'radio',
+						'instructions' => '',
+						'required' => 0,
+						'conditional_logic' => 0,
+						'wrapper' => array(
+							'width' => '',
+							'class' => '',
+							'id' => '',
+						),
+						'choices' => array(
+							'one' => 'One Column',
+							'twelve' => 'Twelve Columns',
+							'six' => 'Six Columns',
+							'four' => 'Four Columns',
+							'three' => 'Three Columns',
+							'two' => 'Two Columns',
+						),
+						'allow_null' => 0,
+						'other_choice' => 0,
+						'default_value' => 'three',
+						'layout' => 'horizontal',
+						'return_format' => 'value',
+						'save_other_choice' => 0,
+					),
 					array(
 						'key' => 'field_601235414f7da',
 						'label' => 'Cards',
