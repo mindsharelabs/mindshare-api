@@ -28,29 +28,34 @@ if( !empty($block['align']) ) {
 $mind_staff_cards = get_field('mind_staff_cards');
 if($mind_staff_cards['staff_cards']) :
   echo '<div class="' . $className . '" id="accordion' . $id . '">';
-    echo '<div class="row justify-content-center">';
+    echo '<div class="row justify-content-start">';
       foreach ($mind_staff_cards['staff_cards'] as $key => $card) :
-        echo '<div class="col-12 col-md-6 col-lg-4 d-flex flex-column h-100 justify-content-between">';
-
-
+        $card_classes = apply_filters('mind_staff_card_classes', 'col-12 col-md-6 col-lg-4 d-flex flex-column h-100 justify-content-between', $card);
+        echo '<div class="' . $card_classes . '">';
             if($card['image']) :
-              echo '<div class="rounded-circle w-75 border border-light border-3 my-3 mx-auto p-2">';
+              $classes = apply_filters('mind_staff_cards_image_classes', 'rounded-circle card-img-top', $card);
+              $image_size = apply_filters( 'mind_staff_cards_image_size', 'grid-image', $card );
+
               if($card['staff_page_link']) :
                 echo '<a href="' . $card['staff_page_link']['url'] . '" target="' . $card['staff_page_link']['target'] . '">';
               endif;
-                echo wp_get_attachment_image( $card['image']['id'], 'grid-image', false, array('class'=> 'card-img-top rounded-circle') );
+
+                echo wp_get_attachment_image( $card['image']['id'], $image_size, false, array('class'=> $classes) );
               if($card['staff_page_link']) :
                 echo '</a>';
               endif;
-              echo '</div>';
+
             endif;
 
-
-            echo '<div class="card-body">';
+            $card_body_classes = apply_filters('mind_staff_card_body_classes', 'card_body', $card);
+            echo '<div class="' . $card_body_classes . '">';
               if($card['staff_page_link']) :
                 echo '<a href="' . $card['staff_page_link']['url'] . '" target="' . $card['staff_page_link']['target'] . '">';
               endif;
-              echo '<h3 class="staff-name text-center mb-1">' . $card['name'] . '</h3>';
+
+
+              $card_title_classes = apply_filters('mind_staff_card_title_classes', 'staff-name text-center mb-1');
+              echo '<h3 class="' . $card_title_classes .'">' . $card['name'] . '</h3>';
               if($card['staff_page_link']) :
                 echo '</a>';
               endif;
