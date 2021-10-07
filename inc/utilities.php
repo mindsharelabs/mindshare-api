@@ -59,3 +59,22 @@ function mapi_get_regisered_size_options() {
   endif;
   return $sizes;
 }
+
+
+
+function mind_check_page_modal($postID, $location) {
+
+  $include = (is_array($location['include_specific_pages']) ? $location['include_specific_pages'] : array());
+
+  if((count($include) < 1)) :
+    return true;
+  endif;
+
+  if(!in_array($postID, $include)) :
+    return false;
+  else :
+    return true;
+  endif;
+
+
+}

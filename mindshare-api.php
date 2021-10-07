@@ -71,10 +71,12 @@ class mapiPlugin {
 
 
     //General
+    include_once MAPI_ABSPATH . 'inc/field-groups.php';
     include_once MAPI_ABSPATH . 'inc/blocks.php';
     include_once MAPI_ABSPATH . 'inc/scripts-and-styles.php';
     include_once MAPI_ABSPATH . 'inc/widgets.php';
     include_once MAPI_ABSPATH . 'inc/ajax.php';
+    include_once MAPI_ABSPATH . 'inc/popups/popup.php';
 
 
 

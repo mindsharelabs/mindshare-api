@@ -299,6 +299,12 @@ add_action('acf/init', function () {
 				// We're just registering it here and then with the action get_footer we'll enqueue it.
 				wp_register_style( 'mapi-block-styles', MAPI_URL . '/inc/css/block-styles.css' );
 				add_action( 'get_footer', function () {wp_enqueue_style('mapi-block-styles');});
+				//
+				wp_register_script('bootstrap-js', MAPI_URL . 'inc/js/bootstrap/bootstrap.bundle.min.js', array('jquery'), MAPI_PLUGIN_VERSION);
+				wp_enqueue_script('bootstrap-js');
+
+
+
 
 				},
 			)
@@ -308,7 +314,7 @@ add_action('acf/init', function () {
 
 
 	}
-}, 1000000);
+}, 1);
 
 
 
