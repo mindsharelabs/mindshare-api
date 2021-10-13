@@ -910,6 +910,7 @@ global $_wp_additional_image_sizes;
 						'choices' => array(
 							'gallery' => 'Gallery View',
 							'list' => 'List View',
+							'small' => 'Small List',
 							'card' => 'Card View',
 						),
 						'allow_null' => 0,

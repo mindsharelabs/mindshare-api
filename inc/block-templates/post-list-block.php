@@ -62,65 +62,93 @@ if($post_list_block) :
     echo '<div class="' . $className . ' row" id="' . $id . '">';
     $tools = array();
 
-    while($posts->have_posts()) :
-      $posts->the_post();
 
-
-      echo '<div class="col-12 my-2 ' . ($type == 'list' ? '' : $med_container) . '">';
-        echo '<div class="card d-flex h-100 mb-3">';
 
           if($type == 'gallery') :
-            if(has_post_thumbnail()) :
-              the_post_thumbnail( 'loop-square', array('class' => 'card-img-top') );
-              echo '<a class="overlay" href="' . get_permalink() . '">';
-                echo '<h2>' . get_the_title(get_the_id()) . '</h2>';
-                echo '<p>' . get_the_excerpt() . '</p>';
-              echo '</a>';
-            else :
-              if(current_user_can('administrator')) :
-                echo '<pre>This post has no thumbnail, choose a different layout for this post to display.</pre>';
-              endif;
-            endif;
+
+            while($posts->have_posts()) :
+              $posts->the_post();
+              echo '<div class="col-12 my-2">';
+                echo '<div class="card d-flex h-100 mb-3">';
+                  if(has_post_thumbnail()) :
+                    the_post_thumbnail( 'loop-square', array('class' => 'card-img-top') );
+                    echo '<a class="overlay" href="' . get_permalink() . '">';
+                      echo '<h2>' . get_the_title(get_the_id()) . '</h2>';
+                      echo '<p>' . get_the_excerpt() . '</p>';
+                    echo '</a>';
+                  else :
+                    if(current_user_can('administrator')) :
+                      echo '<pre>This post has no thumbnail, choose a different layout for this post to display.</pre>';
+                    endif;
+                  endif;
+                echo '</div>';
+              echo '</div>';
+            endwhile;
+
           elseif($type == 'list') :
-            echo '<div class="row no-gutters">';
-            if(has_post_thumbnail()):
-              echo '<div class="col-12 col-md-4">';
-                echo '<a href="' . get_permalink() . '" title="' . get_the_title() . '">';
-                  the_post_thumbnail( 'loop-list-thumbnail', array('class' => 'card-img-top') );
-                echo '</a>';
-              echo '</div>';
-            endif;
 
-              echo '<div class="col-12 col-md">';
-                echo '<div class="card-body">';
-                  echo '<h3><a href="' . get_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h3>';
-                  echo get_the_excerpt();
-                echo '</div>';
-                echo '<div class="card-footer border-0 background-transparent bg-transparent">';
-                  echo '<a href="' . get_permalink() . '" class="btn btn-primary mt-3">Read More</a>';
-                echo '</div>';
+
+            while($posts->have_posts()) :
+              $posts->the_post();
+              echo '<div class="col-12 my-2 ' . ($type == 'list' ? '' : $med_container) . '">';
+                echo '<div class="card d-flex h-100 mb-3">';
+                  echo '<div class="row no-gutters">';
+                    if(has_post_thumbnail()):
+                      echo '<div class="col-12 col-md-4">';
+                        echo '<a href="' . get_permalink() . '" title="' . get_the_title() . '">';
+                          the_post_thumbnail( 'loop-list-thumbnail', array('class' => 'card-img-top') );
+                        echo '</a>';
+                      echo '</div>';
+                    endif;
+                    echo '<div class="col-12 col-md">';
+                      echo '<div class="card-body">';
+                        echo '<h3><a href="' . get_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h3>';
+                        echo get_the_excerpt();
+                      echo '</div>';
+                      echo '<div class="card-footer border-0 background-transparent bg-transparent">';
+                        echo '<a href="' . get_permalink() . '" class="btn btn-primary mt-3">Read More</a>';
+                      echo '</div>';
+                    echo '</div>';
+                  echo '</div>';
               echo '</div>';
-            echo '</div>';
+              echo '</div>';
+            endwhile;
+
+
+          elseif($type == 'small') :
+            echo '<ul>';
+            while($posts->have_posts()) :
+              $posts->the_post();
+              echo '<li>';
+                echo '<h3 class="h5 d-inline"><a href="' . get_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h3>';
+                echo ' - ' . get_the_excerpt();
+              echo '</li>';
+
+            endwhile;
+            echo '</ul>';
           elseif($type == 'card') :
-            the_post_thumbnail( 'loop-thumbnail', array('class' => 'card-img-top') );
-            echo '<div class="card-body">';
-              echo '<h3><a href="' . get_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h3>';
-              echo get_the_excerpt();
 
-            echo '</div>';
-            echo '<div class="card-footer text-center w-100">';
-              echo '<a href="' . get_permalink() . '">Read More</a>';
-            echo '</div>';
+            while($posts->have_posts()) :
+              $posts->the_post();
+              echo '<div class="col-12 my-2 ' . ($type == 'list' ? '' : $med_container) . '">';
+                echo '<div class="card d-flex h-100 mb-3">';
+                  the_post_thumbnail( 'loop-thumbnail', array('class' => 'card-img-top') );
+                  echo '<div class="card-body test-dark">';
+                    echo '<h3><a href="' . get_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h3>';
+                    echo '<p class="text-dark mb-0">' . get_the_excerpt() . '</p>';
+
+                  echo '</div>';
+                  echo '<div class="card-footer text-center w-100">';
+                    echo '<a href="' . get_permalink() . '">Read More</a>';
+                  echo '</div>';
+                echo '</div>';
+              echo '</div>';
+
+            endwhile;
+
           endif;
 
-        echo '</div>';
-      echo '</div>';
 
-
-    endwhile;
     echo '</div>';
-
-
-
   endif;
 endif;
