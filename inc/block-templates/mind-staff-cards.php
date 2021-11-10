@@ -39,7 +39,6 @@ if($mind_staff_cards['staff_cards']) :
               if($card['staff_page_link']) :
                 echo '<a href="' . $card['staff_page_link']['url'] . '" target="' . $card['staff_page_link']['target'] . '">';
               endif;
-
                 echo wp_get_attachment_image( $card['image']['id'], $image_size, false, array('class'=> $classes) );
               if($card['staff_page_link']) :
                 echo '</a>';
