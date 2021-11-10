@@ -55,11 +55,11 @@ if($mind_staff_cards['staff_cards']) :
 
 
               $card_title_classes = apply_filters('mind_staff_card_title_classes', 'staff-name text-center mb-1');
-              echo '<h3 class="' . $card_title_classes .'">' . $card['name'] . '</h3>';
+              echo ($card['name'] ? '<h3 class="' . $card_title_classes .'">' . $card['name'] . '</h3>' : '');
               if($card['staff_page_link']) :
                 echo '</a>';
               endif;
-              echo '<span class="staff-title text-center">' . $card['title'] . '</span>';
+              echo ($card['title'] ? '<span class="staff-title text-center">' . $card['title'] . '</span>' : '');
 
               if($card['staff_links']) :
                 echo '<div class="d-flex flex-row justify-content-center my-1">';
@@ -70,9 +70,11 @@ if($mind_staff_cards['staff_cards']) :
                   endforeach;
                 echo '</div>';
               endif;
-              echo '<div class="staff-bio">';
-                echo $card['short_bio'];
-              echo '</div>';
+              if($card['short_bio']) :
+                echo '<div class="staff-bio">';
+                  echo $card['short_bio'];
+                echo '</div>';
+              endif;
             echo '</div>';
 
 
