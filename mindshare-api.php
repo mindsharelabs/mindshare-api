@@ -22,9 +22,13 @@ class mapiPlugin {
     $this->define( 'MAPI_URL', plugin_dir_url( __FILE__ ));
     $this->define( 'MAPI_PLUGIN_VERSION', '2.4.7');
     $this->define( 'MAPI_PREPEND', 'mapi_');
+
+
 		//TODO: Change this to options
     $this->define( 'GOOGLE_MAPS_API_KEY', 'AIzaSyC0Wo2IFDzXPY18ERmsgXjKljUl1wh9Dl8');
-
+    $this->define( 'FACETWP_LICENSE_KEY', '6034a621ec91fb6f728dc2ba74c66a3c');
+    $this->define( 'ACF_PRO_LICENSE', 'b3JkZXJfaWQ9MzI5NTN8dHlwZT1kZXZlbG9wZXJ8ZGF0ZT0yMDE0LTA3LTA3IDE1OjU4OjE5');
+    
 
     $this->define('MIND_ACF_PATH', MAPI_ABSPATH . '/includes/acf/' );
     $this->define('MIND_ACF_URL', MAPI_URL . '/includes/acf/' );
