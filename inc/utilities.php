@@ -2,7 +2,7 @@
 
 if (function_exists('add_image_size')) {
   add_image_size( 'loop-square', 350, 350, array('center', 'center'));
-  add_image_size( 'loop-thumbnail', 350, 150, array('center', 'center'));
+  add_image_size( 'loop-thumbnail', 350, 250, array('center', 'center'));
   add_image_size( 'loop-list-thumbnail', 350, 250, array('center', 'center'));
   add_image_size( 'vertical-media-image', 400, 490, array('center', 'center'));
   add_image_size( 'horizontal-media-image', 500, 400, array('center', 'center'));

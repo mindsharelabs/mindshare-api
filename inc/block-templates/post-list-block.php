@@ -103,6 +103,9 @@ if($post_list_block) :
                     echo '<div class="col-12 col-md">';
                       echo '<div class="card-body">';
                         echo '<h3><a href="' . get_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h3>';
+
+
+
                         echo get_the_excerpt();
                       echo '</div>';
                       echo '<div class="card-footer border-0 background-transparent bg-transparent">';
@@ -135,6 +138,12 @@ if($post_list_block) :
                   the_post_thumbnail( 'loop-thumbnail', array('class' => 'card-img-top') );
                   echo '<div class="card-body test-dark">';
                     echo '<h3><a href="' . get_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h3>';
+                    $categories = get_the_category();
+                    foreach( $categories as $category) {
+                      $name = $category->name;
+                      $category_link = get_category_link( $category->term_id );
+                      echo '<a class="badge small bg-secondary text-light" href=' . $category_link . '>' . esc_attr( $name) . '</a>';
+                    }
                     echo '<p class="text-dark mb-0">' . get_the_excerpt() . '</p>';
 
                   echo '</div>';
