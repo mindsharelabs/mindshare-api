@@ -30,6 +30,7 @@ $post_list_block = get_field('post_list_block');
 if($post_list_block) :
   $args = array(
     'posts_per_page' => $post_list_block['posts_per_page'],
+    'post_type' => ($post_list_block['posts_per_page'] ? $post_list_block['posts_per_page'] : 'post'),
     'tax_query' => array(
       'relation' => 'AND',
       array(
