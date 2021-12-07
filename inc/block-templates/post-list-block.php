@@ -26,11 +26,10 @@ if( !empty($block['align']) ) {
 
 // Load values and assing defaults.
 $post_list_block = get_field('post_list_block');
-
 if($post_list_block) :
   $args = array(
     'posts_per_page' => $post_list_block['posts_per_page'],
-    'post_type' => ($post_list_block['posts_per_page'] ? $post_list_block['posts_per_page'] : 'post'),
+    'post_type' => (count($post_list_block['post_type']) > 0 ? $post_list_block['post_type'] : 'post'),
     'tax_query' => array(
       'relation' => 'AND',
       array(
@@ -62,8 +61,6 @@ if($post_list_block) :
   if($posts->have_posts()) :
     echo '<div class="' . $className . ' row" id="' . $id . '">';
     $tools = array();
-
-
 
           if($type == 'gallery') :
 
@@ -118,7 +115,6 @@ if($post_list_block) :
               echo '</div>';
             endwhile;
 
-
           elseif($type == 'small') :
             echo '<ul>';
             while($posts->have_posts()) :
@@ -130,6 +126,7 @@ if($post_list_block) :
 
             endwhile;
             echo '</ul>';
+
           elseif($type == 'card') :
 
             while($posts->have_posts()) :
