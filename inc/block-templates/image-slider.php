@@ -30,7 +30,7 @@ $slide_image_size = get_field('slide_image_size');
 
 if($images) :
   echo '<div class="' . $className . ' mb-2" id="' . $id . '">';
-    echo '<div class="mapi-slider-container">';
+    echo '<div class="mapi-slider-container" data-id="' . $id . '" dots="' . (get_field('mapi_slider_dots') ? 'true' : 'false') . '" arrows="' . (get_field('mapi_slider_arrows') ? 'true' : 'false') . '">';
       foreach ($images as $key => $image) :
         echo '<div class="image-slide">';
           echo wp_get_attachment_image( $image['image']['id'], $slide_image_size, array('class' => 'slide-image w-100') );
@@ -50,13 +50,5 @@ if($images) :
     echo '</div>';
 
   echo '</div>';
-
-
-  echo '<script>';
-
-    echo 'var sliderArrows = ' . (get_field('mapi_slider_arrows') ? 'true' : 'false') . ';';
-    echo 'var sliderDots = ' . (get_field('mapi_slider_dots') ? 'true' : 'false') . ';';
-
-  echo '</script>';
 
 endif;

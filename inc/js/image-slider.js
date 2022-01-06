@@ -6,16 +6,23 @@
 	$(function () {
 
     $(document).ready(function(){
-			console.log(sliderDots);
-      $('.mapi-slider-container').slick({
-				dots : sliderDots,
-				arrows : sliderArrows,
-        // setting-name: setting-value
+			$('.mapi-slider-container').each(function(i, e) {
 
-				nextArrow: $('.mapi-slide-next'),
-				prevArrow: $('.mapi-slide-prev'),
-				appendDots: $(".mapi-slide-dots"),
-      });
+				var sliderDots = JSON.parse($(e).attr('dots'));
+				var sliderArrows = JSON.parse($(e).attr('arrows'));
+				var sliderID = $(e).attr('data-id');
+
+				$(e).slick({
+					dots : sliderDots,
+					arrows : sliderArrows,
+	        // setting-name: setting-value
+
+					nextArrow: $('#' + sliderID + ' .mapi-slide-next'),
+					prevArrow: $('#' + sliderID + ' .mapi-slide-prev'),
+					appendDots: $('#' + sliderID + ' .mapi-slide-dots'),
+	      });
+			});
+
     });
 
 
