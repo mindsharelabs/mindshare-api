@@ -44,9 +44,11 @@ if($images) :
 
 
     echo '<div class="slide-nav">';
-      echo (get_field('mapi_slider_arrows') ? '<div class="interaction mapi-slide-prev"><i class="fas fa-angle-left"></i></div>' : '');
-      echo (get_field('mapi_slider_dots') ? '<div class="interaction mapi-slide-dots"></div>' : '');
-      echo (get_field('mapi_slider_arrows') ? '<div class="interaction mapi-slide-next"><i class="fas fa-angle-right"></i></div>' : '');
+      echo '<div class="buttons">';
+        echo (get_field('mapi_slider_arrows') ? '<div class="interaction mapi-slide-prev"><i class="fas fa-angle-left"></i></div>' : '');
+        echo (get_field('mapi_slider_dots') ? '<div class="interaction mapi-slide-dots"></div>' : '');
+        echo (get_field('mapi_slider_arrows') ? '<div class="interaction mapi-slide-next"><i class="fas fa-angle-right"></i></div>' : '');
+      echo '</div>';
     echo '</div>';
 
   echo '</div>';

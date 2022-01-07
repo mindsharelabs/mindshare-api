@@ -7,7 +7,7 @@
 }
 .mind-notice-block {
   p {
-    margin-bottom: 0; 
+    margin-bottom: 0;
   }
 }
 .media-and-image-edge {
@@ -107,57 +107,66 @@
     padding: 20px;
     width: 100%;
     justify-content: center;
-    .interaction {
-      cursor: pointer;
-      color: #fff;
-      text-shadow: 0 0 10px #fff;
-      opacity: .7;
-      height: 30px;
+    .buttons {
+      background: #e6e6e6;
+      border-radius: 6px;
       display: flex;
       justify-content: center;
-      align-items: center;
-      @include transition(500ms);
-      &:hover {
-        opacity: 1;
-        @include transition(50ms);
-      }
-      &.mapi-slide-dots {
-        margin-left: 10px;
-        margin-right: 10px;
-      }
-      ul.slick-dots {
-        position: relative;
-        bottom: unset;
-        list-style: none;
+      padding: 0 10px;
+      .interaction {
+        cursor: pointer;
+        color: #545454;
+        text-shadow: 0 0 10px #fff;
+        opacity: .7;
+        height: 30px;
         display: flex;
-        flex-direction: row;
-        text-align: center;
-        padding: 0;
-        margin: 0;
-        width: 100%;
+        justify-content: center;
+        align-items: center;
 
-        li {
-          -webkit-border-radius: 10px;
-          border-radius: 10px;
-          display: block;
-          width: 10px;
-          height: 10px;
-          opacity: .7;
+        @include transition(500ms);
+        &:hover {
+          opacity: 1;
+          @include transition(50ms);
+        }
+        &.mapi-slide-dots {
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+        ul.slick-dots {
+          position: relative;
+          bottom: unset;
+          list-style: none;
           display: flex;
-          justify-content: center;
-          align-items: center;
-          background: #fff;
-          @include transition(500ms);
-          button {
-            display: none;
-          }
-          &.slick-active, &:hover {
-            opacity: 1;
-            @include transition(50ms);
+          flex-direction: row;
+          text-align: center;
+          padding: 0;
+          margin: 0;
+          width: 100%;
+
+          li {
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            display: block;
+            width: 10px;
+            height: 10px;
+            opacity: .6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #545454;
+            @include transition(500ms);
+            button {
+              display: none;
+            }
+            &.slick-active, &:hover {
+              opacity: 1;
+              @include transition(50ms);
+            }
           }
         }
       }
     }
+
   }
 }
 
