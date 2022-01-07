@@ -21,7 +21,7 @@ add_action('wp_enqueue_scripts', function () {
       'show' => mind_check_page_modal(get_the_id(), get_field('location_settings', 'options'))
     ));
 
-    wp_register_script('mind-notice-cookie-js', 'https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js', array(), MINDNOTICE_PLUGIN_VERSION);
+    wp_register_script('mind-notice-cookie-js', 'https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js', array(), MAPI_PLUGIN_VERSION);
     wp_enqueue_script('mind-notice-cookie-js');
   endif;
 
