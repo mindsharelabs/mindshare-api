@@ -20,7 +20,7 @@ class mapiPlugin {
     //Define all the constants
     $this->define( 'MAPI_ABSPATH', dirname( MAPI_PLUGIN_FILE ) . '/' );
     $this->define( 'MAPI_URL', plugin_dir_url( __FILE__ ));
-    $this->define( 'MAPI_PLUGIN_VERSION', '2.5.7');
+    $this->define( 'MAPI_PLUGIN_VERSION', '2.5.8');
     $this->define( 'MAPI_PREPEND', 'mapi_');
 
 
