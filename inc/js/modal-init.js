@@ -11,7 +11,6 @@
       });
       if(mindModalSettings.show) {
 				var modalCookie = Cookies.get('mind-notice-modal');
-				console.log(modalCookie);
 				var modalid = $('#mindModal').data('modalid');
 				if(modalCookie != modalid) {
 					mindModal.show();
