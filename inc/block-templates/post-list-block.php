@@ -153,6 +153,22 @@ if($post_list_block) :
 
             endwhile;
 
+          elseif($type == 'small_card') :
+
+            while($posts->have_posts()) :
+              $posts->the_post();
+              echo '<div class="col-12 my-2 ' . ($type == 'list' ? '' : $med_container) . '">';
+                echo '<div class="card d-flex h-100 mb-3">';
+                  echo '<div class="card-body test-dark">';
+                    echo '<span class="date small faded">' . get_the_date('F j, Y') . '</span>';
+                    echo '<h3 class="h5"><a href="' . get_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h3>';
+                    echo '<p class="text-dark small mb-0">' . get_the_excerpt() . '</p>';
+                  echo '</div>';
+                echo '</div>';
+              echo '</div>';
+
+            endwhile;
+
           endif;
 
 
