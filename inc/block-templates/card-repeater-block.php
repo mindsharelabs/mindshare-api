@@ -33,15 +33,15 @@ if($block_card_repeater) :
       foreach ($block_card_repeater['cards'] as $key => $card) :
 
         if($num_columns == 'one') :
-          $class = 'col-12 col-lg-12';
+          $class = 'col-12';
         elseif($num_columns == 'two') :
-          $class = 'col-12 col-lg-6';
+          $class = 'col-12 col-md-6 col-lg-6';
         elseif($num_columns == 'three') :
-          $class = 'col-12 col-lg-4';
+          $class = 'col-12 col-md-6 col-lg-4';
         elseif($num_columns == 'four') :
-          $class = 'col-12 col-lg-3';
+          $class = 'col-12 col-md-3 col-lg-3';
         elseif($num_columns == 'six') :
-          $class = 'col-12 col-lg-2';
+          $class = 'col-12 col-md-4 col-lg-2';
         elseif($num_columns == 'twelve') :
           $class = 'col-12 col-lg-1';
         else :
@@ -49,33 +49,33 @@ if($block_card_repeater) :
         endif;
 
         echo '<div class="col-12 mb-4 ' . $class . '">';
-          echo '<div class="card d-flex flex-column h-100 justify-content-between">';
+          echo '<div class="card d-flex flex-column h-100 justify-content-start">';
 
             if($card['card_image']) :
               if($card['card_link']) :
                 echo '<a href="' . $card['card_link']['url'] . '" target="' . $card['card_link']['target'] . '">';
               endif;
-              echo wp_get_attachment_image( $card['card_image']['id'], 'loop-thumbnail', false, array('class'=> 'card-img-top') );
+              echo wp_get_attachment_image( $card['card_image']['id'], 'loop-thumbnail', false, array('class'=> 'card-img-top w-100') );
               if($card['card_link']) :
                 echo '</a>';
               endif;
             endif;
-            if($card['card_header']) :
-              echo '<div class="card-header">';
+            echo '<div class="card-body">';
+              if($card['card_header']) :
+
                 if($card['card_link']) :
                   echo '<a href="' . $card['card_link']['url'] . '" target="' . $card['card_link']['target'] . '">';
                 endif;
-                  echo '<h4>' . $card['card_header'] . '</h4>';
+                  echo '<h4 class="mb-2 mt-1">' . $card['card_header'] . '</h4>';
                 if($card['card_link']) :
                   echo '</a>';
                 endif;
-              echo '</div>';
-            endif;
-            if($card['card_body']) :
-              echo '<div class="card-body">';
+
+              endif;
+              if($card['card_body']) :
                 echo $card['card_body'];
-              echo '</div>';
-            endif;
+              endif;
+            echo '</div>';
             if($card['card_link']) :
               echo '<div class="card-footer">';
                 echo '<a href="' . $card['card_link']['url'] . '" target="' . $card['card_link']['target'] . '">' . $card['card_link']['title'] . '</a>';
