@@ -68,7 +68,7 @@ if($post_list_block) :
               $posts->the_post();
               echo '<div class="col-12 my-2">';
                 echo '<div class="card d-flex h-100 mb-3">';
-                  do_action('mind_before_post_card');
+                  do_action('mind_before_post_card', get_the_id());
                   if(has_post_thumbnail()) :
                     the_post_thumbnail( 'loop-square', array('class' => 'card-img-top') );
                     echo '<a class="overlay" href="' . get_permalink() . '">';
@@ -80,7 +80,7 @@ if($post_list_block) :
                       echo '<pre>This post has no thumbnail, choose a different layout for this post to display.</pre>';
                     endif;
                   endif;
-                  do_action('mind_after_post_card');
+                  do_action('mind_after_post_card', get_the_id());
                 echo '</div>';
               echo '</div>';
             endwhile;
@@ -92,7 +92,7 @@ if($post_list_block) :
               $posts->the_post();
               echo '<div class="col-12 my-2 ' . ($type == 'list' ? '' : $med_container) . '">';
                 echo '<div class="card d-flex h-100 mb-3">';
-                  do_action('mind_before_post_card');
+                  do_action('mind_before_post_card', get_the_id());
                   echo '<div class="row no-gutters">';
                     if(has_post_thumbnail()):
                       echo '<div class="col-12 col-md-4">';
@@ -114,7 +114,7 @@ if($post_list_block) :
                       echo '</div>';
                     echo '</div>';
                   echo '</div>';
-                  do_action('mind_after_post_card');
+                  do_action('mind_after_post_card', get_the_id());
                 echo '</div>';
               echo '</div>';
             endwhile;
@@ -136,7 +136,7 @@ if($post_list_block) :
               $posts->the_post();
               echo '<div class="col-12 my-2 ' . ($type == 'list' ? '' : $med_container) . '">';
                 echo '<div class="card d-flex h-100 mb-3">';
-                  do_action('mind_before_post_card');
+                  do_action('mind_before_post_card', get_the_id());
                   the_post_thumbnail( 'loop-thumbnail', array('class' => 'card-img-top') );
                   echo '<div class="card-body test-dark">';
                     echo '<h3><a href="' . get_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h3>';
@@ -152,7 +152,7 @@ if($post_list_block) :
                   echo '<div class="card-footer text-center w-100">';
                     echo '<a href="' . get_permalink() . '">Read More</a>';
                   echo '</div>';
-                  do_action('mind_after_post_card');
+                  do_action('mind_after_post_card', get_the_id());
                 echo '</div>';
               echo '</div>';
 
@@ -164,13 +164,13 @@ if($post_list_block) :
               $posts->the_post();
               echo '<div class="col-12 my-2 ' . ($type == 'list' ? '' : $med_container) . '">';
                 echo '<div class="card d-flex h-100 mb-3">';
-                  do_action('mind_before_post_card');
+                  do_action('mind_before_post_card', get_the_id());
                   echo '<div class="card-body test-dark">';
                     echo '<span class="date small faded">' . get_the_date('F j, Y') . '</span>';
                     echo '<h3 class="h5"><a href="' . get_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h3>';
                     echo '<p class="text-dark small mb-0">' . get_the_excerpt() . '</p>';
                   echo '</div>';
-                  do_action('mind_after_post_card');
+                  do_action('mind_after_post_card', get_the_id());
                 echo '</div>';
               echo '</div>';
 
