@@ -32,7 +32,7 @@ if($mind_notice_block['notice_content']) :
       if($mind_notice_block['notice_icon']) :
         echo '<i class="' . $mind_notice_block['notice_icon'] . ' pe-4 fa-lg"></i>';
       endif;
-      echo '<div class="w-100">';
+      echo '<div ' . ($mind_notice_block['notice_icon'] ? '' : 'class="w-100"') . '>';
         echo $mind_notice_block['notice_content'];
       echo '</div>';
     echo '</div>';
