@@ -254,7 +254,7 @@ add_action('acf/init', function () {
 					'align' => false,
 				),
 				'enqueue_assets' => function(){
-			
+
 					// We're just registering it here and then with the action get_footer we'll enqueue it.
 					wp_register_style( 'mapi-block-styles', MAPI_URL . 'inc/css/block-styles.css' );
 					add_action( 'get_footer', function () {wp_enqueue_style('mapi-block-styles');});
@@ -915,6 +915,7 @@ if( function_exists('acf_add_local_field_group') ):
 								'list' => 'List View',
 								'small' => 'Small List',
 								'card' => 'Card View',
+								'small_card' => 'Small Card View',
 							),
 							'allow_null' => 0,
 							'other_choice' => 0,
