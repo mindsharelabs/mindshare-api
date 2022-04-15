@@ -239,6 +239,46 @@ add_action('acf/init', function () {
 			)
 		);
 
+
+		//Block: Logo Slider
+		acf_register_block_type(array(
+			'name'              => 'mind-logo-slider',
+			'title'             => __('Logo Slider'),
+			'description'       => __('This block displays multiple logos in an infite slideshow.'),
+			'render_template'   => MAPI_ABSPATH . '/inc/block-templates/mind-logo-slider.php',
+			'category'          => 'mind-blocks',
+			'icon'              => file_get_contents(MAPI_URL . 'inc/img/mind-icon.svg'),
+			'keywords'          => array( 'logo', 'sponsors', 'logos', 'slider', 'image', 'captions', 'Mindshare' ),
+			'align'             => 'full',
+			'mode'            	=> 'edit',
+			'supports'					=> array(
+				'align' => false,
+			),
+			'enqueue_assets' => function(){
+				// We're just registering it here and then with the action get_footer we'll enqueue it.
+				wp_register_style( 'mapi-block-styles', MAPI_URL . 'inc/css/block-styles.css' );
+				add_action( 'get_footer', function () {wp_enqueue_style('mapi-block-styles');});
+
+				wp_register_style( 'slick-styles', MAPI_URL . 'inc/css/slick.css' );
+				add_action( 'get_footer', function () {wp_enqueue_style('slick-styles');});
+
+				if(!is_admin()) :
+					wp_register_script('slick-slider', MAPI_URL . 'inc/js/slick.min.js', array('jquery'), MAPI_PLUGIN_VERSION);
+		      wp_enqueue_script('slick-slider');
+
+					wp_register_script('image-slider-js', MAPI_URL. 'inc/js/image-slider.js', array('jquery', 'slick-slider'), MAPI_PLUGIN_VERSION, true);
+					wp_enqueue_script('image-slider-js');
+
+					// wp_localize_script( 'image-slider-js', 'sliderOptions', array(
+					// 	'arrows' => get_field('mapi_slider_arrows', get_the_id()),
+					// 	'dots' => get_field('mapi_slider_dots', get_the_id())
+					// ));
+				endif;
+
+				},
+			)
+		);
+
 		//Block: Image Grid
 		acf_register_block_type(array(
 				'name'              => 'image-grid',
@@ -1492,7 +1532,7 @@ if( function_exists('acf_add_local_field_group') ):
 								'info' => 'Info',
 								'warning' => 'Warning',
 								'danger' => 'Danger',
-								'light' => 'light',
+								'light' => 'Light',
 								'dark' => 'Dark',
 							),
 							'default_value' => 'warning',
@@ -1562,6 +1602,131 @@ if( function_exists('acf_add_local_field_group') ):
 			'active' => true,
 			'description' => '',
 		));
+
+
+		//ACF Block Fields: Logo Slider
+		acf_add_local_field_group(array(
+			'key' => 'group_625994542e350',
+			'title' => 'Block: Logo Slider',
+			'fields' => array(
+				array(
+					'key' => 'field_6259945849979',
+					'label' => 'Logo Slides',
+					'name' => 'mind_logo_slides',
+					'type' => 'group',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'layout' => 'block',
+					'sub_fields' => array(
+						array(
+							'key' => 'field_625994614997a',
+							'label' => 'Images',
+							'name' => 'images',
+							'type' => 'repeater',
+							'instructions' => '',
+							'required' => 0,
+							'conditional_logic' => 0,
+							'wrapper' => array(
+								'width' => '',
+								'class' => '',
+								'id' => '',
+							),
+							'collapsed' => '',
+							'min' => 1,
+							'max' => 35,
+							'layout' => 'row',
+							'button_label' => 'Add Logo',
+							'sub_fields' => array(
+								array(
+									'key' => 'field_625994664997b',
+									'label' => 'Image',
+									'name' => 'image',
+									'type' => 'image',
+									'instructions' => '',
+									'required' => 0,
+									'conditional_logic' => 0,
+									'wrapper' => array(
+										'width' => '',
+										'class' => '',
+										'id' => '',
+									),
+									'return_format' => 'array',
+									'preview_size' => 'medium',
+									'library' => 'all',
+									'min_width' => '',
+									'min_height' => '',
+									'min_size' => '',
+									'max_width' => '',
+									'max_height' => '',
+									'max_size' => '',
+									'mime_types' => '',
+								),
+								array(
+									'key' => 'field_6259946a4997c',
+									'label' => 'Link',
+									'name' => 'link',
+									'type' => 'link',
+									'instructions' => '',
+									'required' => 0,
+									'conditional_logic' => 0,
+									'wrapper' => array(
+										'width' => '',
+										'class' => '',
+										'id' => '',
+									),
+									'return_format' => 'array',
+								),
+								array(
+									'key' => 'field_6259946f4997d',
+									'label' => 'Caption',
+									'name' => 'caption',
+									'type' => 'text',
+									'instructions' => '',
+									'required' => 0,
+									'conditional_logic' => 0,
+									'wrapper' => array(
+										'width' => '',
+										'class' => '',
+										'id' => '',
+									),
+									'default_value' => '',
+									'placeholder' => '',
+									'prepend' => '',
+									'append' => '',
+									'maxlength' => '',
+								),
+							),
+						),
+					),
+				),
+			),
+			'location' => array(
+				array(
+					array(
+						'param' => 'block',
+						'operator' => '==',
+						'value' => 'acf/mind-logo-slider',
+					),
+				),
+			),
+			'menu_order' => 0,
+			'position' => 'normal',
+			'style' => 'default',
+			'label_placement' => 'top',
+			'instruction_placement' => 'label',
+			'hide_on_screen' => '',
+			'active' => true,
+			'description' => '',
+			'show_in_rest' => 0,
+		));
+
+
 
 		//ACF Block Fields: Card Repeater Block
 		acf_add_local_field_group(array(

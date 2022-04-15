@@ -16,7 +16,7 @@ if( !empty($block['anchor']) ) {
 }
 
 // Create class attribute allowing for custom "className" and "align" values.
-$className = 'image-slider';
+$className = 'mind-image-slider image-slider';
 if( !empty($block['className']) ) {
     $className .= ' ' . $block['className'];
 }
