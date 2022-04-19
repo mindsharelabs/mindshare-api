@@ -76,9 +76,9 @@ if($mind_buttons) :
               if($alignment == 'start') :
                 $align_text = 'offset-0';
               elseif($alignment == 'center') :
-                $align_text = 'offset-4';
+                $align_text = 'offset-0 offset-md-4';
               elseif($alignment == 'end') :
-                $align_text = 'offset-8';
+                $align_text = 'offset-0 offset-md-8';
               endif;
 
               echo '<div class="d-grid gap-1 col-12 col-md-4 ' . $align_text . '" role="group">';

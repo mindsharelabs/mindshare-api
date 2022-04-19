@@ -34,7 +34,7 @@ if($accordions) :
       foreach ($accordions as $key => $accordion) :
         echo '<div class="accordion-item">';
 
-          echo '<h2 class="accordion-header" id="heading-' . $key . '-' . $id . '">';
+          echo '<h2 class="accordion-header mt-0 mb-0" id="heading-' . $key . '-' . $id . '">';
             echo '<button class="accordion-button ' . ($key == 0 ? '' : 'collapsed') . '" type="button" data-bs-toggle="collapse" data-bs-target="#collapse' . $key . '-' . $id . '" aria-expanded="' . ($key == 0 ? 'true' : 'false') . '" aria-controls="collapse' . $key . '-' . $id . '">';
               echo $accordion['accordion_header'];
             echo '</button>';

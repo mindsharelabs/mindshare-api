@@ -63,7 +63,7 @@ if($mind_staff_cards['staff_cards']) :
               if($card['staff_links']) :
                 echo '<div class="d-flex flex-row justify-content-center my-1">';
                   foreach ($card['staff_links'] as $key => $s_link) :
-                    echo '<a class="p-2" href="' . $s_link['link']['url'] . '" target="' . $s_link['link']['target'] . '" title="' . $s_link['link']['title'] . '">';
+                    echo '<a class="p-2" href="' . $s_link['link']['url'] . '" target="' . ($s_link['link']['target'] ? $s_link['link']['target'] : '') . '" title="' . ($s_link['link']['title'] ? $s_link['link']['title'] : '') . '">';
                       echo '<i class="fa-lg ' . $s_link['icon'] . '"></i>';
                     echo '</a>';
                   endforeach;
