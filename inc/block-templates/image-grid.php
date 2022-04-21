@@ -27,10 +27,24 @@ if( !empty($block['align']) ) {
 // Load values and assing defaults.
 $images = get_field('block_image_grid');
 if($images) :
-  echo '<div class="' . $className . ' row g-0" id="' . $id . '">';
+  $count = count($images);
+
+  if($count == 1) :
+    $classes = 'col-12';
+  elseif($count == 2) :
+    $classes = 'col-12 col-md-6';
+  elseif($count % 3 == 0) :
+    $classes = 'col-12 col-md-4';
+  elseif($count % 4 == 0) :
+    $classes = 'col-12 col-md-3';
+  else :
+    $classes = 'col-12 col-md-3';
+  endif;
+
+  echo '<div class="' . $className . ' row" id="' . $id . '">';
     foreach ($images as $key => $image) :
-      echo '<div class="col-6 col-md-3">';
-        echo '<div class="card d-flex flex-column h-100">';
+      echo '<div class="' . $classes . '">';
+        echo '<div class="card d-flex flex-column h-100 text-center">';
 
           echo ($image['link'] ? '<a href="' . $image['link']['url'] . '">' : '');
             echo wp_get_attachment_image( $image['image']['id'], 'grid-image', array('class' => 'card-image-top') );

@@ -10,13 +10,11 @@ add_action('wp_enqueue_scripts', function () {
   $mind_enable_bootstrap = get_field('mind_enable_bootstrap', 'options');
   if($mind_enable_bootstrap) :
     if(in_array('js', $mind_enable_bootstrap)) :
-      mapi_write_log($mind_enable_bootstrap);
       wp_register_script('mind-bootstrap',  MAPI_URL . 'inc/js/bootstrap/bootstrap.bundle.min.js', array('jquery'), MAPI_PLUGIN_VERSION, true);
       wp_enqueue_script('mind-bootstrap');
     endif;
 
-    if(in_array('js', $mind_enable_bootstrap)) :
-      mapi_write_log($mind_enable_bootstrap);
+    if(in_array('css', $mind_enable_bootstrap)) :
       wp_register_style('mind-bootstrap-grid-css-min', MAPI_URL . 'inc/css/bootstrap-grid.min.css', array(), MAPI_PLUGIN_VERSION);
       wp_enqueue_style('mind-bootstrap-grid-css-min');
       wp_register_style('mind-bootstrap-utilities-css-min', MAPI_URL . 'inc/css/bootstrap-utilities.min.css', array(), MAPI_PLUGIN_VERSION);
