@@ -9,7 +9,9 @@ add_action('wp_footer', function() {
       $link = get_field('popup_link', 'options');
       $options = get_field('popup_options', 'options');
       $modalid = get_option( 'mapi-website-popup-cookie', 'mind-notice-modal' );
-      echo '<div class="modal fade" data-modalid="' . $modalid . '" id="mindModal" ' . ($options['behavior'] == 'static' ? 'data-bs-backdrop="static"' : '') . ' data-bs-keyboard="false" tabindex="-1" aria-labelledby="mindModalLabel" aria-hidden="true">';
+
+
+      echo '<div class="modal fade" style="z-index:9999999999" data-modalid="' . $modalid . '" id="mindModal" ' . ($options['behavior'] == 'static' ? 'data-bs-backdrop="static"' : '') . ' data-bs-keyboard="false" tabindex="-1" aria-labelledby="mindModalLabel" aria-hidden="true">';
         echo '<div class="modal-dialog ' . ($options['position'] == 'centered' ? 'modal-dialog-centered' : '') . ' modal-' . $options['size'] . '">';
           echo '<div class="modal-content">';
             echo '<div class="close-btn d-flex justify-content-end">';
