@@ -47,7 +47,7 @@ if($images) :
         echo '<div class="card d-flex flex-column h-100 text-center">';
 
           echo ($image['link'] ? '<a href="' . $image['link']['url'] . '">' : '');
-            echo wp_get_attachment_image( $image['image']['id'], 'grid-image', array('class' => 'card-image-top') );
+            echo wp_get_attachment_image( $image['image']['id'], 'grid-image',false, array('class' => 'card-image-top w-100') );
           echo ($image['link'] ? '</a>' : '');
 
           if($image['title'] || $image['desc']) :

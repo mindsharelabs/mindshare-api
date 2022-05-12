@@ -43,7 +43,11 @@
   }
 }
 
-
+.image-grid {
+  .card {
+    overflow: hidden;
+  }
+}
 
 .media-and-image-edge {
   $container-width: 1500px;

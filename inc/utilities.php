@@ -1,6 +1,7 @@
 <?php
 
 if (function_exists('add_image_size')) {
+  add_image_size( 'grid-image', 450);
   add_image_size( 'loop-square', 350, 350, array('center', 'center'));
   add_image_size( 'loop-thumbnail', 350, 250, array('center', 'center'));
   add_image_size( 'vertical-media-image', 400, 490, array('center', 'center'));
