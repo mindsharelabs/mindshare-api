@@ -10,9 +10,20 @@ if( function_exists('acf_add_options_page') ) {
     'redirect'		=> false
   ));
 
+  acf_add_options_page(array(
+    'page_title' 	=> 'API Settings',
+    'menu_title'	=> 'Mindshare API Settings',
+    'menu_slug' 	=> 'mindshare-settings',
+    'capability'	=> 'edit_posts',
+    'redirect'		=> false
+  ));
+
 }
 
 if( function_exists('acf_add_local_field_group') ):
+
+
+
 
 acf_add_local_field_group(array(
 	'key' => 'group_615f2e5af07c6',
@@ -244,4 +255,80 @@ acf_add_local_field_group(array(
 	'description' => '',
 ));
 
+acf_add_local_field_group(array(
+	'key' => 'group_61f31102439e1',
+	'title' => 'API Options',
+	'fields' => array(
+		array(
+			'key' => 'field_61f3110917ff1',
+			'label' => 'Enable Scripts',
+			'name' => '',
+			'type' => 'tab',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'placement' => 'top',
+			'endpoint' => 0,
+		),
+		array(
+			'key' => 'field_61f3111417ff2',
+			'label' => 'Enable Bootstrap',
+			'name' => 'mind_enable_bootstrap',
+			'type' => 'checkbox',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'choices' => array(
+				'js' => 'Enable Bootstrap Javascript',
+				'css' => 'Enable Bootstrap CSS',
+			),
+			'allow_custom' => 0,
+			'default_value' => array(
+			),
+			'layout' => 'vertical',
+			'toggle' => 0,
+			'return_format' => 'value',
+			'save_custom' => 0,
+		),
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'options_page',
+				'operator' => '==',
+				'value' => 'mindshare-settings',
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'normal',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+	'show_in_rest' => 0,
+));
 endif;
+
+
+
+function mapi_generate_popup_cookie() {
+    $screen = get_current_screen();
+    if ($screen->id == 'toplevel_page_website-popup') {
+      $cookie = wp_generate_password(12, false, false );
+      update_option( 'mapi-website-popup-cookie', $cookie);
+    }
+}
+add_action('acf/save_post', 'mapi_generate_popup_cookie', 20);

@@ -35,7 +35,7 @@ if($mind_staff_cards['staff_cards']) :
             if($card['image']) :
               $classes = apply_filters('mind_staff_cards_image_classes', 'rounded-circle card-img-top', $card);
               $image_size = apply_filters( 'mind_staff_cards_image_size', 'grid-image', $card );
-
+              mapi_write_log($image_size);
               if($card['staff_page_link']) :
                 echo '<a href="' . $card['staff_page_link']['url'] . '" target="' . $card['staff_page_link']['target'] . '">';
               endif;
@@ -46,7 +46,7 @@ if($mind_staff_cards['staff_cards']) :
 
             endif;
 
-            $card_body_classes = apply_filters('mind_staff_card_body_classes', 'card_body', $card);
+            $card_body_classes = apply_filters('mind_staff_card_body_classes', 'card-body', $card);
             echo '<div class="' . $card_body_classes . '">';
               if($card['staff_page_link']) :
                 echo '<a href="' . $card['staff_page_link']['url'] . '" target="' . $card['staff_page_link']['target'] . '">';
@@ -58,7 +58,7 @@ if($mind_staff_cards['staff_cards']) :
               if($card['staff_page_link']) :
                 echo '</a>';
               endif;
-              echo ($card['title'] ? '<span class="staff-title text-center">' . $card['title'] . '</span>' : '');
+              echo ($card['title'] ? '<span class="staff-title text-center d-block">' . $card['title'] . '</span>' : '');
 
               if($card['staff_links']) :
                 echo '<div class="d-flex flex-column my-1">';

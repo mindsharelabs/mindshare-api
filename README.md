@@ -10,6 +10,10 @@ Provides a library of additional template tags, 3rd-party libraries, and functio
 
 # Changelog:
 
+## 2.5.7
+- Fix error when displaying multiple image sliders on one page.
+
+
 ## 2.4.7
 - Included fields for notice block
 - Added some options for card repeater block.
