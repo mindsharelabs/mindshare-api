@@ -35,7 +35,6 @@ if($mind_staff_cards['staff_cards']) :
             if($card['image']) :
               $classes = apply_filters('mind_staff_cards_image_classes', 'rounded-circle card-img-top', $card);
               $image_size = apply_filters( 'mind_staff_cards_image_size', 'grid-image', $card );
-              mapi_write_log($image_size);
               if($card['staff_page_link']) :
                 echo '<a href="' . $card['staff_page_link']['url'] . '" target="' . $card['staff_page_link']['target'] . '">';
               endif;
