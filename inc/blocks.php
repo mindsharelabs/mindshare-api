@@ -362,7 +362,7 @@ add_action('acf/init', function () {
 
 
 if( function_exists('acf_add_local_field_group') ):
-	add_action( 'init', function() {
+	add_action( 'acf/init', function() {
 
 		global $_wp_additional_image_sizes;
 		$args = array(
