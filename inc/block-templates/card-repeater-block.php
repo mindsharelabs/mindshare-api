@@ -61,7 +61,7 @@ if($block_card_repeater) :
               endif;
             endif;
 
-            if($card['card_header'] || $card['card_link'] || $card['card_body']) :
+            if($card['card_header'] || $card['card_body']) :
               echo '<div class="card-body">';
                 if($card['card_header']) :
 
