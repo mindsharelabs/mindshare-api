@@ -60,12 +60,19 @@ if($mind_staff_cards['staff_cards']) :
               echo ($card['title'] ? '<span class="staff-title text-center d-block">' . $card['title'] . '</span>' : '');
 
               if($card['staff_links']) :
-                echo '<div class="d-flex flex-column my-1">';
+                echo '<div class="d-flex flex-row justify-content-center my-1">';
                   foreach ($card['staff_links'] as $key => $s_link) :
 
-                    echo '<a class="py-1 d-block" href="' . $s_link['link']['url'] . '" target="' . $s_link['link']['target'] . '" title="' . $s_link['link']['title'] . '">';
-                      echo '<div class="py-1 small"><i class="me-1 fa-lg ' . $s_link['icon'] . '"></i><span class=" label">' . $s_link['link']['title'] . '</span></div>';
+                    echo '<a class="py-1 d-block"
+                      href="' . (isset($s_link['link']['url']) ? $s_link['link']['url'] : '') . '"
+                      target="' . (isset($s_link['link']['target']) ? $s_link['link']['target'] : '') . '"
+                      title="' . (isset($s_link['link']['title']) ? $s_link['link']['title'] : '') . '">';
+
+                      echo (isset($s_link['icon']) ? '<i class="me-1 fa-lg ' . ($s_link['icon']) . '"></i>' : '');
+                      echo '<span class="label">' . (isset($s_link['link']['title']) ? $s_link['link']['title'] : '') . '</span>';
+
                     echo '</a>';
+
                   endforeach;
                 echo '</div>';
               endif;
