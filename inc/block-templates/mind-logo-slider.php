@@ -44,6 +44,14 @@ if($mind_logo_slides['images']) :
 
     echo '</div>';
 
+    echo '<div class="slide-nav">';
+      echo '<div class="buttons">';
+        echo '<div class="interaction mapi-slide-prev"><i class="fas fa-angle-left"></i></div>';
+        echo '<div class="interaction mapi-slide-dots"></div>';
+        echo '<div class="interaction mapi-slide-next"><i class="fas fa-angle-right"></i></div>';
+      echo '</div>';
+    echo '</div>';
+
   echo '</div>';
 
 endif;

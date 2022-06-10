@@ -24,16 +24,18 @@
 
 
 			$('.mind-logo-slider .mapi-slider-container').each(function(i, e) {
-
 				var sliderID = $(e).attr('data-id');
 
 				$(e).slick({
-					dots : false,
-					arrows : false,
+					dots : true,
+					arrows : true,
 					infinite : true,
 					slidesToShow: 6,
 					slidesToScroll: 3,
 					// setting-name: setting-value
+					nextArrow: $('#' + sliderID + ' .mapi-slide-next'),
+					prevArrow: $('#' + sliderID + ' .mapi-slide-prev'),
+					appendDots: $('#' + sliderID + ' .mapi-slide-dots'),
 					responsive: [
 				    {
 				      breakpoint: 1024,
@@ -41,7 +43,6 @@
 				        slidesToShow: 4,
 				        slidesToScroll: 2,
 				        infinite: true,
-				        dots: false
 				      }
 				    },
 				    {
