@@ -1057,6 +1057,25 @@ if( function_exists('acf_add_local_field_group') ):
 			'title' => 'Block: Accordion',
 			'fields' => array(
 				array(
+					'key' => 'field_6asd3jk0a2314ad77ae9dd',
+					'label' => 'First Accordion Start Open',
+					'name' => 'mapi_first_accordion_open',
+					'type' => 'true_false',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'message' => '',
+					'default_value' => 1,
+					'ui' => 1,
+					'ui_on_text' => '',
+					'ui_off_text' => '',
+				),
+				array(
 					'key' => 'field_5faae6330b120',
 					'label' => 'Accordions',
 					'name' => 'accordions',

@@ -26,23 +26,28 @@ if( !empty($block['align']) ) {
 
 // Load values and assing defaults.
 $accordions = get_field('accordions');
+$first_open = get_field('mapi_first_accordion_open');
+
 if($accordions) :
   echo '<div class="' . $className . '">';
 
 
     echo '<div class="accordion" id="accordion' . $id . '">';
       foreach ($accordions as $key => $accordion) :
+
+        $open = ($key == 0 ? $first_open : false);
+
         echo '<div class="accordion-item">';
 
           echo '<h2 class="accordion-header mt-0 mb-0" id="heading-' . $key . '-' . $id . '">';
-            echo '<button class="accordion-button ' . ($key == 0 ? '' : 'collapsed') . '" type="button" data-bs-toggle="collapse" data-bs-target="#collapse' . $key . '-' . $id . '" aria-expanded="' . ($key == 0 ? 'true' : 'false') . '" aria-controls="collapse' . $key . '-' . $id . '">';
-              echo $accordion['accordion_header'];
+            echo '<button class="accordion-button ' . ($open ? '' : 'collapsed') . '" type="button" data-bs-toggle="collapse" data-bs-target="#collapse' . $key . '-' . $id . '" aria-expanded="' . ($open ? 'true' : 'false') . '" aria-controls="collapse' . $key . '-' . $id . '">';
+              echo (isset($accordion['accordion_header']) ? $accordion['accordion_header'] : 'Accordion ' . $key);
             echo '</button>';
           echo '</h2>';
 
-          echo '<div id="collapse' . $key . '-' . $id . '" class="accordion-collapse collapse ' . ($key == 0 ? 'show' : '') . '" aria-labelledby="heading' . $key . '-' . $id . '" data-bs-parent="#accordion' . $id . '">';
+          echo '<div id="collapse' . $key . '-' . $id . '" class="accordion-collapse collapse ' . ($open ? 'show' : '') . '" aria-labelledby="heading' . $key . '-' . $id . '" data-bs-parent="#accordion' . $id . '">';
             echo '<div class="accordion-body">';
-              echo $accordion['content'];
+              echo (isset($accordion['content']) ? $accordion['content'] : '');
             echo '</div>';
           echo '</div>';
 
