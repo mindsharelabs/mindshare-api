@@ -55,7 +55,7 @@ if($block_card_repeater) :
               if($card['card_link']) :
                 echo '<a href="' . $card['card_link']['url'] . '" target="' . $card['card_link']['target'] . '">';
               endif;
-              echo wp_get_attachment_image( $card['card_image']['id'], 'loop-thumbnail', false, array('class'=> 'card-img-top w-100') );
+              echo wp_get_attachment_image( $card['card_image']['id'], 'horizontal-media-image', false, array('class'=> 'card-img-top w-100') );
               if($card['card_link']) :
                 echo '</a>';
               endif;
