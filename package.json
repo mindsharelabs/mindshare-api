@@ -8,11 +8,11 @@
     "url": "ssh://git@git.mindsharelabs.com:devops/mindblank.git"
   },
   "devDependencies": {
-    "del": "^5.1.0",
+    "del": "^6.1.1",
     "gulp": "^4.0.2",
-    "gulp-sass": "^5.0.0",
+    "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^3.0.0",
-    "node-sass": "^6.0.1"
+    "node-sass": "^7.0.1"
   },
   "author": "Mindshare Labs, Inc.",
   "license": "GPL-3.0",

@@ -60,22 +60,26 @@ if($block_card_repeater) :
                 echo '</a>';
               endif;
             endif;
-            echo '<div class="card-body">';
-              if($card['card_header']) :
 
-                if($card['card_link']) :
-                  echo '<a href="' . $card['card_link']['url'] . '" target="' . $card['card_link']['target'] . '">';
-                endif;
-                  echo '<h4 class="mb-2 mt-1">' . $card['card_header'] . '</h4>';
-                if($card['card_link']) :
-                  echo '</a>';
-                endif;
+            if($card['card_header'] || $card['card_body']) :
+              echo '<div class="card-body">';
+                if($card['card_header']) :
 
-              endif;
-              if($card['card_body']) :
-                echo $card['card_body'];
-              endif;
-            echo '</div>';
+                  if($card['card_link']) :
+                    echo '<a href="' . $card['card_link']['url'] . '" target="' . $card['card_link']['target'] . '">';
+                  endif;
+                    echo '<h4 class="mb-2 mt-1">' . $card['card_header'] . '</h4>';
+                  if($card['card_link']) :
+                    echo '</a>';
+                  endif;
+
+                endif;
+                if($card['card_body']) :
+                  echo $card['card_body'];
+                endif;
+              echo '</div>';
+            endif;
+
             if($card['card_link']) :
               echo '<div class="card-footer">';
                 echo '<a href="' . $card['card_link']['url'] . '" target="' . $card['card_link']['target'] . '">' . $card['card_link']['title'] . '</a>';

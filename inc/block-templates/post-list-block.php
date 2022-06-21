@@ -26,6 +26,11 @@ if( !empty($block['align']) ) {
 
 // Load values and assing defaults.
 $post_list_block = get_field('post_list_block');
+
+if(!$post_list_block['posts_per_page']) :
+  $post_list_block['posts_per_page'] = get_option( 'posts_per_page' );
+endif;
+
 if($post_list_block) :
   $args = array(
     'posts_per_page' => $post_list_block['posts_per_page'],
@@ -41,6 +46,9 @@ if($post_list_block) :
   );
 
   $med_container = 'col-md-4';
+
+
+
   if($post_list_block['posts_per_page'] % 2 == 0) {
     $med_container = 'col-md-6';
   }
