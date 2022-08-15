@@ -46,6 +46,12 @@ add_action( 'tgmpa_register', function() {
 			'force_activation' => true
 		),
 		array(
+			'name'     => 'Regenerate Thumbnails',
+			'slug'     => 'regenerate-thumbnails',
+			'required' => false,
+			'force_activation' => false
+		),
+		array(
 			'name'     => 'What the File',
 			'slug'     => 'what-the-file',
 			'required' => true,

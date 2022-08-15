@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Accordion Block
+ * Card Repeater Block
  *
  * @param   array $block The block settings and attributes.
  * @param   string $content The block inner HTML (empty).
@@ -28,7 +28,7 @@ if( !empty($block['align']) ) {
 $block_card_repeater = get_field('block_card_repeater');
 $num_columns = $block_card_repeater['num_columns'];
 if($block_card_repeater) :
-  echo '<div class="' . $className . '" id="accordion' . $id . '">';
+  echo '<div class="' . $className . '" id="' . $id . '">';
     echo '<div class="row">';
       foreach ($block_card_repeater['cards'] as $key => $card) :
 

@@ -14,7 +14,7 @@ if(!function_exists('mapi_var_dump')) {
     if (current_user_can('administrator') && isset($var)) {
         echo '<pre>';
         var_dump($var);
-        echo '</pre>';
+        echo '</pre>'; 
     }
   }
 }
