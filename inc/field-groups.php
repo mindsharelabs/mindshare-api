@@ -325,10 +325,12 @@ endif;
 
 
 function mapi_generate_popup_cookie() {
+  if(function_exists('get_current_screen')) :
     $screen = get_current_screen();
     if ($screen->id == 'toplevel_page_website-popup') {
       $cookie = wp_generate_password(12, false, false );
       update_option( 'mapi-website-popup-cookie', $cookie);
     }
+  endif;
 }
 add_action('acf/save_post', 'mapi_generate_popup_cookie', 20);
