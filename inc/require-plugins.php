@@ -32,11 +32,11 @@ add_action( 'tgmpa_register', function() {
 		// This is an example of how to include a plugin from a GitHub repository in your theme.
 		// This presumes that the plugin code is based in the root of the GitHub repository
 		// and not in a subdirectory ('/src') of the repository.
-		array(
-			'name'   => 'ACF Better Address Field',
-			'slug'   => 'ACF-Better-Address-Field',
-			'source' => 'https://github.com/mindsharelabs/ACF-Better-Address-Field/releases/latest/download/ACF-Better-Address-Field-master.zip',
-		),
+		// array(
+		// 	'name'   => 'ACF Better Address Field',
+		// 	'slug'   => 'ACF-Better-Address-Field',
+		// 	'source' => 'https://github.com/mindsharelabs/ACF-Better-Address-Field/releases/latest/download/ACF-Better-Address-Field-master.zip',
+		// ),
 
 		// // This is an example of how to include a plugin from the WordPress Plugin Repository.
 		array(
