@@ -40,7 +40,7 @@ if($accordions) :
         echo '<div class="accordion-item">';
 
           echo '<h2 class="accordion-header mt-0 mb-0" id="heading-' . $key . '-' . $id . '">';
-            echo '<button class="accordion-button text-start' . ($open ? '' : 'collapsed') . '" type="button" data-bs-toggle="collapse" data-bs-target="#collapse' . $key . '-' . $id . '" aria-expanded="' . ($open ? 'true' : 'false') . '" aria-controls="collapse' . $key . '-' . $id . '">';
+            echo '<button class="accordion-button text-start ' . ($open ? '' : 'collapsed') . '" type="button" data-bs-toggle="collapse" data-bs-target="#collapse' . $key . '-' . $id . '" aria-expanded="' . ($open ? 'true' : 'false') . '" aria-controls="collapse' . $key . '-' . $id . '">';
               echo (isset($accordion['accordion_header']) ? $accordion['accordion_header'] : 'Accordion ' . $key);
             echo '</button>';
           echo '</h2>';
