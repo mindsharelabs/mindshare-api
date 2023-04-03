@@ -41,7 +41,7 @@ if($images) :
     $classes = 'col-12 col-md-3';
   endif;
 
-  echo '<div class="' . $className . ' row" id="' . $id . '">';
+  echo '<div class="' . $className . ' row gy-3" id="' . $id . '">';
     foreach ($images as $key => $image) :
       echo '<div class="' . $classes . '">';
         echo '<div class="card d-flex flex-column h-100 text-center">';
