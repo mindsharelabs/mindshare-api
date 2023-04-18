@@ -302,6 +302,7 @@ add_action('acf/init', function () {
 				wp_register_style( 'lightbox-styles', MAPI_URL . 'inc/css/simple-lightbox.min.css' );
 				add_action( 'get_footer', function () {wp_enqueue_style('lightbox-styles');});
 
+				//https://github.com/andreknieriem/simplelightbox
 				wp_register_script('image-lightbox-js', MAPI_URL. 'inc/js/simple-lightbox.jquery.min.js', array('jquery'), MAPI_PLUGIN_VERSION, true);
 				wp_enqueue_script('image-lightbox-js');
 
