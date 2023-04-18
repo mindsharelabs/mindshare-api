@@ -16,7 +16,7 @@ if( !empty($block['anchor']) ) {
 }
 
 // Create class attribute allowing for custom "className" and "align" values.
-$className = 'image-grid';
+$className = 'mapi-image-grid';
 if( !empty($block['className']) ) {
     $className .= ' ' . $block['className'];
 }
@@ -26,35 +26,25 @@ if( !empty($block['align']) ) {
 
 // Load values and assing defaults.
 $images = get_field('block_image_grid');
+$crop_images = get_field('crop_images');
 if($images) :
   $count = count($images);
 
-  if($count == 1) :
-    $classes = 'col-12';
-  elseif($count == 2) :
-    $classes = 'col-12 col-md-6';
-  elseif($count % 3 == 0) :
-    $classes = 'col-12 col-md-4';
-  elseif($count % 4 == 0) :
-    $classes = 'col-12 col-md-3';
-  else :
-    $classes = 'col-12 col-md-3';
-  endif;
+  $classes = 'col-12 col-md-6';
+
 
   echo '<div class="' . $className . ' row gy-1 gx-1" id="' . $id . '">';
     foreach ($images as $key => $image) :
       echo '<div class="' . $classes . '">';
         echo '<div class="card d-flex flex-column h-100 text-center">';
-
-          echo ($image['link'] ? '<a href="' . $image['link']['url'] . '">' : '');
-            echo wp_get_attachment_image( $image['image']['id'], 'grid-image',false, array('class' => 'card-image-top w-100') );
-          echo ($image['link'] ? '</a>' : '');
+  
+          echo '<a href="' . $image['image']['url'] . '">';
+            echo wp_get_attachment_image( $image['image']['id'], ($crop_images ? 'loop-square' : 'grid-image'), false, array('class' => 'card-image-top w-100') );
+          echo '</a>';
 
           if($image['title'] || $image['desc']) :
             echo '<div class="card-body p-2">';
-              echo ($image['link'] ? '<a href="' . $image['link']['url'] . '">' : '');
               echo ($image['title'] ? '<h3>' . $image['title'] . '</h3>' : '');
-              echo ($image['link'] ? '</a>' : '');
               echo ($image['desc'] ? $image['desc'] : '');
             echo '</div>';
           endif;
