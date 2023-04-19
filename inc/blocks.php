@@ -328,6 +328,10 @@ add_action('acf/init', function () {
 				wp_register_script('image-lightbox-js', MAPI_URL. 'inc/js/simple-lightbox.jquery.min.js', array('jquery'), MAPI_PLUGIN_VERSION, true);
 				wp_enqueue_script('image-lightbox-js');
 
+
+				wp_register_script('masonry-js', 'https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js', array('jquery'), MAPI_PLUGIN_VERSION, true);
+				wp_enqueue_script('masonry-js');
+
 				wp_register_script('lightbox-init', MAPI_URL. 'inc/js/lightbox-init.js', array('jquery', 'image-lightbox-js'), MAPI_PLUGIN_VERSION, true);
 				wp_enqueue_script('lightbox-init');
 
@@ -1402,25 +1406,7 @@ acf_add_local_field_group(array(
 					'max_size' => '',
 					'mime_types' => '',
 				),
-				array(
-					'key' => 'field_5fa9a86064f7d',
-					'label' => 'Title',
-					'name' => 'title',
-					'type' => 'text',
-					'instructions' => '',
-					'required' => 0,
-					'conditional_logic' => 0,
-					'wrapper' => array(
-						'width' => '',
-						'class' => '',
-						'id' => '',
-					),
-					'default_value' => '',
-					'placeholder' => '',
-					'prepend' => '',
-					'append' => '',
-					'maxlength' => '',
-				),
+				
 				array(
 					'key' => 'field_5fa9a86464f7e',
 					'label' => 'Description',
@@ -1437,7 +1423,7 @@ acf_add_local_field_group(array(
 					'default_value' => '',
 					'placeholder' => '',
 					'maxlength' => '',
-					'rows' => '',
+					'rows' => 3,
 					'new_lines' => '',
 				),
 			),
