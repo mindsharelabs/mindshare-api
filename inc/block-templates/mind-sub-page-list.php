@@ -28,7 +28,7 @@ if( !empty($block['align']) ) {
 $args = array(
     'post_type'      => 'page',
     'posts_per_page' => -1,
-    'post_parent'    => $post->ID,
+    'post_parent'    => get_the_id(),
     'order'          => 'ASC',
     'orderby'        => 'menu_order'
  );
