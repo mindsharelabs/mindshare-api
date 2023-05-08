@@ -207,7 +207,9 @@ add_action('acf/init', function () {
 				wp_register_style( 'mapi-block-styles', MAPI_URL . 'inc/css/block-styles.css' );
 				add_action( 'get_footer', function () {wp_enqueue_style('mapi-block-styles');});
 
-				wp_register_script('google-maps', 'https://maps.googleapis.com/maps/api/js?key=' . GOOGLE_MAPS_API_KEY, array('jquery'), MAPI_PLUGIN_VERSION, true);
+				$options = get_option( 'mapi_plugin_options' );
+
+				wp_register_script('google-maps', 'https://maps.googleapis.com/maps/api/js?key=' . (isset($options['mapi_google_api_key']) ? $options['mapi_google_api_key'] : ''), array('jquery'), MAPI_PLUGIN_VERSION, true);
 				wp_enqueue_script('google-maps');
 
 				wp_register_script('map-block-init', MAPI_URL . 'inc/js/map-init.js', array('jquery', 'google-maps'), MAPI_PLUGIN_VERSION, true);

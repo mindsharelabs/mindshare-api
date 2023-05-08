@@ -25,10 +25,8 @@ class mapiPlugin {
     $this->define( 'ACF_PRO_LICENSE', 'b3JkZXJfaWQ9MzI5NTN8dHlwZT1kZXZlbG9wZXJ8ZGF0ZT0yMDE0LTA3LTA3IDE1OjU4OjE5');
 
 
-		//TODO: Change this to options
-    $this->define( 'GOOGLE_MAPS_API_KEY', 'AIzaSyC0Wo2IFDzXPY18ERmsgXjKljUl1wh9Dl8');
-    $this->define( 'FACETWP_LICENSE_KEY', '6034a621ec91fb6f728dc2ba74c66a3c');
 
+   
     $this->define('MIND_ACF_PATH', MAPI_ABSPATH . '/includes/acf/' );
     $this->define('MIND_ACF_URL', MAPI_URL . '/includes/acf/' );
 
@@ -79,7 +77,8 @@ class mapiPlugin {
     include_once MAPI_ABSPATH . 'inc/scripts-and-styles.php';
     include_once MAPI_ABSPATH . 'inc/widgets.php';
     include_once MAPI_ABSPATH . 'inc/ajax.php';
-    include_once MAPI_ABSPATH . 'inc/popups/popup.php';
+    // include_once MAPI_ABSPATH . 'inc/popups/popup.php';
+    include_once MAPI_ABSPATH . 'inc/options.php';
 
 
 

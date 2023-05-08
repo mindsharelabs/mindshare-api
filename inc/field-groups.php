@@ -22,6 +22,71 @@ if( function_exists('acf_add_options_page') ) {
 
 if( function_exists('acf_add_local_field_group') ):
 
+	acf_add_local_field_group( array(
+		'key' => 'group_64592a3034ae7',
+		'title' => '3rd Party APIs',
+		'fields' => array(
+			array(
+				'key' => 'field_64592a30882f1',
+				'label' => 'Google Maps API',
+				'name' => 'google_maps_api',
+				'aria-label' => '',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => 'AIzaSyDf942BZzWwDifk88ZzA68yhGZ46lCutQI',
+				'maxlength' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+			),
+			array(
+				'key' => 'field_64592aafedd83',
+				'label' => 'Facet WP API',
+				'name' => 'facet_wp_api',
+				'aria-label' => '',
+				'type' => 'text',
+				'instructions' => '',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'default_value' => '6034a621ec91fb6f728dc2ba74c66a3c',
+				'maxlength' => '',
+				'placeholder' => '',
+				'prepend' => '',
+				'append' => '',
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'options_page',
+					'operator' => '==',
+					'value' => 'mindshare-settings',
+				),
+			),
+		),
+		'menu_order' => 0,
+		'position' => 'normal',
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => '',
+		'active' => true,
+		'description' => '',
+		'show_in_rest' => 0,
+	) );
+
 
 
 
