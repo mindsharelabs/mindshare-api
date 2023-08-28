@@ -207,16 +207,15 @@ add_action('acf/init', function () {
 				wp_register_style( 'mapi-block-styles', MAPI_URL . 'inc/css/block-styles.css' );
 				add_action( 'get_footer', function () {wp_enqueue_style('mapi-block-styles');});
 
-				$options = get_option( 'mapi_plugin_options' );
-
-				wp_register_script('google-maps', 'https://maps.googleapis.com/maps/api/js?key=' . (isset($options['mapi_google_api_key']) ? $options['mapi_google_api_key'] : ''), array('jquery'), MAPI_PLUGIN_VERSION, true);
+				$google_maps_api = get_field('google_maps_api', 'options');
+				wp_register_script('google-maps', 'https://maps.googleapis.com/maps/api/js?key=' . ($google_maps_api ? $google_maps_api : ''), array('jquery'), MAPI_PLUGIN_VERSION, true);
 				wp_enqueue_script('google-maps');
 
 				wp_register_script('map-block-init', MAPI_URL . 'inc/js/map-init.js', array('jquery', 'google-maps'), MAPI_PLUGIN_VERSION, true);
 				wp_enqueue_script('map-block-init');
-				wp_localize_script( 'map-block-init', 'map_box_params', array(
+				wp_localize_script( 'map-block-init', 'map_param_data', array(
 					'postID' => get_the_id(), // WordPress AJAX
-					'data' => get_field('map_block_options')
+					'locations' => get_field('map_w_marker')
 				));
 
 
@@ -913,13 +912,13 @@ acf_add_local_field_group(array(
 				'class' => '',
 				'id' => '',
 			),
-			'layout' => 'block',
+			'collapsed' => '',
 			'sub_fields' => array(
 				array(
-					'key' => 'field_5fad8c1513f54',
-					'label' => 'Location',
-					'name' => 'location',
-					'type' => 'google_map',
+					'key' => 'field_5faqwafd34rfad',
+					'label' => 'Map w/ Marker',
+					'name' => 'map_w_marker_locations',
+					'type' => 'repeater',
 					'instructions' => '',
 					'required' => 0,
 					'conditional_logic' => 0,
@@ -928,13 +927,74 @@ acf_add_local_field_group(array(
 						'class' => '',
 						'id' => '',
 					),
-					'center_lat' => '',
-					'center_lng' => '',
-					'zoom' => '',
-					'height' => '',
+					'collapsed' => '',
+					'min' => 1, 
+					'max' => '',
+					'layout' => 'block',
+					'button_label' => 'Add Location',
+					'sub_fields' => array(
+						array(
+							'key' => 'field_62iygauo8hp9ocv7d',
+							'label' => 'Latitude',
+							'name' => 'latitude',
+							'type' => 'text',
+							'instructions' => '',
+							'required' => 1,
+							'conditional_logic' => 0,
+							'wrapper' => array(
+								'width' => '33.3333333333%',
+								'class' => '',
+								'id' => '',
+							),
+							'default_value' => '',
+							'placeholder' => '',
+							'prepend' => '',
+							'append' => '',
+							'maxlength' => '',
+						),
+						array(
+							'key' => 'field_6p0987oyhasd',
+							'label' => 'Longitude',
+							'name' => 'longitude',
+							'type' => 'text',
+							'instructions' => '',
+							'required' => 1,
+							'conditional_logic' => 0,
+							'wrapper' => array(
+								'width' => '33.3333333333%',
+								'class' => '',
+								'id' => '',
+							),
+							'default_value' => '',
+							'placeholder' => '',
+							'prepend' => '',
+							'append' => '',
+							'maxlength' => '',
+						),
+						array(
+							'key' => 'field_6p5896advbntrwaad',
+							'label' => 'Icon',
+							'name' => 'icon',
+							'type' => 'text',
+							'instructions' => '<small>Fontawesome.com icon name. Example: fa-map-marker-alt</small>',
+							'required' => 0,
+							'conditional_logic' => 0,
+							'wrapper' => array(
+								'width' => '33.3333333333%',
+								'class' => '',
+								'id' => '',
+							),
+							'default_value' => 'fa-map-marker-alt',
+							'placeholder' => '',
+							'prepend' => '',
+							'append' => '',
+							'maxlength' => '',
+							
+						),
+					),
 				),
-			),
-		),
+			)
+		)
 	),
 	'location' => array(
 		array(
@@ -949,7 +1009,7 @@ acf_add_local_field_group(array(
 	'position' => 'normal',
 	'style' => 'default',
 	'label_placement' => 'top',
-	'instruction_placement' => 'label',
+	'instruction_placement' => 'field',
 	'hide_on_screen' => '',
 	'active' => true,
 	'description' => '',

@@ -1,5 +1,8 @@
 (function( $ ) {
 
+
+console.log(map_param_data);
+
 /**
  * initMap
  *
