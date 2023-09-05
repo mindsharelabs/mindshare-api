@@ -204,19 +204,21 @@ add_action('acf/init', function () {
 			),
 			'enqueue_assets' => function(){
 				// We're just registering it here and then with the action get_footer we'll enqueue it.
-				wp_register_style( 'mapi-block-styles', MAPI_URL . 'inc/css/block-styles.css' );
+				wp_register_style( 'mapi-block-styles', MAPI_URL . 'inc/css/block-styles.css', array(), MAPI_PLUGIN_VERSION );
 				add_action( 'get_footer', function () {wp_enqueue_style('mapi-block-styles');});
 
 				$google_maps_api = get_field('google_maps_api', 'options');
 				wp_register_script('google-maps', 'https://maps.googleapis.com/maps/api/js?key=' . ($google_maps_api ? $google_maps_api : ''), array('jquery'), MAPI_PLUGIN_VERSION, true);
 				wp_enqueue_script('google-maps');
 
-				wp_register_script('map-block-init', MAPI_URL . 'inc/js/map-init.js', array('jquery', 'google-maps'), MAPI_PLUGIN_VERSION, true);
+				wp_register_script('google-maps-clustering', 'https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js', array('jquery', 'google-maps'), MAPI_PLUGIN_VERSION, true);
+				wp_enqueue_script('google-maps-clustering');
+
+				wp_register_script('map-block-init', MAPI_URL . 'inc/js/map-init.js', array('jquery', 'google-maps', 'google-maps-clustering'), MAPI_PLUGIN_VERSION, true);
 				wp_enqueue_script('map-block-init');
 				wp_localize_script( 'map-block-init', 'map_param_data', array(
 					'postID' => get_the_id(), // WordPress AJAX
-					'locations' => get_field('map_w_marker')
-				));
+					));
 
 
 			},
@@ -971,26 +973,7 @@ acf_add_local_field_group(array(
 							'append' => '',
 							'maxlength' => '',
 						),
-						array(
-							'key' => 'field_6p5896advbntrwaad',
-							'label' => 'Icon',
-							'name' => 'icon',
-							'type' => 'text',
-							'instructions' => '<small>Fontawesome.com icon name. Example: fa-map-marker-alt</small>',
-							'required' => 0,
-							'conditional_logic' => 0,
-							'wrapper' => array(
-								'width' => '33.3333333333%',
-								'class' => '',
-								'id' => '',
-							),
-							'default_value' => 'fa-map-marker-alt',
-							'placeholder' => '',
-							'prepend' => '',
-							'append' => '',
-							'maxlength' => '',
-							
-						),
+					
 					),
 				),
 			)
