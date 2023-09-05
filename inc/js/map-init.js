@@ -1,7 +1,3 @@
-
-
-
-
 async function initMap($el) {
     
     // Request needed libraries.
