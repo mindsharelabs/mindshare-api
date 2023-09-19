@@ -30,7 +30,7 @@ if($mind_staff_cards['staff_cards']) :
   echo '<div class="' . $className . '" id="' . $id . '">';
     echo '<div class="row justify-content-start">';
       foreach ($mind_staff_cards['staff_cards'] as $key => $card) :
-        $card_classes = apply_filters('mind_staff_card_classes', 'col-12 col-md-6 col-lg-4 d-flex flex-column h-100 justify-content-between', $card);
+        $card_classes = apply_filters('mind_staff_card_classes', 'col-12 col-md-6 col-lg-4 d-flex flex-column h-100 justify-content-between', $card, $mind_staff_cards['staff_cards']);
         echo '<div class="' . $card_classes . '">';
             if($card['image']) :
               $classes = apply_filters('mind_staff_cards_image_classes', 'rounded-circle card-img-top', $card);
