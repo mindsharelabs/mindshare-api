@@ -57,9 +57,12 @@ if($mind_staff_cards['staff_cards']) :
               if($card['staff_page_link']) :
                 echo '</a>';
               endif;
-              echo ($card['title'] ? '<span class="staff-title text-center d-block">' . $card['title'] . '</span>' : '');
+              echo ($card['title'] ? '<span class="staff-title d-block">' . $card['title'] . '</span>' : '');
 
-              if($card['staff_links']) :
+
+              $show_link_button = apply_filters('mind_staff_card_show_link_button', true, $card);
+
+              if($card['staff_links'] && $show_link_button) :
                 echo '<div class="d-flex flex-row justify-content-center my-1">';
                   foreach ($card['staff_links'] as $key => $s_link) :
 
@@ -77,6 +80,7 @@ if($mind_staff_cards['staff_cards']) :
                 echo '</div>';
               endif;
               if($card['short_bio']) :
+                do_action('mind_sbefore_taff_card_bio', $card);
                 echo '<div class="staff-bio">';
                   echo $card['short_bio'];
                 echo '</div>';

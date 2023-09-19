@@ -24,16 +24,27 @@ if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
 }
 
+
+
+echo '<script> var locations = []; </script>';
+
 // Load values and assing defaults.
 $map_w_marker = get_field('map_w_marker');
-
-if($map_w_marker['location']['lat'] && $map_w_marker['location']['lng']) :
-  echo '<div class="acf-map ' . $className . '" id="' . $id . '" data-zoom="16">';
+if($map_w_marker['map_w_marker_locations']) :
+  echo '<div class="acf-map ' . $className . '" id="' . $id . '" data-zoom="16"></div>';
     // Load sub field values.
-    $description = get_sub_field('description');
-    echo '<div class="marker" data-lat="' . esc_attr($map_w_marker['location']['lat']) . '" data-lng="' . esc_attr($map_w_marker['location']['lng']) . '">';
-      echo '<p><em>' . esc_html( $map_w_marker['location']['address'] ) . '</em></p>';
-      echo '<p>' . esc_html( $description ) . '</p>';
-    echo '</div>';
-  echo '</div>';
+  echo '<script>';
+    foreach($map_w_marker['map_w_marker_locations'] as $location) :
+      if($location['latitude'] && $location['longitude']) :
+
+          echo 'var newItem = {
+            lat: ' . (float)esc_attr($location['latitude']) . ',
+            lng: ' . (float)esc_attr($location['longitude']) . ',
+          };';
+
+          echo 'locations.push(newItem);';
+      endif;
+    endforeach;
+  echo '</script>';
+
 endif;

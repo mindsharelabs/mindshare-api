@@ -24,18 +24,6 @@ add_action('wp_enqueue_scripts', function () {
 
 
 
-  // wp_register_script('mind-modal-init',  MAPI_URL . '/inc/js/modal-init.js', array('jquery', 'mind-bootstrap-js'), MAPI_PLUGIN_VERSION, true);
-
-  // if(get_field('enable_modal', 'options')) :
-  //   wp_enqueue_script('mind-modal-init');
-  //   wp_localize_script( 'mind-modal-init', 'mindModalSettings', array(
-  //     'postID' => get_the_id(),
-  //     'show' => mind_check_page_modal(get_the_id(), get_field('location_settings', 'options'))
-  //   ));
-
-  //   wp_register_script('mind-notice-cookie-js', 'https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js', array(), MAPI_PLUGIN_VERSION);
-  //   wp_enqueue_script('mind-notice-cookie-js');
-  // endif;
 
 
 }, 100);
