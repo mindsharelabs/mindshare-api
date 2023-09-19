@@ -223,6 +223,7 @@
 
 .image-slider{
   position: relative;
+  overflow-x: hidden;
   .mapi-slider-container {
     .image-slide {
       img {
