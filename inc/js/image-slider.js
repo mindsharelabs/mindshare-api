@@ -25,7 +25,7 @@
 
 			$('.mind-logo-slider .mapi-slider-container').each(function(i, e) {
 				var sliderID = $(e).attr('data-id');
-
+				var autoPlay = JSON.parse($(e).attr('autoplay'));
 				$(e).slick({
 					dots : true,
 					arrows : true,

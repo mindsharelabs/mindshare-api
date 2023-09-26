@@ -27,6 +27,7 @@ if( !empty($block['align']) ) {
 // Load values and assing defaults.
 $images = get_field('block_image_slides');
 $slide_image_size = get_field('slide_image_size');
+$autoplay = (get_field('mapi_autoplay') ? 'true' : 'false');
 
 if($images) :
   echo '<div class="' . $className . ' mb-2" id="' . $id . '">';
