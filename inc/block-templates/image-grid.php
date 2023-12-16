@@ -46,7 +46,6 @@ if($images) :
 
           if($image['title'] || $image['desc']) :
             echo '<div class="card-body p-2">';
-              echo ($image['title'] ? '<h3>' . $image['title'] . '</h3>' : '');
               echo ($image['desc'] ? $image['desc'] : '');
             echo '</div>';
           endif;

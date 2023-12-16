@@ -8,16 +8,21 @@
     "url": "ssh://git@git.mindsharelabs.com:devops/mindblank.git"
   },
   "devDependencies": {
-    "del": "^6.1.1",
+    "del": "^7.1.0",
     "gulp": "^4.0.2",
     "gulp-sass": "^5.1.0",
     "gulp-sourcemaps": "^3.0.0",
-    "node-sass": "^7.0.1"
+    "node-sass": "^9.0.0"
   },
   "author": "Mindshare Labs, Inc.",
   "license": "GPL-3.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": []
+  "keywords": [],
+  "dependencies": {
+    "node-fetch": "^2.6.1",
+    "sass": "^1.55.0"
+  },
+  "type": "module"
 }

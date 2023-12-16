@@ -45,18 +45,18 @@ if($sub_pages->have_posts()) :
 		  	
 		     echo '<div class="col-6 col-md-4">';
 		     	echo '<div class=" sub-page-item">';
-			     	echo '<div class="row gx-0">';
-			     		if(has_post_thumbnail(get_the_id())) :
-				     		echo '<div class="col-2 page-image">';
-				     			echo '<a href="' . get_permalink() . '">';
-				     				the_post_thumbnail('loop-square');
-				     			echo '</a>';
-				     		echo '</div>';
-				     	endif;
-			     		echo '<div class="col page-title ps-2">';
-			     			echo '<a href="' . get_permalink() . '">' . get_the_title() .  '</a>';
-			     		echo '</div>';
-			     	echo '</div>';
+			     	
+					if(has_post_thumbnail(get_the_id())) :
+						echo '<div class=" page-image">';
+							echo '<a href="' . get_permalink() . '">';
+								the_post_thumbnail('loop-square');
+							echo '</a>';
+						echo '</div>';
+					endif;
+					echo '<div class="page-title ps-2">';
+						echo '<a href="' . get_permalink() . '">' . get_the_title() .  '</a>';
+					echo '</div>';
+			     	
 		     	echo '</div>';
 		     echo '</div>';
 		    	

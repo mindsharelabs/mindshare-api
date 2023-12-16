@@ -1470,7 +1470,7 @@ acf_add_local_field_group(array(
 					'max_size' => '',
 					'mime_types' => '',
 				),
-				
+
 				array(
 					'key' => 'field_5fa9a86464f7e',
 					'label' => 'Description',

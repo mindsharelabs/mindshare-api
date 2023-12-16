@@ -17,21 +17,31 @@
     border: 1px solid rgb(230, 230, 230);
     border-radius: 10px;
     overflow: hidden;
+    display: flex;
+    min-height: 60px;
     .page-image {
       display: flex;
       align-items: center;
-      max-height: 60px;;
+      max-height: 60px;
+      a {
+        height: 60px;
+        width: 60px;
+      }
       img {
         height: 60px;
+        width: 60px;
       }
     }
     .page-title {
-      line-height: 60px;
-      white-space: nowrap;
+      line-height: 1.2em;
+      white-space: pre-wrap;
+      margin: auto 0;
       a {
+        display: block;
         font-size: 1.2em;
         font-weight: bold;
         font-style: italic;
+        pad: 10px 0;
       }
     }
   }
@@ -148,7 +158,7 @@
   $container-width: 1500px;
   $columns: 12;
   $gap: 30px;
-  $column-width: ($container-width / $columns) - $gap;
+  $column-width: calc($container-width / $columns) - $gap;
   $breakpoint: 600px;
   .image-edge-grid {
     display: flex;
