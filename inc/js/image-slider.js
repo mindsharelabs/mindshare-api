@@ -25,14 +25,13 @@
 
 			$('.mind-logo-slider .mapi-slider-container').each(function(i, e) {
 				var sliderID = $(e).attr('data-id');
-				var autoPlay = JSON.parse($(e).attr('autoplay'));
+				// var autoPlay = JSON.parse($(e).attr('autoplay'));
 				$(e).slick({
 					dots : true,
 					arrows : true,
 					infinite : true,
 					slidesToShow: 6,
 					slidesToScroll: 3,
-					// setting-name: setting-value
 					nextArrow: $('#' + sliderID + ' .mapi-slide-next'),
 					prevArrow: $('#' + sliderID + ' .mapi-slide-prev'),
 					appendDots: $('#' + sliderID + ' .mapi-slide-dots'),

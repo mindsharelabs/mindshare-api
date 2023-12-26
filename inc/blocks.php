@@ -288,8 +288,8 @@ add_action('acf/init', function () {
 				add_action( 'get_footer', function () {wp_enqueue_style('slick-styles');});
 
 				if(!is_admin()) :
-					wp_register_script('slick-slider', MAPI_URL . 'inc/js/slick.min.js', array('jquery'), MAPI_PLUGIN_VERSION);
-					wp_enqueue_script('slick-slider');
+					wp_register_script('mapi-slick-slider', MAPI_URL . 'inc/js/slick.min.js', array('jquery'), MAPI_PLUGIN_VERSION);
+					wp_enqueue_script('mapi-slick-slider');
 
 					wp_register_script('image-slider-js', MAPI_URL. 'inc/js/image-slider.js', array('jquery', 'slick-slider'), MAPI_PLUGIN_VERSION, true);
 					wp_enqueue_script('image-slider-js');

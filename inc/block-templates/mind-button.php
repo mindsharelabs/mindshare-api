@@ -74,14 +74,14 @@ if($mind_buttons) :
             case 'column':
 
               if($alignment == 'start') :
-                $align_text = 'offset-0';
+                $align_text = 'justfy-content-start';
               elseif($alignment == 'center') :
-                $align_text = 'offset-0 offset-md-4';
+                $align_text = 'justify-content-center';
               elseif($alignment == 'end') :
-                $align_text = 'offset-0 offset-md-8';
+                $align_text = 'justifty-content-end';
               endif;
 
-              echo '<div class="d-grid gap-1 col-12 col-md-4 ' . $align_text . '" role="group">';
+              echo '<div class="d-grid gap-1 col-12 ' . $align_text . '" role="group">';
                 foreach ($mind_buttons['buttons'] as $key => $button) :
                   echo '<a
                     href="' . esc_url($button['button_link']['url']) . '"
