@@ -7,6 +7,7 @@ const sass = gulpSass(dartSass);
 import sourcemaps from 'gulp-sourcemaps';
 import {deleteAsync} from 'del';
 
+
 gulp.task('styles', () => {
     return gulp.src('scss/front.scss')
       .pipe(sourcemaps.init())
