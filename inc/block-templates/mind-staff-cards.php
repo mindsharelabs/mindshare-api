@@ -28,7 +28,7 @@ if( !empty($block['align']) ) {
 $mind_staff_cards = get_field('mind_staff_cards');
 if($mind_staff_cards['staff_cards']) :
   echo '<div class="' . $className . '" id="' . $id . '">';
-    echo '<div class="row justify-content-start">';
+    echo '<div class="row justify-content-start gy-3">';
       foreach ($mind_staff_cards['staff_cards'] as $key => $card) :
         $card_classes = apply_filters('mind_staff_card_classes', 'col-12 col-md-6 col-lg-4 d-flex flex-column h-100 justify-content-between', $card, $mind_staff_cards['staff_cards']);
         echo '<div class="' . $card_classes . '">';
@@ -63,16 +63,19 @@ if($mind_staff_cards['staff_cards']) :
               $show_link_button = apply_filters('mind_staff_card_show_link_button', true, $card);
 
               if($card['staff_links'] && $show_link_button) :
-                echo '<div class="d-flex flex-row justify-content-center my-1">';
+
+                $staff_link_classes = apply_filters('mind_staff_card_link_classes', 'd-flex flex-row justify-content-center my-1 card-links', $card);
+                echo '<div class="' . $staff_link_classes . '">';
                   foreach ($card['staff_links'] as $key => $s_link) :
 
-                    echo '<a class="py-1 d-block"
+                    echo (isset($s_link['label']) ?  '<span class="label">' . $s_link['label'] . '</span>': '');
+                    echo '<a 
                       href="' . (isset($s_link['link']['url']) ? $s_link['link']['url'] : '') . '"
                       target="' . (isset($s_link['link']['target']) ? $s_link['link']['target'] : '') . '"
                       title="' . (isset($s_link['link']['title']) ? $s_link['link']['title'] : '') . '">';
 
-                      echo (isset($s_link['icon']) ? '<i class="me-1 fa-lg ' . ($s_link['icon']) . '"></i>' : '');
-                      echo '<span class="label">' . (isset($s_link['link']['title']) ? $s_link['link']['title'] : '') . '</span>';
+                     
+                      echo '<span class="link-title">' . (isset($s_link['link']['title']) ? $s_link['link']['title'] : '') . '</span>';
 
                     echo '</a>';
 
