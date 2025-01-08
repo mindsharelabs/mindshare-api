@@ -128,11 +128,11 @@ if($post_list_block) :
             endwhile;
 
           elseif($type == 'small') :
-            echo '<ul>';
+            echo '<ul class="list-unstyled">';
             while($posts->have_posts()) :
               $posts->the_post();
-              echo '<li>';
-                echo '<h3 class="h5 d-inline"><a href="' . get_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></h3>';
+              echo '<li class="mb-3">';
+                echo '<strong><a href="' . get_permalink() . '" title="' . get_the_title() . '">' . get_the_title() . '</a></strong>';
                 echo ' - ' . get_the_excerpt();
               echo '</li>';
             endwhile;
