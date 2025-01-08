@@ -44,7 +44,7 @@ if($images) :
             echo wp_get_attachment_image( $image['image']['id'], ($crop_images ? 'loop-square' : 'grid-image'), false, array('class' => 'card-image-top w-100') );
           echo '</a>';
 
-          if(isset($image['title']) || isset($image['desc'])) :
+          if(isset($image['desc'])) :
             echo '<div class="card-body p-2">';
               echo ($image['desc'] ? $image['desc'] : '');
             echo '</div>';

@@ -748,7 +748,7 @@ acf_add_local_field_group(array(
 								'md' => 'Default',
 								'lg' => 'Large',
 							),
-							'default_value' => false,
+							'default_value' => 'md',
 							'allow_null' => 0,
 							'multiple' => 0,
 							'ui' => 0,
