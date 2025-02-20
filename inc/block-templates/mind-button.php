@@ -40,7 +40,6 @@ if($mind_buttons) :
                 foreach ($mind_buttons['buttons'] as $key => $button) :
                   echo '<a
                     href="' . esc_url($button['button_link']['url']) . '"
-                    title="' . esc_attr($button['button_link']['title']) . '"
                     class="btn btn-' . $button['button_type'] . ' btn-' . $button['button_size'] . '"
                     target="' . esc_attr($button['button_link']['target']) . '">' . html_entity_decode($button['button_link']['title']) . '</a>';
                 endforeach;
@@ -61,7 +60,6 @@ if($mind_buttons) :
                 foreach ($mind_buttons['buttons'] as $key => $button) :
                   echo '<a
                     href="' . esc_url($button['button_link']['url']) . '"
-                    title="' . esc_attr($button['button_link']['title']) . '"
                     class="m-1 btn btn-' . $button['button_type'] . ' btn-' . $button['button_size'] . '"
                     target="' . esc_attr($button['button_link']['target']) . '">' . html_entity_decode($button['button_link']['title']) . '</a>';
                 endforeach;
@@ -85,7 +83,6 @@ if($mind_buttons) :
                 foreach ($mind_buttons['buttons'] as $key => $button) :
                   echo '<a
                     href="' . esc_url($button['button_link']['url']) . '"
-                    title="' . esc_attr($button['button_link']['title']) . '"
                     class="m-1 d-block btn btn-' . $button['button_type'] . ' btn-' . $button['button_size'] . '"
                     target="' . esc_attr($button['button_link']['target']) . '">' . html_entity_decode($button['button_link']['title']) . '</a>';
                 endforeach;

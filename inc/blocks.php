@@ -564,8 +564,8 @@ if( function_exists('acf_add_local_field_group') ):
 									'sub_fields' => array(
 										array(
 											'key' => 'field_60908b137c764',
-											'label' => 'Icon',
-											'name' => 'icon',
+											'label' => 'Label',
+											'name' => 'label',
 											'type' => 'text',
 											'instructions' => '',
 											'required' => 0,
@@ -741,7 +741,7 @@ acf_add_local_field_group(array(
 								'md' => 'Default',
 								'lg' => 'Large',
 							),
-							'default_value' => false,
+							'default_value' => 'md',
 							'allow_null' => 0,
 							'multiple' => 0,
 							'ui' => 0,

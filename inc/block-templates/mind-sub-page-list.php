@@ -44,7 +44,7 @@ if($sub_pages->have_posts()) :
 			$sub_pages->the_post();
 		  	
 		     echo '<div class="col-6 col-md-4">';
-		     	echo '<div class=" sub-page-item">';
+		     	echo '<div class="sub-page-item">';
 			     	
 					if(has_post_thumbnail(get_the_id())) :
 						echo '<div class=" page-image">';
