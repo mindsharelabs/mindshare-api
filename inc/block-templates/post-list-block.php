@@ -45,7 +45,7 @@ if($post_list_block) :
     )
   );
 
-  $med_container = 'col-md-4';
+  $med_container = 'col-lg-4';
 
 
 
@@ -54,11 +54,11 @@ if($post_list_block) :
   }
 
   if($post_list_block['posts_per_page'] % 3 == 0) {
-    $med_container = 'col-md-4';
+    $med_container = 'col-lg-4';
   }
 
   if($post_list_block['posts_per_page'] % 12 == 0) {
-    $med_container = 'col-md-4';
+    $med_container = 'col-md-6 col-lg-4';
   }
 
 
@@ -152,7 +152,7 @@ if($post_list_block) :
                     foreach( $categories as $category) {
                       $name = $category->name;
                       $category_link = get_category_link( $category->term_id );
-                      echo '<a class="badge small bg-secondary text-light" href=' . $category_link . '>' . esc_attr( $name) . '</a>';
+                      echo '<a class="badge" href=' . $category_link . '>' . esc_attr( $name) . '</a>';
                     }
                     echo '<p class="text-dark mb-0">' . get_the_excerpt() . '</p>';
 
