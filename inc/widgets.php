@@ -19,7 +19,7 @@ class mind_widget extends WP_Widget {
   // Creating widget front-end
 
   public function widget( $args, $instance ) {
-    // mapi_write_log($instance);
+
     $icons = get_field('social_media_icons', 'widget_' . $args['widget_id']);
 
     $title = apply_filters( 'widget_title', $instance['title'] );
