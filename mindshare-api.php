@@ -48,23 +48,10 @@ class mapiPlugin {
   }
   private function includes() {
 
-    if( ! class_exists('ACF') ) :
-      include_once MIND_ACF_PATH . 'acf.php';
-      // Customize the url setting to fix incorrect asset URLs.
-      add_filter('acf/settings/url', function ( $url ) {
-        return MIND_ACF_URL;
-      });
-
-      // (Optional) Hide the ACF admin menu item.
-      add_filter('acf/settings/show_admin', function ( $show_admin ) {
-          return true;
-      });
-    endif;
-
 
     include_once MAPI_ABSPATH . 'inc/utilities.php';
     include_once MAPI_ABSPATH . 'inc/multiple-roles.php';
-    // Include the ACF plugin.
+
 
 		//Required Plugins
 		require_once 'inc/plugin-activation.class.php';
@@ -77,7 +64,6 @@ class mapiPlugin {
     include_once MAPI_ABSPATH . 'inc/scripts-and-styles.php';
     include_once MAPI_ABSPATH . 'inc/widgets.php';
     include_once MAPI_ABSPATH . 'inc/ajax.php';
-    // include_once MAPI_ABSPATH . 'inc/popups/popup.php';
     include_once MAPI_ABSPATH . 'inc/options.php';
 
 
