@@ -186,5 +186,13 @@ if($post_list_block) :
 
           endif;
     echo '</div>';
+  else :
+    echo '<div class="col-12">';
+      if(current_user_can('administrator')) :
+        echo '<p class="h4 text-center">No posts found.</p>';
+      endif;
+    echo '</div>';
+  
   endif;
+
 endif;
