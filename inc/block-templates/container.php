@@ -42,8 +42,8 @@ if(!isset($container_options['background_color'])) :
 endif;
 
 if($container_options) :
-  echo '<div class="container-block w-100" style="' . ($is_preview ? 'padding:10px;' : '') . 'background-color:' . $container_options['background_color'] . ';">';
-    echo '<div class="container ' . $className . '" id="' . $id . '">';
+  echo '<div class="container-block ' . $className . ' w-100" style="' . ($is_preview ? 'padding:10px;' : '') . 'background-color:' . $container_options['background_color'] . ';">';
+    echo '<div class="container" id="' . $id . '">';
       echo '<div class="row">';
         echo '<div class="block-content col-12 py-2 offset-0 offset-md-' . $offset . ' col-md-' . $container_options['width'] . '">';
           echo '<InnerBlocks  />';
