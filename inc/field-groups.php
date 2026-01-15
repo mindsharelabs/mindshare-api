@@ -1,6 +1,6 @@
 <?php
 
-add_action('init', 'mindshare_api_init');
+add_action('acf/init', 'mindshare_api_init');
 function mindshare_api_init() {
 if( function_exists('acf_add_options_page') ) {
   acf_add_options_page(array(

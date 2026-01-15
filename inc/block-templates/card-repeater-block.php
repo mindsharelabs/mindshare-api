@@ -68,7 +68,7 @@ if($block_card_repeater) :
                   if($card['card_link']) :
                     echo '<a href="' . $card['card_link']['url'] . '" target="' . $card['card_link']['target'] . '">';
                   endif;
-                    echo '<h4 class="mb-2 mt-1">' . $card['card_header'] . '</h4>';
+                    echo '<h2 class="mb-2 mt-1 text-center">' . $card['card_header'] . '</h2>';
                   if($card['card_link']) :
                     echo '</a>';
                   endif;
