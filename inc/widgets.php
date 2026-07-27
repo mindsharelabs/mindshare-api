@@ -20,7 +20,7 @@ class mind_widget extends WP_Widget {
 
   public function widget( $args, $instance ) {
 
-    $icons = get_field('social_media_icons', 'widget_' . $args['widget_id']);
+    $icons = function_exists('get_field') ? get_field('social_media_icons', 'widget_' . $args['widget_id']) : false;
 
     $title = apply_filters( 'widget_title', $instance['title'] );
 

@@ -63,12 +63,6 @@ add_action( 'tgmpa_register', function() {
 			'required' => true,
 			'force_activation' => true
 		),
-		array(
-			'name'     => 'Classic Widgets',
-			'slug'     => 'classic-widgets',
-			'required' => true,
-			'force_activation' => true
-		),
 
 
 		// // This is an example of the use of 'is_callable' functionality. A user could - for instance -

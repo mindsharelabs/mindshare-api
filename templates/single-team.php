@@ -1,6 +1,6 @@
 <?php
 get_header();
-$links = get_field('links');
+$links = function_exists('get_field') ? get_field('links') : false;
 if(have_posts()) : while(have_posts()) : the_post(); ?>
   <main role="main" aria-label="Content" <?php post_class(); ?>>
     <section class="container my-5">
@@ -26,7 +26,9 @@ if(have_posts()) : while(have_posts()) : the_post(); ?>
          ?>
         <div class="col">
           <h1 class="my-0"><?php the_title(); ?></h1>
-          <h3 class="mt-0 mb-3"><?php the_field('titlejob'); ?></h3>
+          <?php if ( function_exists('the_field') ) : ?>
+            <h3 class="mt-0 mb-3"><?php the_field('titlejob'); ?></h3>
+          <?php endif; ?>
           <hr>
           <?php the_content(); ?>
 

@@ -9,7 +9,8 @@
       <h4 class="section-title">
         <a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a>
       </h4>
-      <?php echo (get_field('titlejob') ? '<h5>' . get_field('titlejob') . '</h5>' : ''); ?>
+      <?php $titlejob = function_exists('get_field') ? get_field('titlejob') : false; ?>
+      <?php echo ($titlejob ? '<h5>' . $titlejob . '</h5>' : ''); ?>
     </div>
     <div class="overlay text-center">
       <h4 class="section-title mb-2">

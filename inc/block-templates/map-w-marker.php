@@ -24,8 +24,6 @@ if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
 }
 
-
-
 echo '<script> var locations = []; </script>';
 
 // Load values and assing defaults.

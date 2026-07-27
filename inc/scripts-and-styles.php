@@ -7,7 +7,7 @@ add_action('wp_enqueue_scripts', function () {
 
   endif;
 
-  $mind_enable_bootstrap = get_field('mind_enable_bootstrap', 'options');
+  $mind_enable_bootstrap = function_exists('get_field') ? get_field('mind_enable_bootstrap', 'options') : false;
   if($mind_enable_bootstrap) :
     if(in_array('js', $mind_enable_bootstrap)) :
       wp_register_script('mind-bootstrap-js',  MAPI_URL . 'inc/js/bootstrap/bootstrap.bundle.min.js', array('jquery'), MAPI_PLUGIN_VERSION, true);

@@ -22,9 +22,11 @@ class mapiPlugin {
     $this->define( 'MAPI_URL', plugin_dir_url( __FILE__ ));
     $this->define( 'MAPI_PLUGIN_VERSION', '2.8.2');
     $this->define( 'MAPI_PREPEND', 'mapi_');
-    $this->define( 'ACF_PRO_LICENSE', 'b3JkZXJfaWQ9MzI5NTN8dHlwZT1kZXZlbG9wZXJ8ZGF0ZT0yMDE0LTA3LTA3IDE1OjU4OjE5');
+    // ACF PRO license: do NOT hardcode a real license key in this shared plugin.
+    // Define ACF_PRO_LICENSE in each site's wp-config.php instead, e.g.:
+    //   define('ACF_PRO_LICENSE', 'your-license-key-here');
 
-   
+
     $this->define('MIND_ACF_PATH', MAPI_ABSPATH . '/includes/acf/' );
     $this->define('MIND_ACF_URL', MAPI_URL . '/includes/acf/' );
 

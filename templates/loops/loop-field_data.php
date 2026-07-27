@@ -1,5 +1,5 @@
 <?php
-$fields = get_fields(get_the_id());
+$fields = function_exists('get_fields') ? get_fields(get_the_id()) : array();
 $dimensions = get_the_terms( get_the_id(), 'dimension_category' );
 $codes  = get_the_terms( get_the_id(), 'quote_codes' );
 $descriptions  = get_the_terms( get_the_id(), 'doc_description' );
