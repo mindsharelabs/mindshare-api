@@ -15,13 +15,12 @@ if( !empty($block['anchor']) ) {
     $id = $block['anchor'];
 }
 
-// Create class attribute allowing for custom "className" and "align" values.
-$className = 'container-block';
+// This block has no align control (supports.align is false in the block
+// registration) — it must always render full-bleed, so "alignfull" is
+// added unconditionally rather than mirrored from $block['align'].
+$className = 'container-block alignfull';
 if( !empty($block['className']) ) {
     $className .= ' ' . $block['className'];
-}
-if( !empty($block['align']) ) {
-    $className .= ' align' . $block['align'];
 }
 
 // Load values and assing defaults.
@@ -42,7 +41,10 @@ if(!isset($container_options['background_color'])) :
 endif;
 
 if($container_options) :
-  echo '<div class="container-block ' . $className . ' w-100" style="' . ($is_preview ? 'padding:10px;' : '') . 'background-color:' . $container_options['background_color'] . ';">';
+  // Note: no Bootstrap "w-100" here — its "width: 100% !important" would
+  // override alignfull's "width: auto" and fight the negative-margin
+  // breakout, leaving the background narrower than the viewport.
+  echo '<div class="' . $className . '" style="' . ($is_preview ? 'padding:10px;' : '') . 'background-color:' . $container_options['background_color'] . ';">';
     echo '<div class="container" id="' . $id . '">';
       echo '<div class="row">';
         echo '<div class="block-content col-12 py-2 offset-0 offset-md-' . $offset . ' col-md-' . $container_options['width'] . '">';
