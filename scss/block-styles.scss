@@ -154,6 +154,68 @@
   }
 }
 
+// Tabs block: theme-colored .nav-tabs/.tab-content (imported by the theme's
+// styles.scss). Horizontal tabs on desktop; on mobile the underline/overlap
+// trick that .nav-tabs relies on doesn't read well stacked, so it's swapped
+// for a simple left-border "active" indicator instead.
+.tabs-block {
+  &__nav {
+    --bs-nav-link-color: var(--bs-body-color);
+    --bs-nav-link-hover-color: var(--bs-primary);
+    --bs-nav-tabs-border-width: 2px;
+    --bs-nav-tabs-link-active-color: var(--bs-primary);
+    --bs-nav-tabs-link-active-bg: transparent;
+    --bs-nav-tabs-link-active-border-color: transparent transparent var(--bs-primary);
+    --bs-nav-tabs-link-hover-border-color: transparent transparent var(--bs-primary);
+
+    // Very light backdrop behind the tab buttons themselves — kept neutral
+    // (not primary-tinted) so it doesn't compete with the active tab's own
+    // primary-colored underline/left-border.
+    background-color: var(--bs-tertiary-bg, #f8f9fa);
+    border-radius: var(--bs-border-radius) var(--bs-border-radius) 0 0;
+    padding: .375rem .375rem 0;
+
+    .nav-link {
+      font-weight: 600;
+      @include transition(150ms);
+    }
+  }
+
+  &__content {
+    padding-top: 1.25rem;
+  }
+
+  @media (max-width: 767.98px) {
+    .tabs-block__nav {
+      --bs-nav-tabs-border-width: 0;
+      border-radius: var(--bs-border-radius);
+      padding: .375rem;
+      row-gap: .125rem;
+
+      .nav-link {
+        border: 0;
+        border-left: 3px solid transparent;
+        border-radius: 0;
+
+        &.active,
+        &:hover,
+        &:focus {
+          border-left-color: var(--bs-primary);
+        }
+
+        &.active {
+          background-color: color-mix(in srgb, var(--bs-primary) 8%, transparent);
+        }
+      }
+    }
+
+    .tabs-block__content {
+      padding-top: 1rem;
+      padding-left: .25rem;
+    }
+  }
+}
+
 .media-and-image-edge {
   $container-width: 1500px;
   $columns: 12;

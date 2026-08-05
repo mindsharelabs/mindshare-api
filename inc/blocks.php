@@ -401,6 +401,32 @@ add_action('acf/init', function () {
 		)
 	);
 
+		//Block: Tabs
+		acf_register_block_type(array(
+			'name'              => 'tabs-block',
+			'title'             => __('Tabs'),
+			'description'       => __('Tabbed content: horizontal tabs on desktop, a stacked vertical list on mobile.'),
+			'render_template'   => MAPI_ABSPATH . '/inc/block-templates/tabs-block.php',
+			'category'          => 'mind-blocks',
+			'icon'              => $icon,
+			'keywords'          => array( 'tabs', 'tabbed', 'toggle', 'mind', 'Mindshare' ),
+			'align'             => 'full',
+			'mode'            	=> 'edit',
+			'supports'					=> array(
+				'align' => array( 'wide', 'full' ),
+			),
+			'enqueue_assets' => function(){
+				// We're just registering it here and then with the action get_footer we'll enqueue it.
+				wp_register_style( 'mapi-block-styles', MAPI_URL . '/inc/css/block-styles.css' );
+				add_action( 'get_footer', function () {wp_enqueue_style('mapi-block-styles');});
+
+				// Tab switching relies on Bootstrap's Tab JS component, which the
+				// theme already enqueues site-wide (functions.php: bootstrap-min) —
+				// same convention as the accordion block above.
+			},
+		)
+	);
+
 
 
 
@@ -1999,6 +2025,90 @@ acf_add_local_field_group(array(
 				'param' => 'block',
 				'operator' => '==',
 				'value' => 'acf/card-repeater-block',
+			),
+		),
+	),
+	'menu_order' => 0,
+	'position' => 'normal',
+	'style' => 'default',
+	'label_placement' => 'top',
+	'instruction_placement' => 'label',
+	'hide_on_screen' => '',
+	'active' => true,
+	'description' => '',
+));
+
+		//ACF Block Fields: Tabs
+acf_add_local_field_group(array(
+	'key' => 'group_mind_tabs_block',
+	'title' => 'Block: Tabs',
+	'fields' => array(
+		array(
+			'key' => 'field_mind_tabs_block_tabs',
+			'label' => 'Tabs',
+			'name' => 'tabs',
+			'type' => 'repeater',
+			'instructions' => '',
+			'required' => 0,
+			'conditional_logic' => 0,
+			'wrapper' => array(
+				'width' => '',
+				'class' => '',
+				'id' => '',
+			),
+			'collapsed' => 'field_mind_tabs_block_tab_label',
+			'min' => 1,
+			'max' => 0,
+			'layout' => 'block',
+			'button_label' => 'Add Tab',
+			'sub_fields' => array(
+				array(
+					'key' => 'field_mind_tabs_block_tab_label',
+					'label' => 'Tab Label',
+					'name' => 'tab_label',
+					'type' => 'text',
+					'instructions' => '',
+					'required' => 1,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'placeholder' => '',
+					'prepend' => '',
+					'append' => '',
+					'maxlength' => '',
+				),
+				array(
+					'key' => 'field_mind_tabs_block_tab_content',
+					'label' => 'Tab Content',
+					'name' => 'tab_content',
+					'type' => 'wysiwyg',
+					'instructions' => '',
+					'required' => 0,
+					'conditional_logic' => 0,
+					'wrapper' => array(
+						'width' => '',
+						'class' => '',
+						'id' => '',
+					),
+					'default_value' => '',
+					'tabs' => 'all',
+					'toolbar' => 'full',
+					'media_upload' => 1,
+					'delay' => 0,
+				),
+			),
+		),
+	),
+	'location' => array(
+		array(
+			array(
+				'param' => 'block',
+				'operator' => '==',
+				'value' => 'acf/tabs-block',
 			),
 		),
 	),
