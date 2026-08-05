@@ -45,7 +45,7 @@ if($accordions) :
             echo '</button>';
           echo '</h2>';
 
-          echo '<div id="collapse' . $key . '-' . $id . '" class="accordion-collapse collapse ' . ($open ? 'show' : '') . '" aria-labelledby="heading' . $key . '-' . $id . '" data-bs-parent="#accordion' . $id . '">';
+          echo '<div id="collapse' . $key . '-' . $id . '" class="accordion-collapse collapse ' . ($open ? 'show' : '') . '" aria-labelledby="heading-' . $key . '-' . $id . '" data-bs-parent="#accordion' . $id . '">';
             echo '<div class="accordion-body">';
               echo (isset($accordion['content']) ? $accordion['content'] : '');
             echo '</div>';

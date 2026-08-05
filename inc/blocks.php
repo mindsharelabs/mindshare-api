@@ -390,13 +390,13 @@ add_action('acf/init', function () {
 				// We're just registering it here and then with the action get_footer we'll enqueue it.
 				wp_register_style( 'mapi-block-styles', MAPI_URL . '/inc/css/block-styles.css' );
 				add_action( 'get_footer', function () {wp_enqueue_style('mapi-block-styles');});
-				//
-				wp_register_script('bootstrap-js', MAPI_URL . 'inc/js/bootstrap/bootstrap.bundle.min.js', array('jquery'), MAPI_PLUGIN_VERSION);
-				wp_enqueue_script('bootstrap-js');
 
-
-
-
+				// The accordion relies on Bootstrap's Collapse JS component, which the
+				// theme already enqueues site-wide (functions.php: bootstrap-min). Do not
+				// also enqueue the plugin's own bundled copy here — it's an older
+				// Bootstrap version, and loading two copies double-registers the
+				// data-bs-toggle click handlers, so each click opens and immediately
+				// re-closes the accordion.
 			},
 		)
 	);
