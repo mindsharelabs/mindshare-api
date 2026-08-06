@@ -8,6 +8,32 @@ Mindshare Theme API
 
 Provides a library of additional template tags, 3rd-party libraries, and functions for WordPress themes and additional features for WordPress CMS websites.
 
+# Bootstrap requirements
+
+This plugin's Gutenberg blocks emit Bootstrap 5 class names and are built to
+work on *any* theme — each block ships the minimum CSS it needs to actually
+function (see `inc/css/block-styles.css`), regardless of what the active
+theme imports. A theme that imports the matching Bootstrap Sass partial gets
+the full, intended visual treatment on top of that; without it, the block
+still works, it just renders with plain browser defaults instead of
+Bootstrap's styling.
+
+| Block | Classes emitted | Bootstrap partial for full styling | Works without it? |
+|---|---|---|---|
+| Accordion | `.accordion*`, `.collapse` | `bootstrap/accordion`, `bootstrap/transitions` | Yes — block ships a `.collapse:not(.show)` fallback |
+| Tabs | `.nav-tabs`, `.tab-content`, `.tab-pane` | `bootstrap/nav` | Yes — block ships a `.tab-pane` fallback |
+| Buttons, Button Group | `.btn*`, `.btn-group` | `bootstrap/buttons`, `bootstrap/button-group` | Yes — cosmetic only |
+| Card Repeater, Image Grid, Staff Cards, Post List | `.card*` | `bootstrap/card` | Yes — cosmetic only |
+| Notice Block | `.alert*` | `bootstrap/alert` | Yes — cosmetic only |
+| Post List (card view) | `.badge` | `bootstrap/badge` | Yes — cosmetic only |
+| Container, Post List, and most others | `.container`, `.row`, `.col-*` | `bootstrap/grid`, `bootstrap/containers` | Base layout — expected on any Bootstrap-based theme |
+
+When adding a new block that relies on a Bootstrap JS component (anything
+that toggles visibility via classes — Collapse, Tab, Modal, Offcanvas,
+Dropdown, etc.), give it the same treatment as Accordion/Tabs above: ship
+the one or two rules that make it *function* in this plugin's own CSS, and
+let the theme's Bootstrap import supply the polish.
+
 # Changelog:
 
 ## 2.5.7

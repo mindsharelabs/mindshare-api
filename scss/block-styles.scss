@@ -5,6 +5,21 @@
   -o-transition: all $speed ease;
   transition: all $speed ease;
 }
+// --- Functional fallbacks --------------------------------------------
+// This plugin's blocks are meant to work on any theme, but a couple lean
+// on Bootstrap JS components (Collapse, Tab) that only toggle classes —
+// the actual show/hide is normally supplied by Bootstrap's own CSS
+// (bootstrap/transitions, bootstrap/nav). A theme may not opt into those
+// partials, so each block below carries the one rule that makes it
+// *function* regardless. These match Bootstrap's own selectors exactly,
+// so there's no conflict when a theme does import the real partial —
+// it just adds the full visual treatment (borders, animation, etc.) on
+// top of this.
+
+.accordion-block .collapse:not(.show) {
+  display: none;
+}
+
 .mind-notice-block {
   p {
     margin-bottom: 0;
@@ -159,6 +174,16 @@
 // trick that .nav-tabs relies on doesn't read well stacked, so it's swapped
 // for a simple left-border "active" indicator instead.
 .tabs-block {
+  // Functional fallback (see top of file) — only the active pane shows,
+  // even on a theme that doesn't import bootstrap/nav.
+  .tab-pane {
+    display: none;
+
+    &.active {
+      display: block;
+    }
+  }
+
   &__nav {
     --bs-nav-link-color: var(--bs-body-color);
     --bs-nav-link-hover-color: var(--bs-primary);
