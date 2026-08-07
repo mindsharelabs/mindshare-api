@@ -38,10 +38,11 @@ if($mind_buttons) :
 
               echo '<div class="btn-group" role="group">';
                 foreach ($mind_buttons['buttons'] as $key => $button) :
+                  $button_link = is_array($button['button_link'] ?? null) ? $button['button_link'] : [];
                   echo '<a
-                    href="' . esc_url($button['button_link']['url']) . '"
+                    href="' . esc_url($button_link['url'] ?? '') . '"
                     class="btn btn-' . $button['button_type'] . ' btn-' . $button['button_size'] . '"
-                    target="' . esc_attr($button['button_link']['target']) . '">' . html_entity_decode($button['button_link']['title']) . '</a>';
+                    target="' . esc_attr($button_link['target'] ?? '') . '">' . html_entity_decode($button_link['title'] ?? '') . '</a>';
                 endforeach;
               echo '</div>';
 
@@ -58,10 +59,11 @@ if($mind_buttons) :
 
               echo '<div class="buttons d-flex flex-wrap flex-row ' . $align_text . '" role="group">';
                 foreach ($mind_buttons['buttons'] as $key => $button) :
+                  $button_link = is_array($button['button_link'] ?? null) ? $button['button_link'] : [];
                   echo '<a
-                    href="' . esc_url($button['button_link']['url']) . '"
+                    href="' . esc_url($button_link['url'] ?? '') . '"
                     class="m-1 btn btn-' . $button['button_type'] . ' btn-' . $button['button_size'] . '"
-                    target="' . esc_attr($button['button_link']['target']) . '">' . html_entity_decode($button['button_link']['title']) . '</a>';
+                    target="' . esc_attr($button_link['target'] ?? '') . '">' . html_entity_decode($button_link['title'] ?? '') . '</a>';
                 endforeach;
               echo '</div>';
 
@@ -81,10 +83,11 @@ if($mind_buttons) :
 
               echo '<div class="d-grid gap-1 col-12 ' . $align_text . '" role="group">';
                 foreach ($mind_buttons['buttons'] as $key => $button) :
+                  $button_link = is_array($button['button_link'] ?? null) ? $button['button_link'] : [];
                   echo '<a
-                    href="' . esc_url($button['button_link']['url']) . '"
+                    href="' . esc_url($button_link['url'] ?? '') . '"
                     class="m-1 d-block btn btn-' . $button['button_type'] . ' btn-' . $button['button_size'] . '"
-                    target="' . esc_attr($button['button_link']['target']) . '">' . html_entity_decode($button['button_link']['title']) . '</a>';
+                    target="' . esc_attr($button_link['target'] ?? '') . '">' . html_entity_decode($button_link['title'] ?? '') . '</a>';
                 endforeach;
               echo '</div>';
               break;
