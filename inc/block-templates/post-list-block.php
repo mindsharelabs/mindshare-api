@@ -98,8 +98,8 @@ if($post_list_block) :
 
             while($posts->have_posts()) :
               $posts->the_post();
-              echo '<div class="col-12 my-2 ' . ($type == 'list' ? '' : $med_container) . '">';
-                echo '<div class="card d-flex h-100 mb-3">';
+              echo '<div class="col-12 my-3 ' . ($type == 'list' ? '' : $med_container) . '">';
+                echo '<div class="card d-flex h-100">';
                   do_action('mind_before_post_card', get_the_id());
                   echo '<div class="row no-gutters">';
                     if(has_post_thumbnail()):
