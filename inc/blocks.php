@@ -47,23 +47,26 @@ add_action('acf/init', function () {
 		acf_register_block_type(array(
 			'name'              => 'mind-sub-page-list',
 			'title'             => __('Sub Page List'),
-			'description'       => __('A block that displays all of the sub pages in a navigation latout.'),
+			'description'       => __('Displays the sub pages of the current page as a list, an image gallery, or cover cards.'),
 			'render_template'   => MAPI_ABSPATH . '/inc/block-templates/mind-sub-page-list.php',
 			'category'          => 'mind-blocks',
 			'icon'              => $icon,
-			'keywords'          => array( 'navigation', 'sub', 'page', 'button', 'mind', 'Mindshare' ),
+			'keywords'          => array( 'navigation', 'sub', 'page', 'button', 'gallery', 'cover', 'mind', 'Mindshare' ),
 			'align'             => 'full',
-			'mode'            	=> 'edit',
+			'mode'            	=> 'preview',
 			'supports'					=> array(
 				'align' => array( 'wide', 'full' ),
-				'mode' => false,
 				'jsx' => false
 			),
 			'enqueue_assets' => function(){
-				// We're just registering it here and then with the action get_footer we'll enqueue it.
-				wp_register_style( 'mind-block-styles', MAPI_URL . 'inc/css/block-styles.css' );
-				add_action( 'get_footer', function () {wp_enqueue_style('mind-block-styles');});
-
+				wp_register_style( 'mind-block-styles', MAPI_URL . 'inc/css/block-styles.css', array(), MAPI_PLUGIN_VERSION );
+				if ( is_admin() ) {
+					// Editor preview.
+					wp_enqueue_style( 'mind-block-styles' );
+				} else {
+					// We're just registering it here and then with the action get_footer we'll enqueue it.
+					add_action( 'get_footer', function () {wp_enqueue_style('mind-block-styles');});
+				}
 			},
 		));
 
@@ -2122,6 +2125,75 @@ acf_add_local_field_group(array(
 	'description' => '',
 ));
 }, 1);
+
+	// Block: Sub Page List settings.
+	add_action( 'acf/init', function() {
+		$not_list = array(
+			array(
+				array(
+					'field'    => 'field_mind_spl_layout',
+					'operator' => '!=',
+					'value'    => 'list',
+				),
+			),
+		);
+
+		acf_add_local_field_group( array(
+			'key'      => 'group_mind_sub_page_list',
+			'title'    => 'Sub Page List',
+			'fields'   => array(
+				array(
+					'key'           => 'field_mind_spl_layout',
+					'label'         => 'Layout',
+					'name'          => 'layout',
+					'type'          => 'button_group',
+					'choices'       => array(
+						'list'    => 'List',
+						'gallery' => 'Gallery',
+						'cover'   => 'Cover',
+					),
+					'default_value' => 'list',
+					'instructions'  => 'Gallery: image with the title beneath. Cover: title centered over the image.',
+				),
+				array(
+					'key'               => 'field_mind_spl_columns',
+					'label'             => 'Columns',
+					'name'              => 'columns',
+					'type'              => 'button_group',
+					'choices'           => array(
+						'2' => '2',
+						'3' => '3',
+						'4' => '4',
+					),
+					'default_value'     => '3',
+					'conditional_logic' => $not_list,
+				),
+				array(
+					'key'               => 'field_mind_spl_ratio',
+					'label'             => 'Image Shape',
+					'name'              => 'image_ratio',
+					'type'              => 'select',
+					'choices'           => array(
+						'portrait'  => 'Portrait (4:5)',
+						'square'    => 'Square (1:1)',
+						'landscape' => 'Landscape (3:2)',
+						'wide'      => 'Wide (16:9)',
+					),
+					'default_value'     => 'portrait',
+					'conditional_logic' => $not_list,
+				),
+			),
+			'location' => array(
+				array(
+					array(
+						'param'    => 'block',
+						'operator' => '==',
+						'value'    => 'acf/mind-sub-page-list',
+					),
+				),
+			),
+		) );
+	} );
 
 
 

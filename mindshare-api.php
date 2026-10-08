@@ -7,7 +7,7 @@ Author: Mindshare Labs, Inc
 Author URI: https://mind.sh/are
 License:           GPL v2 or later
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
-Version: 2.8.2
+Version: 2.9.0
 Author: Mindshare Labs, Inc
 Author URI: https://mind.sh/are
 Network: false
@@ -42,7 +42,7 @@ class mapiPlugin {
     //Define all the constants
     $this->define( 'MAPI_ABSPATH', dirname( MAPI_PLUGIN_FILE ) . '/' );
     $this->define( 'MAPI_URL', plugin_dir_url( __FILE__ ));
-    $this->define( 'MAPI_PLUGIN_VERSION', '2.8.2');
+    $this->define( 'MAPI_PLUGIN_VERSION', '2.9.0');
     $this->define( 'MAPI_PREPEND', 'mapi_');
     // ACF PRO license: do NOT hardcode a real license key in this shared plugin.
     // Define ACF_PRO_LICENSE in each site's wp-config.php instead, e.g.:
