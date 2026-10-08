@@ -39,6 +39,7 @@ let the theme's Bootstrap import supply the polish.
 ## 2.9.0
 - Sub Page List: new Gallery and Cover layouts, with column (2/3/4) and image shape options. List remains the default.
 - Sub Page List: live preview in the editor; resets post data after its loop.
+- Sub Page List: pages are now ordered newest published first (was menu order).
 
 ## 2.5.7
 - Fix error when displaying multiple image sliders on one page.

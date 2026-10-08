@@ -41,8 +41,8 @@ $args = array(
     'post_type'      => 'page',
     'posts_per_page' => -1,
     'post_parent'    => ( is_numeric($post_id ?? null) && $post_id > 0 ) ? (int) $post_id : get_the_id(),
-    'order'          => 'ASC',
-    'orderby'        => 'menu_order'
+    'orderby'        => 'date', // Newest published first.
+    'order'          => 'DESC',
  );
 
 
