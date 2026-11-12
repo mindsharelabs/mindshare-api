@@ -67,16 +67,15 @@ if($mind_staff_cards['staff_cards']) :
                 $staff_link_classes = apply_filters('mind_staff_card_link_classes', 'd-flex flex-row justify-content-center my-1 card-links', $card);
                 echo '<div class="' . $staff_link_classes . '">';
                   foreach ($card['staff_links'] as $key => $s_link) :
-
-                    echo (isset($s_link['label']) ?  '<span class="label">' . $s_link['label'] . '</span>': '');
-                    echo '<a 
-                      href="' . (isset($s_link['link']['url']) ? $s_link['link']['url'] : '') . '"
-                      target="' . (isset($s_link['link']['target']) ? $s_link['link']['target'] : '') . '"
-                      title="' . (isset($s_link['link']['title']) ? $s_link['link']['title'] : '') . '">';
-
-                     
-                      echo '<span class="link-title">' . (isset($s_link['link']['title']) ? $s_link['link']['title'] : '') . '</span>';
-
+                    $link = isset($s_link['link']) && is_array($s_link['link']) ? $s_link['link'] : array();
+                    if (empty($link['url'])) :
+                      continue;
+                    endif;
+                    // The link field carries its own text. Older content may
+                    // only have the (removed) "Label" field filled in.
+                    $text = !empty($link['title']) ? $link['title'] : (!empty($s_link['label']) ? $s_link['label'] : $link['url']);
+                    echo '<a href="' . esc_url($link['url']) . '"' . (!empty($link['target']) ? ' target="' . esc_attr($link['target']) . '" rel="noopener"' : '') . '>';
+                      echo '<span class="link-title">' . esc_html($text) . '</span>';
                     echo '</a>';
 
                   endforeach;
