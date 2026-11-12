@@ -36,6 +36,15 @@ let the theme's Bootstrap import supply the polish.
 
 # Changelog:
 
+## 2.10.0
+- SEO essentials (inc/seo.php), no extra plugin needed:
+  - meta description and Open Graph / Twitter card tags on every page
+  - settings under Mindshare API Settings → SEO: default social image, home page description, and Organization details for the home page's structured data
+  - a "Search & sharing" box on every post type: description, social image and "Hide from search engines"
+  - WordPress's built-in sitemap (/wp-sitemap.xml) without user or tag archives, or hidden posts
+  - descriptions fall back to the excerpt or first paragraph, images to the featured image or first image block (`mapi_seo_block_image` lets a site add its own blocks)
+  - switches itself off when Yoast, Rank Math, SEOPress, AIOSEO or The SEO Framework is active
+
 ## 2.9.0
 - Sub Page List: new Gallery and Cover layouts, with column (2/3/4) and image shape options. List remains the default.
 - Sub Page List: live preview in the editor; resets post data after its loop.
