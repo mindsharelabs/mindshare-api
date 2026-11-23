@@ -36,6 +36,10 @@ let the theme's Bootstrap import supply the polish.
 
 # Changelog:
 
+## 2.10.1
+- Card Repeater: new "Heading Level" setting (Default, H2–H6) for the card titles, so they can sit correctly in the page's heading outline. Default stays H2.
+- Card Repeater: `mapi_card_repeater_heading_tag` filter sets the site-wide default level, and `mapi_card_repeater_heading_class` sets the title classes (default `mb-2 mt-1 text-center`), so a theme can change the level without changing the look.
+
 ## 2.10.0
 - SEO essentials (inc/seo.php), no extra plugin needed:
   - meta description and Open Graph / Twitter card tags on every page

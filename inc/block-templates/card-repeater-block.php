@@ -27,6 +27,22 @@ if( !empty($block['align']) ) {
 // Load values and assing defaults.
 $block_card_repeater = get_field('block_card_repeater');
 $num_columns = $block_card_repeater['num_columns'];
+
+// Card title heading. The level comes from the block's "Heading Level" setting,
+// or the mapi_card_repeater_heading_tag filter when it's left on "Default", so
+// sites can fit the cards into their page's heading outline. The classes come
+// from mapi_card_repeater_heading_class, which keeps the look independent of
+// the level (e.g. an <h3> styled like an h4 with class "h4").
+$allowed_heading_tags = array('h2', 'h3', 'h4', 'h5', 'h6');
+$heading_level = isset($block_card_repeater['heading_level']) ? $block_card_repeater['heading_level'] : 'default';
+$heading_tag = in_array($heading_level, $allowed_heading_tags, true)
+  ? $heading_level
+  : apply_filters('mapi_card_repeater_heading_tag', 'h2', $block);
+if (!in_array($heading_tag, $allowed_heading_tags, true)) {
+  $heading_tag = 'h2';
+}
+$heading_class = apply_filters('mapi_card_repeater_heading_class', 'mb-2 mt-1 text-center', $heading_tag, $block);
+
 if($block_card_repeater) :
   echo '<div class="' . $className . '" id="' . $id . '">';
     echo '<div class="row">';
@@ -68,7 +84,7 @@ if($block_card_repeater) :
                   if($card['card_link']) :
                     echo '<a href="' . $card['card_link']['url'] . '" target="' . $card['card_link']['target'] . '">';
                   endif;
-                    echo '<h2 class="mb-2 mt-1 text-center">' . $card['card_header'] . '</h2>';
+                    echo '<' . $heading_tag . ' class="' . esc_attr($heading_class) . '">' . $card['card_header'] . '</' . $heading_tag . '>';
                   if($card['card_link']) :
                     echo '</a>';
                   endif;
